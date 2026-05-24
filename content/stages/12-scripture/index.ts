@@ -4,6 +4,11 @@ import {
   johnSix,
   oralAndWritten,
 } from "./more-scripture";
+import {
+  matthewSixteen,
+  johnSeventeen,
+  romans5,
+} from "./disputed-texts";
 
 export const stage12: Stage = {
   id: "12-scripture",
@@ -99,5 +104,8 @@ export const stage12: Stage = {
     hermeneutics,
     johnSix,
     oralAndWritten,
+    matthewSixteen,
+    johnSeventeen,
+    romans5,
   ],
 };

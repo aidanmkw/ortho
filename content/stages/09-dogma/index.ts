@@ -5,6 +5,7 @@ import {
   ecclesiology,
   sacraments,
 } from "./more-dogma";
+import { triadology, angelology } from "./triadology";
 
 export const stage09: Stage = {
   id: "09-dogma",
@@ -73,5 +74,7 @@ export const stage09: Stage = {
     ancestralSin,
     ecclesiology,
     sacraments,
+    triadology,
+    angelology,
   ],
 };
