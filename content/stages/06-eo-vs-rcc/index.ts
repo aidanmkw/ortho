@@ -16,6 +16,15 @@ import {
   createdGraceDeep,
   petrineTextsDeep,
 } from "./depth-rcc";
+import {
+  clericalCelibacy,
+  scholasticism,
+  transubstantiation,
+  papalUniversalJurisdiction,
+  reunionAttempts,
+  filioqueHistory,
+  ecclesiologyRome,
+} from "./bulk-rcc";
 
 export const stage06: Stage = {
   id: "06-eo-vs-rcc",
@@ -174,5 +183,12 @@ export const stage06: Stage = {
     purgatoryDeep,
     createdGraceDeep,
     petrineTextsDeep,
+    clericalCelibacy,
+    scholasticism,
+    transubstantiation,
+    papalUniversalJurisdiction,
+    reunionAttempts,
+    filioqueHistory,
+    ecclesiologyRome,
   ],
 };

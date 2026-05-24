@@ -5,6 +5,13 @@ import {
   photianCouncil,
   hesychastCouncils,
 } from "./more-councils";
+import {
+  constII,
+  trullan,
+  robberCouncil,
+  conciliarReception,
+  localCouncils,
+} from "./bulk-councils";
 
 export const stage05: Stage = {
   id: "05-councils",
@@ -138,5 +145,10 @@ export const stage05: Stage = {
     ephesus,
     photianCouncil,
     hesychastCouncils,
+    constII,
+    trullan,
+    robberCouncil,
+    conciliarReception,
+    localCouncils,
   ],
 };

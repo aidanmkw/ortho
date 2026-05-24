@@ -6,6 +6,13 @@ import {
   confession,
 } from "./more-practices";
 import { holyWeek, vestments, octoechos } from "./holy-week";
+import {
+  liturgyDetails,
+  prayerRule,
+  memorials,
+  incense,
+  tonsure,
+} from "./bulk-practices";
 
 export const stage11: Stage = {
   id: "11-practices",
@@ -110,5 +117,10 @@ export const stage11: Stage = {
     holyWeek,
     vestments,
     octoechos,
+    liturgyDetails,
+    prayerRule,
+    memorials,
+    incense,
+    tonsure,
   ],
 };

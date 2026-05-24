@@ -5,6 +5,13 @@ import {
   symeonNewTheologian,
   cyrilOfAlexandria,
 } from "./more-fathers";
+import {
+  apostolicFathersDepth,
+  cappadocianDepth,
+  latinFathers,
+  tertullianOrigen,
+  philokaliaTopic,
+} from "./bulk-fathers";
 
 export const stage02: Stage = {
   id: "02-church-fathers",
@@ -342,5 +349,10 @@ export const stage02: Stage = {
     chrysostom,
     cyrilOfAlexandria,
     symeonNewTheologian,
+    apostolicFathersDepth,
+    cappadocianDepth,
+    latinFathers,
+    tertullianOrigen,
+    philokaliaTopic,
   ],
 };

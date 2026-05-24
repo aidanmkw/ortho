@@ -9,6 +9,15 @@ import {
   ldsBibleTranslation,
   closingChristianStrategy,
 } from "./depth-lds";
+import {
+  witnessesOfBoM,
+  adamGod,
+  moroniPromise,
+  continuingRevelation,
+  baptismDead,
+  ldsHistoryProblems,
+  exaltationDeep,
+} from "./bulk-lds";
 
 export const stage08: Stage = {
   id: "08-eo-vs-lds",
@@ -207,5 +216,12 @@ export const stage08: Stage = {
     eternalFamilies,
     ldsBibleTranslation,
     closingChristianStrategy,
+    witnessesOfBoM,
+    adamGod,
+    moroniPromise,
+    continuingRevelation,
+    baptismDead,
+    ldsHistoryProblems,
+    exaltationDeep,
   ],
 };

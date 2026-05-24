@@ -1,0 +1,90 @@
+import type { Topic } from "@/lib/types";
+
+export const moreFinal: Topic = {
+  id: "more-final-scenarios",
+  title: "More Capstone Scenarios",
+  summary: "Additional debate scenarios — Pentecostal pastor, Anglo-Catholic, Jewish neighbor, JW at the door, secular friend.",
+  learningObjectives: ["Synthesize across all 13 stages."],
+  primarySources: ["All prior stages"],
+  items: [
+    {
+      id: "fin-006",
+      kind: "debate",
+      difficulty: 5,
+      tags: ["capstone", "pentecostal"],
+      opponentTradition: "Pentecostal",
+      opponentClaim: "A Pentecostal pastor: 'I see the Holy Spirit working powerfully in our church — healings, words of knowledge, speaking in tongues. The Orthodox liturgy seems so formal and lifeless. Where is the Spirit?'",
+      orthodoxRebuttal: "'Brother, the Holy Spirit is the very breath of the Orthodox Liturgy. Every consecration, every sacrament, every blessing is by His descent. We confess Him daily in the Trisagion (Heavenly King), the Symbol, the doxologies — and we have for two thousand years. The question is not WHETHER the Spirit moves but HOW we recognize Him. The Lord said by their FRUITS ye shall know them (Mt 7:16). The Spirit's fruits — love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control (Gal 5:22-23) — these are produced through ascetical struggle, prayer, fasting, sacraments, and obedience under a spiritual father. Tongues and dramatic gifts come and go in the Church's history; the saints we revere — St. Anthony, St. Macarius, St. Seraphim of Sarov, St. Paisios — produced extraordinary fruit and many miracles, but rarely the modern Pentecostal phenomenon of glossolalia. St. Paul himself says in 1 Cor 14 that intelligible prophecy edifies the church more than tongues. May I invite you to a Liturgy — not to argue but simply to attend? Let the Spirit you confess testify across our differences.'",
+      citations: [
+        { source: "Matthew 7:16; Galatians 5:22-23; 1 Corinthians 14:1-19" },
+        { source: "Acts 2 (the apostolic gift of tongues as intelligible foreign languages)" },
+      ],
+    },
+    {
+      id: "fin-007",
+      kind: "debate",
+      difficulty: 5,
+      tags: ["capstone", "anglo-catholic"],
+      opponentTradition: "Anglican",
+      opponentClaim: "An Anglo-Catholic: 'We have all of Tradition — the Fathers, the Councils, the sacraments, apostolic succession. We just don't have the Pope. That makes us essentially Orthodox in the West.'",
+      orthodoxRebuttal: "'I respect your love for the Fathers and the early Councils. Three serious questions: (1) Apostolic succession — Pope Leo XIII declared Anglican orders invalid in 1896 (Apostolicae Curae); the Orthodox have never formally received Anglican orders, and after the 1976 ordination of women in many Anglican provinces this question is moot. (2) Tradition — Anglicanism contains within itself opposing readings of the Eucharist (Cranmerian symbolism, Anglo-Catholic Real Presence) and of the sacraments. There is no binding confession that adjudicates. The 39 Articles are explicit against purgatory, invocation of saints, and prayers for the dead (Articles XXII, XXVIII) — at odds with Anglo-Catholic practice. (3) The Councils — Anglicanism has received the first four (or seven, depending on the writer) on paper, but has not lived under their canonical authority for 500 years. Orthodoxy is not 'continental Anglo-Catholicism without the Pope'; it is the unbroken Body of Christ that has continued from the Apostles. The serious Anglo-Catholic, taking his own claims at full strength, regularly ends up in Rome or in Orthodoxy. Come and see.'",
+      citations: [
+        { source: "Leo XIII, Apostolicae Curae (1896)" },
+        { source: "Newman, Apologia pro Vita Sua (1864)" },
+        { source: "39 Articles, especially XXII, XXVIII" },
+      ],
+    },
+    {
+      id: "fin-008",
+      kind: "debate",
+      difficulty: 5,
+      tags: ["capstone", "jewish"],
+      opponentTradition: "Judaism",
+      opponentClaim: "A devout Jew: 'How can you claim Jesus is the Messiah? The Messianic prophecies (worldwide peace, return of all exiles, rebuilt Temple, knowledge of God filling the earth) are not yet fulfilled. The world is still broken.'",
+      orthodoxRebuttal: "'Friend, you raise the deepest question. Christians have always confessed two comings of Messiah. (1) The Suffering Servant (Isaiah 53; Daniel 9:24-27; Zechariah 12:10) — fulfilled at Christ's first coming, His Cross and Resurrection, His outpouring of the Spirit on all flesh (Joel 2 / Acts 2). (2) The Glorified Judge — to come at the end of the age, when 'the knowledge of the Lord shall cover the earth as the waters cover the sea' (Isaiah 11:9; Habakkuk 2:14). Justin Martyr's Dialogue with Trypho (~AD 160) wrestled with these very questions point by point. Isaiah 53's Suffering Servant — read in the synagogue before Christ as Messianic — was so embarrassing to the post-Christian rabbinic exegesis that many medieval rabbis reassigned it to the nation of Israel collectively. The earliest Jewish reading was Messianic; only after Christ does the reading shift. Furthermore, the Lord's death in the year 30 fits Daniel 9's 'seventy weeks' arithmetic from Cyrus's decree. The transformation of pagan Rome into the Christian commonwealth within three centuries — through the blood of the martyrs — is one fulfillment of the prophecy that the knowledge of the LORD would fill the earth. We await the second coming in the meantime.'",
+      citations: [
+        { source: "Isaiah 53; Daniel 9:24-27; Zechariah 12:10; Joel 2; Habakkuk 2:14" },
+        { source: "St. Justin Martyr, Dialogue with Trypho (~AD 160)" },
+      ],
+    },
+    {
+      id: "fin-009",
+      kind: "debate",
+      difficulty: 5,
+      tags: ["capstone", "jw"],
+      opponentTradition: "JW",
+      opponentClaim: "A pair of JWs at the door: 'Did you know Jesus is not God? The Bible says the Father is greater than him (Jn 14:28), and he is the firstborn of all creation (Col 1:15).'",
+      orthodoxRebuttal: "'Thank you, friends. Let me ask one question first: would you agree that we should read each verse in light of the whole Bible? Then look with me. (1) John 1:1 in the Greek says 'the Word was God' — every Greek scholar from the earliest Fathers (Origen, Chrysostom) onward through the modern critical editions reads it this way; the NWT's 'a god' is a 1950 innovation unsupported by Greek grammar. (2) John 20:28 — Thomas calls Jesus 'My Lord and my God!' and Jesus does NOT correct him. (3) Hebrews 1:8 — the Father addresses the Son: 'Thy throne, O God, is for ever and ever.' (4) Colossians 1:15-17 says of the same Christ in the same paragraph: 'For by HIM were all things created' (v. 16) — if all things were created by Him, He cannot be one of the created things (v. 15's prōtotokos means rank/inheritance, not 'first created' — that word would be prōtoktistos, which Paul does not use). (5) On Jn 14:28 — the Lord speaks as the Incarnate One, having taken our nature; in His divinity He and the Father are one (Jn 10:30). May I share with you the Symbol of Faith that all Christians confessed for the first 1900 years before the Watchtower? The Council of Nicaea in 325 met precisely to answer this question your tradition raises again.'",
+      citations: [
+        { source: "John 1:1; 20:28; Hebrews 1:8; Colossians 1:15-17; John 10:30" },
+        { source: "Symbol of Nicaea (325) and Constantinople (381)" },
+      ],
+    },
+    {
+      id: "fin-010",
+      kind: "debate",
+      difficulty: 4,
+      tags: ["capstone", "agnostic-mystic"],
+      opponentTradition: "Secular",
+      opponentClaim: "'I'm spiritual but not religious. All paths lead to God. Why insist Christianity has the truth?'",
+      orthodoxRebuttal: "'I respect the impulse — every human longs for the divine, and that longing is itself a fingerprint of God on you. But the gentle implication that 'all paths lead to God' actually does an injustice to every religion: it says, in effect, that none of their distinct claims are true, since they contradict each other. The Buddhist denies a personal God; the Muslim denies that God could have a Son; the Hindu posits many gods (or none, depending on the school); the Jew denies the Incarnation. They cannot ALL be right. They could all be wrong — but they cannot all be right. Christianity stakes its claim on a falsifiable historical event: a man named Jesus of Nazareth died at the hands of Roman power around AD 30 and was raised three days later. If THIS happened, then the universe contains a God who acts in history and who has spoken decisively. The Orthodox Church preserves the original community of witness from that event forward — unbroken, documented, lived in continuity. Investigate the historical claim. Read Mark or John, knowing it was set down by people who walked with Jesus or with those who did. That is the testable hinge.'",
+      citations: [
+        { source: "1 Corinthians 15:3-8 — earliest creedal tradition of the Resurrection" },
+        { source: "Acts 2:32-36 — the apostolic kerygma" },
+      ],
+    },
+    {
+      id: "fin-011",
+      kind: "debate",
+      difficulty: 5,
+      tags: ["capstone", "atheist"],
+      opponentTradition: "Secular",
+      opponentClaim: "An atheist: 'The problem of evil disproves any good and powerful God. If God could prevent the Holocaust and chose not to, He's not good. If He couldn't, He's not God.'",
+      orthodoxRebuttal: "'This is the most serious objection in classical and modern philosophy. Christianity's answer is not a clean syllogism but a Person on a cross. (1) The Orthodox confession: God made a world in which real love is possible, and real love requires free creatures who can refuse — so suffering and evil are the possibility, the underside, of the gift of freedom. God did not author evil; we did. (2) But God did not merely create and abandon. The God we confess entered the suffering He had not authored — was tortured to death by the very humans He came to save. The Christian God is not an aloof Power surveying our pain from outside; He bore it Himself. The Cross is the divine answer to evil — not an explanation but a participation. (3) The Resurrection is the divine promise that evil does not have the final word. (4) In our own lives, we are commanded NOT to be passive about evil but to fight it — to feed the hungry, free the captives, console the dying. The problem of evil is not so much intellectual as personal: what will YOU do about it? The Orthodox saints answer with their lives. Spend an hour with the witness of St. Maria Skobtsova (martyred at Ravensbrück, 1945, for hiding Jews in Paris), and then ask whether the God who raised her up was absent from the Holocaust.'",
+      citations: [
+        { source: "Romans 8:18-39; 1 Peter 4:12-13" },
+        { source: "Dostoevsky, The Brothers Karamazov — Book V chapters 4-5 (Ivan's question); Book VI (Zosima's answer)" },
+      ],
+    },
+  ],
+};

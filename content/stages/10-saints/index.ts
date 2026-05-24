@@ -6,6 +6,18 @@ import {
   greekModern,
 } from "./more-saints";
 import { antony, sergiusOfRadonezh, americanSaints } from "./desert-depth";
+import {
+  stephenFirstMartyr,
+  georgeTheTrophy,
+  nicholasOfMyra,
+  symeonStylites,
+  macariusEgypt,
+  ninaGeorgia,
+  seraphimRose,
+  ignatiusBrianchaninov,
+  johnMaximovitch,
+  justinPopovic,
+} from "./bulk-saints";
 
 export const stage10: Stage = {
   id: "10-saints",
@@ -123,5 +135,15 @@ export const stage10: Stage = {
     antony,
     sergiusOfRadonezh,
     americanSaints,
+    stephenFirstMartyr,
+    georgeTheTrophy,
+    nicholasOfMyra,
+    symeonStylites,
+    macariusEgypt,
+    ninaGeorgia,
+    seraphimRose,
+    ignatiusBrianchaninov,
+    johnMaximovitch,
+    justinPopovic,
   ],
 };

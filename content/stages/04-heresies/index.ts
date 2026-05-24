@@ -10,6 +10,16 @@ import {
   bogomils,
   ecumenismHeresy,
 } from "./even-more-heresies";
+import {
+  docetism,
+  sabellianism,
+  apollinarianism,
+  monophysitism,
+  adoptionism,
+  manicheism,
+  eunomianism,
+  nestorianismDeep,
+} from "./bulk-heresies";
 
 export const stage04: Stage = {
   id: "04-heresies",
@@ -187,5 +197,13 @@ export const stage04: Stage = {
     iconoclasm,
     bogomils,
     ecumenismHeresy,
+    docetism,
+    sabellianism,
+    apollinarianism,
+    monophysitism,
+    adoptionism,
+    manicheism,
+    eunomianism,
+    nestorianismDeep,
   ],
 };

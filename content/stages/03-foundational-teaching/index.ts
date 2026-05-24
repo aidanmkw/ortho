@@ -4,6 +4,13 @@ import {
   mariology,
   anthropology,
 } from "./more-foundations";
+import {
+  pneumatology,
+  energiesEssence,
+  fall,
+  baptismFoundation,
+  dyothelitism,
+} from "./bulk-foundations";
 
 export const stage03: Stage = {
   id: "03-foundational-teaching",
@@ -160,5 +167,10 @@ export const stage03: Stage = {
     christology,
     mariology,
     anthropology,
+    pneumatology,
+    energiesEssence,
+    fall,
+    baptismFoundation,
+    dyothelitism,
   ],
 };

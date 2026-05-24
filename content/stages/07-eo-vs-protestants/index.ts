@@ -12,6 +12,14 @@ import {
   invisibleChurch,
   totalDepravity,
 } from "./depth-prot";
+import {
+  tongues,
+  calvinism5Points,
+  onceSavedAlwaysSaved,
+  saints,
+  traditionContent,
+  lutheranOrthodox,
+} from "./bulk-prot";
 
 export const stage07: Stage = {
   id: "07-eo-vs-protestants",
@@ -277,5 +285,11 @@ export const stage07: Stage = {
     reformedTulip,
     invisibleChurch,
     totalDepravity,
+    tongues,
+    calvinism5Points,
+    onceSavedAlwaysSaved,
+    saints,
+    traditionContent,
+    lutheranOrthodox,
   ],
 };

@@ -5,6 +5,13 @@ import {
   ukraine,
   americanJurisdictions,
 } from "./more-modern";
+import {
+  evolution,
+  sexualityMarriage,
+  ivf,
+  trueOrthodox,
+  westernRite,
+} from "./bulk-modern";
 
 export const stage13: Stage = {
   id: "13-modern-issues",
@@ -81,5 +88,10 @@ export const stage13: Stage = {
     sergianism,
     ukraine,
     americanJurisdictions,
+    evolution,
+    sexualityMarriage,
+    ivf,
+    trueOrthodox,
+    westernRite,
   ],
 };

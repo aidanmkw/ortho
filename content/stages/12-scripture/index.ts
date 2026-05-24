@@ -9,6 +9,15 @@ import {
   johnSeventeen,
   romans5,
 } from "./disputed-texts";
+import {
+  oneTimothy,
+  acts2_42,
+  johnTwentyThree,
+  hebrewsTen,
+  psalter,
+  inspirationOfScripture,
+  inerrancy,
+} from "./bulk-scripture";
 
 export const stage12: Stage = {
   id: "12-scripture",
@@ -107,5 +116,12 @@ export const stage12: Stage = {
     matthewSixteen,
     johnSeventeen,
     romans5,
+    oneTimothy,
+    acts2_42,
+    johnTwentyThree,
+    hebrewsTen,
+    psalter,
+    inspirationOfScripture,
+    inerrancy,
   ],
 };

@@ -6,6 +6,14 @@ import {
   sacraments,
 } from "./more-dogma";
 import { triadology, angelology } from "./triadology";
+import {
+  monarchyFather,
+  hellAsLove,
+  synergy,
+  apophaticism,
+  passions,
+  sin,
+} from "./bulk-dogma";
 
 export const stage09: Stage = {
   id: "09-dogma",
@@ -76,5 +84,11 @@ export const stage09: Stage = {
     sacraments,
     triadology,
     angelology,
+    monarchyFather,
+    hellAsLove,
+    synergy,
+    apophaticism,
+    passions,
+    sin,
   ],
 };
