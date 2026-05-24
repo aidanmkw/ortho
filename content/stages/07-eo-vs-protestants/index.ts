@@ -29,6 +29,7 @@ import {
   oneness,
 } from "./extra-prot";
 import { protestantFactsPack } from "./mass-prot";
+import { protFinalPack } from "./final-prot";
 
 export const stage07: Stage = {
   id: "07-eo-vs-protestants",
@@ -307,5 +308,6 @@ export const stage07: Stage = {
     dispensationalismDeep,
     oneness,
     protestantFactsPack,
+    protFinalPack,
   ],
 };

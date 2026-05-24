@@ -28,6 +28,7 @@ import {
   sergianismHeresy,
 } from "./extra-heresies";
 import { heresyFactsPack } from "./mass-heresies";
+import { heresiesFinalPack } from "./final-heresies";
 
 export const stage04: Stage = {
   id: "04-heresies",
@@ -219,5 +220,6 @@ export const stage04: Stage = {
     eutychianism,
     sergianismHeresy,
     heresyFactsPack,
+    heresiesFinalPack,
   ],
 };

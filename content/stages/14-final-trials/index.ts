@@ -1,6 +1,8 @@
 import type { Stage } from "@/lib/types";
 import { moreScenarios } from "./more-trials";
 import { moreFinal } from "./bulk-trials";
+import { finalScenariosTwo } from "./mass-trials";
+import { finalCapstoneRound } from "./final-trials";
 
 export const stage14: Stage = {
   id: "14-final-trials",
@@ -64,5 +66,7 @@ export const stage14: Stage = {
     },
     moreScenarios,
     moreFinal,
+    finalScenariosTwo,
+    finalCapstoneRound,
   ],
 };

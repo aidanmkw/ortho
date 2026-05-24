@@ -21,6 +21,8 @@ import {
   blessingHouse,
   fastingDetail,
 } from "./extra-practices";
+import { practicesFactsPack } from "./mass-practices";
+import { practicesFinalPack } from "./final-practices";
 
 export const stage11: Stage = {
   id: "11-practices",
@@ -136,5 +138,7 @@ export const stage11: Stage = {
     antidoron,
     blessingHouse,
     fastingDetail,
+    practicesFactsPack,
+    practicesFinalPack,
   ],
 };

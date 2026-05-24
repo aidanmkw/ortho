@@ -12,6 +12,8 @@ import {
   trueOrthodox,
   westernRite,
 } from "./bulk-modern";
+import { modernFactsPack } from "./mass-modern";
+import { modernFinalPack } from "./final-modern";
 
 export const stage13: Stage = {
   id: "13-modern-issues",
@@ -93,5 +95,7 @@ export const stage13: Stage = {
     ivf,
     trueOrthodox,
     westernRite,
+    modernFactsPack,
+    modernFinalPack,
   ],
 };

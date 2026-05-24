@@ -18,6 +18,7 @@ import {
   johnMaximovitch,
   justinPopovic,
 } from "./bulk-saints";
+import { saintsFactsPack } from "./mass-saints";
 import {
   johnTheTheologian,
   peterAndPaul,
@@ -28,6 +29,7 @@ import {
   innocentAlaska,
   isaacOfSyria,
 } from "./extra-saints";
+import { saintsFinalPack } from "./final-saints";
 
 export const stage10: Stage = {
   id: "10-saints",
@@ -163,5 +165,7 @@ export const stage10: Stage = {
     optinaElders,
     innocentAlaska,
     isaacOfSyria,
+    saintsFactsPack,
+    saintsFinalPack,
   ],
 };

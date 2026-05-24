@@ -21,6 +21,8 @@ import {
   repentance,
   humility,
 } from "./extra-dogma";
+import { dogmaFactsPack } from "./mass-dogma";
+import { dogmaFinalPack } from "./final-dogma";
 
 export const stage09: Stage = {
   id: "09-dogma",
@@ -102,5 +104,7 @@ export const stage09: Stage = {
     prayerForDead,
     repentance,
     humility,
+    dogmaFactsPack,
+    dogmaFinalPack,
   ],
 };

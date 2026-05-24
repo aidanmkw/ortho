@@ -27,6 +27,8 @@ import {
   psalm22,
   acts15,
 } from "./extra-scripture";
+import { scriptureFactsPack } from "./mass-scripture";
+import { scriptureFinalPack } from "./final-scripture";
 
 export const stage12: Stage = {
   id: "12-scripture",
@@ -139,5 +141,7 @@ export const stage12: Stage = {
     oneCor11,
     psalm22,
     acts15,
+    scriptureFactsPack,
+    scriptureFinalPack,
   ],
 };

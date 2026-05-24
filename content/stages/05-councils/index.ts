@@ -13,6 +13,8 @@ import {
   localCouncils,
 } from "./bulk-councils";
 import { sevenCouncilsQuickRecall, synodicon } from "./extra-councils";
+import { councilsDetail } from "./extra-2";
+import { councilsFinalPack } from "./final-councils";
 
 export const stage05: Stage = {
   id: "05-councils",
@@ -153,5 +155,7 @@ export const stage05: Stage = {
     localCouncils,
     sevenCouncilsQuickRecall,
     synodicon,
+    councilsDetail,
+    councilsFinalPack,
   ],
 };

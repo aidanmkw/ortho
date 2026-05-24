@@ -33,6 +33,7 @@ import {
   limbo,
 } from "./extra-rcc";
 import { rcMassQuestions, rcSpiritualityTopics } from "./mass-rcc";
+import { rccFinalPack } from "./final-rcc";
 
 export const stage06: Stage = {
   id: "06-eo-vs-rcc",
@@ -205,5 +206,6 @@ export const stage06: Stage = {
     limbo,
     rcMassQuestions,
     rcSpiritualityTopics,
+    rccFinalPack,
   ],
 };

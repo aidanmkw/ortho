@@ -18,6 +18,8 @@ import {
   ordination,
   unction,
 } from "./more-foundations-2";
+import { foundationFactsPack } from "./extra-foundations";
+import { foundationsFinalPack } from "./final-foundations";
 
 export const stage03: Stage = {
   id: "03-foundational-teaching",
@@ -184,5 +186,7 @@ export const stage03: Stage = {
     marriage,
     ordination,
     unction,
+    foundationFactsPack,
+    foundationsFinalPack,
   ],
 };
