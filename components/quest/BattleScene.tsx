@@ -17,8 +17,7 @@ import {
 
 type Phase =
   | "intro"           // boss line, then player chooses move
-  | "showClaim"       // showing boss attack claim
-  | "choosing"        // player picks an answer
+  | "attack"          // showing boss attack claim + answer options (combined)
   | "resolving"       // showing the result
   | "midline"
   | "victory"
@@ -69,6 +68,8 @@ export default function BattleScene({
   const [phase, setPhase] = useState<Phase>("intro");
   const [attackIdx, setAttackIdx] = useState(0);
   const [optionsOrder, setOptionsOrder] = useState<number[]>([]);
+  // True once the claim typewriter finishes (or user taps Skip). Reset every round.
+  const [claimRevealed, setClaimRevealed] = useState(false);
   const [resultMsg, setResultMsg] = useState<string>("");
   const [resultRationale, setResultRationale] = useState<string>("");
   const [bossFlash, setBossFlash] = useState(false);
@@ -102,7 +103,7 @@ export default function BattleScene({
 
   // Shuffle options when entering an attack
   useEffect(() => {
-    if (phase === "showClaim" && attack) {
+    if (phase === "attack" && attack) {
       const idxs = attack.options.map((_, i) => i);
       setOptionsOrder(shuffle(idxs, Date.now()));
     }
@@ -116,7 +117,8 @@ export default function BattleScene({
   function startAttack() {
     if (!attack) return;
     setBossLine(attack.taunt ?? boss.intro);
-    setPhase("showClaim");
+    setClaimRevealed(false);
+    setPhase("attack");
   }
 
   function chooseAnswer(originalIdx: number) {
@@ -300,49 +302,63 @@ export default function BattleScene({
             </PixelFrame>
           )}
 
-          {phase === "showClaim" && attack && (
+          {phase === "attack" && attack && (
             <PixelFrame variant="danger" className="p-3">
-              <div className="font-pixel text-crimson text-[8px] uppercase tracking-widest mb-1">
-                Attack — Difficulty {"★".repeat(attack.difficulty)}
-                <span className="text-parchment/30">
-                  {"★".repeat(5 - attack.difficulty)}
+              <div className="font-pixel text-crimson text-[8px] uppercase tracking-widest mb-2 flex items-center justify-between">
+                <span>
+                  Attack — {"★".repeat(attack.difficulty)}
+                  <span className="text-parchment/30">
+                    {"★".repeat(5 - attack.difficulty)}
+                  </span>
                 </span>
-              </div>
-              <blockquote className="font-pixel text-parchment text-[11px] leading-relaxed mb-3 pl-3 border-l-2 border-crimson italic">
-                <Typewriter
-                  text={attack.claim}
-                  speed={20}
-                  onDone={() => setPhase("choosing")}
-                />
-              </blockquote>
-              {phase === ("showClaim" as Phase) && (
-                <button
-                  className="text-[9px] text-gold/70 underline"
-                  onClick={() => setPhase("choosing")}
-                >
-                  Skip »
-                </button>
-              )}
-            </PixelFrame>
-          )}
-
-          {phase === "choosing" && attack && (
-            <PixelFrame className="p-3">
-              <div className="font-pixel text-gold text-[8px] uppercase tracking-widest mb-2">
-                Your Answer
-              </div>
-              <div className="space-y-2">
-                {optionsOrder.map((origIdx, i) => (
+                {!claimRevealed && (
                   <button
-                    key={i}
-                    onClick={() => chooseAnswer(origIdx)}
-                    className="pixel-btn block w-full text-left p-2.5 border-[2px] border-parchment/30 hover:border-gold/80 active:translate-y-[1px] transition font-pixel text-[10px] leading-relaxed text-parchment"
+                    onClick={() => setClaimRevealed(true)}
+                    className="text-[9px] text-gold/80 underline font-pixel"
                   >
-                    <span className="text-gold mr-2">[{i + 1}]</span>
-                    {attack.options[origIdx].text}
+                    Skip ▶▶
                   </button>
-                ))}
+                )}
               </div>
+
+              <div className="font-pixel text-parchment/50 text-[8px] uppercase tracking-widest mb-1">
+                {boss.name} says:
+              </div>
+              <blockquote className="font-pixel text-parchment text-[11px] leading-relaxed pl-3 border-l-2 border-crimson italic mb-3">
+                {claimRevealed ? (
+                  attack.claim
+                ) : (
+                  <Typewriter
+                    text={attack.claim}
+                    speed={22}
+                    onDone={() => setClaimRevealed(true)}
+                  />
+                )}
+              </blockquote>
+
+              {claimRevealed ? (
+                <>
+                  <div className="font-pixel text-gold text-[9px] uppercase tracking-widest mb-2 mt-3 pt-3 border-t border-gold/20">
+                    Choose your answer
+                  </div>
+                  <div className="space-y-2">
+                    {optionsOrder.map((origIdx, i) => (
+                      <button
+                        key={i}
+                        onClick={() => chooseAnswer(origIdx)}
+                        className="pixel-btn block w-full text-left p-2.5 border-[2px] border-parchment/30 hover:border-gold/80 active:translate-y-[1px] transition font-pixel text-[10px] leading-relaxed text-parchment"
+                      >
+                        <span className="text-gold mr-2">[{i + 1}]</span>
+                        {attack.options[origIdx].text}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div className="font-pixel text-parchment/50 text-[9px] italic text-center mt-2">
+                  Read the claim. Answers appear when you're ready.
+                </div>
+              )}
             </PixelFrame>
           )}
 
