@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { PixelFrame, PixelButton, Typewriter } from "./PixelUI";
 import PixelSprite from "./PixelSprite";
 import { spriteAnthony } from "@/lib/quest/sprites";
+import ShareButton from "./ShareButton";
 
 export default function TitleScreen({
   hasSave,
@@ -97,6 +98,9 @@ export default function TitleScreen({
           >
             {hasSave ? "New Game" : "Begin the Quest ▶"}
           </PixelButton>
+
+          <ShareButton className="mt-2" />
+
           <a
             href={(process.env.NEXT_PUBLIC_BASE_PATH ?? "") + "/"}
             className="font-pixel text-parchment/50 hover:text-gold text-[9px] uppercase tracking-widest text-center mt-2 no-underline"
