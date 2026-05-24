@@ -7,7 +7,7 @@ export function generateStaticParams() {
   return curriculum.stages.map((s) => ({ stageId: s.id }));
 }
 
-export default function DrillPage({
+export default function DebatePage({
   params,
 }: {
   params: { stageId: string };
@@ -15,7 +15,9 @@ export default function DrillPage({
   const stage = getStage(params.stageId);
   if (!stage) notFound();
 
-  const items = stage.topics.flatMap((t) => t.items);
+  const items = stage.topics
+    .flatMap((t) => t.items)
+    .filter((i) => i.kind === "debate");
 
   return (
     <div>
@@ -27,7 +29,11 @@ export default function DrillPage({
           ← Back to {stage.title}
         </Link>
       </div>
-      <DrillRunner items={items} stageTitle={stage.title} />
+      <DrillRunner
+        items={items}
+        stageTitle={stage.title}
+        topicTitle="Cross-Examination"
+      />
     </div>
   );
 }

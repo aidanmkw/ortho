@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#3a1f4d"/>
+      <stop offset="60%" stop-color="#14110c"/>
+      <stop offset="100%" stop-color="#0c0a08"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e0bd4b"/>
+      <stop offset="100%" stop-color="#8a6e15"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- Orthodox three-bar cross -->
+  <g fill="url(#gold)" stroke="#c9a227" stroke-width="3" stroke-linejoin="round">
+    <!-- Top bar (titulus) -->
+    <rect x="200" y="120" width="112" height="22" rx="3"/>
+    <!-- Main horizontal bar -->
+    <rect x="148" y="200" width="216" height="32" rx="4"/>
+    <!-- Slanted footrest -->
+    <polygon points="172,344 340,304 340,340 172,380"/>
+    <!-- Vertical post -->
+    <rect x="240" y="100" width="32" height="320" rx="6"/>
+  </g>
+</svg>

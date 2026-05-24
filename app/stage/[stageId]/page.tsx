@@ -50,7 +50,7 @@ export default function StagePage({
           </Link>
           {debateItems > 0 && (
             <Link
-              href={`/drill/${stage.id}?mode=debate`}
+              href={`/debate/${stage.id}`}
               className="btn-quiet px-5 py-2 rounded no-underline"
             >
               ⚔ Cross-Examination ({debateItems})
