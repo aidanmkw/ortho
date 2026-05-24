@@ -4,6 +4,11 @@ import {
   priesthoodBan,
   bookOfMormonArch,
 } from "./more-lds";
+import {
+  eternalFamilies,
+  ldsBibleTranslation,
+  closingChristianStrategy,
+} from "./depth-lds";
 
 export const stage08: Stage = {
   id: "08-eo-vs-lds",
@@ -199,5 +204,8 @@ export const stage08: Stage = {
     polygamy,
     priesthoodBan,
     bookOfMormonArch,
+    eternalFamilies,
+    ldsBibleTranslation,
+    closingChristianStrategy,
   ],
 };

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { ProgressProvider } from "@/components/ProgressProvider";
+import RankUpBanner from "@/components/RankUpBanner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ProgressProvider>
+        <RankUpBanner />
         <div className="min-h-screen">
           <header className="border-b border-gold/20">
             <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
