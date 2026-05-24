@@ -1,4 +1,9 @@
 import type { Stage } from "@/lib/types";
+import {
+  christology,
+  mariology,
+  anthropology,
+} from "./more-foundations";
 
 export const stage03: Stage = {
   id: "03-foundational-teaching",
@@ -152,5 +157,8 @@ export const stage03: Stage = {
         },
       ],
     },
+    christology,
+    mariology,
+    anthropology,
   ],
 };

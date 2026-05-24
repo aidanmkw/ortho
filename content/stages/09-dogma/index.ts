@@ -1,4 +1,10 @@
 import type { Stage } from "@/lib/types";
+import {
+  eschatology,
+  ancestralSin,
+  ecclesiology,
+  sacraments,
+} from "./more-dogma";
 
 export const stage09: Stage = {
   id: "09-dogma",
@@ -63,5 +69,9 @@ export const stage09: Stage = {
         },
       ],
     },
+    eschatology,
+    ancestralSin,
+    ecclesiology,
+    sacraments,
   ],
 };

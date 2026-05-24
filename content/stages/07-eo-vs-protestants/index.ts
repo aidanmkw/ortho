@@ -1,4 +1,11 @@
 import type { Stage } from "@/lib/types";
+import {
+  eternalSecurity,
+  investedJudgment,
+  jwTrinity,
+  wordOfFaith,
+  dispensationalism,
+} from "./more-protestant";
 
 export const stage07: Stage = {
   id: "07-eo-vs-protestants",
@@ -254,5 +261,10 @@ export const stage07: Stage = {
         },
       ],
     },
+    eternalSecurity,
+    investedJudgment,
+    jwTrinity,
+    wordOfFaith,
+    dispensationalism,
   ],
 };

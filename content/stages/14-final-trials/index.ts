@@ -1,4 +1,5 @@
 import type { Stage } from "@/lib/types";
+import { moreScenarios } from "./more-trials";
 
 export const stage14: Stage = {
   id: "14-final-trials",
@@ -60,5 +61,6 @@ export const stage14: Stage = {
         },
       ],
     },
+    moreScenarios,
   ],
 };

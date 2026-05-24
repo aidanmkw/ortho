@@ -1,4 +1,10 @@
 import type { Stage } from "@/lib/types";
+import {
+  gnosticism,
+  monothelitism,
+  pelagianism,
+  arianismDeep,
+} from "./more-heresies";
 
 export const stage04: Stage = {
   id: "04-heresies",
@@ -9,6 +15,8 @@ export const stage04: Stage = {
     "Gnosticism, Arianism, Nestorianism, Monothelitism, Iconoclasm, Pelagianism, Bogomilism, Filioquism, Barlaamism, and the modern controversies. Each heresy with its proposition, its refutation, and the council that condemned it.",
   rank: "Subdeacon",
   topics: [
+    gnosticism,
+    arianismDeep,
     {
       id: "arianism",
       title: "Arianism",
@@ -169,5 +177,7 @@ export const stage04: Stage = {
         },
       ],
     },
+    monothelitism,
+    pelagianism,
   ],
 };

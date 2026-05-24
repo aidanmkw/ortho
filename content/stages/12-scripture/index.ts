@@ -1,4 +1,9 @@
 import type { Stage } from "@/lib/types";
+import {
+  hermeneutics,
+  johnSix,
+  oralAndWritten,
+} from "./more-scripture";
 
 export const stage12: Stage = {
   id: "12-scripture",
@@ -91,5 +96,8 @@ export const stage12: Stage = {
         },
       ],
     },
+    hermeneutics,
+    johnSix,
+    oralAndWritten,
   ],
 };

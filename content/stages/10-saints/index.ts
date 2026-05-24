@@ -1,4 +1,10 @@
 import type { Stage } from "@/lib/types";
+import {
+  apostles,
+  maryOfEgypt,
+  newMartyrs,
+  greekModern,
+} from "./more-saints";
 
 export const stage10: Stage = {
   id: "10-saints",
@@ -109,5 +115,9 @@ export const stage10: Stage = {
         },
       ],
     },
+    apostles,
+    maryOfEgypt,
+    newMartyrs,
+    greekModern,
   ],
 };

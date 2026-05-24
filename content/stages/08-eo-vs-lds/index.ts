@@ -1,4 +1,9 @@
 import type { Stage } from "@/lib/types";
+import {
+  polygamy,
+  priesthoodBan,
+  bookOfMormonArch,
+} from "./more-lds";
 
 export const stage08: Stage = {
   id: "08-eo-vs-lds",
@@ -191,5 +196,8 @@ export const stage08: Stage = {
         },
       ],
     },
+    polygamy,
+    priesthoodBan,
+    bookOfMormonArch,
   ],
 };

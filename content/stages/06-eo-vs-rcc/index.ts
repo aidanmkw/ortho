@@ -1,4 +1,11 @@
 import type { Stage } from "@/lib/types";
+import {
+  immaculateConception,
+  azymes,
+  indulgences,
+  florence,
+  augustineEast,
+} from "./more-rcc";
 
 export const stage06: Stage = {
   id: "06-eo-vs-rcc",
@@ -146,5 +153,10 @@ export const stage06: Stage = {
         },
       ],
     },
+    immaculateConception,
+    azymes,
+    indulgences,
+    florence,
+    augustineEast,
   ],
 };

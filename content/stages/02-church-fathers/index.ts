@@ -1,4 +1,10 @@
 import type { Stage } from "@/lib/types";
+import {
+  irenaeus,
+  chrysostom,
+  symeonNewTheologian,
+  cyrilOfAlexandria,
+} from "./more-fathers";
 
 export const stage02: Stage = {
   id: "02-church-fathers",
@@ -332,5 +338,9 @@ export const stage02: Stage = {
         },
       ],
     },
+    irenaeus,
+    chrysostom,
+    cyrilOfAlexandria,
+    symeonNewTheologian,
   ],
 };

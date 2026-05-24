@@ -1,4 +1,10 @@
 import type { Stage } from "@/lib/types";
+import {
+  constantinopleI,
+  ephesus,
+  photianCouncil,
+  hesychastCouncils,
+} from "./more-councils";
 
 export const stage05: Stage = {
   id: "05-councils",
@@ -128,5 +134,9 @@ export const stage05: Stage = {
         },
       ],
     },
+    constantinopleI,
+    ephesus,
+    photianCouncil,
+    hesychastCouncils,
   ],
 };
