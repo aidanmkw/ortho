@@ -6,6 +6,7 @@ import {
   wordOfFaith,
   dispensationalism,
 } from "./more-protestant";
+import { anglicanism, methodist } from "./even-more-prot";
 
 export const stage07: Stage = {
   id: "07-eo-vs-protestants",
@@ -266,5 +267,7 @@ export const stage07: Stage = {
     jwTrinity,
     wordOfFaith,
     dispensationalism,
+    anglicanism,
+    methodist,
   ],
 };

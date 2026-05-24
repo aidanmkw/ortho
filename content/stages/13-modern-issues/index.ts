@@ -1,4 +1,10 @@
 import type { Stage } from "@/lib/types";
+import {
+  bioethics,
+  sergianism,
+  ukraine,
+  americanJurisdictions,
+} from "./more-modern";
 
 export const stage13: Stage = {
   id: "13-modern-issues",
@@ -71,5 +77,9 @@ export const stage13: Stage = {
         },
       ],
     },
+    bioethics,
+    sergianism,
+    ukraine,
+    americanJurisdictions,
   ],
 };

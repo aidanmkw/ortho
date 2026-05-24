@@ -57,8 +57,11 @@ export default function RootLayout({
                   </div>
                 </div>
               </Link>
-              <nav className="hidden md:flex gap-6 text-sm">
+              <nav className="flex gap-3 sm:gap-6 text-xs sm:text-sm">
                 <Link href="/" className="text-parchment/80 hover:text-gold">Stages</Link>
+                <Link href="/daily" className="text-parchment/80 hover:text-gold">Daily</Link>
+                <Link href="/review" className="text-parchment/80 hover:text-gold">Review</Link>
+                <Link href="/settings" className="text-parchment/80 hover:text-gold">⚙</Link>
               </nav>
             </div>
           </header>
