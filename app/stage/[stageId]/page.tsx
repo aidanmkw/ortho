@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getStage, curriculum } from "@/lib/content";
+import TopicProgress from "@/components/TopicProgress";
 
 export function generateStaticParams() {
   return curriculum.stages.map((s) => ({ stageId: s.id }));
@@ -70,13 +71,14 @@ export default function StagePage({
           {stage.topics.map((topic) => (
             <div key={topic.id} className="parchment-card p-5">
               <div className="flex justify-between items-start gap-4 mb-3">
-                <div>
+                <div className="flex-1 min-w-0">
                   <h3 className="text-parchment text-lg font-semibold">
                     {topic.title}
                   </h3>
                   <p className="text-parchment/70 text-sm mt-1 max-w-3xl">
                     {topic.summary}
                   </p>
+                  <TopicProgress itemIds={topic.items.map((i) => i.id)} />
                 </div>
                 <Link
                   href={`/drill/${stage.id}/${topic.id}`}
