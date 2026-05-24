@@ -5,6 +5,11 @@ import {
   pelagianism,
   arianismDeep,
 } from "./more-heresies";
+import {
+  iconoclasm,
+  bogomils,
+  ecumenismHeresy,
+} from "./even-more-heresies";
 
 export const stage04: Stage = {
   id: "04-heresies",
@@ -179,5 +184,8 @@ export const stage04: Stage = {
     },
     monothelitism,
     pelagianism,
+    iconoclasm,
+    bogomils,
+    ecumenismHeresy,
   ],
 };
