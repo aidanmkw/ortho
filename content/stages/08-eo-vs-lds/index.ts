@@ -18,6 +18,7 @@ import {
   ldsHistoryProblems,
   exaltationDeep,
 } from "./bulk-lds";
+import { ldsHistoryPack } from "./mass-lds";
 
 export const stage08: Stage = {
   id: "08-eo-vs-lds",
@@ -223,5 +224,6 @@ export const stage08: Stage = {
     baptismDead,
     ldsHistoryProblems,
     exaltationDeep,
+    ldsHistoryPack,
   ],
 };

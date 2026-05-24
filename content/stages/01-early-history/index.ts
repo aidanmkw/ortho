@@ -14,6 +14,7 @@ import {
   earlyChurchOrder,
 } from "./topics/09-quick-recall";
 import { mcqPackEarly } from "./topics/10-mcq-pack";
+import { finalEarlyPack } from "./topics/11-final-pack";
 
 export const stage01: Stage = {
   id: "01-early-history",
@@ -38,5 +39,6 @@ export const stage01: Stage = {
     persecutionsDetail,
     earlyChurchOrder,
     mcqPackEarly,
+    finalEarlyPack,
   ],
 };

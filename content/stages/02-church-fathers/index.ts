@@ -19,6 +19,7 @@ import {
   ephremSyrian,
   dionysiusAreo,
 } from "./extra-fathers";
+import { fathersFactsPack } from "./mass-fathers";
 
 export const stage02: Stage = {
   id: "02-church-fathers",
@@ -366,5 +367,6 @@ export const stage02: Stage = {
     johnCassian,
     ephremSyrian,
     dionysiusAreo,
+    fathersFactsPack,
   ],
 };

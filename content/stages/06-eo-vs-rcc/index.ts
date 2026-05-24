@@ -32,6 +32,7 @@ import {
   papalApologies,
   limbo,
 } from "./extra-rcc";
+import { rcMassQuestions, rcSpiritualityTopics } from "./mass-rcc";
 
 export const stage06: Stage = {
   id: "06-eo-vs-rcc",
@@ -202,5 +203,7 @@ export const stage06: Stage = {
     papalElection,
     papalApologies,
     limbo,
+    rcMassQuestions,
+    rcSpiritualityTopics,
   ],
 };

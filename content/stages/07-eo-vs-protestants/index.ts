@@ -28,6 +28,7 @@ import {
   dispensationalismDeep,
   oneness,
 } from "./extra-prot";
+import { protestantFactsPack } from "./mass-prot";
 
 export const stage07: Stage = {
   id: "07-eo-vs-protestants",
@@ -305,5 +306,6 @@ export const stage07: Stage = {
     churchOfChrist,
     dispensationalismDeep,
     oneness,
+    protestantFactsPack,
   ],
 };
