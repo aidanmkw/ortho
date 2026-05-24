@@ -18,6 +18,7 @@ const config: Config = {
       fontFamily: {
         serif: ["Georgia", "Cambria", "Times New Roman", "serif"],
         display: ["Cinzel", "Georgia", "serif"],
+        pixel: ['"Press Start 2P"', "VT323", "Courier New", "monospace"],
       },
     },
   },

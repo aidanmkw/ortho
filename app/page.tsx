@@ -38,6 +38,35 @@ export default function Home() {
 
       <QuickStart />
 
+      <Link
+        href="/quest"
+        className="block mb-6 no-underline group"
+      >
+        <div
+          className="parchment-card p-5 border-2 border-gold/40 hover:border-gold transition relative overflow-hidden"
+          style={{
+            background:
+              "linear-gradient(135deg, #1a1024 0%, #28182c 50%, #2a1a08 100%)",
+          }}
+        >
+          <div className="flex items-center gap-4">
+            <div className="text-5xl text-gold">☦</div>
+            <div className="flex-1 min-w-0">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-gold/80">
+                NEW · Pixel Quest
+              </div>
+              <div className="font-display text-xl text-parchment leading-tight">
+                Orthodox Quest: Witness of the Witnesses
+              </div>
+              <div className="text-xs text-parchment/70 mt-1 italic">
+                A modern Inquirer is pulled through time. 13 chapters from Antioch to the present, fighting boss-heretics by answering with the Fathers.
+              </div>
+            </div>
+            <div className="text-gold text-2xl group-hover:translate-x-1 transition">→</div>
+          </div>
+        </div>
+      </Link>
+
       <div className="grid sm:grid-cols-2 gap-4 mb-8">
         <RankBadge />
         <DailyCard />
