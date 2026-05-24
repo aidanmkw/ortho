@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Boss, HeroState, BossAttack, Sprite } from "@/lib/quest/types";
+import type {
+  Boss,
+  HeroState,
+  BossAttack,
+  Sprite,
+  ResolvedAttack,
+} from "@/lib/quest/types";
 import { ALL_SPRITES, playerSprite } from "@/lib/quest/sprites";
 import { getPatron } from "@/lib/quest/patrons";
 import { getItem } from "@/lib/quest/items";
@@ -29,10 +35,14 @@ type Props = {
   background: string;
   hero: HeroState;
   hairColor: string;
+  // sandbox mode = sparring (HP loss doesn't matter; abort allowed)
+  sandbox?: boolean;
   onResult: (
     result: "victory" | "defeat",
-    finalHero: HeroState
+    finalHero: HeroState,
+    resolved: ResolvedAttack[]
   ) => void;
+  onAbort?: () => void;
 };
 
 function getBossSprite(id: string): Sprite | undefined {
@@ -57,7 +67,9 @@ export default function BattleScene({
   background,
   hero: initialHero,
   hairColor,
+  sandbox = false,
   onResult,
+  onAbort,
 }: Props) {
   const bossSprite = getBossSprite(bossSpriteId);
   const playerSpriteData = playerSprite(hairColor);
@@ -80,6 +92,7 @@ export default function BattleScene({
   const [shownVictoryEpigraph, setShownVictoryEpigraph] = useState(false);
   const heroRef = useRef(hero);
   heroRef.current = hero;
+  const resolvedRef = useRef<ResolvedAttack[]>([]);
 
   // Compute item bonuses
   const itemBonuses = useMemo(() => {
@@ -124,6 +137,17 @@ export default function BattleScene({
   function chooseAnswer(originalIdx: number) {
     if (!attack) return;
     const opt = attack.options[originalIdx];
+    const correctOpt = attack.options.find((o) => o.correct);
+    // Record this resolution for the post-battle review.
+    resolvedRef.current.push({
+      attackIdx: attackIdx % boss.attacks.length,
+      bossId: boss.id,
+      pickedOptionText: opt.text,
+      pickedCorrect: opt.correct,
+      correctOptionText: correctOpt?.text ?? "",
+      rationale: opt.rationale,
+      claim: attack.claim,
+    });
     const baseDamage =
       (attack.difficulty * 18 + 12) * itemBonuses.strikeMult;
     const critRoll = Math.random();
@@ -191,15 +215,24 @@ export default function BattleScene({
   }
 
   function finishVictory() {
-    onResult("victory", heroRef.current);
+    onResult("victory", heroRef.current, resolvedRef.current);
   }
   function finishDefeat() {
-    onResult("defeat", heroRef.current);
+    onResult("defeat", heroRef.current, resolvedRef.current);
   }
 
   return (
     <div className="relative min-h-[100dvh] w-full overflow-hidden">
       <PixelBackground id={background} />
+
+      {sandbox && onAbort && (
+        <button
+          onClick={onAbort}
+          className="fixed top-2 left-1/2 -translate-x-1/2 z-[70] font-pixel text-[9px] bg-black/80 border-2 border-gold/50 text-gold px-3 py-1 uppercase tracking-widest"
+        >
+          ⚔ SPARRING · Quit Drill
+        </button>
+      )}
 
       {/* Top: boss + boss HP */}
       <div className="relative z-10 pt-4 px-3">

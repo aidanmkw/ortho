@@ -123,6 +123,16 @@ export type HeroState = {
   rank: string;
 };
 
+export type AttackState = {
+  // composite key: `${bossId}:${attackIdx}`
+  bossId: string;
+  attackIdx: number;
+  attempts: number;
+  correct: number;
+  lastResult: "correct" | "wrong" | null;
+  lastSeenAt: number;
+};
+
 export type QuestProgress = {
   version: 2;
   hero: HeroState | null;
@@ -135,6 +145,19 @@ export type QuestProgress = {
   lastSavedAt: number;
   // Cosmetic
   hairColor: string;
+  // Per-attack mastery tracking (learning analytics) — added later;
+  // optional for backward compat with v2 saves before this field.
+  attackStates?: Record<string, AttackState>;
+};
+
+export type ResolvedAttack = {
+  attackIdx: number;          // index in boss.attacks
+  bossId: string;
+  pickedOptionText: string;
+  pickedCorrect: boolean;
+  correctOptionText: string;
+  rationale?: string;
+  claim: string;
 };
 
 export type BattleResult = "victory" | "defeat" | "ongoing";

@@ -9,10 +9,12 @@ export default function TitleScreen({
   hasSave,
   onNew,
   onContinue,
+  onSparringHall,
 }: {
   hasSave: boolean;
   onNew: () => void;
   onContinue: () => void;
+  onSparringHall: () => void;
 }) {
   const [showSubtitle, setShowSubtitle] = useState(false);
 
@@ -84,8 +86,13 @@ export default function TitleScreen({
               Continue ▶
             </PixelButton>
           )}
+          {hasSave && (
+            <PixelButton variant="secondary" onClick={onSparringHall}>
+              ⚔ Sparring Hall · Drill Past Battles
+            </PixelButton>
+          )}
           <PixelButton
-            variant={hasSave ? "secondary" : "primary"}
+            variant={hasSave ? "ghost" : "primary"}
             onClick={onNew}
           >
             {hasSave ? "New Game" : "Begin the Quest ▶"}

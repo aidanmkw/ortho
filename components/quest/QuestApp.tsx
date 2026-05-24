@@ -13,11 +13,23 @@ import { CHAPTERS, getChapter } from "@/lib/quest/chapters";
 import { getItem } from "@/lib/quest/items";
 import { getPatron } from "@/lib/quest/patrons";
 import { sfx, getMuted, setMuted } from "@/lib/quest/sfx";
-import type { QuestProgress, HeroState } from "@/lib/quest/types";
+import type {
+  QuestProgress,
+  HeroState,
+  ResolvedAttack,
+  AttackState,
+  Boss,
+} from "@/lib/quest/types";
 import TitleScreen from "./TitleScreen";
 import CharacterCreate from "./CharacterCreate";
 import DialogScene from "./DialogScene";
 import BattleScene from "./BattleScene";
+import BattleReview from "./BattleReview";
+import SparringHall, {
+  buildMistakesBoss,
+  buildSkirmishBoss,
+  type SparringTarget,
+} from "./SparringHall";
 import { PixelFrame, PixelButton, ScanlineOverlay } from "./PixelUI";
 import PixelSprite from "./PixelSprite";
 import { ALL_SPRITES, spriteAnthony } from "@/lib/quest/sprites";
@@ -28,16 +40,26 @@ type Scene =
   | "chapter-card"
   | "intro"
   | "battle"
+  | "review"
   | "outro"
   | "reward"
   | "finale"
-  | "credits";
+  | "credits"
+  | "sparring-hall"
+  | "sparring-battle"
+  | "sparring-review";
 
 export default function QuestApp() {
   const [progress, setProgress] = useState<QuestProgress>(emptyProgress());
   const [scene, setScene] = useState<Scene>("title");
   const [muted, setMutedState] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  // Outcomes from the most recent battle (for the review screen)
+  const [lastResolved, setLastResolved] = useState<ResolvedAttack[]>([]);
+  const [lastOutcome, setLastOutcome] = useState<"victory" | "defeat">("victory");
+  const [lastBossName, setLastBossName] = useState<string>("");
+  // Sparring state
+  const [sparringBoss, setSparringBoss] = useState<Boss | null>(null);
 
   useEffect(() => {
     setProgress(loadProgress());
@@ -100,14 +122,70 @@ export default function QuestApp() {
     setScene("battle");
   }
 
+  function mergeAttackStates(
+    prev: Record<string, AttackState> | undefined,
+    resolved: ResolvedAttack[]
+  ): Record<string, AttackState> {
+    const next: Record<string, AttackState> = { ...(prev ?? {}) };
+    for (const r of resolved) {
+      const key = `${r.bossId}:${r.attackIdx}`;
+      const cur = next[key] ?? {
+        bossId: r.bossId,
+        attackIdx: r.attackIdx,
+        attempts: 0,
+        correct: 0,
+        lastResult: null,
+        lastSeenAt: 0,
+      };
+      next[key] = {
+        ...cur,
+        attempts: cur.attempts + 1,
+        correct: cur.correct + (r.pickedCorrect ? 1 : 0),
+        lastResult: r.pickedCorrect ? "correct" : "wrong",
+        lastSeenAt: Date.now(),
+      };
+    }
+    return next;
+  }
+
   function onBattleResult(
     result: "victory" | "defeat",
-    finalHero: HeroState
+    finalHero: HeroState,
+    resolved: ResolvedAttack[]
   ) {
     if (!chapter) return;
+    // Always record attack states so the player learns.
+    const updatedStates = mergeAttackStates(progress.attackStates, resolved);
+    setLastResolved(resolved);
+    setLastOutcome(result);
+    setLastBossName(chapter.boss.name);
     if (result === "victory") {
-      // Apply reward
-      const newHero = { ...finalHero };
+      persist({
+        ...progress,
+        hero: { ...finalHero },
+        attackStates: updatedStates,
+        totalBattlesWon: progress.totalBattlesWon + 1,
+      });
+      sfx.levelUp();
+      setScene("review");
+    } else {
+      // Reset HP, will retry battle after review
+      const newHero = { ...finalHero, hp: finalHero.maxHp };
+      persist({
+        ...progress,
+        hero: newHero,
+        attackStates: updatedStates,
+        totalBattlesLost: progress.totalBattlesLost + 1,
+      });
+      setScene("review");
+    }
+  }
+
+  function onReviewComplete() {
+    if (!chapter) return;
+    if (lastOutcome === "victory") {
+      // Apply reward + go to outro
+      const newHero = { ...(progress.hero as HeroState) };
       newHero.level += chapter.reward.xp;
       newHero.xp += chapter.reward.xp;
       newHero.rank = rankForLevel(newHero.level);
@@ -123,25 +201,67 @@ export default function QuestApp() {
         newHero.hp = newHero.maxHp;
         newHero.faith = newHero.maxFaith;
       }
-      const updated: QuestProgress = {
-        ...progress,
-        hero: newHero,
-        chaptersBeaten: [...progress.chaptersBeaten, chapter.id],
-        totalBattlesWon: progress.totalBattlesWon + 1,
-      };
-      persist(updated);
-      sfx.levelUp();
-      setScene("outro");
-    } else {
-      // Reset HP, retry battle
-      const newHero = { ...finalHero, hp: finalHero.maxHp };
       persist({
         ...progress,
         hero: newHero,
-        totalBattlesLost: progress.totalBattlesLost + 1,
+        chaptersBeaten: progress.chaptersBeaten.includes(chapter.id)
+          ? progress.chaptersBeaten
+          : [...progress.chaptersBeaten, chapter.id],
       });
+      setScene("outro");
+    } else {
+      // Retry battle
       setScene("intro");
     }
+  }
+
+  // ===== Sparring Hall =====
+  function openSparringHall() {
+    setScene("sparring-hall");
+  }
+  function onSparringSelect(t: SparringTarget) {
+    if (t.kind === "chapter") {
+      const ch = CHAPTERS.find((c) => c.id === t.chapterId);
+      if (ch) {
+        setSparringBoss({ ...ch.boss });
+        setLastBossName(ch.boss.name);
+        setScene("sparring-battle");
+      }
+    } else if (t.kind === "skirmish") {
+      const b = buildSkirmishBoss(progress);
+      if (b) {
+        setSparringBoss(b);
+        setLastBossName(b.name);
+        setScene("sparring-battle");
+      }
+    } else if (t.kind === "mistakes") {
+      const b = buildMistakesBoss(progress);
+      if (b) {
+        setSparringBoss(b);
+        setLastBossName(b.name);
+        setScene("sparring-battle");
+      }
+    }
+  }
+  function onSparringBattleResult(
+    result: "victory" | "defeat",
+    _hero: HeroState,
+    resolved: ResolvedAttack[]
+  ) {
+    // Update attack states (learning persists across sparring too)
+    const updatedStates = mergeAttackStates(progress.attackStates, resolved);
+    persist({ ...progress, attackStates: updatedStates });
+    setLastResolved(resolved);
+    setLastOutcome(result);
+    setScene("sparring-review");
+  }
+  function onSparringReviewComplete() {
+    setSparringBoss(null);
+    setScene("sparring-hall");
+  }
+  function onSparringAbort() {
+    setSparringBoss(null);
+    setScene("sparring-hall");
   }
 
   function onOutroComplete() {
@@ -221,6 +341,7 @@ export default function QuestApp() {
           hasSave={progress.hero !== null}
           onNew={startNew}
           onContinue={continueGame}
+          onSparringHall={openSparringHall}
         />
       )}
 
@@ -254,6 +375,47 @@ export default function QuestApp() {
           hero={progress.hero}
           hairColor={progress.hairColor}
           onResult={onBattleResult}
+        />
+      )}
+
+      {scene === "review" && (
+        <BattleReview
+          resolved={lastResolved}
+          bossName={lastBossName}
+          outcome={lastOutcome}
+          onContinue={onReviewComplete}
+          continueLabel={lastOutcome === "victory" ? "Onward ▶" : "Try Again ▶"}
+        />
+      )}
+
+      {scene === "sparring-hall" && (
+        <SparringHall
+          progress={progress}
+          onSelect={onSparringSelect}
+          onBack={backToTitle}
+        />
+      )}
+
+      {scene === "sparring-battle" && sparringBoss && progress.hero && (
+        <BattleScene
+          boss={sparringBoss}
+          bossSpriteId={sparringBoss.sprite}
+          background="void"
+          hero={{ ...progress.hero, hp: progress.hero.maxHp, faith: progress.hero.maxFaith }}
+          hairColor={progress.hairColor}
+          sandbox
+          onResult={onSparringBattleResult}
+          onAbort={onSparringAbort}
+        />
+      )}
+
+      {scene === "sparring-review" && (
+        <BattleReview
+          resolved={lastResolved}
+          bossName={lastBossName}
+          outcome={lastOutcome}
+          onContinue={onSparringReviewComplete}
+          continueLabel="Back to Sparring Hall ▶"
         />
       )}
 
