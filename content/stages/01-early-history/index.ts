@@ -6,6 +6,7 @@ import { tenPersecutions } from "./topics/04-ten-persecutions";
 import { earlyApologists } from "./topics/05-early-apologists";
 import { earlyLiturgicalPatterns } from "./topics/06-early-liturgical-patterns";
 import { edictOfMilan } from "./topics/07-edict-of-milan";
+import { catacombsCreeds } from "./topics/08-catacombs-creeds";
 
 export const stage01: Stage = {
   id: "01-early-history",
@@ -24,5 +25,6 @@ export const stage01: Stage = {
     earlyApologists,
     earlyLiturgicalPatterns,
     edictOfMilan,
+    catacombsCreeds,
   ],
 };

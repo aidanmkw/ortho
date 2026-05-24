@@ -8,14 +8,45 @@ Pentecostal, SDA, JW, and LDS positions.
 Every answer carries at least one citation — Father, Council, or
 Scripture. The content checker enforces this.
 
-## Quick start
+## Quick start (local)
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-npm run content:check   # verify content invariants
+npm run dev               # http://localhost:3000
+npm run content:check     # verify citation invariants
 npm run typecheck
 ```
+
+## Quick start (mobile, no install)
+
+After the GitHub Actions deploy succeeds (Settings → Pages must be
+enabled and set to "GitHub Actions" as source), the live game is at:
+
+  **https://aidanmkw.github.io/ortho/**
+
+On iPhone, open the URL in Safari → Share → **Add to Home Screen** for a
+full-screen, installed-app experience.
+
+If the workflow fails because Pages isn't enabled yet:
+1. Go to repo Settings → Pages.
+2. Under "Build and deployment," set Source = **GitHub Actions**.
+3. Re-run the deploy workflow from the Actions tab.
+
+## Game mechanics
+
+- **XP / Rank.** Inquirer → Catechumen → Reader → Subdeacon → Deacon →
+  Priest → Archpriest → Confessor → Apologist. XP awarded for first-try
+  correct answers, scaled to difficulty.
+- **Streaks.** Consecutive days of any drilling. Resets after a missed
+  day.
+- **Mastery.** Per-item EMA score. ≥0.7 counts as mastered.
+- **Stage gating.** A stage unlocks when its predecessor is at 60%
+  mastery.
+- **Spaced repetition (SR).** SM-2-lite scheduling. Items you got wrong
+  resurface immediately; correct items grow longer intervals.
+- **Daily Trial.** 10 deterministic items per calendar day, biased
+  toward un-mastered items.
+- **Review Queue.** All due-or-wrong items in one focused drill.
 
 ## Layout
 

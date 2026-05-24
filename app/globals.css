@@ -12,6 +12,14 @@ body {
   color: #f4ecd8;
   font-family: Georgia, Cambria, "Times New Roman", serif;
   min-height: 100%;
+  /* Honor iOS safe areas in standalone PWA mode */
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a {
+  touch-action: manipulation;
 }
 
 a {

@@ -3,6 +3,7 @@ import { curriculum } from "@/lib/content";
 import RankBadge from "@/components/RankBadge";
 import StageGrid from "@/components/StageGrid";
 import DailyCard from "@/components/DailyCard";
+import QuickStart from "@/components/QuickStart";
 
 export default function Home() {
   const totalItems = curriculum.stages.reduce(
@@ -34,6 +35,8 @@ export default function Home() {
           Church.
         </p>
       </section>
+
+      <QuickStart />
 
       <div className="grid sm:grid-cols-2 gap-4 mb-8">
         <RankBadge />

@@ -50,6 +50,15 @@ export default function DrillRunner({ items, stageTitle, topicTitle }: Props) {
   }
 
   function next() {
+    // If we revealed a QA/debate item but never self-rated, treat as skipped.
+    if (
+      item &&
+      revealed &&
+      (item.kind === "qa" || item.kind === "debate") &&
+      selfRated === null
+    ) {
+      commitResult("skipped");
+    }
     if (index < items.length - 1) {
       setIndex(index + 1);
       reset();

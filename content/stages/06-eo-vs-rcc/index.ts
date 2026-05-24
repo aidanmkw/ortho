@@ -6,6 +6,11 @@ import {
   florence,
   augustineEast,
 } from "./more-rcc";
+import {
+  vaticanII,
+  marianDogmas,
+  papalInfallibilityDeep,
+} from "./even-more-rcc";
 
 export const stage06: Stage = {
   id: "06-eo-vs-rcc",
@@ -158,5 +163,8 @@ export const stage06: Stage = {
     indulgences,
     florence,
     augustineEast,
+    vaticanII,
+    marianDogmas,
+    papalInfallibilityDeep,
   ],
 };
