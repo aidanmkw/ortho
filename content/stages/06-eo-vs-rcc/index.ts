@@ -11,6 +11,11 @@ import {
   marianDogmas,
   papalInfallibilityDeep,
 } from "./even-more-rcc";
+import {
+  purgatoryDeep,
+  createdGraceDeep,
+  petrineTextsDeep,
+} from "./depth-rcc";
 
 export const stage06: Stage = {
   id: "06-eo-vs-rcc",
@@ -166,5 +171,8 @@ export const stage06: Stage = {
     vaticanII,
     marianDogmas,
     papalInfallibilityDeep,
+    purgatoryDeep,
+    createdGraceDeep,
+    petrineTextsDeep,
   ],
 };

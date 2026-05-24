@@ -5,6 +5,7 @@ import {
   newMartyrs,
   greekModern,
 } from "./more-saints";
+import { antony, sergiusOfRadonezh, americanSaints } from "./desert-depth";
 
 export const stage10: Stage = {
   id: "10-saints",
@@ -119,5 +120,8 @@ export const stage10: Stage = {
     maryOfEgypt,
     newMartyrs,
     greekModern,
+    antony,
+    sergiusOfRadonezh,
+    americanSaints,
   ],
 };

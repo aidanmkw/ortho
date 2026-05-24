@@ -7,6 +7,11 @@ import {
   dispensationalism,
 } from "./more-protestant";
 import { anglicanism, methodist } from "./even-more-prot";
+import {
+  reformedTulip,
+  invisibleChurch,
+  totalDepravity,
+} from "./depth-prot";
 
 export const stage07: Stage = {
   id: "07-eo-vs-protestants",
@@ -269,5 +274,8 @@ export const stage07: Stage = {
     dispensationalism,
     anglicanism,
     methodist,
+    reformedTulip,
+    invisibleChurch,
+    totalDepravity,
   ],
 };

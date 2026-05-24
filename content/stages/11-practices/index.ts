@@ -5,6 +5,7 @@ import {
   iconography,
   confession,
 } from "./more-practices";
+import { holyWeek, vestments, octoechos } from "./holy-week";
 
 export const stage11: Stage = {
   id: "11-practices",
@@ -106,5 +107,8 @@ export const stage11: Stage = {
     paschaCalculation,
     iconography,
     confession,
+    holyWeek,
+    vestments,
+    octoechos,
   ],
 };
