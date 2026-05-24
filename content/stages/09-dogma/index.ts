@@ -14,6 +14,13 @@ import {
   passions,
   sin,
 } from "./bulk-dogma";
+import {
+  ascension,
+  transfiguration,
+  prayerForDead,
+  repentance,
+  humility,
+} from "./extra-dogma";
 
 export const stage09: Stage = {
   id: "09-dogma",
@@ -90,5 +97,10 @@ export const stage09: Stage = {
     apophaticism,
     passions,
     sin,
+    ascension,
+    transfiguration,
+    prayerForDead,
+    repentance,
+    humility,
   ],
 };

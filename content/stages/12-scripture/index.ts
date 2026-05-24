@@ -18,6 +18,15 @@ import {
   inspirationOfScripture,
   inerrancy,
 } from "./bulk-scripture";
+import {
+  matthewTwentyEight,
+  james2,
+  onePeter3_21,
+  johnThree,
+  oneCor11,
+  psalm22,
+  acts15,
+} from "./extra-scripture";
 
 export const stage12: Stage = {
   id: "12-scripture",
@@ -123,5 +132,12 @@ export const stage12: Stage = {
     psalter,
     inspirationOfScripture,
     inerrancy,
+    matthewTwentyEight,
+    james2,
+    onePeter3_21,
+    johnThree,
+    oneCor11,
+    psalm22,
+    acts15,
   ],
 };

@@ -25,6 +25,13 @@ import {
   filioqueHistory,
   ecclesiologyRome,
 } from "./bulk-rcc";
+import {
+  sacramentNumber,
+  indulgencesHistory,
+  papalElection,
+  papalApologies,
+  limbo,
+} from "./extra-rcc";
 
 export const stage06: Stage = {
   id: "06-eo-vs-rcc",
@@ -190,5 +197,10 @@ export const stage06: Stage = {
     reunionAttempts,
     filioqueHistory,
     ecclesiologyRome,
+    sacramentNumber,
+    indulgencesHistory,
+    papalElection,
+    papalApologies,
+    limbo,
   ],
 };

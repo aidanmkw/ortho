@@ -11,6 +11,13 @@ import {
   baptismFoundation,
   dyothelitism,
 } from "./bulk-foundations";
+import {
+  communionSaints,
+  eucharistFoundation,
+  marriage,
+  ordination,
+  unction,
+} from "./more-foundations-2";
 
 export const stage03: Stage = {
   id: "03-foundational-teaching",
@@ -172,5 +179,10 @@ export const stage03: Stage = {
     fall,
     baptismFoundation,
     dyothelitism,
+    communionSaints,
+    eucharistFoundation,
+    marriage,
+    ordination,
+    unction,
   ],
 };

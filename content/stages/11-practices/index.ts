@@ -13,6 +13,14 @@ import {
   incense,
   tonsure,
 } from "./bulk-practices";
+import {
+  greatCanon,
+  akathist,
+  proskomedia,
+  antidoron,
+  blessingHouse,
+  fastingDetail,
+} from "./extra-practices";
 
 export const stage11: Stage = {
   id: "11-practices",
@@ -122,5 +130,11 @@ export const stage11: Stage = {
     memorials,
     incense,
     tonsure,
+    greatCanon,
+    akathist,
+    proskomedia,
+    antidoron,
+    blessingHouse,
+    fastingDetail,
   ],
 };

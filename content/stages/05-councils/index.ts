@@ -12,6 +12,7 @@ import {
   conciliarReception,
   localCouncils,
 } from "./bulk-councils";
+import { sevenCouncilsQuickRecall, synodicon } from "./extra-councils";
 
 export const stage05: Stage = {
   id: "05-councils",
@@ -150,5 +151,7 @@ export const stage05: Stage = {
     robberCouncil,
     conciliarReception,
     localCouncils,
+    sevenCouncilsQuickRecall,
+    synodicon,
   ],
 };

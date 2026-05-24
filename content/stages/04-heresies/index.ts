@@ -20,6 +20,13 @@ import {
   eunomianism,
   nestorianismDeep,
 } from "./bulk-heresies";
+import {
+  marcionism,
+  tritheism,
+  judaizers,
+  eutychianism,
+  sergianismHeresy,
+} from "./extra-heresies";
 
 export const stage04: Stage = {
   id: "04-heresies",
@@ -205,5 +212,10 @@ export const stage04: Stage = {
     manicheism,
     eunomianism,
     nestorianismDeep,
+    marcionism,
+    tritheism,
+    judaizers,
+    eutychianism,
+    sergianismHeresy,
   ],
 };

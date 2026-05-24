@@ -18,6 +18,16 @@ import {
   johnMaximovitch,
   justinPopovic,
 } from "./bulk-saints";
+import {
+  johnTheTheologian,
+  peterAndPaul,
+  photiosTheGreat,
+  xeniaPetersburg,
+  matronaMoscow,
+  optinaElders,
+  innocentAlaska,
+  isaacOfSyria,
+} from "./extra-saints";
 
 export const stage10: Stage = {
   id: "10-saints",
@@ -145,5 +155,13 @@ export const stage10: Stage = {
     ignatiusBrianchaninov,
     johnMaximovitch,
     justinPopovic,
+    johnTheTheologian,
+    peterAndPaul,
+    photiosTheGreat,
+    xeniaPetersburg,
+    matronaMoscow,
+    optinaElders,
+    innocentAlaska,
+    isaacOfSyria,
   ],
 };

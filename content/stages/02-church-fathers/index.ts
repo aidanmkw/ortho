@@ -12,6 +12,13 @@ import {
   tertullianOrigen,
   philokaliaTopic,
 } from "./bulk-fathers";
+import {
+  athanasiusDepth,
+  cyrilOfJerusalem,
+  johnCassian,
+  ephremSyrian,
+  dionysiusAreo,
+} from "./extra-fathers";
 
 export const stage02: Stage = {
   id: "02-church-fathers",
@@ -354,5 +361,10 @@ export const stage02: Stage = {
     latinFathers,
     tertullianOrigen,
     philokaliaTopic,
+    athanasiusDepth,
+    cyrilOfJerusalem,
+    johnCassian,
+    ephremSyrian,
+    dionysiusAreo,
   ],
 };
