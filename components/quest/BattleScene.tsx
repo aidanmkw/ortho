@@ -22,12 +22,16 @@ import {
 } from "./PixelUI";
 
 type Phase =
-  | "intro"           // boss line, then player chooses move
-  | "attack"          // showing boss attack claim + answer options (combined)
-  | "resolving"       // showing the result
+  | "intro"              // boss line, then player chooses move
+  | "action-select"      // Swords-&-Sandals action menu
+  | "attack"             // showing boss attack claim + answer options
+  | "resolving"          // showing the result of an answer
+  | "non-attack-resolving" // result of Defend / Pray / Witness Strike
   | "midline"
   | "victory"
   | "defeat";
+
+type ChosenAction = "strike" | "power" | "defend" | "pray" | "witness";
 
 type Props = {
   boss: Boss;
@@ -87,6 +91,13 @@ export default function BattleScene({
   const [bossFlash, setBossFlash] = useState(false);
   const [heroFlash, setHeroFlash] = useState(false);
   const [bossLine, setBossLine] = useState(boss.intro);
+  // Combat mechanics
+  const [chosenAction, setChosenAction] = useState<ChosenAction>("strike");
+  const [defendActive, setDefendActive] = useState(false); // halves next hit
+  const [cloud, setCloud] = useState(0); // Cloud of Witnesses meter, 0-5
+  const CLOUD_MAX = 5;
+  const [roundCount, setRoundCount] = useState(0);
+  const [nonAttackMsg, setNonAttackMsg] = useState<string>("");
   const [showMidline, setShowMidline] = useState(false);
   const [lastResultWasCrit, setLastResultWasCrit] = useState(false);
   const [shownVictoryEpigraph, setShownVictoryEpigraph] = useState(false);
@@ -127,18 +138,151 @@ export default function BattleScene({
     sfx.bossEnter();
   }, []);
 
-  function startAttack() {
+  function openActionMenu() {
+    setPhase("action-select");
+  }
+
+  /** Boss strikes the player on a turn where you did NOT answer a question
+      (Defend / Pray / Witness — i.e. you skipped your attack). */
+  function bossCounterStrike(damageMultiplier: number) {
+    if (!attack) return 0;
+    let dmg = Math.round(attack.difficulty * 6 + 8);
+    dmg = Math.round(dmg * damageMultiplier);
+    if (defendActive) {
+      dmg = Math.round(dmg * 0.5);
+    }
+    return dmg;
+  }
+
+  function performDefend() {
     if (!attack) return;
+    setChosenAction("defend");
+    setDefendActive(true);
+    setNonAttackMsg(
+      `🛡 You stand firm in the Tradition. Incoming damage halved this round.`
+    );
+    // Boss still attacks but at 50% (lighter than its full taunt) + your defend.
+    const dmg = bossCounterStrike(0.5);
+    const newHp = Math.max(0, hero.hp - dmg);
+    setHero((h) => ({ ...h, hp: newHp }));
+    if (dmg > 0) {
+      setHeroFlash(true);
+      setTimeout(() => setHeroFlash(false), 400);
+    }
+    sfx.click();
+    setPhase("non-attack-resolving");
+    setTimeout(() => {
+      if (newHp === 0) {
+        sfx.defeat();
+        setPhase("defeat");
+      } else {
+        regenAndAdvance();
+      }
+    }, 1700);
+  }
+
+  function performPray() {
+    if (!attack) return;
+    const fpGain = 12;
+    const hpGain = 5;
+    setHero((h) => ({
+      ...h,
+      faith: Math.min(h.maxFaith, h.faith + fpGain),
+      hp: Math.min(h.maxHp, h.hp + hpGain),
+    }));
+    setChosenAction("pray");
+    sfx.heal();
+    setNonAttackMsg(
+      `🙏 You pray. +${hpGain} HP, +${fpGain} Faith. But the boss attacks while you are recollecting.`
+    );
+    // Boss attacks at full this round (you took no defensive action).
+    const dmg = bossCounterStrike(1.0);
+    const newHp = Math.max(0, Math.min(hero.maxHp, hero.hp + hpGain) - dmg);
+    // Apply the net result on next tick to ensure regen + damage settle.
+    setTimeout(() => {
+      setHero((h) => ({ ...h, hp: newHp }));
+      if (dmg > 0) {
+        setHeroFlash(true);
+        setTimeout(() => setHeroFlash(false), 400);
+      }
+    }, 600);
+    setPhase("non-attack-resolving");
+    setTimeout(() => {
+      if (newHp === 0) {
+        sfx.defeat();
+        setPhase("defeat");
+      } else {
+        regenAndAdvance();
+      }
+    }, 1900);
+  }
+
+  function performWitnessStrike() {
+    // Unleash all 5 Cloud-of-Witnesses charges as a massive blow to the boss.
+    if (cloud < CLOUD_MAX) return;
+    const baseDmg = 80;
+    const dmg = Math.round(baseDmg * itemBonuses.strikeMult);
+    const newBossHp = Math.max(0, bossHp - dmg);
+    setBossHp(newBossHp);
+    setCloud(0);
+    setBossFlash(true);
+    setTimeout(() => setBossFlash(false), 600);
+    sfx.crit();
+    setChosenAction("witness");
+    setNonAttackMsg(
+      `✦ The Cloud of Witnesses descends! The saints pray with you. ${dmg} damage to ${boss.name}!`
+    );
+    setPhase("non-attack-resolving");
+    setTimeout(() => {
+      if (newBossHp === 0) {
+        sfx.victory();
+        setPhase("victory");
+      } else {
+        regenAndAdvance();
+      }
+    }, 2200);
+  }
+
+  function chooseStrike(power: boolean) {
+    if (!attack) return;
+    if (power && hero.faith < 6) {
+      // not enough FP — fall back silently to normal strike
+      power = false;
+    }
+    setChosenAction(power ? "power" : "strike");
+    if (power) {
+      setHero((h) => ({ ...h, faith: Math.max(0, h.faith - 6) }));
+    }
     setBossLine(attack.taunt ?? boss.intro);
     setClaimRevealed(false);
     setPhase("attack");
+  }
+
+  function regenAndAdvance() {
+    setHero((h) => ({
+      ...h,
+      faith: Math.min(h.maxFaith, h.faith + itemBonuses.faithRegen + 2),
+    }));
+    setDefendActive(false);
+    setAttackIdx((i) => i + 1);
+    setRoundCount((r) => r + 1);
+    if (
+      boss.midline &&
+      !showMidline &&
+      bossHp <= Math.floor(boss.maxHp / 2)
+    ) {
+      setShowMidline(true);
+      setBossLine(boss.midline);
+      setPhase("midline");
+    } else {
+      setPhase("intro");
+    }
   }
 
   function chooseAnswer(originalIdx: number) {
     if (!attack) return;
     const opt = attack.options[originalIdx];
     const correctOpt = attack.options.find((o) => o.correct);
-    // Record this resolution for the post-battle review.
     resolvedRef.current.push({
       attackIdx: attackIdx % boss.attacks.length,
       bossId: boss.id,
@@ -148,53 +292,52 @@ export default function BattleScene({
       rationale: opt.rationale,
       claim: attack.claim,
     });
-    const baseDamage =
-      (attack.difficulty * 18 + 12) * itemBonuses.strikeMult;
+
+    // Damage formula — rebalanced for longer fights:
+    //   base = difficulty * 8 + 10  (was difficulty*18+12)
+    // Power Strike: 1.6× damage on correct, 1.4× penalty on wrong (you staked Faith).
+    // Critical (patron passive): 2× damage on correct.
+    const actionPow = chosenAction === "power";
+    const correctBase =
+      (attack.difficulty * 8 + 10) * itemBonuses.strikeMult * (actionPow ? 1.6 : 1.0);
+    const wrongBase =
+      (attack.difficulty * 6 + 6) * (actionPow ? 1.4 : 1.0);
     const critRoll = Math.random();
     const isCrit = critRoll < (patron?.passive.critChance ?? 0);
     setLastResultWasCrit(false);
 
     if (opt.correct) {
-      const dmg = Math.round(isCrit ? baseDamage * 2 : baseDamage);
+      const dmg = Math.round(isCrit ? correctBase * 2 : correctBase);
       setLastResultWasCrit(isCrit);
       const newBossHp = Math.max(0, bossHp - dmg);
       setBossHp(newBossHp);
       setBossFlash(true);
       isCrit ? sfx.crit() : sfx.hit();
-      setResultMsg(`✓ Correct! ${isCrit ? "CRITICAL " : ""}${dmg} damage to ${boss.name}.`);
+      setCloud((c) => Math.min(CLOUD_MAX, c + 1));
+      setResultMsg(
+        `✓ Correct! ${actionPow ? "POWER STRIKE — " : ""}${isCrit ? "CRITICAL — " : ""}${dmg} damage to ${boss.name}.`
+      );
       setResultRationale(opt.rationale ?? "");
       setPhase("resolving");
       setTimeout(() => setBossFlash(false), 400);
-      // After resolve, check victory / midline / continue
       setTimeout(() => {
         if (newBossHp === 0) {
           sfx.victory();
           setPhase("victory");
-        } else if (
-          boss.midline &&
-          !showMidline &&
-          newBossHp <= Math.floor(boss.maxHp / 2)
-        ) {
-          setShowMidline(true);
-          setBossLine(boss.midline);
-          setPhase("midline");
         } else {
-          // Faith regen between rounds
-          setHero((h) => ({
-            ...h,
-            faith: Math.min(h.maxFaith, h.faith + itemBonuses.faithRegen + 2),
-          }));
-          setAttackIdx((i) => i + 1);
-          setPhase("intro");
+          regenAndAdvance();
         }
       }, 2200);
     } else {
-      const dmg = Math.round(attack.difficulty * 10 + 8);
+      let dmg = Math.round(wrongBase);
+      if (defendActive) dmg = Math.round(dmg * 0.5);
       const newHp = Math.max(0, hero.hp - dmg);
       setHero((h) => ({ ...h, hp: newHp }));
       setHeroFlash(true);
       sfx.wrong();
-      setResultMsg(`✗ Wrong! You take ${dmg} damage.`);
+      setResultMsg(
+        `✗ Wrong! ${actionPow ? "Power Strike misfires — " : ""}You take ${dmg} damage${defendActive ? " (halved by Defend)" : ""}.`
+      );
       setResultRationale(opt.rationale ?? "");
       setPhase("resolving");
       setTimeout(() => setHeroFlash(false), 400);
@@ -203,12 +346,7 @@ export default function BattleScene({
           sfx.defeat();
           setPhase("defeat");
         } else {
-          setHero((h) => ({
-            ...h,
-            faith: Math.min(h.maxFaith, h.faith + itemBonuses.faithRegen + 2),
-          }));
-          setAttackIdx((i) => i + 1);
-          setPhase("intro");
+          regenAndAdvance();
         }
       }, 2200);
     }
@@ -249,6 +387,29 @@ export default function BattleScene({
             label="Pride"
             color="#7c1414"
           />
+          {/* Cloud of Witnesses meter */}
+          <div className="mt-2 flex items-center justify-between gap-2">
+            <span className="font-pixel text-[8px] uppercase tracking-widest text-parchment/60">
+              Cloud of Witnesses
+            </span>
+            <div className="flex gap-1">
+              {Array.from({ length: CLOUD_MAX }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`inline-block w-2.5 h-2.5 border ${
+                    i < cloud
+                      ? "bg-gold border-gold shadow-[0_0_6px_#c9a227]"
+                      : "border-parchment/30 bg-transparent"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+          {cloud >= CLOUD_MAX && (
+            <div className="font-pixel text-[8px] text-gold text-right mt-1 animate-pulse uppercase tracking-widest">
+              Witness Strike ready ✦
+            </div>
+          )}
           <div className="flex justify-center mt-3 mb-1">
             {bossSprite && (
               <div
@@ -304,15 +465,83 @@ export default function BattleScene({
         <div className="max-w-md mx-auto">
           {phase === "intro" && (
             <PixelFrame variant="danger" className="p-3">
-              <div className="font-pixel text-crimson text-[8px] uppercase tracking-widest mb-1">
-                {boss.name}
+              <div className="font-pixel text-crimson text-[8px] uppercase tracking-widest mb-1 flex items-center justify-between">
+                <span>{boss.name}</span>
+                <span className="text-parchment/40">
+                  Round {roundCount + 1}
+                </span>
               </div>
               <p className="font-pixel text-parchment text-[11px] leading-relaxed mb-3">
                 <Typewriter text={bossLine} speed={22} />
               </p>
-              <PixelButton onClick={startAttack} variant="primary">
-                Face the Attack ▶
+              <PixelButton onClick={openActionMenu} variant="primary">
+                Choose Your Action ▶
               </PixelButton>
+            </PixelFrame>
+          )}
+
+          {phase === "action-select" && attack && (
+            <PixelFrame variant="default" className="p-3">
+              <div className="font-pixel text-gold text-[9px] uppercase tracking-widest mb-2 flex items-center justify-between">
+                <span>Your Move</span>
+                <span className="text-parchment/60">
+                  HP {hero.hp}/{hero.maxHp} · FP {hero.faith}/{hero.maxFaith}
+                </span>
+              </div>
+              <div className="grid grid-cols-1 gap-2">
+                <ActionBtn
+                  icon="⚔"
+                  title="Strike"
+                  desc="Answer the boss's claim. Correct = damage."
+                  onClick={() => chooseStrike(false)}
+                  accent="gold"
+                />
+                <ActionBtn
+                  icon="✦"
+                  title={`Power Strike  (−6 FP)`}
+                  desc="Stake Faith for 1.6× damage on correct, but 1.4× pain on wrong."
+                  onClick={() => chooseStrike(true)}
+                  accent="purple"
+                  disabled={hero.faith < 6}
+                />
+                <ActionBtn
+                  icon="🛡"
+                  title="Defend"
+                  desc="Skip the attack. Halve the boss's counter-strike this round."
+                  onClick={performDefend}
+                  accent="muted"
+                />
+                <ActionBtn
+                  icon="🙏"
+                  title="Pray"
+                  desc="+5 HP, +12 FP. But the boss strikes you unanswered."
+                  onClick={performPray}
+                  accent="muted"
+                />
+                <ActionBtn
+                  icon="✦✦"
+                  title="Witness Strike"
+                  desc={
+                    cloud >= CLOUD_MAX
+                      ? "Spend all 5 charges for a massive blow (80 dmg base)."
+                      : `Need ${CLOUD_MAX - cloud} more correct answers to unleash.`
+                  }
+                  onClick={performWitnessStrike}
+                  accent="crimson"
+                  disabled={cloud < CLOUD_MAX}
+                />
+              </div>
+            </PixelFrame>
+          )}
+
+          {phase === "non-attack-resolving" && (
+            <PixelFrame
+              variant={chosenAction === "witness" ? "good" : "default"}
+              className="p-3"
+            >
+              <p className="font-pixel text-parchment text-[11px] leading-relaxed">
+                <Typewriter text={nonAttackMsg} speed={18} silent />
+              </p>
             </PixelFrame>
           )}
 
@@ -476,5 +705,53 @@ export default function BattleScene({
         </div>
       </div>
     </div>
+  );
+}
+
+function ActionBtn({
+  icon,
+  title,
+  desc,
+  onClick,
+  accent,
+  disabled,
+}: {
+  icon: string;
+  title: string;
+  desc: string;
+  onClick: () => void;
+  accent: "gold" | "purple" | "crimson" | "muted";
+  disabled?: boolean;
+}) {
+  const borders: Record<string, string> = {
+    gold: "border-gold/60 hover:border-gold",
+    purple: "border-byzantine hover:border-[#c4a0d8]",
+    crimson: "border-crimson/70 hover:border-crimson",
+    muted: "border-parchment/30 hover:border-parchment/60",
+  };
+  const iconColors: Record<string, string> = {
+    gold: "text-gold",
+    purple: "text-[#c4a0d8]",
+    crimson: "text-crimson",
+    muted: "text-parchment/80",
+  };
+  return (
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      className={`pixel-btn block w-full text-left p-2.5 border-2 transition active:translate-y-[1px] font-pixel ${
+        borders[accent]
+      } ${disabled ? "opacity-40 pointer-events-none" : ""}`}
+    >
+      <div className="flex items-center gap-2 mb-1">
+        <span className={`text-[14px] ${iconColors[accent]}`}>{icon}</span>
+        <span className="text-[11px] text-parchment uppercase tracking-widest">
+          {title}
+        </span>
+      </div>
+      <div className="font-pixel text-[9px] text-parchment/60 leading-relaxed pl-7">
+        {desc}
+      </div>
+    </button>
   );
 }

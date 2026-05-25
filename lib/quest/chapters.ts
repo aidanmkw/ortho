@@ -72,7 +72,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Captain of the Guard",
       tradition: "Pagan Rome",
       sprite: "centurion", // we'll override in component
-      maxHp: 80,
+      maxHp: 140,
       intro: "You Christians refuse the gods. Atheists! Tell me — what is this 'Christ' worth dying for?",
       midline: "Hah! A clever tongue. But the gods of Rome have not yet had their say.",
       outro:
@@ -200,6 +200,101 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 2,
         },
+        {
+          claim:
+            "Why not just offer a pinch of incense to Caesar's image? It is only a formality. Then go home to your Christ.",
+          options: [
+            {
+              text: "I will not. 'Eighty-six years I have served Him, and He has done me no wrong; how can I blaspheme my King?' We worship one Lord only.",
+              correct: true,
+              rationale:
+                "St. Polycarp's words to the Roman proconsul (Martyrdom of Polycarp 9). The act, not the heart, is the test of allegiance.",
+            },
+            {
+              text: "Fine — a small pinch. God knows my heart is for Him.",
+              correct: false,
+              rationale:
+                "This is the libellatici compromise — apostates who 'just got the certificate.' The Church received them back only with long penance, because the public act IS the denial.",
+            },
+            {
+              text: "Caesar is a god in his way. I can honor him with the others.",
+              correct: false,
+              rationale:
+                "Outright apostasy — exactly what Rome demanded. 'Thou shalt have no other gods before Me' (Exodus 20:3).",
+            },
+            {
+              text: "Incense is fine; only blood sacrifice matters.",
+              correct: false,
+              rationale:
+                "The ancient Church judged that any cultic act before the imperial image was idolatry, regardless of the substance offered.",
+            },
+          ],
+          difficulty: 3,
+          taunt: "Just a pinch. So little. So easy.",
+        },
+        {
+          claim:
+            "Why do you Christians gather on the 'first day' instead of the Sabbath? You break the Law of your own God!",
+          options: [
+            {
+              text: "The Lord rose on the first day. The Apostles broke bread on the first day (Acts 20:7). We call it the Lord's Day — the eighth day, the day of new creation.",
+              correct: true,
+              rationale:
+                "Confirmed by the Didache (14:1) and St. Justin's Apology (1.67). Sunday is apostolic.",
+            },
+            {
+              text: "We secretly still keep the Sabbath; Sunday is just for show.",
+              correct: false,
+              rationale:
+                "Judaizing — exactly what St. Paul fought in Galatians. The Sabbath is fulfilled in Christ, not retained alongside Sunday.",
+            },
+            {
+              text: "Constantine moved the day in the 4th century to please pagans.",
+              correct: false,
+              rationale:
+                "A common modern myth. Sunday worship is attested by Ignatius (~107 AD), long before Constantine. He merely made it a civil holiday.",
+            },
+            {
+              text: "The day does not matter; we worship every day equally.",
+              correct: false,
+              rationale:
+                "We do pray daily, but the eucharistic gathering 'on the first day of the week' is apostolic command, not preference.",
+            },
+          ],
+          difficulty: 2,
+        },
+        {
+          claim:
+            "If your Jesus was crucified by Rome, how do you say he lives? Bodies stay in tombs, Christ-follower. You worship a corpse.",
+          options: [
+            {
+              text: "Over five hundred saw Him risen at once (1 Cor 15:6). The Apostles died for what they saw — men do not die for what they know to be a lie.",
+              correct: true,
+              rationale:
+                "St. Paul's argument in 1 Corinthians 15. The bodily resurrection is the hinge of the faith.",
+            },
+            {
+              text: "He rose only in our hearts, as a beautiful idea.",
+              correct: false,
+              rationale:
+                "This is the modernist 'Easter faith' — explicitly rejected by 1 Corinthians 15:14: 'if Christ is not raised, our faith is in vain.'",
+            },
+            {
+              text: "His soul went to heaven; the body decayed like any other.",
+              correct: false,
+              rationale:
+                "This is closer to Greek dualism than Christian teaching. The tomb was empty; the body was glorified, not abandoned.",
+            },
+            {
+              text: "The Apostles stole the body and made up the story.",
+              correct: false,
+              rationale:
+                "The first lie circulated about the empty tomb (Matt 28:13). But thieves do not die torturous deaths for a hoax they invented.",
+            },
+          ],
+          difficulty: 3,
+          taunt: "Show me the body. There is no body, because there is no resurrection.",
+        },
       ],
     },
     outro: [
@@ -271,7 +366,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Pagan Patrician",
       tradition: "Pagan Rome",
       sprite: "marcus",
-      maxHp: 90,
+      maxHp: 180,
       intro:
         "Your tomb is full of painted gods. Your religion is no different from ours.",
       midline:
@@ -401,6 +496,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 3,
         },
+        {
+          claim:
+            "Your initiation rite — washing with water. We have the same in the mysteries of Isis and Mithras. What is the difference?",
+          options: [
+            {
+              text: "Christian baptism unites us to Christ's death and resurrection (Rom 6:3-4). It is not a symbol of purification but an actual death and rebirth into His Body.",
+              correct: true,
+              rationale:
+                "St. Paul's central baptismal teaching. The Mysteries imitated something; baptism IS the thing.",
+            },
+            {
+              text: "It is the same ritual; the names of the gods differ.",
+              correct: false,
+              rationale:
+                "This is the History-of-Religions School thesis (Reitzenstein, etc.), comprehensively answered. The forms differ, the substance entirely.",
+            },
+            {
+              text: "Our water is from holy springs blessed by the priest's prayer alone.",
+              correct: false,
+              rationale:
+                "The water is sanctified, yes — but baptism's efficacy is from Christ's command and the Spirit's descent, not the water's source.",
+            },
+            {
+              text: "Baptism is only a public sign that one has already become Christian inwardly.",
+              correct: false,
+              rationale:
+                "This is the Zwinglian / Anabaptist sign-only view. Apostolic teaching is regenerative — 'baptism now saves you' (1 Peter 3:21).",
+            },
+          ],
+          difficulty: 3,
+          taunt: "Water is water, Christ-follower.",
+        },
+        {
+          claim:
+            "I see your dead are honored with prayers and feasts. You pray TO the dead! Necromancy is not new; we Romans did it for centuries.",
+          options: [
+            {
+              text: "Those in Christ are not dead but alive in Him (Luke 20:38). We ask their prayers as we ask any brother's — they are 'a great cloud of witnesses' (Heb 12:1).",
+              correct: true,
+              rationale:
+                "Hebrews 12:1 and the witness of every catacomb fresco. The martyrs intercede; they are not consulted as oracles.",
+            },
+            {
+              text: "We summon their spirits to speak through mediums.",
+              correct: false,
+              rationale:
+                "This IS necromancy — forbidden in Deuteronomy 18:11. Asking saints to pray is the opposite: we ask, we do not conjure.",
+            },
+            {
+              text: "We do not really pray to the saints; that is a later corruption.",
+              correct: false,
+              rationale:
+                "Refuted by the catacomb inscriptions themselves — 'St. Peter, St. Paul, pray for Victor' dates to the 3rd century.",
+            },
+            {
+              text: "They cannot hear us, but praying to them comforts us.",
+              correct: false,
+              rationale:
+                "The saints are conscious in Christ, beholding His face (Rev 6:9-10). To deny their hearing is to make the resurrection a fiction.",
+            },
+          ],
+          difficulty: 3,
+        },
+        {
+          claim:
+            "Why this strange refusal of marriage and concubines among some of you? Even our gods enjoyed themselves. The body is for pleasure!",
+          options: [
+            {
+              text: "The body is good — it will rise! But it is also a temple of the Spirit (1 Cor 6:19). Some keep virginity for the Kingdom; all keep purity within marriage.",
+              correct: true,
+              rationale:
+                "St. Paul in 1 Cor 6-7. Christian celibacy is not a denial of the body's goodness but a foretaste of the angelic life (Matt 22:30).",
+            },
+            {
+              text: "The body is evil; marriage is a concession for the weak.",
+              correct: false,
+              rationale:
+                "Encratite / Gnostic — condemned. Hebrews 13:4: 'Marriage is honorable.' The body is good because Christ took flesh.",
+            },
+            {
+              text: "Only priests must be celibate; everyone else may live as they wish.",
+              correct: false,
+              rationale:
+                "The Christian moral law binds ALL — chastity in singleness, fidelity in marriage. The Sermon on the Mount applies to all.",
+            },
+            {
+              text: "We tolerate it but do not really teach it.",
+              correct: false,
+              rationale:
+                "The early Church was famous in Rome precisely for sexual restraint — Aristides, Justin, the Letter to Diognetus all attest this.",
+            },
+          ],
+          difficulty: 2,
+        },
       ],
     },
     outro: [
@@ -433,7 +622,7 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "A grand hall. Three hundred and eighteen bishops in council. Constantine seated at the head, attentive. Some bear scars from the persecutions — eyes put out, hands missing.",
+          "A grand hall. Three hundred and eighteen bishops in council. Constantine seated at the head, attentive. Some bear scars from the persecutions — eyes put out, hands missing. The Edict of Milan is twelve years old. They remember the lions.",
       },
       {
         speaker: "st-anthony",
@@ -441,18 +630,44 @@ export const CHAPTERS: Chapter[] = [
           "The First Ecumenical Council. The greatest crisis since the Apostles. A presbyter named Arius teaches that the Son is a creature — that there was a time when He was not.",
       },
       {
-        speaker: "st-athanasius",
+        speaker: "st-anthony",
         text:
-          "I am Athanasius, deacon of Alexandria. If we yield to Arius, the Gospel is undone — for if the Son is not God, He cannot save us.",
+          "He has set the empire on fire with his song: 'There was when He was not.' Sailors sing it at the docks. Bakers sing it at their ovens. The Church may yet be lost — not by the sword, but by a slogan.",
       },
       {
         speaker: "narrator",
-        text: "Arius rises to speak. The hall falls silent.",
+        text:
+          "A deacon — perhaps thirty years old, intense, dark-eyed — pushes through the throng to you. His robe is plain. His voice will outlast emperors.",
+      },
+      {
+        speaker: "st-athanasius",
+        text:
+          "I am Athanasius, deacon of Alexandria. If we yield to Arius, the Gospel is undone — for if the Son is not God, He cannot save us. Only God can heal us. Only God can be worshipped.",
+      },
+      {
+        speaker: "st-athanasius",
+        text:
+          "Hear what is at stake: if the Son is a creature, then we Christians worship a CREATURE — and we are idolaters. There is no middle road.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "An old bishop with a scarred face turns to you. You recognize his name from the road: Nicholas of Myra. He bows slightly.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Arius rises to speak. He is tall, ascetic, charismatic — the kind of voice crowds follow. The hall falls silent.",
       },
       {
         speaker: "arius",
         text:
           "Beloved bishops! Let us reason. Surely the Son is begotten — and what is begotten must HAVE A BEGINNING. The Father alone is uncreated.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Stand, $you. The Council needs every voice. Answer the heresiarch — and the deposit of faith may yet be confessed.",
       },
     ],
     boss: {
@@ -461,7 +676,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Presbyter of Alexandria",
       tradition: "Arian Heresy",
       sprite: "arius",
-      maxHp: 110,
+      maxHp: 220,
       intro:
         "Surely there was a time when the Son was not. He is the firstborn of all creation — the first and highest creature.",
       midline:
@@ -589,6 +804,98 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 4,
         },
+        {
+          claim:
+            "Proverbs 8:22 plainly says: 'The Lord CREATED me at the beginning of his ways.' Wisdom is the Son — and Wisdom is CREATED. The text is decisive.",
+          options: [
+            {
+              text: "The Hebrew qanah means 'acquired' or 'possessed' — not 'created from nothing.' The LXX's ektisen renders the same: Wisdom is eternally with the Father, not made.",
+              correct: true,
+              rationale:
+                "St. Athanasius, Orations against the Arians 2.44ff. The text describes the economy of the Incarnation, where the Wisdom of God 'was sent' for our salvation.",
+            },
+            {
+              text: "Yes — Wisdom (the Son) was created first, then made everything else.",
+              correct: false,
+              rationale:
+                "This is Arius's exact reading, condemned at Nicaea. Proverbs cannot overturn John 1:1: 'In the beginning was the Word.'",
+            },
+            {
+              text: "Proverbs is poetry; it has no theological force.",
+              correct: false,
+              rationale:
+                "Theological force, yes — but rightly interpreted. Hebrew poetry is no less inspired than narrative.",
+            },
+            {
+              text: "Wisdom in Proverbs is not the Son at all; the verse is irrelevant.",
+              correct: false,
+              rationale:
+                "The Fathers (including Athanasius) accepted Wisdom as a type/title of the Son. The right move is exegesis, not denial of reference.",
+            },
+          ],
+          difficulty: 5,
+          taunt: "Read the text! Created! KTISEN! It is right there!",
+        },
+        {
+          claim:
+            "Christ said: 'No one knows the day or the hour, not even the Son, but only the Father' (Mark 13:32). The Son DOES NOT KNOW. He is therefore lesser.",
+          options: [
+            {
+              text: "He speaks according to His humanity, which He assumed in the Incarnation. As God, He knows all; as man, He hides this knowledge in voluntary humility (Phil 2:7).",
+              correct: true,
+              rationale:
+                "St. Gregory of Nazianzus, Or. 30.15 and St. Cyril, Thesaurus 22. The two-natures Christology resolves the apparent paradox.",
+            },
+            {
+              text: "The Son truly does not know — He is a finite being.",
+              correct: false,
+              rationale: "Arian. This collapses His divinity entirely.",
+            },
+            {
+              text: "Christ was mistaken or speculating.",
+              correct: false,
+              rationale:
+                "Christ cannot err. The Logos is Truth itself (John 14:6).",
+            },
+            {
+              text: "The verse is a later corruption.",
+              correct: false,
+              rationale: "No manuscript evidence supports excision.",
+            },
+          ],
+          difficulty: 5,
+        },
+        {
+          claim:
+            "Even your Origen, the great Alexandrian, taught that the Son is subordinate to the Father. You contradict your own tradition!",
+          options: [
+            {
+              text: "Origen taught much, some of which the Church received and some which it later corrected. Where he affirmed eternal generation, we follow him; where he subordinated the Son in essence, we follow Nicaea.",
+              correct: true,
+              rationale:
+                "The patristic principle: the Fathers are read together. Origen's eternal generation IS used at Nicaea; his subordinationism is corrected.",
+            },
+            {
+              text: "Origen was always heretical; ignore him.",
+              correct: false,
+              rationale:
+                "Reductionist. The Church reads the Fathers with discernment, neither rejecting nor accepting them wholesale.",
+            },
+            {
+              text: "Origen and Athanasius agreed completely.",
+              correct: false,
+              rationale:
+                "Historically false. Athanasius corrected and refined the Alexandrian inheritance.",
+            },
+            {
+              text: "Origen's subordinationism is the true teaching; Nicaea was an innovation.",
+              correct: false,
+              rationale:
+                "This is exactly what the Arians claimed. The Council of Constantinople (553) condemned Origen's errors precisely.",
+            },
+          ],
+          difficulty: 5,
+        },
       ],
     },
     outro: [
@@ -620,7 +927,13 @@ export const CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Heat. Sand. The wind hisses across endless dunes. A cave mouth, and inside, a tall thin monk.",
+        text:
+          "Heat. Sand. The wind hisses across endless dunes. The dust between your sandals is the dust of centuries. You have come, you realize, to the cradle of monasticism.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A cave mouth, and inside, a tall thin monk. He has the eyes of a man who has not been afraid of anything for a very long time.",
       },
       {
         speaker: "st-macarius",
@@ -630,7 +943,26 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "st-anthony",
         text:
-          "The desert is the proving ground. To stand against heretics out there, you must conquer the heretic in here — your own passions.",
+          "$you, listen. The cities have grown large with Christians who do not know themselves. The desert is the proving ground. To stand against heretics out there, you must conquer the heretic in here — your own passions.",
+      },
+      {
+        speaker: "st-macarius",
+        text:
+          "The fathers came here in their thousands when the persecutions ended. Without lions, they sought another martyrdom — the slow one. Of the appetites. Of the tongue.",
+      },
+      {
+        speaker: "st-macarius",
+        text:
+          "I will give you three weapons before he comes. The Jesus Prayer: Lord Jesus Christ, Son of God, have mercy on me. Fasting — to remind the body it is not god. Vigilance — for he is subtle.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Outside, a goat bleats and is suddenly silent. Macarius's face hardens. He turns to face the cave mouth.",
+      },
+      {
+        speaker: "st-macarius",
+        text: "He is here. Stand behind me, $you. But do not look away.",
       },
       {
         speaker: "narrator",
@@ -649,7 +981,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Father of Lies",
       tradition: "Demonic",
       sprite: "tempter",
-      maxHp: 130,
+      maxHp: 260,
       intro:
         "Why fast and pray? Why deny yourself? Surely God wants you to be HAPPY.",
       midline:
@@ -777,6 +1109,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 5,
         },
+        {
+          claim:
+            "Your body is a temple of God, you say. Then why mortify it with fasting? Why deprive what God Himself called good?",
+          options: [
+            {
+              text: "Because the body is good, fasting orders it to its true end: to be a temple, not an idol. We do not destroy the body; we discipline it (1 Cor 9:27).",
+              correct: true,
+              rationale:
+                "St. Paul's athletic metaphor. The body is good; the passions which deform it are not.",
+            },
+            {
+              text: "The body is evil and must be punished into submission.",
+              correct: false,
+              rationale:
+                "Manichaean. The Church fasts to free the body for prayer, not to punish it as wicked.",
+            },
+            {
+              text: "Fasting is for monks only; the laity need not bother.",
+              correct: false,
+              rationale:
+                "The Church appoints fasts for ALL the faithful — Wednesday, Friday, the great fasts. They sanctify lay life too.",
+            },
+            {
+              text: "Fasting is merely a diet for physical health.",
+              correct: false,
+              rationale:
+                "A pagan reduction. Fasting is a spiritual weapon (Matt 17:21) — its primary fruit is humility, not weight loss.",
+            },
+          ],
+          difficulty: 3,
+          taunt: "Eat! Drink! The Lord loves a cheerful belly!",
+        },
+        {
+          claim:
+            "Why confess your sins to a priest? Tell God directly — He hears! The priest is a man, sinful as you.",
+          options: [
+            {
+              text: "Christ gave the Apostles authority: 'Whose sins ye remit, they are remitted' (John 20:23). The priest is a witness and instrument; the absolution is Christ's.",
+              correct: true,
+              rationale:
+                "John 20:22-23 is the dominical institution of sacramental confession. The Church preserves it from Acts onward.",
+            },
+            {
+              text: "You are right — confess only to God, never to a priest.",
+              correct: false,
+              rationale:
+                "This sounds humble but rejects Christ's own gift. James 5:16 commands confession to one another.",
+            },
+            {
+              text: "The priest forgives by his own power.",
+              correct: false,
+              rationale:
+                "No. The priest is icon and instrument; absolution is from Christ, not the priest's own holiness.",
+            },
+            {
+              text: "Confession is a medieval invention.",
+              correct: false,
+              rationale:
+                "Refuted by the Didache (4:14), Tertullian (On Penance), and Origen — all far earlier than any 'medieval' development.",
+            },
+          ],
+          difficulty: 3,
+        },
+        {
+          claim:
+            "Set prayers, prayer ropes, prostrations — empty repetition! Did not your Christ Himself condemn this 'vain babbling' of the pagans?",
+          options: [
+            {
+              text: "Christ condemned vain babbling — words without heart. He Himself prayed the same prayer three times in Gethsemane (Matt 26:44). Repetition WITH attention is not vain.",
+              correct: true,
+              rationale:
+                "The Jesus Prayer tradition is rooted in this. Heart and tongue together — that is prayer.",
+            },
+            {
+              text: "Repetition is always empty; pray only spontaneously.",
+              correct: false,
+              rationale:
+                "Then condemn the Psalter, which Christ Himself prayed. Set prayers form the heart.",
+            },
+            {
+              text: "Long prayers are more efficacious — quantity matters.",
+              correct: false,
+              rationale:
+                "This IS the babbling Christ condemned. Length without attention is the pagan error.",
+            },
+            {
+              text: "The body has no role in prayer; only the mind.",
+              correct: false,
+              rationale:
+                "Prostrations, crossing oneself, standing — the whole man prays. We are not Cartesian souls in machines.",
+            },
+          ],
+          difficulty: 3,
+        },
       ],
     },
     outro: [
@@ -809,17 +1235,42 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Chalcedon. Six hundred and thirty bishops gathered. The Tome of Leo of Rome has just been read aloud. The hall erupts: 'Peter has spoken through Leo!'",
+          "Chalcedon. Six hundred and thirty bishops gathered — the largest council yet. Empress Pulcheria has called it. The Robber Council of Ephesus, two years ago, beat a deacon to death on the floor. This time imperial guards line the walls.",
       },
       {
-        speaker: "st-cyril",
+        speaker: "narrator",
         text:
-          "I am Cyril of Alexandria. Twenty years ago I deposed Nestorius for dividing Christ. Now a different error rises — Eutyches teaches that Christ has only one nature, the human swallowed by the divine.",
+          "The Tome of Leo of Rome has just been read aloud. The hall erupts: 'Peter has spoken through Leo! Cyril and Leo teach the same!'",
       },
       {
         speaker: "st-anthony",
         text:
-          "If Eutyches is right, Christ's humanity is illusory — and what is not assumed is not healed (Gregory the Theologian).",
+          "$you. We are between two errors. One says: Christ is so divided He is two persons. The other says: He is so united His humanity vanishes. The truth is one Person, two natures — without confusion, without division.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A bishop with a long beard and weary eyes turns from the chair. This is Cyril of Alexandria — or his memory; he died seven years ago. The Spirit makes him present.",
+      },
+      {
+        speaker: "st-cyril",
+        text:
+          "I am Cyril. Twenty years ago I deposed Nestorius for dividing Christ. Now a different error rises — Eutyches teaches that Christ has only one nature, the human swallowed by the divine like a drop in the ocean.",
+      },
+      {
+        speaker: "st-cyril",
+        text:
+          "I once wrote — incautiously — of 'one nature of the Word incarnate.' He uses my words to break the faith. Help me clarify what I meant, $you.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "If Eutyches is right, Christ's humanity is illusory — and 'what is not assumed is not healed' (St. Gregory the Theologian). The very ground of our salvation is at stake.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A robed archimandrite is brought forward. His face is composed, his bearing certain. He has been a monk in Constantinople for seventy years. He is not a fool.",
       },
       {
         speaker: "eutyches",
@@ -833,7 +1284,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Archimandrite of Constantinople",
       tradition: "Monophysite Heresy",
       sprite: "eutyches",
-      maxHp: 120,
+      maxHp: 280,
       intro:
         "Surely Christ's humanity, like a drop of vinegar in the ocean of His divinity, is absorbed!",
       midline: "You have read more than I supposed. But the union must collapse the two.",
@@ -961,6 +1412,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 5,
         },
+        {
+          claim:
+            "Mary bore the man Jesus. To call her Theotokos — 'God-bearer' — is to mingle the natures into one. She is Christotokos at best.",
+          options: [
+            {
+              text: "She bore the one Person, Christ, who is fully God and fully man. The title guards His unity, not a confusion of natures.",
+              correct: true,
+              rationale:
+                "St. Cyril against Nestorius. The Council of Ephesus (431) defined Theotokos precisely to guard the unity of the Incarnate Word.",
+            },
+            {
+              text: "Theotokos means Mary is herself divine.",
+              correct: false,
+              rationale:
+                "A common Protestant misunderstanding. The title is Christological — about WHOM she bore — not about her own nature.",
+            },
+            {
+              text: "She bore only His human nature, not His Person.",
+              correct: false,
+              rationale:
+                "Nestorian — splits Christ into two persons. Natures are not 'born'; persons are.",
+            },
+            {
+              text: "She bore a divinity that swallowed the humanity.",
+              correct: false,
+              rationale:
+                "Your own monophysite reading, Eutyches. Theotokos preserves BOTH natures unconfused.",
+            },
+          ],
+          difficulty: 4,
+          taunt: "She bore a man! Only a man!",
+        },
+        {
+          claim:
+            "If Christ truly suffered hunger and wept and thirsted — He could not have been divine. God does not weep!",
+          options: [
+            {
+              text: "He suffered in His human nature, while remaining impassible in His divine nature. The same Person knew both — without confusion, without division.",
+              correct: true,
+              rationale:
+                "Chalcedonian Definition: 'in two natures, without confusion, without change, without division, without separation.' Two natures, one acting Person.",
+            },
+            {
+              text: "His humanity wept; His divinity was unaffected, as a separate being.",
+              correct: false,
+              rationale:
+                "Nestorian — two persons, not two natures of one Person. The single Christ wept.",
+            },
+            {
+              text: "His divinity wept; the impassible became passible.",
+              correct: false,
+              rationale:
+                "Patripassianism — denies divine immutability. The Logos suffered in the flesh, not in His divine nature.",
+            },
+            {
+              text: "He only appeared to weep; the tears were illusory.",
+              correct: false,
+              rationale:
+                "Docetism — denies real humanity. He truly hungered, truly wept, truly died.",
+            },
+          ],
+          difficulty: 5,
+        },
+        {
+          claim:
+            "Two natures means two persons! You divide Christ. The unity of the Saviour requires ONE NATURE after the union.",
+          options: [
+            {
+              text: "Nature and Person are not the same. We confess one Person (hypostasis) in two natures (physeis) — united but distinct. Chalcedon, against you and against Nestorius.",
+              correct: true,
+              rationale:
+                "The technical Chalcedonian distinction. Person = WHO; nature = WHAT. One WHO, two WHATs.",
+            },
+            {
+              text: "Yes, after the union there is only one nature.",
+              correct: false,
+              rationale:
+                "Eutychianism / monophysitism. This swallows the humanity into the divinity — making salvation impossible (cf. Gregory Nazianzen: 'What is not assumed is not healed').",
+            },
+            {
+              text: "Two natures means two persons — therefore drop the second nature.",
+              correct: false,
+              rationale:
+                "False dichotomy. Chalcedon refused both Nestorian division and Eutychian confusion.",
+            },
+            {
+              text: "He has one composite nature, half God half man.",
+              correct: false,
+              rationale:
+                "A 'tertium quid' — neither truly God nor truly man. The full reality of both is preserved without mixing.",
+            },
+          ],
+          difficulty: 5,
+        },
       ],
     },
     outro: [
@@ -993,17 +1538,42 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Hagia Sophia rises around you, vast and golden, all its mosaics destroyed by the iconoclasts. Empress Irene has gathered the Seventh Council to restore the icons.",
-      },
-      {
-        speaker: "st-john-damascus",
-        text:
-          "I am John, called of Damascus. From beneath Muslim rule I wrote three treatises defending the icons. I will be with you.",
+          "Hagia Sophia rises around you, vast and golden — and DEFACED. Where mosaics of Christ Pantocrator and the Theotokos once gazed down, plaster covers raw stone. Sixty years of iconoclast emperors have left their mark.",
       },
       {
         speaker: "st-anthony",
         text:
-          "If God truly became MATTER, then matter can bear His image. Iconoclasm is fundamentally a denial of the Incarnation.",
+          "The Eastern Roman Empire has been at war with itself over PAINT. Constantine V the Iconoclast burned monasteries and tortured monks. He died nineteen years ago — but his spirit has come back to test you.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Empress Irene presides on a small wooden chair — she has summoned the Seventh Ecumenical Council to restore the icons. Three hundred and fifty bishops fill the nave.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A monk steps from the column shadow. He wears the habit of Mar Sabba. His name has carried across the empire from the lands of the Caliph.",
+      },
+      {
+        speaker: "st-john-damascus",
+        text:
+          "I am John, called of Damascus. From beneath Muslim rule — where my hand was once cut off and restored by the Theotokos — I wrote three treatises defending the icons. I will be with you.",
+      },
+      {
+        speaker: "st-john-damascus",
+        text:
+          "Hear this — the deepest answer: 'I do not paint an invisible Godhead, but the flesh of God which was seen.' The Incarnation IS the dogmatic foundation of the icon.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "If God truly became MATTER, then matter can bear His image. Iconoclasm is fundamentally a denial of the Incarnation. Win this and the senses themselves are baptized.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "The air grows cold. A figure in imperial purple materializes at the altar end, crowned, eyes hard. He died nineteen years ago — but his teaching has not.",
       },
       {
         speaker: "iconoclast",
@@ -1017,7 +1587,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Iconoclast Emperor (deceased)",
       tradition: "Iconoclasm",
       sprite: "iconoclast",
-      maxHp: 130,
+      maxHp: 320,
       intro:
         "You worship paint and wood. I will destroy every panel until the people are pure.",
       midline:
@@ -1141,6 +1711,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 3,
         },
+        {
+          claim:
+            "Moses said: 'You saw NO FORM on Horeb — make no image' (Deut 4:15). Plain command, plainly broken by your panels.",
+          options: [
+            {
+              text: "Then — God had not been seen. But now: 'the Word became flesh and dwelt among us, and we beheld His glory' (John 1:14). The Incarnation changes everything.",
+              correct: true,
+              rationale:
+                "St. John Damascene, On the Divine Images 1.16: 'I do not paint an invisible Godhead, but the flesh of God which was seen.'",
+            },
+            {
+              text: "The Deuteronomy command no longer applies — the Old Testament is abolished.",
+              correct: false,
+              rationale:
+                "Marcionite. The Law is fulfilled, not abolished (Matt 5:17). The reason for the prohibition was that God had not been seen — that reason now ends in Christ.",
+            },
+            {
+              text: "Moses meant only Canaanite idols, not images in general.",
+              correct: false,
+              rationale:
+                "Partly true but inadequate. The deeper answer is christological: the unseen God has made Himself visible.",
+            },
+            {
+              text: "Moses was wrong about images.",
+              correct: false,
+              rationale:
+                "Heretical. The Old Law is from God; it was preparatory, not erroneous.",
+            },
+          ],
+          difficulty: 4,
+          taunt: "Read Moses! He commands what I do!",
+        },
+        {
+          claim:
+            "Then venerate even the Cross? It is wood. An instrument of Roman torture — nothing more. Smash it!",
+          options: [
+            {
+              text: "We honor it because of Whom it bore: 'God forbid that I should glory, save in the cross of our Lord Jesus Christ' (Gal 6:14). The veneration passes to the prototype.",
+              correct: true,
+              rationale:
+                "St. Basil: 'The honor paid to the image passes to the prototype' (On the Holy Spirit 18.45). Adopted at Nicaea II.",
+            },
+            {
+              text: "The Cross is sacred wood in itself, apart from Christ.",
+              correct: false,
+              rationale:
+                "Tree-worship. The wood is honored only because it bore the Saviour.",
+            },
+            {
+              text: "We should not honor the Cross at all.",
+              correct: false,
+              rationale:
+                "The Church has venerated the Cross since at least the 4th century — Helena's discovery and the Feast of the Exaltation are catholic memory.",
+            },
+            {
+              text: "The Cross is symbolic only; do not bow before it.",
+              correct: false,
+              rationale:
+                "Iconoclasm cannot help calling the Cross 'symbolic only' — but this is to deny what relics and the Cross actually do as channels of Christ's grace.",
+            },
+          ],
+          difficulty: 3,
+        },
+        {
+          claim:
+            "You kiss the BONES of the dead — relics! This is necromancy and pagan superstition!",
+          options: [
+            {
+              text: "Elisha's bones raised a corpse (2 Kings 13:21). Paul's handkerchiefs healed (Acts 19:12). The bodies of the saints, glorified in Christ, are vessels of His grace.",
+              correct: true,
+              rationale:
+                "Biblical foundation for relics: 2 Kings 13:21 (Elisha), Acts 19:12 (Paul), 2 Kings 23:18 (David honored).",
+            },
+            {
+              text: "We worship the bones themselves.",
+              correct: false,
+              rationale:
+                "Calumny. We venerate — not worship — and the veneration is offered to God through His saints.",
+            },
+            {
+              text: "Relics work by their own magical power.",
+              correct: false,
+              rationale:
+                "Pagan reduction. The grace is Christ's, mediated through His holy ones — exactly as in 2 Kings 13.",
+            },
+            {
+              text: "Relics are a medieval superstition.",
+              correct: false,
+              rationale:
+                "Refuted by 2nd-century Martyrdom of Polycarp 18: 'We took up his bones, more precious than precious stones, and laid them where it was fitting.'",
+            },
+          ],
+          difficulty: 4,
+        },
       ],
     },
     outro: [
@@ -1173,17 +1837,37 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "July, 1054. The patriarchate of Constantinople under Michael Cerularius is at uneasy peace with Rome. Then a Roman legate strides into the Liturgy itself, with a parchment.",
+          "July, 1054. The Great City. Two centuries since Photius confronted Rome over the same addition; nothing has been resolved. Pope Leo IX is dying in Italy, but his legates have not heard the news.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "The Christian world will not see itself whole again in this age. Today is the day it tears. You are a witness — and a defender. Hold the Symbol unaltered.",
       },
       {
         speaker: "narrator",
         text:
-          "Cardinal Humbert lays the parchment on the altar of Hagia Sophia: an excommunication of the Patriarch. He turns and leaves, shouting in Latin: 'God see and judge!'",
+          "The patriarchate of Constantinople under Michael Cerularius is at uneasy peace with Rome. Then a Roman legate strides into the Liturgy itself, with a parchment.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Cardinal Humbert lays the parchment on the altar of Hagia Sophia: an excommunication of the Patriarch. He turns and leaves, shouting in Latin: 'God see and judge!' The Greek deacons stand in shock. One picks it up. Reads it. Falls to his knees.",
       },
       {
         speaker: "st-anthony",
         text:
           "The breach has been forming for centuries. The trigger: the Latin addition to the Symbol of Faith — 'and the Son' — Filioque. The Pope claims authority to add to what the Councils forbade adding to.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "But there are other quarrels: unleavened bread, married priests, the very nature of Peter's primacy. The Roman court has hardened from primacy of honor into supremacy of jurisdiction.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Humbert wheels at the door and sees you — a stranger in foreign garb, plainly Western yet standing among the Greeks. His eyes narrow.",
       },
       {
         speaker: "humbert",
@@ -1197,7 +1881,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Roman Legate",
       tradition: "Latin (pre-Vatican)",
       sprite: "humbert",
-      maxHp: 140,
+      maxHp: 340,
       intro:
         "Stubborn Greek! Sign the addition or be cast out of the universal Church!",
       midline:
@@ -1325,6 +2009,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 5,
         },
+        {
+          claim:
+            "Peter received the keys (Matt 16:18)! Rome alone holds them. Submit to the Vicar of Christ — there is no Church without the Pope!",
+          options: [
+            {
+              text: "The keys are given through Peter to ALL the Apostles (Matt 18:18; John 20:23). Rome held a primacy of honor — never of jurisdiction over the East. Christ alone is Head.",
+              correct: true,
+              rationale:
+                "St. Cyprian, Unity of the Church 4: every bishop holds the keys. Canon 28 of Chalcedon explicitly limits Rome's prerogatives to honor and a primacy among equals.",
+            },
+            {
+              text: "The keys belong to the Pope alone, and to no other bishop.",
+              correct: false,
+              rationale:
+                "Latin innovation. The pre-schism Church held collegiality, not papal monarchy. The Pope had primacy, not supremacy.",
+            },
+            {
+              text: "The keys belong to every Christian individually.",
+              correct: false,
+              rationale:
+                "Reformation private-judgment view — also un-apostolic. The keys belong to the apostolic college.",
+            },
+            {
+              text: "The keys were lost when Peter died.",
+              correct: false,
+              rationale:
+                "The apostolic ministry continues through the laying-on of hands. The keys remain with the bishops.",
+            },
+          ],
+          difficulty: 4,
+          taunt: "Tu es Petrus! Submit!",
+        },
+        {
+          claim:
+            "Christ ate UNLEAVENED bread at the Last Supper, for it was Passover! Your leavened loaves contradict the Lord's own institution!",
+          options: [
+            {
+              text: "Leaven signifies the risen, living Christ — bread that has risen from the dough as He rose from the tomb. The East has used leavened bread continuously from the Apostles.",
+              correct: true,
+              rationale:
+                "The synoptics suggest Passover; John 19:14 places the Crucifixion on Preparation Day — meaning the Supper might not have been the formal seder. Both East and West have ancient practice.",
+            },
+            {
+              text: "Yes, only unleavened bread is valid; the East errs.",
+              correct: false,
+              rationale:
+                "The Eucharist's validity does not depend on this detail. The Council in Trullo (692) and centuries of unbroken Greek practice attest otherwise.",
+            },
+            {
+              text: "Bread does not matter at all; we may use anything.",
+              correct: false,
+              rationale:
+                "The matter of the sacrament does matter — it must be bread (wheat) and wine. But leavened vs. unleavened is liturgical custom, not dogma.",
+            },
+            {
+              text: "Christ ate leavened bread; you Latins err on the historical fact.",
+              correct: false,
+              rationale:
+                "Going beyond what the evidence supports. The honest answer admits ancient legitimacy on both sides.",
+            },
+          ],
+          difficulty: 3,
+        },
+        {
+          claim:
+            "Your married priests defile the altar! Christ chose virgin apostles. Only the celibate may handle the holy things — this is apostolic discipline!",
+          options: [
+            {
+              text: "Peter had a mother-in-law (Matt 8:14); 1 Tim 3:2 says a bishop must be 'the husband of one wife.' Mandatory celibacy is Latin discipline, not apostolic law.",
+              correct: true,
+              rationale:
+                "The Council in Trullo (692) regulated but did not impose universal celibacy. Married priests are apostolic — only bishops are chosen from monastics.",
+            },
+            {
+              text: "Yes, all clergy must be celibate; the East is in error.",
+              correct: false,
+              rationale:
+                "Then Peter was in error — and the entire Eastern apostolic Church. Discipline differs; doctrine does not.",
+            },
+            {
+              text: "Marriage is incompatible with priesthood in principle.",
+              correct: false,
+              rationale:
+                "This is a theological judgment foreign to Scripture (1 Tim 3:2) and to the first millennium.",
+            },
+            {
+              text: "Celibacy is a higher state and so should be universally enforced.",
+              correct: false,
+              rationale:
+                "Virginity is a high calling (1 Cor 7:32-34) but not a precondition of ordination. The Church discerns each vocation.",
+            },
+          ],
+          difficulty: 4,
+        },
       ],
     },
     outro: [
@@ -1357,22 +2135,47 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Florence, June 1439. The Byzantine Empire has hours to live; the Sultan's armies are at the walls. The Emperor begs union with Rome to save what remains.",
+          "Florence, June 1439. The Byzantine Empire has hours to live; the Sultan's armies are at the walls of Constantinople. The Emperor John VIII has come west — pleading. The Pope has him over a barrel: sign for union, or die.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "$you. Truth is purchased here for ships and soldiers. The Emperor will pay it. Most of the bishops will pay it. One man will not. Watch him.",
       },
       {
         speaker: "narrator",
         text:
-          "The Greek bishops have signed, one by one, under pressure. The Filioque accepted. Purgatory accepted. Azymes accepted. Papal supremacy accepted. Only one bishop refuses.",
+          "The Greek bishops have signed, one by one, under pressure — bishops denied food, bishops threatened with loss of their sees. The Filioque accepted. Purgatory accepted. Azymes accepted. Papal supremacy accepted.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Only one bishop refuses. He is forty-six years old, thin, hollow-eyed from fasting. The Pope sent for him last night and offered him a cardinal's hat. He returned the offer untouched.",
       },
       {
         speaker: "st-mark-ephesus",
         text:
-          "I am Mark, of Ephesus. I have read every line of every Father on the Filioque. I will not sign. May God preserve me.",
+          "I am Mark, of Ephesus. I have read every line of every Father on the Filioque. I will not sign. May God preserve me. May He preserve the Faith — though every other bishop in this hall has fled.",
+      },
+      {
+        speaker: "st-mark-ephesus",
+        text:
+          "$you, listen well. When this Council ends and we sail home, the people of Constantinople will see our signatures and TEAR THEM. The union will be void. But here, today, I must speak it — for them.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Stand with him. The empires fall; the faith does not. 'Better the loss of all, than to deny one syllable of the holy doctrine.'",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "The Pope of Rome enters in red. Eugene IV — tall, intelligent, weary. The papacy is recovering from the conciliarist crisis. He must have THIS union to consolidate his throne. He has read the file on Mark.",
       },
       {
         speaker: "pope-eugene",
         text:
-          "Bring me the Ephesian. I will reason with him personally. Sign, Mark. The Eastern Empire dies tomorrow without our help.",
+          "Bring me the Ephesian. I will reason with him personally. Sign, Mark. The Eastern Empire dies tomorrow without our help. Pride is no virtue when nations bleed.",
       },
     ],
     boss: {
@@ -1381,7 +2184,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Roman Pontiff",
       tradition: "Latin (Florence)",
       sprite: "pope-eugene",
-      maxHp: 150,
+      maxHp: 380,
       intro:
         "$you. You also? Sign with the others. Your Emperor commands it. Your conscience must yield to the Empire.",
       midline:
@@ -1510,6 +2313,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 5,
         },
+        {
+          claim:
+            "A Council cannot judge a Pope! The Pope is above the Council — Pastor Aeternus seals it. Sign or be condemned!",
+          options: [
+            {
+              text: "The seven Ecumenical Councils judged popes (e.g. Honorius at Constantinople III, 681 — anathematized as a heretic). Conciliarity, not monarchy, is the apostolic order.",
+              correct: true,
+              rationale:
+                "Honorius's posthumous condemnation by Constantinople III is the historical refutation of papal supremacy and infallibility — accepted by Rome herself until Vatican I.",
+            },
+            {
+              text: "The Council is always above the Pope.",
+              correct: false,
+              rationale:
+                "Conciliarism overcorrects. The truth is symphony: the Council with the bishop of Rome, each in his proper role.",
+            },
+            {
+              text: "Neither Pope nor Council can err.",
+              correct: false,
+              rationale:
+                "Only the consensus of the Church — received over time, expressed in the Councils — is preserved by the Spirit.",
+            },
+            {
+              text: "Whoever has political power is right.",
+              correct: false,
+              rationale:
+                "Erastianism. The Emperor convoked the Councils but did not define the faith. The bishops did.",
+            },
+          ],
+          difficulty: 5,
+          taunt: "Pastor Aeternus! The Pope speaks, the matter is closed!",
+        },
+        {
+          claim:
+            "The souls of the imperfect must be cleansed by FIRE before heaven. Purgatory is plain reason — and Maccabees prays for the dead!",
+          options: [
+            {
+              text: "We pray for the dead too — but we do not teach a place of created fire that satisfies justice. The East holds the soul's condition after death is in God's mercy, not in punitive temporal flames.",
+              correct: true,
+              rationale:
+                "St. Mark of Ephesus's First Homily on Purgatorial Fire at Florence. Orthodoxy affirms prayer for the dead; rejects the Latin doctrine of purgatorial fire as satisfaction.",
+            },
+            {
+              text: "There is a created fire that punishes the soul before heaven.",
+              correct: false,
+              rationale:
+                "Latin scholastic teaching that the East rejected at Florence and after.",
+            },
+            {
+              text: "We must not pray for the dead at all.",
+              correct: false,
+              rationale:
+                "Then 2 Maccabees 12:45 is wrong, and the entire liturgical tradition. The Church has prayed for the departed from the catacombs.",
+            },
+            {
+              text: "Every soul is saved or damned at death — no intermediate state.",
+              correct: false,
+              rationale:
+                "The Church teaches a 'partial taste' of judgment at death, with the final state at the General Resurrection. The mystery is not the Latin scholastic system.",
+            },
+          ],
+          difficulty: 5,
+        },
+        {
+          claim:
+            "The Pope holds the treasury of merits of Christ and the saints. By indulgences he can release a soul from purgatory. The benefit is immediate — sign!",
+          options: [
+            {
+              text: "No man holds Christ's merit as a treasury to dispense. Forgiveness comes through repentance and the sacraments, not legal credits transferred by papal decree.",
+              correct: true,
+              rationale:
+                "This is precisely the doctrine that scandalized Luther a century later — and the East had rejected centuries before. Christ's merit is infinite and personal, not a quantified bank.",
+            },
+            {
+              text: "Indulgences are valid if money is given to the Church.",
+              correct: false,
+              rationale:
+                "The Tetzelian abuse: 'When the coin in the coffer rings, the soul from purgatory springs.' Even Rome later regulated this.",
+            },
+            {
+              text: "Only saints can transfer merit to others.",
+              correct: false,
+              rationale:
+                "The saints intercede; they do not 'transfer credits.' This commercializes the communion of the saints.",
+            },
+            {
+              text: "Indulgences are how God forgives all sins.",
+              correct: false,
+              rationale:
+                "Confession and the Eucharist forgive sins. Indulgences are an extra-sacramental Latin development with no parallel in the East.",
+            },
+          ],
+          difficulty: 5,
+        },
       ],
     },
     outro: [
@@ -1541,17 +2438,37 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "A bare concrete room. A single bulb. The smell of disinfectant and fear. A man in gray uniform sits across the table, calm, almost kind.",
+          "A bare concrete room. A single bulb. The smell of disinfectant and fear. Twenty years since the Revolution. The Year of the Great Purge has begun. Across the country, churches are demolished by dynamite — Christ the Saviour, the Trinity-Sergius. Bells melted for coins.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A man in gray uniform sits across the table, calm, almost kind. He has a wife and two daughters. He believes — sincerely — that he is building paradise on earth. He has signed three hundred and seven execution orders this month.",
       },
       {
         speaker: "st-anthony",
         text:
-          "In this year alone, eighty thousand Russian Orthodox will be executed. Many of them you have walked among — Tikhon, Hilarion of Troitsky, the Royal Family, Mother Maria.",
+          "In this year alone, eighty thousand Russian Orthodox will be executed. Bishops shot in cellars. Priests buried alive. Many of them you have walked among — Patriarch Tikhon, Hilarion of Troitsky, the Royal Family, Mother Maria of Paris.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "But also — Fr. Arseny in the Camp of Death. Mother Matrona praying in her hiding-place. Sergei Bulgakov writing theology in exile. The Church does not die when its bishops are killed; it goes underground and grows.",
       },
       {
         speaker: "st-anthony",
         text:
           "You will not survive this chapter with words alone. You must learn that some questions are not answered with argument but with blood. And yet — you must speak the truth as long as you can.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "The Captain wants you to denounce a priest, a friend, a name. Anything that proves cooperation. Anything that 'just gets you home.' Do not give it.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "The door opens behind you. Two guards take their positions. Captain Pavlov gestures to the chair across from him.",
       },
       {
         speaker: "nkvd",
@@ -1565,7 +2482,7 @@ export const CHAPTERS: Chapter[] = [
       title: "NKVD Interrogator",
       tradition: "Soviet Atheism",
       sprite: "nkvd",
-      maxHp: 160,
+      maxHp: 420,
       intro:
         "Sign here. Renounce religion. You may go home tonight. Your mother is waiting.",
       midline:
@@ -1693,6 +2610,100 @@ export const CHAPTERS: Chapter[] = [
           difficulty: 5,
           taunt: "Think of her.",
         },
+        {
+          claim:
+            "Where is your God now? In the camps? In the famines? He is silent — therefore He is not. The cosmos has no Father.",
+          options: [
+            {
+              text: "He is in the camps — bound, beaten, dying, with His people. The God of the Cross is precisely the God who suffers with us. His silence is not absence.",
+              correct: true,
+              rationale:
+                "St. Maria of Paris in Ravensbrück; Fr. Arseny in the gulag. The Christian answer to suffering is not philosophical, but Christological: the Cross.",
+            },
+            {
+              text: "He is testing the worthy and abandoning the weak.",
+              correct: false,
+              rationale:
+                "Stoic, not Christian. God does not abandon — even the cry 'why hast thou forsaken me?' is itself from Psalm 22 and ends in vindication.",
+            },
+            {
+              text: "He is angry; the gulag is punishment for our sins.",
+              correct: false,
+              rationale:
+                "Job's friends spoke so, and were rebuked (Job 42:7). The presence of suffering is not the measure of guilt.",
+            },
+            {
+              text: "There is no God; you are right.",
+              correct: false,
+              rationale:
+                "The very capacity to recognize evil as evil presupposes a standard — which atheism cannot ground.",
+            },
+          ],
+          difficulty: 5,
+        },
+        {
+          claim:
+            "Marx settled it: religion is the OPIUM OF THE PEOPLE. You cling to fairy tales to dull the pain of class struggle. Cast off the chains!",
+          options: [
+            {
+              text: "If religion were opium, the martyrs would not have died for it — opium dulls; faith DROVE them to suffer. Marx confused the symptom with the disease.",
+              correct: true,
+              rationale:
+                "The martyrs of Russia under Soviet rule (~200,000+ killed for the faith) decisively refute the opium thesis. Opium-users do not seek the firing squad.",
+            },
+            {
+              text: "Yes, Marx was right; religion is sociology.",
+              correct: false,
+              rationale:
+                "Genetic fallacy. Even if religion serves social functions (which it does), that does not falsify its truth claims.",
+            },
+            {
+              text: "Marxism is a religion of its own.",
+              correct: false,
+              rationale:
+                "True, and worth saying — but not the deepest answer. The deeper answer is that the martyrs prove the opium thesis empirically wrong.",
+            },
+            {
+              text: "Christianity is for the rich, against the poor.",
+              correct: false,
+              rationale:
+                "Historically false. The early Church was overwhelmingly poor and slave. 'God hath chosen the poor of this world' (James 2:5).",
+            },
+          ],
+          difficulty: 4,
+          taunt: "Workers of the world unite!",
+        },
+        {
+          claim:
+            "Science has explained the cosmos. Evolution, the Big Bang — no Creator required. Your God is a god of the gaps, shrinking yearly.",
+          options: [
+            {
+              text: "Science explains the HOW of natural processes; it cannot explain WHY there is anything at all. The God of Genesis is not a competing physical cause but the ground of being itself.",
+              correct: true,
+              rationale:
+                "The Fathers (Basil's Hexaemeron, Gregory of Nyssa) read Genesis as both historical AND theological — not as a rival to natural philosophy.",
+            },
+            {
+              text: "Evolution and the Big Bang are atheist lies.",
+              correct: false,
+              rationale:
+                "Many Orthodox theologians accept both as natural processes within the divine economy. The dispute is about meaning, not mechanism.",
+            },
+            {
+              text: "Science is evil and we should reject it.",
+              correct: false,
+              rationale:
+                "Anti-intellectual. Many Orthodox saints (e.g. St. Luke the Surgeon) were both scientists and theologians.",
+            },
+            {
+              text: "Genesis is poetry only; it has no historical content.",
+              correct: false,
+              rationale:
+                "Reductionist. Genesis tells real truths about creation, fall, and covenant — even if its literary form is not a modern textbook.",
+            },
+          ],
+          difficulty: 4,
+        },
       ],
     },
     outro: [
@@ -1724,16 +2735,32 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "You wake. Light through cheap curtains. Your phone, your coffee maker. The book is on your nightstand, where you left it. But everything is different.",
+          "You wake. Light through cheap curtains. Your phone, your coffee maker. The book is on your nightstand, where you left it. But everything is DIFFERENT now.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "You can still hear St. Ignatius in chains, still smell the desert under Macarius's feet, still see Mark of Ephesus refusing to sign. They walk with you now. The 'cloud of witnesses' is no longer a Sunday-school phrase.",
       },
       {
         speaker: "st-anthony",
         text:
-          "You have walked the whole path. Now comes the test you came for: defending the faith in the age you live in. Three encounters. Be ready always — 1 Peter 3:15.",
+          "You have walked the whole path — from the Apostolic Age through the Councils, through the dark night of the desert, through Schism and Council, through the Gulag. The Church survived all of it.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Now comes the test you came for: defending the faith in the AGE YOU LIVE IN. The persecutions are less bloody but more subtle — the air itself is unbelief. Three encounters await you today. Three voices speaking what your neighbors believe.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Be ready always to give an account for the hope that is in you — but with meekness and reverence (1 Peter 3:15). The world does not need debaters; it needs SAINTS who can answer.",
       },
       {
         speaker: "narrator",
-        text: "There is a knock at the door.",
+        text:
+          "There is a knock at the door. Through the peephole: two young men in white shirts and ties, holding small books.",
       },
       {
         speaker: "lds",
@@ -1747,7 +2774,7 @@ export const CHAPTERS: Chapter[] = [
       title: "LDS Missionary",
       tradition: "LDS / Mormonism",
       sprite: "lds",
-      maxHp: 100,
+      maxHp: 260,
       intro:
         "Joseph Smith restored the true Church of Jesus Christ in 1830. May I share his story?",
       midline:
@@ -1844,6 +2871,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 4,
         },
+        {
+          claim:
+            "Joseph Smith translated golden plates buried in upstate New York. Have you read the Book of Mormon for yourself? It is another testament of Jesus Christ.",
+          options: [
+            {
+              text: "I trust the Apostles, who saw the risen Christ in Palestine — not a private revelation to one man in 1820s America with no surviving plates and contradicted by DNA, archaeology, and Smith's own multiple First Vision accounts.",
+              correct: true,
+              rationale:
+                "The historicity of the Book of Mormon (Nephites, horses, steel, etc.) is unsupported by archaeology and contradicted by Native American DNA evidence.",
+            },
+            {
+              text: "Sure — I am open to new revelation.",
+              correct: false,
+              rationale:
+                "St. Paul: 'Though an angel from heaven preach any other gospel, let him be accursed' (Gal 1:8). The deposit of faith is closed.",
+            },
+            {
+              text: "The Book of Mormon contradicts the Bible, but both can be true.",
+              correct: false,
+              rationale:
+                "Logical impossibility. The BoM teaches God was once a man (King Follett Discourse implications) — the Bible says 'I am God, and there is none else, neither was a god formed before me' (Isaiah 43:10).",
+            },
+            {
+              text: "I cannot judge without reading every text.",
+              correct: false,
+              rationale:
+                "Then no one could judge between religions. Christ said: 'By their fruits ye shall know them' — and the witness of the Apostles is sufficient for discernment.",
+            },
+          ],
+          difficulty: 3,
+          taunt: "Read it. Pray about it. The Spirit will confirm.",
+        },
+        {
+          claim:
+            "Paul mentions 'baptism for the dead' (1 Cor 15:29). We perform proxy baptism. We practice what Paul taught — you do not!",
+          options: [
+            {
+              text: "Paul mentions the practice in passing to argue from his opponents' own assumption — he does not endorse it. The ancient Church never practiced proxy baptism. It is dishonest exegesis to build a doctrine on one ambiguous verse.",
+              correct: true,
+              rationale:
+                "Paul's argument in 1 Cor 15:29 is ad hominem: 'IF there is no resurrection, why even do this?' He does not approve it, and the early Church did not practice it.",
+            },
+            {
+              text: "Yes, the early Church practiced proxy baptism universally.",
+              correct: false,
+              rationale:
+                "Historically false. There is no evidence in the first-century Church or any patristic source endorsing the practice.",
+            },
+            {
+              text: "Mormons invented it, but it is permissible.",
+              correct: false,
+              rationale:
+                "The Church does not innovate sacraments. Baptism is for the living believer's regeneration, not for the dead by proxy.",
+            },
+            {
+              text: "Once baptized, a person can be baptized again for others.",
+              correct: false,
+              rationale:
+                "Baptism is once for each soul (Eph 4:5: 'one Lord, one faith, one baptism'). It is not transferable.",
+            },
+          ],
+          difficulty: 3,
+        },
+        {
+          claim:
+            "We have LIVING APOSTLES today — twelve of them, called and ordained. Your closed canon and dead church cannot compare to ongoing revelation!",
+          options: [
+            {
+              text: "The Apostolic ministry continues through apostolic succession — bishops in unbroken line from the Twelve. We do not lack apostles; we have many. But the deposit of faith was delivered once for all (Jude 3).",
+              correct: true,
+              rationale:
+                "Jude 3: 'the faith which was ONCE FOR ALL delivered unto the saints.' Apostolic succession preserves; it does not produce new revelation.",
+            },
+            {
+              text: "Yes, twelve living apostles is biblical.",
+              correct: false,
+              rationale:
+                "The Twelve were specifically those who saw the risen Christ (Acts 1:21-22). No modern church has such men.",
+            },
+            {
+              text: "Revelation continues with anyone who claims it.",
+              correct: false,
+              rationale:
+                "Then Mohammed, Joseph Smith, and a thousand others all qualify. The Apostolic norm is the standard.",
+            },
+            {
+              text: "Bishops are not apostles; we have no apostles today.",
+              correct: false,
+              rationale:
+                "The bishops are 'apostolic men' in succession from the Twelve. The ministry continues; the office of Apostle (eyewitness of the Risen Lord) was unique.",
+            },
+          ],
+          difficulty: 4,
+        },
       ],
     },
     outro: [
@@ -1879,7 +3000,23 @@ export const CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Coffee mugs. Hardwood tables. A copy of Calvin's Institutes on the chair beside her.",
+        text:
+          "Coffee mugs. Hardwood tables. The smell of espresso and old book pages. A young woman with cropped hair and intelligent eyes sits across from you. A copy of Calvin's Institutes on the chair beside her, two highlighters tucked in.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Sarah Kelley. PCA seminarian. She has been a Christian her whole life — devout, serious, prayerful. She lost a sister to cancer at sixteen and prayed her way through it. She is not the enemy.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "$you. Be GENTLE. She loves Christ. Her categories differ — sola scriptura, sola fide, sola gratia — but the heart is open. Listen first; correct without crushing.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "The danger in this conversation is not losing the argument. It is winning it and losing the person. Speak the truth in love (Eph 4:15).",
       },
       {
         speaker: "reformed",
@@ -1893,7 +3030,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Reformed Seminarian",
       tradition: "Reformed Protestantism",
       sprite: "reformed",
-      maxHp: 120,
+      maxHp: 320,
       intro:
         "Where in Scripture do you find prayers to Mary? Where do you find seven sacraments? You add to the Bible.",
       midline:
@@ -1991,6 +3128,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 4,
         },
+        {
+          claim:
+            "Romans 3:28: 'A man is justified by faith APART FROM works of the law.' Sola fide is plain Scripture. You add works to grace!",
+          options: [
+            {
+              text: "James 2:24 — 'a man is justified by works and NOT BY FAITH ALONE.' Both are Scripture. We are saved by grace through living faith, which works (Gal 5:6) — not by mere assent.",
+              correct: true,
+              rationale:
+                "St. James's reply to Paul, in the same New Testament. Sola fide cannot stand James's explicit refutation. Faith and works are not opposites but one living reality.",
+            },
+            {
+              text: "Yes, faith alone — works are added later by Catholics.",
+              correct: false,
+              rationale:
+                "Then St. James is wrong. The Reformers struggled with James precisely because it explicitly denies sola fide.",
+            },
+            {
+              text: "We are saved by works, not faith.",
+              correct: false,
+              rationale:
+                "Pelagian. The Church holds synergy: grace primary, our cooperation real but never meritorious by itself.",
+            },
+            {
+              text: "Faith and works are completely separate categories.",
+              correct: false,
+              rationale:
+                "St. Paul's 'works of the law' meant ritual works (circumcision, etc.) — not all moral cooperation with grace. Read Romans 2:6-7 alongside.",
+            },
+          ],
+          difficulty: 4,
+          taunt: "Sola fide! Sola gratia!",
+        },
+        {
+          claim:
+            "Romans 9 settles it. God hardens whom He will. He elects whom He pleases. Free will is an illusion — accept divine sovereignty!",
+          options: [
+            {
+              text: "We confess synergy: God's grace is sovereign and primary; our free response is real and necessary. 'Behold, I stand at the door and knock' (Rev 3:20) — He does not break it down.",
+              correct: true,
+              rationale:
+                "The Orthodox doctrine of synergy, against both Pelagius (works alone) and Augustine's late-Calvin reading (grace alone, no cooperation).",
+            },
+            {
+              text: "God determines everything — our choices are illusions.",
+              correct: false,
+              rationale:
+                "Then God is the author of sin (which Reformed theology cannot consistently avoid). The whole pastoral pleading of Scripture ('choose ye this day') becomes mockery.",
+            },
+            {
+              text: "We earn our salvation by free will alone.",
+              correct: false,
+              rationale:
+                "Pelagian. Without grace we can do nothing (John 15:5). Free will is itself a gift of grace.",
+            },
+            {
+              text: "Romans 9 means God arbitrarily picks individuals for eternal damnation.",
+              correct: false,
+              rationale:
+                "Romans 9 is about NATIONS in salvation history (Jacob/Esau as types of Israel/Edom), not about individual reprobation, as the Fathers read it.",
+            },
+          ],
+          difficulty: 5,
+        },
+        {
+          claim:
+            "Where was your Church before Constantine? Hidden! Invisible! The true Church is invisible — known only to God — not your visible institution!",
+          options: [
+            {
+              text: "The Church before Constantine was visible in every city — bishops, presbyters, Eucharists, persecutions. Ignatius, Polycarp, Justin, Irenaeus — all visible. Christ founded a visible Body (Eph 4:11-13).",
+              correct: true,
+              rationale:
+                "Historical record: every pre-Nicene witness describes a visible hierarchical Church with sacraments. The 'invisible Church' is a Reformation invention.",
+            },
+            {
+              text: "Yes, the true Church is invisible; institutions are corrupt.",
+              correct: false,
+              rationale:
+                "Then Christ founded nothing definite, and 'where two or three are gathered' becomes everyone alone. The visible Church is His Body.",
+            },
+            {
+              text: "The Church became visible only at the Reformation.",
+              correct: false,
+              rationale:
+                "Historically absurd. There were bishops, councils, liturgies, and martyrs for 1500 years before Luther.",
+            },
+            {
+              text: "Any group of Christians is the Church.",
+              correct: false,
+              rationale:
+                "Then the Church has no marks, no boundaries, and no apostolic identity — and Christ founded only a vague affinity group.",
+            },
+          ],
+          difficulty: 4,
+        },
       ],
     },
     outro: [
@@ -2025,6 +3256,21 @@ export const CHAPTERS: Chapter[] = [
     background: "modern",
     intro: [
       {
+        speaker: "narrator",
+        text:
+          "Two a.m. Your apartment. Headphones on. The Discord call has been going for three hours. Alex Chen — old college friend, software engineer, brilliant. His dad was Catholic; his mom was Buddhist; he is neither.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "He has read Dawkins, Harris, Hitchens, and beyond — also Nietzsche, also Camus. He is not a dabbler. He is also not unkind. The respect is real, in both directions.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "He has the most painful question last on his list: his sister attempted suicide in college. He prayed for her. She survived. He thanks medication, not God. The wound is fresh.",
+      },
+      {
         speaker: "atheist",
         text:
           "I'm not trying to be a jerk. I genuinely don't get it. A good and all-powerful God would not allow the Holocaust. So either He's not good or He's not all-powerful.",
@@ -2032,7 +3278,7 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "st-anthony",
         text:
-          "This is the deepest question. Do not answer it with cleverness. Answer it from your own life.",
+          "This is the deepest question of the modern world. Do not answer it with cleverness. Answer it from your own life — and from the Cross. The Cross IS the answer.",
       },
     ],
     boss: {
@@ -2041,7 +3287,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Skeptical Friend",
       tradition: "New Atheism",
       sprite: "atheist",
-      maxHp: 140,
+      maxHp: 380,
       intro:
         "Make a case. I'll listen. But don't give me Sunday school answers.",
       midline:
@@ -2167,6 +3413,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 5,
         },
+        {
+          claim:
+            "Here is the problem: if God is all-good and all-powerful, why cancer in children? Why earthquakes? The problem of evil refutes Him.",
+          options: [
+            {
+              text: "Christianity does not deny suffering — it confronts it on the Cross. God did not stay distant from evil; He entered it, took it on, and overcame it through death. The answer is not a theory but a Person.",
+              correct: true,
+              rationale:
+                "The Cross is the Christian answer to evil. Christ did not explain suffering; He bore it. The Resurrection is the promise that evil does not have the last word.",
+            },
+            {
+              text: "All suffering is punishment for sin.",
+              correct: false,
+              rationale:
+                "Christ explicitly rejected this in John 9:3 (the man born blind) and Luke 13 (the tower of Siloam). Suffering is not always desert.",
+            },
+            {
+              text: "God allows evil because free will requires it.",
+              correct: false,
+              rationale:
+                "Free-will theodicy is partial — it does not address natural evil (cancer, earthquakes). The Christological answer is deeper.",
+            },
+            {
+              text: "Evil is an illusion; suffering is not real.",
+              correct: false,
+              rationale:
+                "Buddhist / Christian Science answer. Christianity is brutally realistic: suffering is real, and is real ENEMY, and is conquered by the Risen Christ.",
+            },
+          ],
+          difficulty: 5,
+          taunt: "A child has died of cancer somewhere just now. Defend your God.",
+        },
+        {
+          claim:
+            "Hume settled miracles: it is always more probable that the witnesses lied or erred than that the laws of nature broke. So no miracle is ever credible.",
+          options: [
+            {
+              text: "Hume's argument assumes what it must prove: that natural law NEVER breaks. The historical evidence for the Resurrection (multiple witnesses, willingness to die, transformation of skeptics) cannot be a priori dismissed by a circular axiom.",
+              correct: true,
+              rationale:
+                "Hume's argument is question-begging. C. S. Lewis (Miracles), N. T. Wright (Resurrection of the Son of God), and many others have shown this in detail.",
+            },
+            {
+              text: "Yes, Hume is right; no miracle is credible.",
+              correct: false,
+              rationale:
+                "Then no testimony could ever overcome any 'natural law' belief — even when we have multiple independent witnesses who die for their account.",
+            },
+            {
+              text: "We need miracles today to believe.",
+              correct: false,
+              rationale:
+                "Christ said: 'Blessed are they that have not seen, and yet have believed' (John 20:29). The historical witness is sufficient.",
+            },
+            {
+              text: "Miracles happen so often that they are normal.",
+              correct: false,
+              rationale:
+                "Miracles are precisely the rare incursions of the Creator into His creation — not regular events.",
+            },
+          ],
+          difficulty: 5,
+        },
+        {
+          claim:
+            "An infinite punishment for finite sin? Your God is a moral monster. Eternal hell for missing the right religion is grotesque.",
+          options: [
+            {
+              text: "Hell is not God's vindictive will but the soul's own resistance to the divine love it cannot escape. The same fire warms or burns depending on whether one loves it (St. Isaac the Syrian).",
+              correct: true,
+              rationale:
+                "St. Isaac of Nineveh: 'Those who are punished in Gehenna are scourged by the scourge of love... it is love's reproach that becomes a torment.'",
+            },
+            {
+              text: "Yes, God actively burns sinners forever in retribution.",
+              correct: false,
+              rationale:
+                "This is the cruder Western reading. Orthodoxy holds the more nuanced view: God is love; resistance to love is the torment.",
+            },
+            {
+              text: "Hell does not exist; everyone is saved.",
+              correct: false,
+              rationale:
+                "Universalism — explicitly rejected at Constantinople II (553). The Church hopes for all (1 Tim 2:4) but does not presume.",
+            },
+            {
+              text: "Hell is annihilation; the wicked simply cease to be.",
+              correct: false,
+              rationale:
+                "Conditionalism. The Church teaches conscious existence of the unrepentant — but their torment is their refusal of love, not divine cruelty.",
+            },
+          ],
+          difficulty: 5,
+        },
       ],
     },
     outro: [
@@ -2198,12 +3538,32 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Three in the morning. You cannot sleep. You sit on the floor of your room, in front of your icon corner. The Theotokos looks at you.",
+          "Three in the morning. You cannot sleep. You sit on the floor of your room, in front of your icon corner. The Theotokos looks at you. The lampada burns low.",
       },
       {
         speaker: "narrator",
         text:
-          "Then the shadow appears, and it has your face. It speaks with your voice. It uses your memories.",
+          "You have done everything they asked. You answered the centurion. You stood against Arius, Eutyches, Constantine the Iconoclast. You did not sign with the Greek bishops at Florence. You did not denounce a friend to the NKVD.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "And yet — here, alone, at three a.m., the silence is loud. You realize you have one enemy left. The hardest one. Not a heretic. Not an emperor. Not a tempter. Yourself.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Every soul that follows Christ comes to this room. The desert fathers called it acedia. The mystics called it the dark night. Modernity calls it depression and unbelief. It is not new. But it is yours now.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "I cannot help you here. This battle is yours alone. But know — you carry all the saints with you. They prayed for the one who would come. They are praying NOW. Macarius, Ignatius, Athanasius, Cyril, John Damascene, Mark, the New Martyrs. Listen.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "And in the corner of the room, where the shadow always pools, the shadow speaks. And it has your face. It speaks with your voice. It uses your memories.",
       },
       {
         speaker: "doubt",
@@ -2213,7 +3573,7 @@ export const CHAPTERS: Chapter[] = [
       {
         speaker: "st-anthony",
         text:
-          "I cannot help you here. This battle is yours alone. But know — you carry all the saints with you. They prayed for the one who would come.",
+          "Pray the Jesus Prayer. Lord Jesus Christ, Son of God, have mercy on me. Even — especially — when you do not feel it.",
       },
     ],
     boss: {
@@ -2222,7 +3582,7 @@ export const CHAPTERS: Chapter[] = [
       title: "Your Own Shadow",
       tradition: "Internal",
       sprite: "doubt",
-      maxHp: 200,
+      maxHp: 600,
       intro:
         "What if all of this is wishful thinking? What if you converted out of loneliness?",
       midline:
@@ -2378,6 +3738,100 @@ export const CHAPTERS: Chapter[] = [
           ],
           difficulty: 5,
           taunt: "You will never be rid of me!",
+        },
+        {
+          claim:
+            "When you stop FEELING God's presence — what then? You are just performing rituals to empty silence. Admit it: you feel nothing.",
+          options: [
+            {
+              text: "Feeling is not faith. The saints' deepest growth came in dryness. The Liturgy is true whether I weep or not. I keep going.",
+              correct: true,
+              rationale:
+                "St. John of the Cross: 'The dark night of the senses is the gateway to union.' Feeling is not the test of God's presence.",
+            },
+            {
+              text: "If I do not feel God, He is not there.",
+              correct: false,
+              rationale:
+                "Subjectivism — the test of presence is not emotion. Christ on the Cross cried 'why hast thou forsaken me?' yet was not forsaken.",
+            },
+            {
+              text: "I will leave until I feel something.",
+              correct: false,
+              rationale:
+                "The path through dryness is THROUGH it. Abandoning the Liturgy because of feeling is the very temptation.",
+            },
+            {
+              text: "I will manufacture emotion by changing churches.",
+              correct: false,
+              rationale:
+                "Religious shopping. The deeper need is faithful endurance, not novel stimuli.",
+            },
+          ],
+          difficulty: 5,
+        },
+        {
+          claim:
+            "Hindus feel just as strongly about Krishna. Muslims about Allah. How do you KNOW yours is the true one and not just cultural?",
+          options: [
+            {
+              text: "I do not know by feeling — I know by the historical Resurrection of Christ, attested by witnesses who died for it, and by the unbroken apostolic Church that has handed it on for 2000 years.",
+              correct: true,
+              rationale:
+                "The Christian claim is historical, not just experiential: 'If Christ be not raised, your faith is vain' (1 Cor 15:14). The evidence is open to inquiry.",
+            },
+            {
+              text: "All religions are roughly equivalent paths to God.",
+              correct: false,
+              rationale:
+                "Religious indifferentism — denies Christ's unique claim: 'I am the way, the truth, and the life' (John 14:6). Not all paths lead home.",
+            },
+            {
+              text: "We just believe what our culture believes.",
+              correct: false,
+              rationale:
+                "Then there is no truth. But Christianity spread AGAINST its cultures (Roman, Greek, Persian) — its hold on hostile cultures argues against the relativist thesis.",
+            },
+            {
+              text: "I cannot decide; all religions confuse me.",
+              correct: false,
+              rationale:
+                "The temptation. Christ said: 'Seek and ye shall find' (Matt 7:7). Inquiry is permitted; permanent agnosticism is the doubt's victory.",
+            },
+          ],
+          difficulty: 5,
+          taunt: "Born in Tehran you would pray five times daily. Born in Mumbai you would wear orange. It is luck, not truth.",
+        },
+        {
+          claim:
+            "Mother Teresa felt nothing for fifty years. John of the Cross felt nothing. Maybe — just maybe — there is NOTHING to feel.",
+          options: [
+            {
+              text: "Or — they kept feeding the dying, kept writing the Spiritual Canticle, kept loving when feeling failed. Their FRUITS prove the silence was not absence but communion at a depth feeling cannot reach.",
+              correct: true,
+              rationale:
+                "St. John of the Cross's Dark Night and Mother Teresa's letters describe contemplative purification, not divine absence. The fruits of love do not lie.",
+            },
+            {
+              text: "If saints felt nothing, God does not exist.",
+              correct: false,
+              rationale:
+                "Then they should have stopped — but they did not. Their persistence in love is itself evidence against the void thesis.",
+            },
+            {
+              text: "Mother Teresa was a fraud.",
+              correct: false,
+              rationale:
+                "Her decades of self-sacrificial work in Calcutta are objective fact. Frauds do not give up everything for the poor.",
+            },
+            {
+              text: "Saints feel God constantly; dryness disproves sanctity.",
+              correct: false,
+              rationale:
+                "The Church Fathers (esp. the desert monastics) teach that the deepest sanctity is purified precisely THROUGH dryness — feeling-attachment must die.",
+            },
+          ],
+          difficulty: 5,
         },
       ],
     },
