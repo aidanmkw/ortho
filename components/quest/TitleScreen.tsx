@@ -67,7 +67,7 @@ export default function TitleScreen({
           )}
         </div>
 
-        <div className="mb-6 pixel-shadow-lg">
+        <div className="mb-6 pixel-shadow-lg pixel-platform pixel-halo-glow">
           <PixelSprite sprite={spriteAnthony} scale={10} idle />
         </div>
 

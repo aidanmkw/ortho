@@ -67,6 +67,32 @@ export default function DialogScene({
 
   const text = (line?.text ?? "").replaceAll("$you", playerName);
 
+  // Glow depending on speaker type — saints get a golden halo, villains a red menace.
+  const speakerId = line?.speaker ?? "";
+  const isSaint =
+    speakerId.startsWith("st-") || speakerId === "st-anthony";
+  const villainIds = new Set([
+    "centurion",
+    "marcus",
+    "arius",
+    "tempter",
+    "eutyches",
+    "iconoclast",
+    "humbert",
+    "pope-eugene",
+    "nkvd",
+    "lds",
+    "reformed",
+    "atheist",
+    "doubt",
+  ]);
+  const isVillain = villainIds.has(speakerId);
+  const glowClass = isSaint
+    ? "pixel-halo-glow"
+    : isVillain
+    ? "pixel-menace-glow"
+    : "";
+
   useEffect(() => {
     setTextDone(false);
   }, [index]);
@@ -101,7 +127,7 @@ export default function DialogScene({
               isPlayer ? "translate-x-[-15%]" : "translate-x-[15%]"
             }`}
           >
-            <div className="pixel-shadow-lg">
+            <div className={`pixel-shadow-lg pixel-platform ${glowClass}`}>
               <PixelSprite sprite={sprite} scale={10} idle />
             </div>
           </div>

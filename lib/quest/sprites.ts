@@ -1,855 +1,976 @@
 import type { Sprite } from "./types";
 
-// Convention for portraits: 16 wide × 18 tall, head-and-shoulders.
-// Char palette per sprite. " " is transparent.
-
-const skin = "#e8c39e";
-const skinShadow = "#b48055";
-const black = "#0a0a0a";
-const white = "#f5e9c9";
-const grayHair = "#cfcfcf";
-const lightBeard = "#e7d7b0";
-const goldHalo = "#e8c54a";
-const gold = "#c9a227";
-const goldDark = "#8a6e15";
-const crimson = "#7c1414";
-const blue = "#324e7b";
-const blueDark = "#1d2f4e";
-const purple = "#3a1f4d";
-const green = "#3d6b3a";
-const greenDark = "#284628";
-const monkBrown = "#5d3a1e";
-const monkBrownDark = "#3b2410";
-const ink = "#1a1814";
+// All character sprites are 16 wide × 18 tall, head-and-shoulders.
+// Each sprite uses single-char keys mapped to hex colors. " " is transparent.
+//
+// Shared palette tokens (used across multiple sprites):
+const SKIN_HI = "#f3d4ad";       // skin highlight
+const SKIN = "#e8c39e";          // skin base
+const SKIN_LO = "#b48055";       // skin shadow
+const EYE_WHITE = "#f5e9c9";     // eye whites (also general light)
+const PUPIL = "#0a0a0a";         // pupil / line ink
+const INK = "#1a1814";           // general dark outline
+const BEARD_WHITE = "#ecdfb8";
+const BEARD_GRAY = "#bababa";
+const BEARD_BROWN = "#7a5028";
+const BEARD_BLACK = "#1c1010";
+const GOLD_HI = "#f0d358";       // halo / gold highlight
+const GOLD = "#c9a227";          // gold base
+const GOLD_LO = "#7a5e10";       // gold shadow
+const CRIMSON_HI = "#a02020";
+const CRIMSON = "#7c1414";
+const CRIMSON_LO = "#4a0808";
+const PURPLE = "#3a1f4d";
+const PURPLE_HI = "#5c3470";
+const MONK_BROWN = "#5d3a1e";
+const MONK_BROWN_HI = "#7e5430";
+const MONK_BROWN_LO = "#3b2410";
+const WHITE = "#f5e9c9";
+const WHITE_LO = "#c8b890";
 
 function makeSprite(rows: string[], palette: Record<string, string>): Sprite {
   return { rows, palette: { " ": "transparent", ...palette } };
 }
 
-// ---- THE PLAYER (4 hair variants chosen at character create) ----
-// Modern hoodie-and-jeans Inquirer. We swap the 'h' char to color hair.
+/* ============================================================
+   PLAYER — modern inquirer in hoodie. Hair char 'h' is themed.
+   Now with: bigger face area, real eyes (whites + pupils),
+   shaded hoodie with drawstrings.
+   ============================================================ */
 const playerRows = [
   "                ",
-  "    hhhhhh      ",
-  "   hhhhhhhh     ",
-  "   hssssssh     ",
-  "   ss.ss.ss     ",
-  "   sssssss      ",
-  "    ss-ss       ",
-  "    sssss       ",
-  "  HHHHHHHHH     ",
-  " HHHHHHHHHHH    ",
-  " HHHHHHHHHHH    ",
-  " HHHHHHHHHHH    ",
-  " HHHHHHHHHHH    ",
-  " HH HHHHH HH    ",
-  " jj  HHH  jj    ",
-  " jj  jjj  jj    ",
-  "  j  jjj   j    ",
-  "     jjj        ",
+  "     hhhhhh     ",
+  "    hhhhhhhh    ",
+  "   hhhhhhhhhh   ",
+  "   hhSSSSSSh    ",  // hair edge + skin highlight forehead
+  "   hssssssss    ",
+  "   ss.oo.ooss   ",  // eyes: pupil-white-pupil-white pairs
+  "   sssssssss    ",
+  "   ssss.ssss    ",  // nose hint
+  "   ssss-ssss    ",  // mouth
+  "    -ssssss     ",  // chin shadow
+  "    eeeeeee     ",  // neck
+  "   HHHHHHHHH    ",  // hoodie collar
+  "  HHHHHHHHHHH   ",  // hoodie shoulders
+  " HHHHHHHHHHHHH  ",
+  " HH dd   dd HH  ",  // drawstrings
+  " HH ddddddd HH  ",
+  " HHHHHHHHHHHHH  ",
 ];
 
 export function playerSprite(hair: string): Sprite {
   return makeSprite(playerRows, {
     h: hair,
-    s: skin,
-    ".": black,
-    "-": skinShadow,
-    H: "#3a4a78", // hoodie blue
-    j: "#3a3a3a", // jeans
+    S: SKIN_HI,
+    s: SKIN,
+    "-": SKIN_LO,
+    e: SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    H: "#3a4a78",
+    d: "#c9a070",   // hoodie drawstring
   });
 }
 
-// ---- ST. ANTHONY THE GREAT (guide) ----
-// Old monk, white beard, monastic skufia (hat), brown robe.
+/* ============================================================
+   ST. ANTHONY THE GREAT — old monk with white beard, skufia.
+   ============================================================ */
 export const spriteAnthony = makeSprite(
   [
     "                ",
-    "                ",
-    "    KKKKKK      ",
-    "   KKKKKKKK     ",
-    "   KKbbbbKK     ",
-    "    bbbbbb      ",
-    "    s.ss.s      ",
-    "    sssss       ",
-    "    sssss       ",
-    "   bbsbsbb      ",
-    "  bbbbsbbbb     ",
-    " bbbbbsbbbbb    ",
-    "BBBBBBBBBBBBB   ",
-    "BBBBBBBBBBBBB   ",
-    "BB++BBBB+BBBB   ",
-    "BB+B+BBB+B+BB   ",
-    "BBBBBBBBBBBBB   ",
-    "                ",
+    "    KKKKKKKK    ",  // wide black skufia
+    "   KKKKKKKKKK   ",
+    "   KKbbbbbbKK   ",  // hairline visible
+    "    bbssssbb    ",
+    "    SssssssS    ",
+    "   ss.oo.oos    ",  // eyes
+    "    ssssssss    ",
+    "    sss.sss     ",  // nose
+    "   bbbbbbbb     ",  // beard begins
+    "  bbbbbbbbbb    ",
+    " bbbbbbbbbbbb   ",
+    " bbbbbbbbbbbb   ",
+    "BBBBBBBBBBBBBB  ",  // brown robe
+    "BBM+MBBBB+MBBB  ",  // robe trim
+    "BBM+MBBBM+MBBB  ",  // gold cross
+    "BBBBBBM+MBBBBB  ",
+    "BBBBBBBBBBBBBB  ",
   ],
   {
-    K: black,         // skufia hat
-    s: skin,
-    ".": black,
-    b: white,         // white beard / hair
-    B: monkBrown,     // robe
-    "+": goldDark,
+    K: "#0a0a0a",
+    b: BEARD_WHITE,
+    S: SKIN_HI,
+    s: SKIN,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    B: MONK_BROWN,
+    M: MONK_BROWN_LO,
+    "+": GOLD,
   }
 );
 
-// ---- ST. IGNATIUS OF ANTIOCH (bishop, in chains heading to martyrdom) ----
-// Bishop in omophorion (white scarf with crosses).
+/* ============================================================
+   ST. IGNATIUS OF ANTIOCH — bishop with mitre and omophorion.
+   ============================================================ */
 export const spriteIgnatius = makeSprite(
   [
-    "                ",
-    "    GGGGGG      ",
-    "   GGgggggG     ",
-    "   GggggggG     ",
-    "   GssssssG     ",
-    "   ss.ss.s      ",
-    "   sssssss      ",
-    "    ssbss       ",
-    "   bbbbbb       ",
-    "  bWWWWWWWb     ",
-    " bWW++++++WWb   ",
-    " bWW+RRRR+WWb   ",
-    " bWW++++++WWb   ",
-    " bWWWWWWWWWb    ",
-    " bWWWWWWWWWb    ",
-    "  bbbbbbbbb     ",
-    "                ",
-    "                ",
+    "      GgGG      ",  // mitre peak
+    "    GGGGGGGG    ",
+    "   GG++++++GG   ",  // gold mitre with red gem row
+    "   GGRRGGRRGG   ",
+    "   GGGGGGGGGG   ",
+    "    bSSSSSSb    ",
+    "    bs.oo.os    ",  // eyes
+    "    bssssssb    ",
+    "     bbbbbb     ",  // short beard
+    "    bbbbbbbb    ",
+    "   bbbbbbbbbb   ",
+    "  WWWWWWWWWWWW  ",  // omophorion (white stole)
+    " WWWW++WW++WWW  ",  // crosses on stole
+    " WWW+RR++RR+WW  ",  // cross detail
+    " WWWW++WW++WWW  ",
+    " WWWWWWWWWWWW   ",  // omophorion continues
+    " ccccccccccc    ",  // chains (hint of martyrdom)
+    " c c c c c c    ",
   ],
   {
-    G: gold,           // bishop's mitre
-    g: goldDark,
-    s: skin,
-    ".": black,
-    b: white,          // beard + omophorion border
-    W: white,
-    "+": crimson,
-    R: gold,
+    G: GOLD,
+    g: GOLD_HI,
+    "+": CRIMSON,
+    R: CRIMSON_HI,
+    S: SKIN_HI,
+    s: SKIN,
+    b: BEARD_WHITE,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    W: WHITE,
+    c: "#5a5a5a",   // iron chain
   }
 );
 
-// ---- ROMAN CENTURION (boss ch.1) ----
+/* ============================================================
+   ROMAN CENTURION LUCIUS — boss ch.1, helmet with crest.
+   ============================================================ */
 export const spriteCenturion = makeSprite(
   [
-    "                ",
-    "    CCCCCC      ",
-    "  C CCRRCC C    ",
-    " CC CCRRCC CC   ",
-    "  C CCCCCC C    ",
-    "    CssssC      ",
-    "    s.ss.s      ",
-    "    sssss       ",
-    "    sssss       ",
-    "  CCCCCCCCC     ",
-    " CCRRRRRRRCC    ",
-    " CCRGGGGGRCC    ",
-    " CCRRRRRRRCC    ",
-    " CCCCCCCCCCC    ",
-    " CCC     CCC    ",
-    " CC       CC    ",
-    "                ",
-    "                ",
+    "      RRRR      ",  // red horsehair crest
+    "      RRRR      ",
+    "     CCRRCC     ",  // helmet with crest mount
+    "   CCCCRRCCCC   ",
+    "   CC++++++CC   ",  // helmet trim
+    "   CCsssssCC    ",
+    "    s.oo.os     ",  // eyes
+    "    sssssss     ",
+    "    s mm  s     ",  // mustache
+    "    s-----s     ",  // jaw shadow
+    "    sssssss     ",
+    "   CCCCCCCCCC   ",  // pauldron
+    "  CCcRRRRRRcCC  ",  // armor with red tunic showing
+    " CCcRRRRRRRRcC  ",
+    " CCcR  GG  RcC  ",  // gold pectoral
+    " CCRR  GG  RRC  ",
+    " CCCCCRRRRCCCC  ",
+    " CCC      CCC   ",
   ],
   {
-    C: "#8a8a8a",   // armor
-    R: crimson,     // tunic
-    s: skin,
-    ".": black,
-    G: gold,
+    C: "#9a9a9a",   // steel armor
+    c: "#5a5a5a",   // armor shadow
+    R: CRIMSON,
+    "+": GOLD,
+    s: SKIN,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    m: SKIN_LO,
+    "-": SKIN_LO,
+    G: GOLD,
   }
 );
 
-// ---- MARCUS THE PAGAN ROMAN ----
+/* ============================================================
+   MARCUS THE PAGAN PATRICIAN — ch.2, dark hair, toga, laurel.
+   ============================================================ */
 export const spriteMarcus = makeSprite(
   [
     "                ",
-    "    LLLLLL      ",
-    "   LLLLLLLL     ",
-    "   LsssssL      ",
-    "   ss.ss.s      ",
-    "   sssssss      ",
-    "    sssss       ",
-    "    s mm s      ",
-    "  PPPPPPPPP     ",
-    " PP RRRRR PP    ",
-    " PP RRRRR PP    ",
-    " PP RRRRR PP    ",
-    " PPPPPPPPPP     ",
-    " PP       PP    ",
-    "                ",
-    "                ",
-    "                ",
+    "   LL++++++LL   ",  // laurel wreath
+    "  LL+LLLLLL+LL  ",
+    "   LLLLLLLLLL   ",
+    "   LLssssssLL   ",
+    "    sssssss     ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s mmm s     ",  // mustache
+    "    s-----s     ",
+    "    sssssss     ",
+    "   WWWWWWWWW    ",  // toga (white)
+    "  WWWWRRRRWWW   ",  // red trim
+    " WWWWWRRRRWWWW  ",
+    " WWWWWWWWWWWWW  ",
+    " WWWWWWWWWWWWW  ",
+    " WWW       WWW  ",
     "                ",
   ],
   {
-    L: "#4a2810", // dark hair
-    s: skin,
-    ".": black,
-    m: skinShadow, // mustache
-    P: white,      // toga
-    R: crimson,
+    L: "#2c1a08",   // dark hair
+    "+": "#4a6c2a", // laurel green
+    s: SKIN,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    m: SKIN_LO,
+    "-": SKIN_LO,
+    W: WHITE,
+    R: CRIMSON,
   }
 );
 
-// ---- ARIUS (heretic, sneering, deacon vestments) ----
+/* ============================================================
+   ARIUS — ch.3, dark deacon vestments, gaunt, severe.
+   ============================================================ */
 export const spriteArius = makeSprite(
   [
     "                ",
-    "    LLLLLL      ",
-    "   LLLLLLLL     ",
-    "   LssssssL     ",
-    "   ss.ss.s      ",
-    "   sss<sss      ",
-    "    sssss       ",
-    "   bbbbbbbb     ",
-    "  bbbbbbbbb     ",
-    "  RWWWWWWWR     ",
-    " RRWWWWWWWRR    ",
-    " RRWW+++WWRR    ",
-    " RRWWW+WWWRR    ",
-    " RRWWWWWWWRR    ",
-    " RRRRRRRRRR     ",
-    "                ",
-    "                ",
-    "                ",
+    "    LLLLLLLL    ",  // black hair
+    "   LLLLLLLLLL   ",
+    "   LLssssssLL   ",
+    "   ssssssssss   ",
+    "    s.oo.os     ",  // narrow eyes
+    "    s--ss--s    ",  // hollow cheeks
+    "    sssssss     ",
+    "    s-----s     ",  // thin lips
+    "    sbbbbbs     ",  // sparse beard
+    "   bbbbbbbbb    ",
+    "  PPPPPPPPPPP   ",  // purple deacon robe
+    " PPWWWWWWWWWPP  ",  // white sticharion
+    " PPWW++++++WPP  ",  // red orarion stripe
+    " PPWWWW++WWWPP  ",
+    " PPWW++++++WPP  ",
+    " PPWWWWWWWWWPP  ",
+    " PPPPPPPPPPPPP  ",
   ],
   {
-    L: black,
-    s: skin,
-    ".": black,
-    "<": "#888888",
-    b: black,        // beard
-    R: purple,       // deacon robe (dark)
-    W: white,        // sticharion
-    "+": crimson,
+    L: "#1a0808",   // jet black hair
+    s: SKIN,
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    b: BEARD_BLACK,
+    P: PURPLE,
+    W: WHITE_LO,
+    "+": CRIMSON,
   }
 );
 
-// ---- ST. ATHANASIUS (ally ch.3) ----
+/* ============================================================
+   ST. ATHANASIUS — ch.3 ally, dark hair, intense gaze.
+   ============================================================ */
 export const spriteAthanasius = makeSprite(
   [
-    "                ",
-    "    BBBBBB      ",
-    "   BBBBBBBB     ",
-    "   BssssssB     ",
-    "   ss.ss.s      ",
-    "   ssssss       ",
-    "    ssbss       ",
-    "   bbbbbbb      ",
-    "  bbbbbbbbb     ",
-    "  RRRRRRRR      ",
-    " RR WWWWW RR    ",
-    " RR WGGGW RR    ",
-    " RR WWWWW RR    ",
-    " RRRRRRRRRR     ",
-    " R          R   ",
-    "                ",
-    "                ",
-    "                ",
+    "      HHHHHH    ",  // small halo arc
+    "    HHGGGGGGHH  ",
+    "   HGGLLLLLLGGH ",
+    "    LLLLLLLLLL  ",
+    "    LLssssssLL  ",
+    "    sssssss     ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s-----s     ",
+    "   bbbbbbbbb    ",  // black beard
+    "  bbbbbbbbbbb   ",
+    "  RRRRRRRRRRR   ",  // crimson omophorion
+    "  RR+WWWW+RRR   ",  // white center with crosses
+    "  RWW++WW++WR   ",
+    "  RWW++GG++WR   ",
+    "  RWW++WW++WR   ",
+    "  RWWWWWWWWWR   ",
+    "  RRRRRRRRRRR   ",
   ],
   {
-    B: black,
-    s: skin,
-    ".": black,
-    b: "#1a1a1a",     // black beard
-    R: crimson,
-    W: white,
-    G: gold,
+    H: GOLD_HI,
+    G: GOLD,
+    L: "#1a0808",
+    s: SKIN,
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    b: BEARD_BLACK,
+    R: CRIMSON,
+    W: WHITE,
+    "+": GOLD_LO,
   }
 );
 
-// ---- DESERT TEMPTER (boss ch.4) — hooded shadow with red eyes ----
+/* ============================================================
+   THE TEMPTER — ch.4 boss, hooded shadow, glowing red eyes.
+   ============================================================ */
 export const spriteTempter = makeSprite(
   [
-    "                ",
-    "   KKKKKKKK     ",
-    "  KKKKKKKKKK    ",
-    " KKKKKKKKKKKK   ",
-    " KK........KK   ",
-    " K.RR....RR.K   ",
-    " K..........K   ",
-    " K....++....K   ",
-    " KK........KK   ",
-    " KKK......KKK   ",
-    " KKKKKKKKKKKK   ",
-    " KK        KK   ",
-    " K          K   ",
-    "                ",
-    "                ",
-    "                ",
-    "                ",
-    "                ",
+    "    KKKKKKKK    ",
+    "   KKKKKKKKKK   ",
+    "  KKKKKKKKKKKK  ",
+    " KKKKKKKKKKKKKK ",
+    " KK..........KK ",  // hood shadow interior
+    " K.RR......RR.K ",  // red eyes
+    " K.RR......RR.K ",
+    " K............K ",
+    " K....PPPP....K ",  // purple smoke at mouth
+    " KK..........KK ",
+    " KKK........KKK ",
+    " KKKKKKKKKKKKKK ",
+    " KK..........KK ",  // hood folds
+    " K............K ",
+    " K............K ",
+    " KK..........KK ",
+    " KKKK......KKKK ",
+    " KKKKKKKKKKKKKK ",
   ],
   {
-    K: "#0e0518",
-    ".": black,
-    R: "#c52a2a",     // glowing eyes
-    "+": purple,
+    K: "#0a0410",   // very dark purple-black
+    ".": "#1a0a20",
+    R: "#dc2828",   // glowing red
+    P: "#5c2078",   // purple mist
   }
 );
 
-// ---- ST. MACARIUS THE GREAT (ally ch.4) ----
+/* ============================================================
+   ST. MACARIUS — ch.4 ally, desert father, light beard, halo.
+   ============================================================ */
 export const spriteMacarius = makeSprite(
   [
-    "                ",
-    "                ",
-    "    KKKKKK      ",
-    "   KKKKKKKK     ",
-    "   KKbbbbKK     ",
-    "    bbbbbb      ",
-    "    s.ss.s      ",
-    "    sssss       ",
-    "   bbbbbbb      ",
-    "  bbbbbbbbb     ",
-    " bbbbbbbbbbb    ",
-    "BBBBBBBBBBBBB   ",
-    "BBBBBBBBBBBBB   ",
-    "BBBB+TTT+BBBB   ",
-    "BBB+TTTTT+BBB   ",
-    "BBBBBBBBBBBBB   ",
-    "                ",
-    "                ",
+    "     HHHHHH     ",  // halo
+    "    HhhhhhhH    ",
+    "   HhhKKKKhhH   ",  // skufia under halo
+    "    KKKKKKKK    ",
+    "    KKbbbbKK    ",
+    "    SsssssS     ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s-----s     ",
+    "   bbbbbbbbb    ",  // light beard
+    "  bbbbbbbbbbb   ",
+    " bbbbbbbbbbbbb  ",
+    "BBBBBBBBBBBBBB  ",  // monk robe
+    "BBBBM+MMM+MBBB  ",
+    "BBBM+MGGM+MBBB  ",
+    "BBM+MMGMM+MBBB  ",
+    "BBBBM++++MBBBB  ",
+    "BBBBBBBBBBBBBB  ",
   ],
   {
-    K: black,
-    s: skin,
-    ".": black,
-    b: lightBeard,
-    B: monkBrown,
-    "+": goldDark,
-    T: gold,
+    H: GOLD_HI,
+    h: GOLD,
+    K: "#0a0a0a",
+    b: "#d8c890",   // light blonde-gray beard
+    S: SKIN_HI,
+    s: SKIN,
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    B: MONK_BROWN,
+    M: MONK_BROWN_LO,
+    G: GOLD,
+    "+": GOLD_LO,
   }
 );
 
-// ---- EUTYCHES the Monophysite ----
+/* ============================================================
+   EUTYCHES — ch.5 boss, archimandrite klobuk, white beard.
+   ============================================================ */
 export const spriteEutyches = makeSprite(
   [
-    "                ",
-    "    KKKKKK      ",
-    "   KKKKKKKK     ",
-    "   Kss<<ssK     ",
-    "   ss.ss.s      ",
-    "   sssssss      ",
-    "    s---s       ",
-    "   ----------   ",
-    "  ------------  ",
-    "  KK--------KK  ",
-    " KKKK------KKKK ",
-    " KKKK------KKKK ",
-    " KKKKKKKKKKKKKK ",
-    " KK          KK ",
-    "                ",
-    "                ",
-    "                ",
-    "                ",
+    "    KKKKKKKK    ",  // klobuk (monastic hood) base
+    "   KKKKKKKKKK   ",
+    "  KKKKKKKKKKKK  ",  // klobuk veil widens
+    "  KK........KK  ",  // veil shadow
+    "   KssssssK     ",
+    "   Kss.oo.sK    ",
+    "    sssssss     ",
+    "    s-----s     ",
+    "   --bbbbb--    ",  // long beard begins
+    "  ----bbb----   ",
+    " ------b------  ",
+    " ------b------  ",
+    " ------b------  ",
+    "KKKKKKKKKKKKKK  ",  // monastic mantle (black)
+    "KK..........KK  ",
+    "KK..........KK  ",
+    "KK..........KK  ",
+    "KKKKKKKKKKKKKK  ",
   ],
   {
-    K: black,
-    s: skin,
-    "<": "#444",
-    ".": black,
-    "-": lightBeard,
+    K: "#0a0a0a",
+    s: SKIN,
+    ".": "#1a1a1a",
+    "-": "#cfc09a",  // very long white beard (using - for fall-off shading)
+    b: BEARD_WHITE,
+    o: EYE_WHITE,
   }
 );
 
-// ---- ST. CYRIL OF ALEXANDRIA ----
+/* ============================================================
+   ST. CYRIL OF ALEXANDRIA — ch.5 ally, bishop, full mitre.
+   ============================================================ */
 export const spriteCyril = makeSprite(
   [
-    "                ",
-    "    GGGGGG      ",
-    "   GGggggG      ",
-    "   GTTTTTG      ",
-    "   GssssssG     ",
-    "   ss.ss.s      ",
-    "    sssss       ",
-    "   bbbbbbb      ",
-    "  bbbbbbbbb     ",
-    "  WWWWWWWWW     ",
-    " WW++RRR++WW    ",
-    " WWGGGRGGGWW    ",
-    " WW++RRR++WW    ",
-    " WWWWWWWWWWW    ",
-    " WW         WW  ",
-    "                ",
-    "                ",
-    "                ",
+    "      GgGG      ",  // mitre peak
+    "    GGGGGGGG    ",
+    "   GG++RR++GG   ",  // gold mitre with red gems
+    "   GGRRGGRRGG   ",
+    "   GGGG++GGGG   ",
+    "    bSSSSSSb    ",
+    "    bs.oo.sb    ",
+    "    bsssssbb    ",
+    "    bbbbbbbb    ",  // dark beard
+    "   bbbbbbbbbb   ",
+    "  WWWWWWWWWWWW  ",  // sakkos (white)
+    "  WW++RRRR++WW  ",  // crosses on chest
+    " WWW+RGGGGR+WWW ",
+    " WWWWRRRRRRWWWW ",  // central cross
+    " WWWWWWGGWWWWWW ",
+    " WWWW++GG++WWWW ",
+    " WWWW+ +GG+ +WW ",
+    " WWWWWWWWWWWWWW ",
   ],
   {
-    G: gold,
-    g: goldDark,
-    T: crimson,
-    s: skin,
-    ".": black,
-    b: "#9a7a40",  // brown beard
-    W: white,
-    R: crimson,
-    "+": gold,
+    G: GOLD,
+    g: GOLD_HI,
+    "+": CRIMSON,
+    R: CRIMSON_HI,
+    S: SKIN_HI,
+    s: SKIN,
+    b: "#3a2210",  // brown beard
+    ".": PUPIL,
+    o: EYE_WHITE,
+    W: WHITE,
   }
 );
 
-// ---- ICONOCLAST EMPEROR Constantine V ----
+/* ============================================================
+   ICONOCLAST EMPEROR Constantine V — ch.6 boss.
+   Crowned in stemma with prependoulia (hanging pearls).
+   ============================================================ */
 export const spriteIconoclast = makeSprite(
   [
-    "                ",
-    " GGGGGGGGGGGG   ",
-    " G+G+G+G+G+G    ",
-    "  GGGGGGGGGG    ",
-    "  GsssssssG     ",
-    "  ss.ss.ss      ",
-    "   sssssss      ",
-    "    sxxxs       ",
-    "   bbbbbbb      ",
-    "  PPPPPPPPP     ",
-    " PP+G+G+G+PP    ",
-    " PP+G+G+G+PP    ",
-    " PPPPPPPPPPP    ",
-    " PP       PP    ",
-    "                ",
-    "                ",
-    "                ",
-    "                ",
+    "    GGGGGGGG    ",  // crown top
+    "   GG++RR++GG   ",  // gem row
+    "  GGGGGGGGGGGG  ",
+    " gGGGGGGGGGGGg  ",  // crown sides
+    " W            W ",  // prependoulia
+    " W  ssssssss  W ",
+    " W  ss.oo.ss  W ",
+    " W  ssssssss  W ",
+    " W  s xxxx s  W ",  // mustache
+    "    s------s    ",
+    "    bbbbbbbb    ",  // beard
+    "   PPPPPPPPPP   ",  // imperial purple chlamys
+    "  PP+GGGGGG+PP  ",  // gold trim
+    " PP+GGRRRRGG+PP ",  // gold panel with red
+    " PP+GGGGGGGG+PP ",
+    " PPPPPPPPPPPPPP ",
+    " PP          PP ",
+    " PP          PP ",
   ],
   {
-    G: gold,
-    "+": crimson,
-    s: skin,
-    ".": black,
-    x: skinShadow, // mustache
-    b: black,
-    P: purple,     // imperial purple
+    G: GOLD,
+    g: GOLD_LO,
+    "+": CRIMSON,
+    R: CRIMSON_HI,
+    W: "#e0d4a0",   // pearl strings
+    s: SKIN,
+    "-": SKIN_LO,
+    x: SKIN_LO,     // mustache
+    b: BEARD_BLACK,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    P: PURPLE,
   }
 );
 
-// ---- ST. JOHN OF DAMASCUS (ally ch.6) ----
+/* ============================================================
+   ST. JOHN OF DAMASCUS — ch.6 ally, monk with icon in hand.
+   ============================================================ */
 export const spriteJohnDamascus = makeSprite(
   [
-    "                ",
-    "                ",
-    "    KKKKKK      ",
-    "   KKKKKKKK     ",
-    "   KKBBBBKK     ",
-    "    BBBBBB      ",
-    "    s.ss.s      ",
-    "    sssss       ",
-    "    sxsxs       ",
-    "   bbbbbbb      ",
-    "  bbbbbbbbb     ",
-    "BBBBBBBBBBBBB   ",
-    "BBBBBBBBBBBBB   ",
-    "BB GGGGGGG BB   ",
-    "BB GIIIIIG BB   ",  // icon
-    "BB GGGGGGG BB   ",
-    "BBBBBBBBBBBBB   ",
-    "                ",
+    "     HHHHHH     ",  // halo
+    "   HHHKKKKHHH   ",
+    "  HHKKKKKKKKHH  ",  // skufia under halo
+    "    KKKKKKKK    ",
+    "    KKbbbbKK    ",
+    "    SssssssS    ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s-----s     ",
+    "    bbbbbbb     ",  // dark beard
+    "   bbbbbbbbb    ",
+    "  BBBBBBBBBBB   ",  // black monk robe
+    " BB GGGGGGGG BB ",  // holds golden icon
+    " BB GIIIIIIG BB ",  // icon (skin tones in center = face of Christ hint)
+    " BB GIWWWWIG BB ",
+    " BB GIIIIIIG BB ",
+    " BB GGGGGGGG BB ",
+    " BBBBBBBBBBBBBB ",
   ],
   {
-    K: black,
-    s: skin,
-    ".": black,
-    x: skinShadow,
-    B: black,
-    b: "#3a2a1a", // dark beard
-    G: gold,
-    I: skin,
+    H: GOLD_HI,
+    K: "#0a0a0a",
+    b: "#2a1810",   // dark brown beard
+    S: SKIN_HI,
+    s: SKIN,
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    B: "#0a0a0a",
+    G: GOLD,
+    I: SKIN,        // icon flesh tones
+    W: WHITE,
   }
 );
 
-// ---- CARDINAL HUMBERT (boss ch.7) ----
+/* ============================================================
+   CARDINAL HUMBERT — ch.7 boss, red galero (cardinal's hat).
+   ============================================================ */
 export const spriteHumbert = makeSprite(
   [
-    "                ",
-    "    RRRRRR      ",
-    "   RRRRRRRR     ",
-    "   RRRRRRRR     ",
-    "    RsssR       ",
-    "    sssss       ",
-    "    s.ss.s      ",
-    "    sssss       ",
-    "    sssss       ",
-    "   RRRRRRR      ",
-    "  RRWWWWWRR     ",
-    " RRWWGGGWWRR    ",
-    " RRWWGCGWWRR    ",
-    " RRWWGGGWWRR    ",
-    " RRWWWWWWWRR    ",
-    " RRRRRRRRRRR    ",
-    "                ",
-    "                ",
+    "  RRRRRRRRRRRR  ",  // wide red galero
+    " RRRRRRRRRRRRRR ",
+    "  R++++++++++R  ",  // gold trim
+    "   RRRRRRRRRR   ",
+    "    RsssssR     ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s-----s     ",  // pursed mouth
+    "    sssssss     ",
+    "    s-----s     ",
+    "   RRRRRRRRRR   ",  // crimson cassock
+    "  RRRRRRRRRRR   ",
+    " RR++WWWW++RRR  ",  // pectoral cross
+    " RR+WWGGGGWWR   ",
+    " RRWWGGCCGGWWR  ",  // cross center
+    " RR+WWGGGGWW+R  ",
+    " RR++WWWW++RR   ",
+    " RRRRRRRRRRRR   ",
   ],
   {
-    R: crimson,
-    s: skin,
-    ".": black,
-    W: white,
-    G: gold,
-    C: crimson,
+    R: CRIMSON,
+    "+": GOLD,
+    s: SKIN,
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    W: WHITE,
+    G: GOLD,
+    C: CRIMSON_HI,
   }
 );
 
-// ---- ST. MARK OF EPHESUS (ally ch.8) ----
+/* ============================================================
+   ST. MARK OF EPHESUS — ch.7 ally / ch.8 protagonist saint.
+   Bishop's mitre, long thin beard from fasting.
+   ============================================================ */
 export const spriteMarkEphesus = makeSprite(
   [
-    "                ",
-    "  KKKKKKKKKK    ",
-    " KKGGGGGGGGKK   ",
-    " KKG+G+G+GKK    ",
-    " KKGGGGGGGKK    ",
-    "  KKssssssKK    ",
-    "   ss.ss.s      ",
-    "   sssssss      ",
-    "    sbsbs       ",
-    "   bbbbbbb      ",
-    "  bbbbbbbbb     ",
-    " BBBBBBBBBBB    ",
-    " BBGGGGGGGBB    ",
-    " BBG+++++GBB    ",
-    " BBGGGGGGGBB    ",
-    " BBBBBBBBBBB    ",
-    "                ",
-    "                ",
+    "      GGGG      ",
+    "    GGGGGGGG    ",
+    "   GG++GG++GG   ",
+    "   GGRRGGRRGG   ",
+    "    GGGGGGGG    ",
+    "    bSSSSSSb    ",  // gaunt face
+    "    bs.oo.sb    ",
+    "    bs----sb    ",  // hollow cheeks
+    "     bbbbbb     ",
+    "    bbbbbbbb    ",  // long thin beard
+    "    bbbbbbbb    ",
+    "    bbbbbbbb    ",
+    "  PPPPPPPPPPPP  ",  // purple mandyas
+    " PPPP+GGGG+PPPP ",
+    " PPPGGRRRRGGPPP ",
+    " PPPGRRCRRGPPPP ",  // central cross
+    " PPP+GRRRRG+PPP ",
+    " PPPPPPPPPPPPPP ",
   ],
   {
-    K: black,
-    G: gold,
-    "+": crimson,
-    s: skin,
-    ".": black,
-    b: white,
-    B: purple,
+    G: GOLD,
+    "+": CRIMSON,
+    R: CRIMSON,
+    S: SKIN_HI,
+    s: SKIN,
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    b: BEARD_WHITE,
+    P: PURPLE,
+    C: CRIMSON_HI,
   }
 );
 
-// ---- POPE EUGENE IV (boss ch.8) ----
+/* ============================================================
+   POPE EUGENE IV — ch.8 boss, papal tiara (triregnum).
+   ============================================================ */
 export const spritePopeEugene = makeSprite(
   [
-    "                ",
-    "    WWWWWW      ",
-    "   WWWWWWWW     ",
-    "  WWWGGGGWWWW   ",
-    "  WWWG++GWWWW   ",
-    "   WWGGGGWWW    ",
-    "    sssss       ",
-    "    s.ss.s      ",
-    "    sssss       ",
-    "    s---s       ",
-    "  WWWWWWWWW     ",
-    " WW+RRR+RRWW    ",
-    " WW+RRRRR+WW    ",
-    " WW+RRRRR+WW    ",
-    " WWWWWWWWWWW    ",
-    " WW       WW    ",
-    "                ",
-    "                ",
+    "      WWWW      ",
+    "     WW++WW     ",  // top tier
+    "    WWWGGWWW    ",
+    "   WW++GG++WW   ",  // middle tier
+    "  WWWW++++WWWW  ",
+    "  WW+GGGGGG+WW  ",  // bottom tier
+    "   WWssssssWW   ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s-----s     ",
+    "    sssssss     ",
+    "  WWWWWWWWWWWW  ",  // papal vestments (white)
+    " WWW+RRRRRR+WWW ",  // red orphreys
+    " WWW+RR++RR+WWW ",
+    " WWWWRRGGRRWWWW ",  // gold cross
+    " WWW+RR++RR+WWW ",
+    " WWW+RRRRRR+WWW ",
+    " WWWWWWWWWWWWWW ",
   ],
   {
-    W: white,
-    G: gold,
-    "+": crimson,
-    s: skin,
-    ".": black,
-    "-": lightBeard,
-    R: crimson,
+    W: WHITE,
+    "+": GOLD,
+    G: GOLD,
+    s: SKIN,
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    R: CRIMSON,
   }
 );
 
-// ---- NKVD INTERROGATOR (boss ch.9) ----
+/* ============================================================
+   NKVD INTERROGATOR — ch.9 boss, peaked cap with red star.
+   ============================================================ */
 export const spriteNKVD = makeSprite(
   [
     "                ",
-    "   KKKKKKKK     ",
-    "  KKRRRRRRKK    ",
-    "  KKK+++KKK     ",
-    "  KKKKKKKKK     ",
-    "   sssssss      ",
-    "   ss.ss.s      ",
-    "    sssss       ",
-    "    s---s       ",
-    "   KKKKKKK      ",
-    "  KKKKKKKKK     ",
-    " KK BBBBB KK    ",
-    " KK BSSSB KK    ",
-    " KK BBBBB KK    ",
-    " KKKKKKKKKKK    ",
-    " KK       KK    ",
-    "                ",
-    "                ",
+    "  KKKKKKKKKKKK  ",  // peaked cap
+    " KKKKKK++KKKKK  ",  // brim
+    "  KKK+RRRR+KKK  ",  // red star
+    "  KKKKKKKKKK    ",
+    "  KKssssssKK    ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s xxx s     ",  // mustache
+    "    s-----s     ",
+    "    sssssss     ",
+    "   KKKKKKKKKK   ",  // gray uniform tunic
+    "  KKBBBBBBBBKK  ",  // collar bars
+    " KKKsssssssKKK  ",  // skin showing throat
+    " KK+RR+RR+RR+KK ",  // medal ribbons
+    " KKRRRRRRRRRRKK ",  // medal bars
+    " KKKKKKKKKKKKKK ",
+    " KK          KK ",
   ],
   {
-    K: "#3a3a3a",  // gray uniform
-    R: "#5e1418",  // red star band
+    K: "#2a2a2a",   // gray uniform
     "+": "#c9a227",
-    s: skin,
-    ".": black,
-    "-": skinShadow,
-    B: "#5e1418",  // blood-red badge
-    S: gold,
+    R: "#5e1418",   // red star / blood-red
+    s: SKIN,
+    "-": SKIN_LO,
+    x: SKIN_LO,     // mustache
+    ".": PUPIL,
+    o: EYE_WHITE,
+    B: "#7a1a1a",   // shoulder bar
   }
 );
 
-// ---- LDS MISSIONARY (boss ch.10a) ----
+/* ============================================================
+   LDS MISSIONARY — ch.10a boss, neat hair, white shirt, tie.
+   ============================================================ */
 export const spriteLDS = makeSprite(
   [
     "                ",
-    "   LLLLLLLL     ",
-    "  LLLLLLLLLL    ",
-    "  LLLLLLLLLL    ",
-    "  LssssssL      ",
-    "  ss.ss.ss      ",
-    "   sssssss      ",
-    "    sssss       ",
-    "   bWWWWWb      ",
-    "  bbWWWWWbb     ",
-    " bbbWBBBWbbb    ",   // tie
-    " bWWWBBBWWWb    ",
-    " bWWWWWWWWWb    ",
-    " bWWWWWWWWWb    ",
-    " bWWWWWWWWWb    ",
-    " bbbbbbbbbbb    ",
-    "                ",
-    "                ",
+    "   LLLLLLLLLL   ",  // tidy hair (side part)
+    "  LLLLLLLLLLLL  ",
+    "  LLLssssLLLL   ",
+    "   LssssssL     ",  // side part visible
+    "    sssssss     ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    sssssss     ",
+    "    s-----s     ",  // smile lines
+    "   sssssssss    ",
+    "  WWWWWWWWWWW   ",  // white shirt
+    " WWWW BBBB WWWW ",  // tie + collar
+    " WWWWBBBBBBWWWW ",  // tie body
+    " WWWWBBBBBBWWWW ",
+    " WWWWBBBBBBWWWW ",
+    " WWWWWWWWWWWWW  ",
+    " WW           W ",
   ],
   {
     L: "#7a4f1d",   // brown hair
-    s: skin,
-    ".": black,
-    b: black,
-    W: white,       // white shirt
-    B: "#1a2c4e",   // tie
+    s: SKIN,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    "-": SKIN_LO,
+    W: WHITE,
+    B: "#1a2c4e",   // navy tie
   }
 );
 
-// ---- REFORMED SEMINARIAN (boss ch.10b) ----
+/* ============================================================
+   REFORMED SEMINARIAN — ch.10b boss, glasses, ginger beard.
+   ============================================================ */
 export const spriteReformed = makeSprite(
   [
     "                ",
-    "   LLLLLLLL     ",
-    "  LLLLLLLLLL    ",
-    "   LLLLLLLL     ",
-    "   LssssssL     ",
-    "   ss.ss.s      ",
-    "    sssss       ",
-    "    s---s       ",
-    "    s---s       ",
-    "  KKKKKKKKK     ",
-    " KK       KK    ",
-    " KK BBBBB KK    ",
-    " KK BBBBB KK    ",
-    " KK BBBBB KK    ",
-    " KK BBBBB KK    ",
-    " KKKKKKKKKKK    ",
-    "                ",
-    "                ",
+    "   LLLLLLLLLL   ",  // sandy hair
+    "  LLLLLLLLLLLL  ",
+    "  LLLssssssLL   ",
+    "   ssssssssss   ",
+    "    gg.oo.gg    ",  // glasses frames around eyes
+    "    sssssss     ",
+    "    s-----s     ",
+    "   bbbbbbbbb    ",  // ginger beard
+    "  bbbbbbbbbbb   ",
+    "  KKKKKKKKKKK   ",  // dark sweater
+    "  KKKKKKKKKKK   ",
+    "  KK BBBBBB KK  ",  // book in hand (Calvin?)
+    "  KK BWWWWB KK  ",
+    "  KK BWBBWB KK  ",
+    "  KK BBBBBB KK  ",
+    "  KKKKKKKKKKK   ",
+    "  KKKKKKKKKKK   ",
   ],
   {
-    L: "#dca873",  // sandy hair
-    s: skin,
-    ".": black,
-    "-": "#6b4a1f", // beard
-    K: black,      // black sweater
-    B: "#4a3a1a",  // book under arm
+    L: "#dca873",   // sandy/ginger hair
+    s: SKIN,
+    g: "#2a2a2a",   // glasses frames
+    ".": PUPIL,
+    o: EYE_WHITE,
+    "-": SKIN_LO,
+    b: "#a85a20",   // ginger beard
+    K: "#1a1a1a",   // dark sweater
+    B: "#3a2818",   // book leather
+    W: WHITE_LO,
   }
 );
 
-// ---- ATHEIST INTERLOCUTOR (boss ch.10c) ----
+/* ============================================================
+   ATHEIST INTERLOCUTOR — ch.10c boss, glasses, dark hoodie.
+   ============================================================ */
 export const spriteAtheist = makeSprite(
   [
     "                ",
-    "    LLLLLL      ",
-    "   LLLLLLLL     ",
-    "   LssssssL     ",
-    "   ss.ss.s      ",
-    "   sssssss      ",
-    "    sssss       ",
-    "    sssss       ",
-    "    s---s       ",
-    "  GGGGGGGGG     ",
-    " GG TTTTT GG    ",
-    " GG TttttT GG   ",
-    " GG TTTTT GG    ",
-    " GGGGGGGGGGG    ",
-    "                ",
-    "                ",
-    "                ",
+    "    LLLLLLLL    ",  // short black hair
+    "   LLLLLLLLLL   ",
+    "   LLssssssLL   ",
+    "    sssssss     ",
+    "    gg.oo.gg    ",  // glasses
+    "    sssssss     ",
+    "    sssssss     ",
+    "    s-----s     ",  // neutral mouth
+    "    sssssss     ",
+    "   sssssssss    ",
+    "  GGGGGGGGGGG   ",  // dark gray hoodie
+    " GGGGGGGGGGGGG  ",
+    " GG ccccccc GG  ",  // shirt under hoodie
+    " GG ccccccc GG  ",
+    " GGGGGGGGGGGGG  ",
+    " GGGGGGGGGGGGG  ",
     "                ",
   ],
   {
-    L: "#222",     // black hair
-    s: skin,
-    ".": black,
-    "-": skinShadow,
-    G: "#2a2a3a",  // dark gray hoodie
-    T: "#666",     // glasses frame
-    t: skin,
+    L: "#181818",
+    s: SKIN,
+    g: "#181818",   // black-rimmed glasses
+    ".": PUPIL,
+    o: EYE_WHITE,
+    "-": SKIN_LO,
+    G: "#2a2a3a",
+    c: "#1a1a26",   // shirt under hoodie
   }
 );
 
-// ---- THE DOUBT (final boss — translucent shadow of the player) ----
+/* ============================================================
+   THE DOUBT — ch.11 final boss, shadow with player's face.
+   ============================================================ */
 export const spriteDoubt = makeSprite(
   [
-    "                ",
-    "    KKKKKK      ",
-    "   KKKKKKKK     ",
-    "   K......K     ",
-    "   K.RR.RR.     ",
-    "   K......K     ",
-    "    K....K      ",
-    "    KK..KK      ",
-    "  KKKKKKKKK     ",
-    " KKKKKKKKKKK    ",
-    " KKKKKKKKKKK    ",
-    " KKKKKKKKKKK    ",
-    " KK       KK    ",
-    " KK       KK    ",
-    " KK       KK    ",
-    " KK       KK    ",
-    "                ",
-    "                ",
+    "     KKKKKK     ",  // shadow head outline
+    "    KKKKKKKK    ",
+    "   KKKKKKKKKK   ",
+    "   KK......KK   ",  // featureless interior
+    "   K.RR..RR.K   ",  // red eyes (your eyes)
+    "   K.RR..RR.K   ",
+    "   K........K   ",
+    "    K......K    ",  // grim line for mouth
+    "    KK....KK    ",
+    "    KK....KK    ",
+    "   KKKKKKKKKK   ",
+    "  KKKKKKKKKKKK  ",  // dissolving body
+    " KKKKKKKKKKKKKK ",
+    " KKKKKKKKKKKKKK ",
+    " KKKKK....KKKKK ",  // void in chest
+    " KKKK......KKKK ",
+    " KKK........KKK ",
+    " KK..........KK ",
   ],
   {
-    K: "#1a1024",
-    ".": "#0a0610",
-    R: "#7c1414",
+    K: "#1a0824",
+    ".": "#0a040e",
+    R: "#a02828",   // hostile red glow
   }
 );
 
-// ---- ST. CATHERINE OF ALEXANDRIA (selectable patron) ----
+/* ============================================================
+   ST. CATHERINE OF ALEXANDRIA — patron, with wheel + book.
+   ============================================================ */
 export const spriteCatherine = makeSprite(
   [
-    "                ",
-    "    HHHHHHH     ",
-    "   HHHHHHHHH    ",
-    "  HhhhhhhhhhH   ",
-    "  HhhhsssshhH   ",
-    "   hsss.s.sh    ",
+    "    HHHHHHHH    ",  // halo
+    "  HHhhhhhhhhHH  ",
+    "  HhhhhhhhhhhH  ",  // dark hair flow
+    "  HhhhssssshhH  ",
+    "   hsssssssh    ",
+    "   sss.oo.ss    ",
     "    sssssss     ",
-    "    ssms ms     ",
-    "   bbbbbbb      ",
-    "  PPPPPPPPP     ",
-    " PPP GGGGG PP   ",
-    " PPP GWWWG PP   ",
-    " PPP GGGGG PP   ",
-    " PPPPPPPPPPP    ",
-    "                ",
-    "                ",
-    "                ",
-    "                ",
+    "    s-----s     ",
+    "    s mmm s     ",  // soft lips
+    "   sssssssss    ",
+    "  PPPPPPPPPPP   ",  // royal purple
+    " PP+GGGGGGGG+PP ",
+    " PPGWWWWWWWWGPP ",  // book in hand (white pages)
+    " PPGW++WW++WGPP ",  // gold trim on book
+    " PPGWWWWWWWWGPP ",
+    " PPGWWGGGGWWGPP ",  // book detail
+    " PP+GGGGGGGG+PP ",
+    " PPPPPPPPPPPPPP ",
   ],
   {
-    H: gold,         // halo
-    h: "#5d3018",    // dark hair
-    s: skin,
-    ".": black,
-    m: crimson,      // lips
-    b: skin,
-    P: purple,
-    G: gold,
-    W: white,
+    H: GOLD_HI,
+    h: "#3a1a0a",   // dark hair
+    s: SKIN,
+    "-": SKIN_LO,
+    m: CRIMSON,     // lips
+    ".": PUPIL,
+    o: EYE_WHITE,
+    P: PURPLE,
+    "+": GOLD,
+    G: GOLD,
+    W: WHITE,
   }
 );
 
-// ---- ST. GEORGE THE TROPHY-BEARER (selectable patron) ----
+/* ============================================================
+   ST. GEORGE THE TROPHY-BEARER — patron, knight in armor.
+   ============================================================ */
 export const spriteGeorge = makeSprite(
   [
-    "                ",
-    "    HHHHHHH     ",
-    "  HhhhhhhhhH    ",
-    "   hhhhhhhh     ",
-    "   hssssssh     ",
-    "   ss.ss.s      ",
-    "    sssss       ",
-    "    s---s       ",
-    "    sssss       ",
-    "  CCCCCCCCC     ",
-    " CCRR+++RRCC    ",
-    " CCRGGGGGRCC    ",
-    " CCRR+++RRCC    ",
-    " CCCCCCCCCCC    ",
-    "                ",
-    "                ",
-    "                ",
-    "                ",
+    "    HHHHHHHH    ",  // halo
+    "  HHhhhhhhhhHH  ",
+    "  HhhhhhhhhhhH  ",
+    "   LLLLLLLLLL   ",  // chestnut hair
+    "   LLssssssLL   ",
+    "    sssssss     ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s-----s     ",
+    "    sssssss     ",
+    "  CCCCCCCCCCC   ",  // mail collar
+    " CC+RRRRRRRR+CC ",  // surcoat
+    " CCRR+WWWW+RRCC ",  // white cross on red surcoat
+    " CCR+WWGGWW+RCC ",
+    " CCR+WGGGGGW+RC ",
+    " CCRR+WWWW+RRCC ",
+    " CC+RRRRRRRR+CC ",
+    " CCCCCCCCCCCCC  ",
   ],
   {
-    H: goldHalo,
-    h: "#6a3a1a",
-    s: skin,
-    ".": black,
-    "-": skinShadow,
-    C: "#9a9a9a",   // armor
-    R: crimson,     // surcoat
-    "+": white,
-    G: gold,
+    H: GOLD_HI,
+    h: "#5a2a10",
+    L: "#5a2a10",
+    s: SKIN,
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    C: "#8a8a8a",   // mail armor
+    R: CRIMSON,
+    W: WHITE,
+    "+": GOLD,
+    G: GOLD,
   }
 );
 
-// ---- ST. MARY OF EGYPT (selectable patron) ----
+/* ============================================================
+   ST. MARY OF EGYPT — patron, ascetic, sun-darkened skin.
+   ============================================================ */
 export const spriteMaryEgypt = makeSprite(
   [
-    "                ",
-    "    HHHHHHH     ",
-    "   HhhhhhhH     ",
-    "   hhhhhhhh     ",
-    "   hssssssh     ",
-    "   ss.ss.s      ",
-    "    sssss       ",
-    "    sssss       ",
-    "    sssss       ",
-    "  BBBBBBBBB     ",
-    " BBBBBBBBBBB    ",
-    " BB+++++++BB    ",
-    " BB+++++++BB    ",
-    " BBBBBBBBBBB    ",
-    "                ",
-    "                ",
-    "                ",
-    "                ",
+    "    HHHHHHHH    ",  // halo
+    "  HHhhhhhhhhHH  ",
+    "  HhhhhhhhhhhH  ",
+    "   hhhhhhhhhh   ",  // long unkempt hair
+    "   hhsssssshh   ",
+    "    sssssss     ",
+    "    s.oo.os     ",
+    "    sssssss     ",
+    "    s-----s     ",  // hollow cheeks
+    "    sssssss     ",
+    "   sssssssss    ",
+    "  BBBBBBBBBBB   ",  // simple monk robe (brown)
+    " BB+++++++++BB  ",  // gold trim of mantle
+    " BBM+MMMMM+MBB  ",
+    " BB+MMMGMMM+BB  ",  // small gold cross
+    " BBMMMMGMMMMBBB ",
+    " BB+++++++++BB  ",
+    " BBBBBBBBBBBBB  ",
   ],
   {
-    H: goldHalo,
-    h: "#4a2410", // dark hair
-    s: "#c8a883", // sun-darkened skin
-    ".": black,
-    B: monkBrown,
-    "+": goldDark,
+    H: GOLD_HI,
+    h: "#3a1a08",   // very dark hair
+    s: "#c8a07a",   // sun-darkened skin
+    "-": "#8a5a30",
+    ".": PUPIL,
+    o: EYE_WHITE,
+    B: MONK_BROWN,
+    M: MONK_BROWN_LO,
+    G: GOLD,
+    "+": GOLD_LO,
   }
 );
 
-// ---- ST. SERAPHIM OF SAROV (selectable patron) ----
+/* ============================================================
+   ST. SERAPHIM OF SAROV — patron, monk with white beard glow.
+   ============================================================ */
 export const spriteSeraphim = makeSprite(
   [
-    "                ",
-    "    HHHHHHH     ",
-    "  HhKKKKKKKhH   ",
-    "  HKKKKKKKKKH   ",
-    "  HKKbbbbbKKH   ",
-    "    bbbbbbb     ",
-    "    s.ss.s      ",
-    "    sssss       ",
-    "   bbbbbbb      ",
-    "  bbbbbbbbb     ",
-    " bbbbbbbbbbb    ",
-    "BBBBBBBBBBBBB   ",
-    "BBBBBBBBBBBBB   ",
-    "BBBB+TTT+BBBB   ",
-    "BBB+TTTTT+BBB   ",
-    "BBBBBBBBBBBBB   ",
-    "                ",
-    "                ",
+    "    HHHHHHHH    ",  // halo
+    "  HHHHHHHHHHHH  ",  // brighter halo (uncreated light)
+    "  HHKKKKKKKKHH  ",  // skufia under halo
+    "  HKKKKKKKKKKH  ",
+    "  HKKbbbbbbKKH  ",
+    "   HSssssssSH   ",  // skin highlighted (light-bearing)
+    "    Ss.oo.sS    ",
+    "    sssssss     ",
+    "    s-----s     ",
+    "   bbbbbbbbb    ",
+    "  bbbbbbbbbbb   ",
+    " bbbbbbbbbbbbb  ",
+    "BBBBBBBBBBBBBB  ",  // monk robe
+    "BBBM+MMM+MBBBB  ",
+    "BBM+MMGMM+MBBB  ",
+    "BBBM+MGMM+MBBBB ",
+    "BBBBM++++MBBBB  ",
+    "BBBBBBBBBBBBBB  ",
   ],
   {
-    H: goldHalo,
-    K: black,
-    s: "#f0d9b5",  // bright skin (light-bearing)
-    ".": black,
-    b: white,
-    B: monkBrown,
-    "+": goldDark,
-    T: gold,
+    H: "#fff0a0",   // bright halo glow
+    K: "#0a0a0a",
+    b: "#f5e9c9",
+    S: "#fff0d4",   // bright skin highlight (Seraphim's light)
+    s: "#f3d4ad",
+    "-": SKIN_LO,
+    ".": PUPIL,
+    o: EYE_WHITE,
+    B: MONK_BROWN,
+    M: MONK_BROWN_LO,
+    G: GOLD,
+    "+": GOLD_LO,
   }
 );
-
-// ---- BACKGROUND TILES (full-bleed mini-bg patterns) ----
-// We don't render full pixel backgrounds; we use CSS gradients per chapter id.
 
 export const ALL_SPRITES: Record<string, Sprite> = {
   "st-anthony": spriteAnthony,

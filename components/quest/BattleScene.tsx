@@ -410,10 +410,10 @@ export default function BattleScene({
               Witness Strike ready ✦
             </div>
           )}
-          <div className="flex justify-center mt-3 mb-1">
+          <div className="flex justify-center mt-3 mb-3">
             {bossSprite && (
               <div
-                className={`pixel-shadow-lg ${
+                className={`pixel-shadow-lg pixel-platform pixel-menace-glow ${
                   phase === "victory" ? "opacity-30 grayscale" : ""
                 }`}
               >
@@ -449,7 +449,7 @@ export default function BattleScene({
               />
             </div>
           </div>
-          <div className="pixel-shadow-lg">
+          <div className="pixel-shadow-lg pixel-platform pixel-halo-glow">
             <PixelSprite
               sprite={playerSpriteData}
               scale={6}

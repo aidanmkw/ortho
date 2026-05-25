@@ -49,7 +49,89 @@
 }
 
 .pixel-shadow-lg {
-  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.6));
+  filter:
+    drop-shadow(0 0 6px rgba(255, 200, 80, 0.12))
+    drop-shadow(0 6px 0 rgba(0, 0, 0, 0.65));
+}
+
+/* Sprite "platform" — soft elliptical ground shadow under the sprite. */
+.pixel-platform {
+  position: relative;
+}
+.pixel-platform::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.2) 60%,
+    transparent 100%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Halo / divine glow — gentle pulsing aura behind saints. */
+.pixel-halo-glow {
+  position: relative;
+}
+.pixel-halo-glow::before {
+  content: "";
+  position: absolute;
+  inset: -10% -10% 30% -10%;
+  background: radial-gradient(
+    circle at 50% 35%,
+    rgba(240, 211, 88, 0.28) 0%,
+    rgba(240, 211, 88, 0.08) 35%,
+    transparent 70%
+  );
+  z-index: -1;
+  animation: pixel-halo 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes pixel-halo {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+/* Boss menace — slow throbbing red aura. */
+.pixel-menace-glow {
+  position: relative;
+}
+.pixel-menace-glow::before {
+  content: "";
+  position: absolute;
+  inset: -8% -8% 25% -8%;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(160, 30, 30, 0.30) 0%,
+    rgba(160, 30, 30, 0.08) 40%,
+    transparent 75%
+  );
+  z-index: -1;
+  animation: pixel-menace 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes pixel-menace {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(1.08); }
+}
+
+/* Subtle ambient flicker (torchlight / candle) on background. */
+.pixel-flicker {
+  animation: pixel-flicker 4.8s ease-in-out infinite;
+}
+@keyframes pixel-flicker {
+  0%, 100% { filter: brightness(1); }
+  25% { filter: brightness(1.05); }
+  45% { filter: brightness(0.95); }
+  72% { filter: brightness(1.08); }
 }
 
 :root {
