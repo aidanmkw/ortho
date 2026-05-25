@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import * as React from "react";
 import { useMemo } from "react";
 import { useProgress } from "./ProgressProvider";
 import { nextRankInfo } from "@/lib/progress";
@@ -89,7 +90,7 @@ export default function HubScene() {
     },
     // Lower-left: icon + vigil lamp → Review (learn from mistakes / penance)
     {
-      href: stats.dueReview > 0 ? "/review" : "#stages",
+      href: stats.dueReview > 0 ? "/review" : "/stages",
       label:
         stats.dueReview > 0 ? `Review · ${stats.dueReview} due` : "Nothing to review",
       sublabel:
@@ -105,7 +106,7 @@ export default function HubScene() {
     },
     // Lower-right: open codex on desk → Curriculum / Stages
     {
-      href: "#stages",
+      href: "/stages",
       label: "Curriculum",
       sublabel: "14 stages · drill any topic",
       x: 60,
@@ -128,44 +129,12 @@ export default function HubScene() {
   ];
 
   return (
-    <div className="mb-10">
-      {/* First-time user tutorial banner */}
-      {isNew && (
-        <div className="parchment-card p-4 mb-4 border-2 border-gold/60 bg-gradient-to-br from-[#1a1408] to-[#0c0a08]">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-gold/90 mb-1.5">
-            Welcome, Inquirer
-          </div>
-          <p className="text-parchment text-sm sm:text-base leading-relaxed">
-            You are standing in your study. Tap any object in the room to
-            begin:
-          </p>
-          <ul className="mt-2 text-xs sm:text-sm text-parchment/80 space-y-1">
-            <li>
-              <span className="text-gold">⚔</span> The <strong>sword & shield</strong> open the
-              Quest — a pixel JRPG through Church history.
-            </li>
-            <li>
-              <span className="text-gold">📜</span> The <strong>scroll</strong> is your Daily
-              Trial — 10 questions, about 5 minutes. <em>Start here.</em>
-            </li>
-            <li>
-              <span className="text-gold">🕯️</span> The <strong>icon corner</strong> is for
-              Review — items you got wrong come back here.
-            </li>
-            <li>
-              <span className="text-gold">📖</span> The <strong>open codex</strong> opens the
-              full Curriculum — 14 stages of training.
-            </li>
-            <li>
-              <span className="text-gold">🚪</span> The <strong>doorway</strong> leads to the
-              Library — lives of the saints.
-            </li>
-          </ul>
-        </div>
-      )}
-
-      {/* Status HUD */}
-      <div className="parchment-card p-3 mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+    // Escape the layout's padding and max-width so the scene goes edge to edge.
+    // The site header is ~72px tall (mobile) / ~90px tall (>= sm); the hub
+    // fills everything beneath it. Negative margins offset main's px/py.
+    <div className="-mx-4 sm:-mx-6 -my-6 sm:-my-10 -mb-24 sm:-mb-10 bg-[#0c0a08] min-h-[calc(100dvh-68px)] sm:min-h-[calc(100dvh-86px)] flex flex-col relative overflow-hidden">
+      {/* Status HUD pinned to top */}
+      <div className="relative z-20 px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 bg-gradient-to-b from-black/85 to-transparent">
         <div className="flex items-baseline gap-3 flex-wrap">
           <span className="text-[10px] uppercase tracking-[0.3em] text-gold/80">
             Rank
@@ -194,21 +163,77 @@ export default function HubScene() {
         )}
       </div>
 
-      {/* Scene with positioned hotspots */}
-      <div className="relative w-full rounded-lg overflow-hidden border-2 border-gold/40 shadow-xl shadow-black/60 bg-[#0c0a08]">
-        <img
-          src={`${BASE}/hub/study.webp`}
-          alt="Your study — tap an object to begin"
-          className="w-full h-auto block select-none"
-          draggable={false}
-        />
-        {hotspots.map((h) => (
-          <Hotspot key={h.label} {...h} />
-        ))}
+      {/* Painting centered in remaining space */}
+      <div className="relative z-10 flex-1 flex items-center justify-center px-1 sm:px-2 py-1">
+        <div className="relative w-full max-w-5xl">
+          <img
+            src={`${BASE}/hub/study.webp`}
+            alt="Your study — tap an object to begin"
+            className="w-full h-auto block select-none rounded shadow-2xl shadow-black/80"
+            draggable={false}
+          />
+          {hotspots.map((h) => (
+            <Hotspot key={h.label} {...h} />
+          ))}
+        </div>
       </div>
-      <p className="text-center text-parchment/50 text-[11px] sm:text-xs mt-2 italic">
-        Tap an object in the room to begin.
-      </p>
+
+      {/* Caption pinned to bottom */}
+      <div className="relative z-20 px-4 pb-3 pt-2 text-center bg-gradient-to-t from-black/85 to-transparent">
+        <p className="text-parchment/60 text-[11px] sm:text-xs italic">
+          Tap an object in the room to begin.
+        </p>
+      </div>
+
+      {/* First-time tutorial overlay — dismissible scrim with the legend */}
+      {isNew && <FirstTimeOverlay />}
+    </div>
+  );
+}
+
+function FirstTimeOverlay() {
+  const [dismissed, setDismissed] = React.useState(false);
+  if (dismissed) return null;
+  return (
+    <div
+      className="absolute inset-0 z-30 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={() => setDismissed(true)}
+      role="button"
+      aria-label="Dismiss tutorial"
+    >
+      <div className="parchment-card p-5 max-w-md border-2 border-gold/60 bg-gradient-to-br from-[#1a1408] to-[#0c0a08]">
+        <div className="text-[10px] uppercase tracking-[0.3em] text-gold/90 mb-2">
+          Welcome, Inquirer
+        </div>
+        <p className="text-parchment text-sm sm:text-base leading-relaxed mb-3">
+          You are standing in your study. Tap any object in the room to begin:
+        </p>
+        <ul className="text-xs sm:text-sm text-parchment/85 space-y-1.5">
+          <li>
+            <span className="text-gold">⚔</span> The <strong>sword &amp; shield</strong> open the
+            Quest — a story-driven journey through Church history.
+          </li>
+          <li>
+            <span className="text-gold">📜</span> The <strong>scroll</strong> is your Daily Trial —
+            10 questions, ~5 minutes. <em>Start here.</em>
+          </li>
+          <li>
+            <span className="text-gold">🕯️</span> The <strong>icon corner</strong> is for Review —
+            items you got wrong come back here.
+          </li>
+          <li>
+            <span className="text-gold">📖</span> The <strong>open codex</strong> opens the full
+            Curriculum — 14 stages of training.
+          </li>
+          <li>
+            <span className="text-gold">🚪</span> The <strong>doorway</strong> leads to the Library
+            — lives of the saints.
+          </li>
+        </ul>
+        <div className="mt-4 text-center text-[10px] uppercase tracking-[0.3em] text-gold/70">
+          Tap anywhere to enter
+        </div>
+      </div>
     </div>
   );
 }
