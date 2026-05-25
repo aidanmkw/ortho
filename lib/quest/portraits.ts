@@ -86,6 +86,7 @@ export type PortraitConfig = {
 
 export const PORTRAITS: Record<string, PortraitConfig> = {
   "st-anthony": {
+    image: "st-anthony.webp",
     skin: "pale",
     hairStyle: "short",
     hairColor: "white",
@@ -98,6 +99,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "ho Megas",
   },
   "st-ignatius": {
+    image: "st-ignatius.webp",
     skin: "pale",
     hairStyle: "short",
     hairColor: "gray",
@@ -110,6 +112,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "of Antioch",
   },
   "st-athanasius": {
+    image: "st-athanasius.webp",
     skin: "light",
     hairStyle: "short",
     hairColor: "black",
@@ -122,6 +125,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "the Great",
   },
   "st-macarius": {
+    image: "st-macarius.webp",
     skin: "tan",
     hairStyle: "short",
     hairColor: "white",
@@ -134,6 +138,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "of Egypt",
   },
   "st-cyril": {
+    image: "st-cyril.webp",
     skin: "light",
     hairStyle: "short",
     hairColor: "brown",
@@ -146,6 +151,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "of Alexandria",
   },
   "st-john-damascus": {
+    image: "st-john-damascus.webp",
     skin: "tan",
     hairStyle: "short",
     hairColor: "black",
@@ -158,6 +164,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "of Damascus",
   },
   "st-mark-ephesus": {
+    image: "st-mark-ephesus.webp",
     skin: "pale",
     hairStyle: "short",
     hairColor: "white",
@@ -170,6 +177,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "of Ephesus",
   },
   "st-catherine": {
+    image: "st-catherine.webp",
     skin: "pale",
     hairStyle: "long",
     hairColor: "black",
@@ -181,6 +189,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "of Alexandria",
   },
   "st-george": {
+    image: "st-george.webp",
     skin: "light",
     hairStyle: "short",
     hairColor: "brown",
@@ -193,6 +202,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "the Trophy-bearer",
   },
   "st-mary-egypt": {
+    image: "st-mary-egypt.webp",
     skin: "tan",
     hairStyle: "long",
     hairColor: "black",
@@ -204,6 +214,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "of Egypt",
   },
   "st-seraphim": {
+    image: "st-seraphim.webp",
     skin: "pale",
     hairStyle: "short",
     hairColor: "white",
@@ -218,6 +229,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
 
   // ---- BOSSES (no halos, often menacing) ----
   centurion: {
+    image: "centurion.webp",
     skin: "light",
     hairStyle: "short",
     hairColor: "black",
@@ -229,6 +241,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Centurion of Rome",
   },
   marcus: {
+    image: "marcus.webp",
     skin: "light",
     hairStyle: "short",
     hairColor: "black",
@@ -241,6 +254,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Pagan Patrician",
   },
   arius: {
+    image: "arius.webp",
     skin: "pale",
     hairStyle: "short",
     hairColor: "black",
@@ -253,6 +267,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Heresiarch",
   },
   tempter: {
+    image: "tempter.webp",
     skin: "shadow",
     hairStyle: "bald",
     hairColor: "none",
@@ -264,6 +279,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Father of Lies",
   },
   eutyches: {
+    image: "eutyches.webp",
     skin: "pale",
     hairStyle: "tonsure",
     hairColor: "white",
@@ -276,6 +292,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Archimandrite",
   },
   iconoclast: {
+    image: "iconoclast.webp",
     skin: "light",
     hairStyle: "short",
     hairColor: "black",
@@ -288,6 +305,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Iconoclast Emperor",
   },
   humbert: {
+    image: "humbert.webp",
     skin: "pale",
     hairStyle: "tonsure",
     hairColor: "gray",
@@ -299,6 +317,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Cardinal of Silva Candida",
   },
   "pope-eugene": {
+    image: "pope-eugene.webp",
     skin: "pale",
     hairStyle: "tonsure",
     hairColor: "white",
@@ -311,6 +330,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Pontifex Maximus",
   },
   nkvd: {
+    image: "nkvd.webp",
     skin: "light",
     hairStyle: "short",
     hairColor: "brown",
@@ -322,6 +342,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "NKVD",
   },
   lds: {
+    image: "lds.webp",
     skin: "light",
     hairStyle: "modern",
     hairColor: "brown",
@@ -333,6 +354,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "LDS Missionary",
   },
   reformed: {
+    image: "reformed.webp",
     skin: "pale",
     hairStyle: "modern",
     hairColor: "ginger",
@@ -346,6 +368,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Reformed Seminarian",
   },
   atheist: {
+    image: "atheist.webp",
     skin: "tan",
     hairStyle: "modern",
     hairColor: "black",
@@ -357,6 +380,7 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     nameSubscript: "Skeptical Friend",
   },
   doubt: {
+    image: "doubt.webp",
     skin: "shadow",
     hairStyle: "bald",
     hairColor: "none",
