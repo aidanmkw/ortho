@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { PixelFrame, PixelButton, Typewriter } from "./PixelUI";
 import PixelSprite from "./PixelSprite";
+import Portrait from "./Portrait";
 import { spriteAnthony } from "@/lib/quest/sprites";
+import { PORTRAITS } from "@/lib/quest/portraits";
 import ShareButton from "./ShareButton";
 
 export default function TitleScreen({
@@ -68,7 +70,7 @@ export default function TitleScreen({
         </div>
 
         <div className="mb-6 pixel-shadow-lg pixel-platform pixel-halo-glow">
-          <PixelSprite sprite={spriteAnthony} scale={10} idle />
+          <Portrait config={PORTRAITS["st-anthony"]} size={220} idle />
         </div>
 
         <PixelFrame className="p-4 w-full mb-4">

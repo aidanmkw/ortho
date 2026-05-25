@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { PixelFrame, PixelButton } from "./PixelUI";
 import PixelSprite from "./PixelSprite";
+import Portrait from "./Portrait";
 import { playerSprite } from "@/lib/quest/sprites";
 import { PATRONS } from "@/lib/quest/patrons";
+import { PORTRAITS, playerPortraitConfig } from "@/lib/quest/portraits";
 
 const HAIR_COLORS = [
   { id: "#7a4f1d", name: "Brown" },
@@ -63,7 +65,12 @@ export default function CharacterCreate({
 
         <div className="flex justify-center mb-5">
           <div className="pixel-shadow-lg pixel-platform">
-            <PixelSprite sprite={playerSprite(hair)} scale={10} idle />
+            <Portrait
+              config={playerPortraitConfig(hair)}
+              size={220}
+              idle
+              hairColorHex={hair}
+            />
           </div>
         </div>
 
@@ -134,7 +141,15 @@ export default function CharacterCreate({
               </PixelButton>
               <div className="flex flex-col items-center">
                 <div className="pixel-shadow-lg pixel-platform pixel-halo-glow mb-3">
-                  <PixelSprite sprite={patron.sprite} scale={7} idle />
+                  {PORTRAITS[patron.id] ? (
+                    <Portrait
+                      config={PORTRAITS[patron.id]}
+                      size={180}
+                      idle
+                    />
+                  ) : (
+                    <PixelSprite sprite={patron.sprite} scale={7} idle />
+                  )}
                 </div>
                 <div className="font-pixel text-gold text-[11px] text-center">
                   {patron.name}
