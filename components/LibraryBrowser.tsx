@@ -14,11 +14,13 @@ type SortMode = "alpha" | "feast";
 
 const ALL_CATS: SaintCategory[] = [
   "apostle",
+  "equal",
   "martyr",
   "hierarch",
   "father",
   "monastic",
   "wonderworker",
+  "righteous",
   "modern",
   "woman",
   "foolforchrist",

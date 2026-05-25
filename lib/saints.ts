@@ -13,7 +13,9 @@ export type SaintCategory =
   | "wonderworker"
   | "modern"
   | "woman"
-  | "foolforchrist";
+  | "foolforchrist"
+  | "righteous"
+  | "equal";
 
 export type SaintLife = {
   slug: string;
@@ -39,6 +41,8 @@ export const CATEGORY_LABELS: Record<SaintCategory, string> = {
   modern: "Modern Saint",
   woman: "Holy Woman",
   foolforchrist: "Fool for Christ",
+  righteous: "Righteous",
+  equal: "Equal-to-the-Apostles",
 };
 
 // The seed corpus — the 49 lives written before the research batches.
