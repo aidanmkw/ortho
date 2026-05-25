@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { QAItem, Citation } from "@/lib/types";
 import { getScriptureText } from "@/lib/bible-text";
+import { getCitationQuote } from "@/lib/citation-text";
 import { useProgress } from "./ProgressProvider";
 
 type Props = {
@@ -541,11 +542,14 @@ function CitationsList({ citations }: { citations: Citation[] }) {
 }
 
 function CitationItem({ c }: { c: Citation }) {
-  // Prefer an explicitly-stored quote. Otherwise look the reference up
-  // in our Bible-text lookup (covers source AND scripture fields, since
-  // many citations only fill the source).
+  // Resolution order for the text body of the citation:
+  //   1. Explicit `quote` on the citation object (curated)
+  //   2. Bible-text lookup on `scripture` or `source` (EOB / KJV / LXX)
+  //   3. Patristic / conciliar / liturgical lookup on `source`
+  //   4. Fallback: "text pending"
   const verse =
     !c.quote && (getScriptureText(c.scripture ?? "") || getScriptureText(c.source));
+  const patristic = !c.quote && !verse && getCitationQuote(c.source);
 
   return (
     <li className="text-sm">
@@ -563,6 +567,17 @@ function CitationItem({ c }: { c: Citation }) {
           <footer className="not-italic text-[10px] text-parchment/50 mt-1">
             — {translationLabel(verse.translation)}
           </footer>
+        </blockquote>
+      ) : patristic ? (
+        <blockquote className="border-l-2 border-gold/40 pl-3 mt-2 text-parchment/90 italic leading-relaxed">
+          {patristic.text}
+          {(patristic.translation || patristic.note) && (
+            <footer className="not-italic text-[10px] text-parchment/50 mt-1">
+              {patristic.translation && <>— {patristic.translation}</>}
+              {patristic.translation && patristic.note && " · "}
+              {patristic.note}
+            </footer>
+          )}
         </blockquote>
       ) : (
         <div className="text-[11px] text-parchment/40 mt-1 italic">
