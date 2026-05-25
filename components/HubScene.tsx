@@ -38,6 +38,11 @@ export default function HubScene() {
     return { playedToday, dueReview, mastered };
   }, [progress]);
 
+  const isNew =
+    hydrated &&
+    progress.xp === 0 &&
+    Object.keys(progress.items).length === 0;
+
   // Loading shimmer matches the scene's aspect (4:3) so layout doesn't jump
   if (!hydrated) {
     return (
@@ -109,10 +114,56 @@ export default function HubScene() {
       h: 42,
       accent: "muted",
     },
+    // Center: arched doorway → The Library (lives of the saints)
+    {
+      href: "/library",
+      label: "The Library",
+      sublabel: "Lives of the saints",
+      x: 38,
+      y: 22,
+      w: 24,
+      h: 65,
+      accent: "gold",
+    },
   ];
 
   return (
     <div className="mb-10">
+      {/* First-time user tutorial banner */}
+      {isNew && (
+        <div className="parchment-card p-4 mb-4 border-2 border-gold/60 bg-gradient-to-br from-[#1a1408] to-[#0c0a08]">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-gold/90 mb-1.5">
+            Welcome, Inquirer
+          </div>
+          <p className="text-parchment text-sm sm:text-base leading-relaxed">
+            You are standing in your study. Tap any object in the room to
+            begin:
+          </p>
+          <ul className="mt-2 text-xs sm:text-sm text-parchment/80 space-y-1">
+            <li>
+              <span className="text-gold">⚔</span> The <strong>sword & shield</strong> open the
+              Quest — a pixel JRPG through Church history.
+            </li>
+            <li>
+              <span className="text-gold">📜</span> The <strong>scroll</strong> is your Daily
+              Trial — 10 questions, about 5 minutes. <em>Start here.</em>
+            </li>
+            <li>
+              <span className="text-gold">🕯️</span> The <strong>icon corner</strong> is for
+              Review — items you got wrong come back here.
+            </li>
+            <li>
+              <span className="text-gold">📖</span> The <strong>open codex</strong> opens the
+              full Curriculum — 14 stages of training.
+            </li>
+            <li>
+              <span className="text-gold">🚪</span> The <strong>doorway</strong> leads to the
+              Library — lives of the saints.
+            </li>
+          </ul>
+        </div>
+      )}
+
       {/* Status HUD */}
       <div className="parchment-card p-3 mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
         <div className="flex items-baseline gap-3 flex-wrap">
