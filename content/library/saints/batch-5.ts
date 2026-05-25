@@ -10,7 +10,7 @@ export const batch5: SaintLife[] = [
     feastDate: 24,
     century: "18th",
     dates: "1714 – 1779",
-    categories: ["martyr", "monastic", "modern"],
+    categories: ["equal", "martyr", "monastic", "modern"],
     body: [
       "Born to a poor weaver's family in Aetolia and tonsured at the Athonite monastery of Philotheou, Cosmas left the Holy Mountain with the patriarch's blessing to preach Christ to the enslaved Greeks of the Ottoman Balkans. For twenty years he walked — through Epirus, Thessaly, Macedonia, Albania — preaching from the foot of a wooden cross he set up in each village.",
       "His method was to preach, then to leave behind a school. He founded over two hundred Greek-language schools and ten higher schools, insisting that without letters the faith would die. 'Better, my brethren, a Greek school than a fountain in your village,' he told them. He carried baptismal fonts strapped to mules, baptizing the children of crypto-Christians and persuading the men to keep Sunday.",
@@ -575,7 +575,7 @@ export const batch5: SaintLife[] = [
     feastMonth: 2,
     feastDate: 3,
     century: "1st",
-    categories: ["father"],
+    categories: ["righteous"],
     body: [
       "An aged and righteous man of Jerusalem, Symeon had been promised by the Holy Spirit that he would not see death until he had seen the Lord's Christ. Tradition identifies him with one of the seventy translators of the Hebrew Scriptures into Greek under Ptolemy II — sent to render the prophets, he had stumbled at Isaiah's word that 'a virgin shall conceive' and tried to correct it, when an angel stopped his hand and told him he would live to see the prophecy fulfilled. By the time Mary brought the forty-day-old Jesus to the Temple, he was, by some accounts, two hundred and seventy years old.",
       "He took the Child into his arms, blessed God, and sang the song that has been the canticle of every Orthodox Vespers since: 'Now lettest Thou Thy servant depart in peace, according to Thy word; for mine eyes have seen Thy salvation.' He prophesied to Mary that a sword would pierce her own soul also.",

@@ -29,7 +29,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 9,
     feastDate: 9,
     century: "1st BC",
-    categories: ["woman"],
+    categories: ["righteous"],
     body: [
       "Joachim, of the royal line of David, and Anna, of the priestly line of Aaron, lived in Nazareth in pious obscurity. They were barren for fifty years of their marriage — in their society a reproach so grave that the High Priest once refused Joachim's offering on those grounds. Withdrawing in shame, the husband fasted forty days in the wilderness while his wife wept under a laurel tree in their garden.",
       "An angel appeared to each of them separately, promising that they would bear a daughter whose name would be praised in every generation. Anna conceived; nine months later she bore Mary, the future Theotokos. They presented the child in the Temple at the age of three, fulfilling a vow.",
@@ -44,7 +44,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 12,
     feastDate: 26,
     century: "1st",
-    categories: ["woman"],
+    categories: ["righteous"],
     body: [
       "Joseph was an aged widower of Nazareth, a carpenter descended from David, when the Temple priests entrusted to him the Virgin Mary as her legal guardian. Orthodox tradition does not regard their union as a marriage in the ordinary sense: Joseph was already a father by his first wife, and the 'brothers of the Lord' in the Gospels are his sons from that earlier marriage.",
       "When he discovered that Mary was with child he resolved to put her away privately, that she might not be shamed; an angel revealed to him in a dream that the child was of the Holy Spirit. Joseph took her into his house, named the child Jesus at His circumcision, fled with mother and Son into Egypt, and returned to raise the Lord in his workshop at Nazareth.",
@@ -79,7 +79,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 9,
     feastDate: 5,
     century: "1st BC",
-    categories: ["woman"],
+    categories: ["righteous"],
     body: [
       "Zachariah was a priest of the course of Abijah; Elizabeth, his wife, was a daughter of Aaron and sister of the righteous Anna, mother of the Theotokos — so the Forerunner and the Lord were cousins. Both were old and childless when the Archangel Gabriel appeared to Zachariah at the altar of incense and promised him a son. For doubting the word, Zachariah was struck mute until the child should be born.",
       "Elizabeth conceived. When the Virgin Mary, herself newly with child, came to visit her, Elizabeth was filled with the Holy Spirit and cried out: 'Blessed art thou among women, and blessed is the fruit of thy womb.' Her words have entered the daily prayer of the Church.",
@@ -93,7 +93,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 2,
     feastDate: 3,
     century: "1st",
-    categories: ["woman"],
+    categories: ["righteous"],
     body: [
       "Simeon, by ancient tradition one of the seventy translators of the Hebrew Scriptures into Greek at Alexandria under Ptolemy, had wished to correct Isaiah's prophecy that a virgin would conceive — substituting 'woman' for what seemed an impossibility. An angel told him he would not see death until the prophecy was fulfilled before his eyes. He waited, by some accounts, more than two centuries.",
       "Led by the Spirit into the Temple on the day Mary brought the forty-day-old Christ to be presented, Simeon took the Child in his arms and spoke the words now sung at every Orthodox Vespers: 'Lord, now lettest thou thy servant depart in peace, according to thy word; for mine eyes have seen thy salvation.'",
@@ -111,7 +111,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 5,
     feastDate: 1,
     century: "1st",
-    categories: ["woman"],
+    categories: ["righteous", "woman"],
     body: [
       "The Myrrhbearers are those women who followed the Lord from Galilee to Jerusalem, stood at His Cross when the apostles had fled, and came at dawn on the first day of the week with sweet spices to anoint His body — only to find the tomb empty and to be the first to hear, and to proclaim, the Resurrection. The Gospels name Mary Magdalene, Mary the mother of James, Joanna the wife of Chuza, Salome the mother of the sons of Zebedee, Susanna, Martha and Mary of Bethany, and Mary the wife of Cleopas.",
       "Their fidelity was steadier than the apostles'; their reward was to be the first evangelists of the empty tomb. The angel said to them: 'He is not here, for He is risen, as He said. Come, see the place where the Lord lay.' Mary Magdalene's words to the Eleven — 'I have seen the Lord' — are the first preaching of the Christian Church.",
@@ -423,7 +423,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 5,
     feastDate: 20,
     century: "1st",
-    categories: ["woman"],
+    categories: ["equal", "righteous", "woman"],
     body: [
       "A native of Thyatira in Asia Minor who had settled at Philippi as a merchant in purple cloth — the costly dye reserved for the wealthy and the imperial — Lydia was a 'God-fearer,' a gentile who worshiped the God of Israel. She met the Apostle Paul on the Sabbath outside the city gate by the river Zygaktos, where the women gathered for prayer.",
       "Acts records the words with characteristic understatement: 'The Lord opened her heart, that she attended unto the things which were spoken of Paul.' She and her entire household were baptized in the river. She then constrained Paul and his companions to lodge in her house — and when, after their imprisonment and the earthquake, they were released, it was to her house that they returned.",
@@ -438,7 +438,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 9,
     feastDate: 3,
     century: "1st",
-    categories: ["woman"],
+    categories: ["righteous", "woman"],
     body: [
       "Phoebe served the Church at Cenchreae, the eastern port of Corinth. The Apostle Paul commended her to the Christians of Rome in two extraordinary verses: he calls her 'our sister, a deaconess (diakonos) of the Church at Cenchreae,' asks that she be received 'in the Lord, as becometh saints,' and notes that she has been 'a helper (prostatis) of many, and of myself also' (Romans 16:1–2).",
       "By long-standing tradition, Paul entrusted her with the delivery of the Epistle to the Romans — the longest and most theologically dense of all his letters. She would have been the first to read it aloud in the Roman house-churches and the first to answer questions about its meaning. In that sense Phoebe was the first commentator on Romans.",
@@ -453,7 +453,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 2,
     feastDate: 13,
     century: "1st",
-    categories: ["apostle", "woman", "martyr"],
+    categories: ["apostle", "righteous", "woman", "martyr"],
     body: [
       "Aquila, a Jew of Pontus, and his wife Priscilla (also called Prisca) were tentmakers expelled from Rome under the emperor Claudius and settled in Corinth, where the Apostle Paul — himself a tentmaker — lodged with them and worked at their trade. They became his coworkers in three cities: Corinth, Ephesus, and after the lifting of the edict, Rome again.",
       "At Ephesus they met the learned Alexandrian Apollos, who knew only the baptism of John, and 'expounded unto him the way of God more perfectly' (Acts 18:26) — the husband and wife together catechizing the future evangelist of Achaea. Paul calls them 'my helpers in Christ Jesus, who have for my life laid down their own necks' (Romans 16:3–4).",
@@ -467,7 +467,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 9,
     feastDate: 13,
     century: "1st",
-    categories: ["martyr", "hierarch"],
+    categories: ["righteous", "martyr", "hierarch"],
     body: [
       "A Roman officer of the Italian cohort stationed at Caesarea Maritima, Cornelius was a 'devout man, and one that feared God with all his house, which gave much alms to the people, and prayed to God always' (Acts 10:2). An angel told him to send to Joppa for one Simon Peter.",
       "At the same hour the apostle, praying on a rooftop, saw the great sheet let down from heaven full of unclean beasts and heard the command, 'What God hath cleansed, that call not thou common.' Peter went to Caesarea, preached the Gospel in the centurion's house, and saw the Holy Spirit descend on Cornelius and his household — gentiles, uncircumcised — exactly as upon the Jewish disciples at Pentecost. He could only baptize them. The Apostolic Council's later decision to admit gentiles without circumcision rested on what God had already done in this house.",
@@ -482,7 +482,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 10,
     feastDate: 25,
     century: "1st",
-    categories: ["woman"],
+    categories: ["righteous", "woman"],
     body: [
       "Tabitha — in Greek Dorcas, 'gazelle' — was a disciple at Joppa, a widow (or in some readings a virgin) who lived by her needle. She made tunics and garments for the poor widows of the town and was full, in Luke's careful phrase, 'of good works and almsdeeds which she did.'",
       "When she fell sick and died, the disciples washed her body, laid her in an upper room, and sent for the Apostle Peter, who was nearby at Lydda. He came at once. The widows of Joppa stood weeping around him and showing him the coats and garments Tabitha had made for them. Peter sent them all out, knelt down, prayed, turned to the body, and said, 'Tabitha, arise.' She opened her eyes and sat up.",
@@ -497,7 +497,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 9,
     feastDate: 24,
     century: "1st",
-    categories: ["woman", "martyr"],
+    categories: ["equal", "woman", "martyr"],
     body: [
       "A wealthy young woman of Iconium, betrothed to a prominent man of the city, Thekla heard the Apostle Paul preaching virginity from a window in her mother's house and was so transfixed that she neither ate nor stirred for three days. Her mother and her betrothed had Paul driven from the city and Thekla condemned to the fire. The flames rose around her and would not touch her; rain put them out.",
       "She followed Paul to Antioch of Pisidia, where a magistrate seized her for her beauty. Condemned to the wild beasts in the arena, she leapt into a tank of seals and baptized herself, and the beasts refused to harm her. Released at last, she went to Seleucia in Isauria and lived as an ascetic in a mountain cave for many years, healing the sick and preaching the Gospel; when pagan physicians sent men to defile her, the rock opened and received her.",
@@ -512,7 +512,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 10,
     feastDate: 17,
     century: "1st",
-    categories: ["hierarch"],
+    categories: ["righteous", "hierarch"],
     body: [
       "Brother of Martha and Mary, Lazarus of Bethany was the friend of the Lord — 'he whom Thou lovest,' as his sisters' message put it during his fatal illness. When Christ arrived four days after the burial, Martha met Him outside the village and confessed her faith in the resurrection 'at the last day'; Christ answered, 'I am the resurrection and the life.' At the tomb He wept, then commanded, 'Lazarus, come forth,' and the dead man walked out bound in his graveclothes.",
       "The miracle hardened the chief priests' resolve to kill not only Jesus but also Lazarus, whose living presence drew crowds. After the Resurrection, Lazarus fled the danger and went to Cyprus, where the Apostles Paul and Barnabas later found him and consecrated him bishop of Kition (modern Larnaca). He governed his flock for thirty years and reposed in peace — Orthodox tradition holds he did not smile in those years save once, when he saw a man steal a clay pot ('one clay steals another').",
@@ -527,7 +527,7 @@ export const batch1: SaintLife[] = [
     feastMonth: 6,
     feastDate: 4,
     century: "1st",
-    categories: ["woman"],
+    categories: ["righteous", "woman"],
     body: [
       "Martha and Mary lived at Bethany, two miles east of Jerusalem, with their brother Lazarus. Their house was a regular lodging of the Lord. The Gospels paint the sisters with quick strokes: Martha, the elder, served; Mary sat at the Lord's feet and heard His word. When Martha complained, the Lord answered her gently — 'Martha, Martha, thou art careful and troubled about many things; but one thing is needful, and Mary hath chosen that good part, which shall not be taken from her.'",
       "At Lazarus's tomb it was Martha who went out to meet Jesus and made the great confession, 'Yea, Lord, I believe that Thou art the Christ, the Son of God.' At the supper six days before the Passover, it was Mary who poured the alabaster of nard on the Lord's feet and wiped them with her hair — anointing Him, in His own words, for His burial.",
@@ -637,7 +637,7 @@ export const batch1: SaintLife[] = [
     feastDate: 1,
     century: "2nd BC",
     dates: "d. 166 BC",
-    categories: ["martyr"],
+    categories: ["righteous", "martyr"],
     body: [
       "Under the persecution of the Seleucid king Antiochus IV Epiphanes, who sought to impose Greek religion on the Jews by force, seven brothers — Abim, Antoninus, Gurias, Eleazar, Eusebonus, Alimus, and Marcellus — were arrested with their mother Solomonia and their aged teacher, the priest Eleazar. They were commanded to eat swine's flesh in violation of the Law and refused. The Second Book of Maccabees preserves the account.",
       "One by one the sons were tortured to death in their mother's presence. Solomonia did not weep but encouraged each in turn, in the Hebrew tongue the executioners could not understand: 'I cannot tell how ye came into my womb; the Creator of the world will give you breath and life again, as ye now regard not your own selves for His laws' sake.' After the youngest was killed she lifted her hands in prayer and herself gave up the spirit. The priest Eleazar, ninety years old, had preceded them.",

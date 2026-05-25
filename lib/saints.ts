@@ -638,13 +638,13 @@ const seedSaints: SaintLife[] = [
   {
     slug: "innocent-of-alaska",
     name: "Innocent of Alaska",
-    title: "Apostle to America",
+    title: "Equal-to-the-Apostles, Apostle to America",
     feastDay: "March 31",
     feastMonth: 3,
     feastDate: 31,
     century: "19th",
     dates: "1797 – 1879",
-    categories: ["hierarch", "modern"],
+    categories: ["equal", "hierarch", "modern"],
     body: [
       "Born Ivan Veniaminov in the Siberian village of Anginskoe, he volunteered as a married priest for the Russian American mission and arrived at Unalaska in 1824. Over the next four decades he learned six Native languages, devised an alphabet for Aleut, translated the Gospel of Matthew and the Divine Liturgy into it, and built churches and schools the length of the Aleutian chain.",
       "Widowed in 1839, he was tonsured Innocent and consecrated bishop the next year, becoming the first Orthodox bishop in the Americas. He later returned to Russia and ended his life as Metropolitan of Moscow.",
@@ -675,7 +675,7 @@ const seedSaints: SaintLife[] = [
     feastDate: 14,
     century: "4th",
     dates: "c. 280 – 335",
-    categories: ["woman"],
+    categories: ["equal", "woman"],
     body: [
       "A young woman from Cappadocia, kin to St. George, Nina entered Iberia (Georgia) carrying a cross of grapevine tied with her own hair. She lived in a bramble hedge outside Mtskheta, prayed at the queen's bedside until the queen was healed, and converted King Mirian after his vision of light in a darkened forest.",
       "By the end of her life Georgia was a Christian kingdom. The cross of grapevine she carried is preserved in Tbilisi. The grapevine cross — its arms drooping downward — became the national symbol of Georgian Christianity.",
@@ -690,7 +690,7 @@ const seedSaints: SaintLife[] = [
     feastDate: 11,
     century: "10th",
     dates: "c. 890 – 969",
-    categories: ["woman"],
+    categories: ["equal", "woman"],
     body: [
       "Widow of the Kievan prince Igor, Olga ruled as regent for her son Svyatoslav. In 957 she traveled to Constantinople and was baptized in Hagia Sophia by the Patriarch, with the Emperor Constantine VII as her godfather. She brought back a Greek priest and tried unsuccessfully to convert her son and her people.",
       "She died in 969. Her grandson Vladimir, twenty years later, would baptize all of Rus. The seed Olga had planted, against every appearance of failure, broke the ground.",
@@ -705,7 +705,7 @@ const seedSaints: SaintLife[] = [
     feastDate: 15,
     century: "10th–11th",
     dates: "958 – 1015",
-    categories: ["modern"],
+    categories: ["equal"],
     body: [
       "Pagan warlord, fratricide, and polygamist, Vladimir of Kiev decided in his mid-life to find a religion for his people. He sent envoys to investigate the religions of his neighbors. Of the Latin Mass they reported only ritual; of Islam, that the prohibition of wine made it unworkable for Russians; of the Liturgy in Hagia Sophia, the envoys said: 'We knew not whether we were in heaven or on earth, for surely there is no such splendor on earth.'",
       "Vladimir was baptized in 988, married the Byzantine princess Anna, and ordered the mass baptism of his people in the Dnieper. He razed the idols, founded churches and schools, gave alms on a vast scale, and forbade capital punishment — clerics had to persuade him to take it up again to govern. The empire of the Rus was Christian from that day.",
@@ -769,7 +769,7 @@ const seedSaints: SaintLife[] = [
     feastDate: 11,
     century: "9th",
     dates: "Cyril 827–869; Methodius c. 815–885",
-    categories: ["father"],
+    categories: ["equal", "father"],
     body: [
       "Two brothers from Thessaloniki, learned in Greek and Slavonic, were sent by the Patriarch Photios in 863 at the request of Prince Rostislav of Moravia to evangelize the Slavs in their own tongue. They invented the Glagolitic alphabet (ancestor of the Cyrillic) and translated the Gospels, the Liturgy, and the Psalter into Old Church Slavonic.",
       "Cyril died in Rome at forty-two; Methodius continued the mission as bishop of Moravia until his death in 885. Their disciples — Clement, Naum, and others — fled persecution by German clergy and carried the Slavonic mission southeast, planting it permanently among the Bulgarians, Serbs, and Russians.",
@@ -843,7 +843,7 @@ const seedSaints: SaintLife[] = [
     feastMonth: 7,
     feastDate: 22,
     century: "1st",
-    categories: ["apostle", "woman"],
+    categories: ["equal", "apostle", "woman"],
     body: [
       "The Lord cast seven demons out of her (Luke 8:2), and she followed Him from Galilee to the Cross. She did not flee on Holy Friday. She stood at the tomb on the third day, and to her — first of all human beings — the Risen Christ appeared and spoke her name in the garden.",
       "She is called 'Equal-to-the-Apostles' because she carried the Resurrection to the apostles before they had seen Him. Later tradition sends her to Rome, where she is said to have appeared before Tiberius Caesar with a red egg, declaring 'Christ is risen!' — the origin of the Paschal egg.",
