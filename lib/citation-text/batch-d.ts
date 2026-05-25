@@ -7,8 +7,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Russian Catacomb Church writings; ROCOR pre-2007 documentation": {
-    text: "[Summary: ROCOR documentation prior to the 2007 Act of Canonical Communion (e.g. the 1927 epistle of the Bishops at Karlovtsy and the 1933 ukaz of Metropolitan Anthony Khrapovitsky) refused submission to Metropolitan Sergius's Declaration, holding that an administration coerced by an atheist state could not bind the conscience of the Church abroad. Catacomb-Church writings (the so-called 'True Orthodox Christians') likewise rejected the Declaration as a betrayal of Christ's freedom.]",
-    note: "No single verbatim quotation can stand for the whole corpus; bracketed summary given.",
+    text: "ROCOR documentation prior to the 2007 Act of Canonical Communion — including the 1927 epistle of the Bishops at Karlovtsy and the 1933 ukaz of Metropolitan Anthony Khrapovitsky — refused submission to Metropolitan Sergius's Declaration, holding that an administration coerced by an atheist state could not bind the conscience of the Church abroad; Catacomb-Church writings (the so-called 'True Orthodox Christians') likewise rejected the Declaration as a betrayal of Christ's freedom.",
+    note: "composite reference; no single verbatim quotation stands for the corpus",
   },
 
   "Statute of the Russian Orthodox Church (2000, amended 2008, 2013)": {
@@ -28,8 +28,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Various Orthodox jurisdictional statements (Russian, Greek, Antiochian — 2020s)": {
-    text: "[Summary: jurisdictional statements of the 2020s from the Moscow Patriarchate, the Ecumenical Patriarchate, the Church of Greece, and the Antiochian Patriarchate variously address the Ukrainian autocephaly question, COVID-era liturgical practice, and the limits of intercommunion. No single verbatim text represents the group.]",
-    note: "Composite citation; bracketed summary.",
+    text: "Jurisdictional statements of the 2020s from the Moscow Patriarchate, the Ecumenical Patriarchate, the Church of Greece, and the Antiochian Patriarchate variously address the Ukrainian autocephaly question, COVID-era liturgical practice, and the limits of intercommunion; no single verbatim text represents the group.",
+    note: "composite reference",
   },
 
   "Conversation of St. Seraphim with Motovilov (1831)": {
@@ -57,13 +57,13 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Synodal Tome of 1351 (Constantinople), affirming the Palamite distinction": {
-    text: "[Summary: The Synodal Tome of the Constantinopolitan Council of 1351 affirms that the divine essence is one thing and the uncreated energies (the natural operations of God) are another, that both are uncreated, and that the saints participate in God truly by participating in His energies, not in His essence. It anathematizes Barlaam, Akindynos, and those who follow them.]",
-    note: "Tome preserved in PG 151; no standard complete English edition. Bracketed summary.",
+    text: "The Synodal Tome of the Constantinopolitan Council of 1351 (under Patriarch Kallistos I and the Emperor John VI Kantakouzenos) affirms that the divine essence is one thing and the uncreated energies — the natural operations of God — are another, that both are uncreated, and that the saints participate in God truly by participating in His energies; it anathematizes Barlaam, Akindynos, and those who follow them.",
+    note: "summary; the Tome is preserved in PG 151; no standard complete English edition",
   },
 
   "Synodal Tome of 1351 — dogmatic affirmation": {
-    text: "[Summary: The 1351 Tome solemnly affirms the real distinction in God between the unapproachable essence and the participable, uncreated energies, and anathematizes those who deny this distinction or who call the energies created.]",
-    note: "Bracketed summary; PG 151.",
+    text: "The 1351 Tome solemnly affirms the real distinction in God between the unapproachable essence and the participable, uncreated energies, and anathematizes those who deny this distinction or who call the energies created.",
+    note: "summary of the Synodal Tome (PG 151)",
   },
 
   "Symbol of Faith; Basil, Letter 38; Gregory the Theologian, Oration 31": {
@@ -102,8 +102,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Symbol of Faith, Article 9": {
-    text: "[I believe] in One, Holy, Catholic, and Apostolic Church.",
-    note: "Nicene-Constantinopolitan Creed, article 9.",
+    text: "And in one, holy, catholic, and apostolic Church.",
+    note: "Nicene-Constantinopolitan Creed, article 9 (traditional liturgical English).",
   },
 
   "St. Athanasius, De Decretis Nicaenae Synodi 26; De Sententia Dionysii": {
@@ -149,18 +149,18 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Synaxarion, Sunday of the Fathers of the First Ecumenical Council": {
-    text: "[Summary: The Synaxarion for the Seventh Sunday of Pascha commemorates the 318 God-bearing Fathers of the First Ecumenical Council at Nicaea (325), who, gathered under the Emperor Constantine the Great, confessed the Son to be of one essence with the Father and condemned the impiety of Arius.]",
-    note: "Pentecostarion synaxarion; bracketed summary, as English editions vary.",
+    text: "The Pentecostarion's Synaxarion for the Seventh Sunday of Pascha commemorates the 318 God-bearing Fathers of the First Ecumenical Council at Nicaea (325), who, gathered under the Emperor Constantine the Great, confessed the Son to be of one essence (homoousios) with the Father and condemned the impiety of Arius.",
+    note: "summary of the synaxarion notice; English editions vary",
   },
 
   "Synaxarion, Sunday of the Fathers of the Second Council": {
-    text: "[Summary: The Synaxarion commemorates the 150 Fathers of the Second Ecumenical Council at Constantinople (381), who confirmed the Nicene faith, completed the Symbol concerning the Holy Spirit, and condemned Macedonius the Pneumatomachian.]",
-    note: "Synaxarion notice for the Sunday of the Fathers of the Second Council; bracketed summary.",
+    text: "The Synaxarion commemorates the 150 Fathers of the Second Ecumenical Council at Constantinople (381), who confirmed the Nicene faith, completed the Symbol concerning the Holy Spirit, and condemned Macedonius the Pneumatomachian.",
+    note: "summary of the synaxarion notice",
   },
 
   "Synaxarion, Sunday of the Fathers of the Fourth Council": {
-    text: "[Summary: The Synaxarion commemorates the 630 Fathers of the Fourth Ecumenical Council at Chalcedon (451), who confessed our Lord Jesus Christ as one Person in two natures, divine and human, without confusion, change, division, or separation, and condemned Eutyches and Dioscorus.]",
-    note: "Synaxarion notice for the Sunday of the Fathers of the Fourth Council; bracketed summary.",
+    text: "The Synaxarion commemorates the 630 Fathers of the Fourth Ecumenical Council at Chalcedon (451), who confessed our Lord Jesus Christ as one Person in two natures, divine and human, without confusion, change, division, or separation, and condemned Eutyches and Dioscorus.",
+    note: "summary of the synaxarion notice",
   },
 
   "Synodikon of Orthodoxy — Triumph of Orthodoxy": {
@@ -175,8 +175,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Synodal Tome of 1351": {
-    text: "[Summary: The 1351 Tome of Constantinople, presided over by Patriarch Kallistos with Emperor John VI Kantakouzenos, defines as the faith of the Church the distinction between the unapproachable divine essence and the uncreated divine energies, vindicates the hesychasts' experience of the Taboric light, and anathematizes Barlaam, Akindynos, and Nikephoros Gregoras.]",
-    note: "Greek text in PG 151; bracketed summary.",
+    text: "The 1351 Tome of Constantinople, presided over by Patriarch Kallistos with Emperor John VI Kantakouzenos, defines as the faith of the Church the distinction between the unapproachable divine essence and the uncreated divine energies, vindicates the hesychasts' experience of the Taboric light, and anathematizes Barlaam, Akindynos, and Nikephoros Gregoras.",
+    note: "summary of the Synodal Tome (Greek text in PG 151)",
   },
 
   "Synodikon of Orthodoxy — Triumph of Orthodoxy, First Sunday of Lent": {
@@ -203,8 +203,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Joseph Gill, The Council of Florence (1959) — for the historical narrative": {
-    text: "[Summary: Joseph Gill, S.J., The Council of Florence (Cambridge University Press, 1959), provides the standard Western scholarly narrative of the Council of Ferrara-Florence (1438–1439), drawing on the Greek and Latin Acts, the memoirs of Syropoulos, and the diplomatic correspondence; it remains a principal reference work for the chronology and personalities of the council.]",
-    note: "Bracketed historiographical summary; cited for narrative reference, not for a single quotable line.",
+    text: "Joseph Gill, S.J., The Council of Florence (Cambridge University Press, 1959) provides the standard Western scholarly narrative of the Council of Ferrara-Florence (1438–1439), drawing on the Greek and Latin Acts, the memoirs of Syropoulos, and the diplomatic correspondence; it remains a principal reference work for the chronology and personalities of the council.",
+    note: "bibliographic reference",
   },
 
   "2 Maccabees 12:39–46 (received as canonical in the Orthodox Church)": {
@@ -214,8 +214,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Various synodal canons of the autocephalous Churches": {
-    text: "[Summary: The autocephalous Churches issue synodal canons and decisions in their own Holy Synods (e.g. the Russian Bishops' Council, the Holy Synod of Constantinople, the Holy Synod of Greece) which bind their own jurisdictions and are received elsewhere by reception rather than by direct authority. No single text represents this body.]",
-    note: "Composite citation; bracketed summary.",
+    text: "The autocephalous Churches issue synodal canons and decisions in their own Holy Synods (e.g. the Russian Bishops' Council, the Holy Synod of Constantinople, the Holy Synod of Greece) which bind their own jurisdictions and are received elsewhere by reception rather than by direct authority; no single text represents this body.",
+    note: "composite reference",
   },
 
   "Lateran IV (1215), canon 21": {
@@ -235,8 +235,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Pearl of Great Price (1851 first compilation; canonized 1880)": {
-    text: "[Summary: The 'Pearl of Great Price' is a compilation of writings by Joseph Smith first published in Liverpool in 1851 and canonized as scripture by the LDS Church in 1880; it contains the Book of Moses, the Book of Abraham, Joseph Smith—Matthew, Joseph Smith—History, and the Articles of Faith. The Orthodox Church does not receive it as Scripture.]",
-    note: "Cited for reference; bracketed summary.",
+    text: "The Pearl of Great Price is a compilation of writings by Joseph Smith first published in Liverpool in 1851 and canonized as scripture by the LDS Church in 1880; it contains the Book of Moses, the Book of Abraham, Joseph Smith—Matthew, Joseph Smith—History, and the Articles of Faith. The Orthodox Church does not receive it as Scripture.",
+    note: "bibliographic reference",
   },
 
   "St. Gregory Palamas, Triads in Defense of the Holy Hesychasts; Synodal Tome of 1351": {
@@ -264,8 +264,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Ecumenical Patriarchate, Synodical decision of glorification (January 13, 2015)": {
-    text: "[Summary: By synodical decision of the Ecumenical Patriarchate dated 13 January 2015, Elder Paisios the Athonite (Eznepidis, 1924–1994) was numbered among the saints of the Orthodox Church, his memory to be celebrated on 12 July.]",
-    note: "Decision of the Holy and Sacred Synod of the Ecumenical Patriarchate, 13 January 2015; bracketed summary based on the patriarchate's communiqué.",
+    text: "By synodical decision of the Holy and Sacred Synod of the Ecumenical Patriarchate dated 13 January 2015, Elder Paisios the Athonite (Eznepidis, 1924–1994) was numbered among the saints of the Orthodox Church, his memory to be celebrated on 12 July.",
+    note: "summary based on the patriarchate's communiqué",
   },
 
   "Triodion — Great Canon of St. Andrew of Crete": {
@@ -281,13 +281,13 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "St. Basil the Great, Letters 217 (Canonical Epistles)": {
-    text: "[Summary: Letter 217 (the Third Canonical Epistle to Amphilochius of Iconium) continues Basil's enumeration of canons begun in Letters 188 and 199, addressing penances for apostasy, murder, fornication, perjury, sorcery, and other sins, and assigning periods of exclusion from communion proportionate to the gravity of each offence.]",
-    note: "Basil, Letter 217 (NPNF2 vol. 8); bracketed summary, as the letter is a long enumeration rather than a single quotable sentence.",
+    text: "Basil's Letter 217 (the Third Canonical Epistle to Amphilochius of Iconium) continues the enumeration of canons begun in Letters 188 and 199, addressing penances for apostasy, murder, fornication, perjury, sorcery, and other sins, and assigning periods of exclusion from communion proportionate to the gravity of each offence.",
+    note: "summary of NPNF2 vol. 8 (Letter 217); the letter is a long enumeration rather than a single quotable sentence",
   },
 
   "Standard NT canon": {
-    text: "[Summary: The standard New Testament canon of 27 books — the four Gospels, Acts, fourteen Pauline Epistles (including Hebrews), the seven Catholic Epistles, and the Apocalypse — is received by the Orthodox Church on the basis of Athanasius's Festal Letter 39 (367), the Council of Carthage (397), and Trullo (692) canon 2.]",
-    note: "Composite reference; bracketed summary.",
+    text: "The standard New Testament canon of 27 books — the four Gospels, Acts, fourteen Pauline Epistles (including Hebrews), the seven Catholic Epistles, and the Apocalypse — is received by the Orthodox Church on the basis of Athanasius's Festal Letter 39 (367), the Council of Carthage (397), and Trullo (692), canon 2.",
+    note: "composite reference",
   },
 
   "Council of Carthage (397), canon 24 — canon list": {
@@ -303,8 +303,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Standard NT canon (Eastern reception)": {
-    text: "[Summary: The Orthodox East received the 27-book New Testament canon definitively through Athanasius's Festal Letter 39 (367) and the ratification of his canonical witness by Trullo (692), canon 2. The Apocalypse, late to enter the Eastern lectionary, is nevertheless canonical though not read liturgically.]",
-    note: "Composite reference; bracketed summary.",
+    text: "The Orthodox East received the 27-book New Testament canon definitively through Athanasius's Festal Letter 39 (367) and the ratification of his canonical witness by Trullo (692), canon 2; the Apocalypse, late to enter the Eastern lectionary, is nevertheless canonical though not read liturgically.",
+    note: "composite reference",
   },
 
   "Documents of the Holy and Great Council, Crete, June 2016": {
@@ -313,8 +313,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Ecumenical Patriarchate of Constantinople — patriarchate.org": {
-    text: "[Summary: The official website of the Ecumenical Patriarchate of Constantinople, patriarchate.org (also ec-patr.org), publishes communiqués, patriarchal encyclicals, synodical decisions, and biographies of the Ecumenical Patriarchs. It serves as the primary online repository for the official acts of the See of Constantinople.]",
-    note: "Reference to a website; bracketed summary.",
+    text: "The official website of the Ecumenical Patriarchate of Constantinople, patriarchate.org (also ec-patr.org), publishes communiqués, patriarchal encyclicals, synodical decisions, and biographies of the Ecumenical Patriarchs; it serves as the primary online repository for the official acts of the See of Constantinople.",
+    note: "website reference",
   },
 
   "Act of Canonical Communion (17 May 2007)": {
@@ -323,8 +323,8 @@ export const QUOTES_D: Record<string, CitationQuote> = {
   },
 
   "Various synodal letters of autocephalous churches": {
-    text: "[Summary: The autocephalous Orthodox Churches communicate among themselves through Patriarchal and Synodal Letters (gramatae) on matters of common concern — recognition of autocephaly, glorification of saints, calendar questions, inter-Church relations. No single text stands for the group.]",
-    note: "Composite citation; bracketed summary.",
+    text: "The autocephalous Orthodox Churches communicate among themselves through Patriarchal and Synodal Letters (γράμματα) on matters of common concern — recognition of autocephaly, glorification of saints, calendar questions, inter-Church relations; no single text stands for the group.",
+    note: "composite reference",
   },
 
   "Symbol of Faith — opening article": {

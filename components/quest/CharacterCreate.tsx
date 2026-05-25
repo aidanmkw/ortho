@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { PixelFrame, PixelButton } from "./PixelUI";
-import PixelSprite from "./PixelSprite";
 import Portrait from "./Portrait";
-import { playerSprite } from "@/lib/quest/sprites";
 import { PATRONS } from "@/lib/quest/patrons";
 import { PORTRAITS, playerPortraitConfig } from "@/lib/quest/portraits";
 
@@ -141,14 +139,12 @@ export default function CharacterCreate({
               </PixelButton>
               <div className="flex flex-col items-center">
                 <div className="pixel-shadow-lg pixel-platform pixel-halo-glow mb-3">
-                  {PORTRAITS[patron.id] ? (
+                  {PORTRAITS[patron.id] && (
                     <Portrait
                       config={PORTRAITS[patron.id]}
                       size={180}
                       idle
                     />
-                  ) : (
-                    <PixelSprite sprite={patron.sprite} scale={7} idle />
                   )}
                 </div>
                 <div className="font-pixel text-gold text-[11px] text-center">

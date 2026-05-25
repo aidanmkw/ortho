@@ -5,15 +5,12 @@ import type {
   Boss,
   HeroState,
   BossAttack,
-  Sprite,
   ResolvedAttack,
 } from "@/lib/quest/types";
-import { ALL_SPRITES, playerSprite } from "@/lib/quest/sprites";
 import { getPatron } from "@/lib/quest/patrons";
 import { getItem } from "@/lib/quest/items";
 import { sfx } from "@/lib/quest/sfx";
 import { PORTRAITS, playerPortraitConfig } from "@/lib/quest/portraits";
-import PixelSprite from "./PixelSprite";
 import Portrait from "./Portrait";
 import {
   PixelFrame,
@@ -51,10 +48,6 @@ type Props = {
   onAbort?: () => void;
 };
 
-function getBossSprite(id: string): Sprite | undefined {
-  return ALL_SPRITES[id];
-}
-
 function shuffle<T>(arr: T[], seed: number): T[] {
   const a = [...arr];
   let s = seed;
@@ -77,8 +70,6 @@ export default function BattleScene({
   onResult,
   onAbort,
 }: Props) {
-  const bossSprite = getBossSprite(bossSpriteId);
-  const playerSpriteData = playerSprite(hairColor);
   const patron = getPatron(initialHero.patronId);
 
   const [hero, setHero] = useState<HeroState>(initialHero);
@@ -413,7 +404,7 @@ export default function BattleScene({
             </div>
           )}
           <div className="flex justify-center mt-3 mb-3">
-            {PORTRAITS[bossSpriteId] ? (
+            {PORTRAITS[bossSpriteId] && (
               <div
                 className={`pixel-shadow-lg pixel-platform pixel-menace-glow ${
                   phase === "victory" ? "opacity-30 grayscale" : ""
@@ -426,21 +417,6 @@ export default function BattleScene({
                   flashing={bossFlash}
                 />
               </div>
-            ) : (
-              bossSprite && (
-                <div
-                  className={`pixel-shadow-lg pixel-platform pixel-menace-glow ${
-                    phase === "victory" ? "opacity-30 grayscale" : ""
-                  }`}
-                >
-                  <PixelSprite
-                    sprite={bossSprite}
-                    scale={9}
-                    idle
-                    flashing={bossFlash}
-                  />
-                </div>
-              )
             )}
           </div>
         </div>

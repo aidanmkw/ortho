@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { PixelFrame, PixelButton, Typewriter } from "./PixelUI";
-import PixelSprite from "./PixelSprite";
 import Portrait from "./Portrait";
-import { spriteAnthony } from "@/lib/quest/sprites";
 import { PORTRAITS } from "@/lib/quest/portraits";
 import ShareButton from "./ShareButton";
 

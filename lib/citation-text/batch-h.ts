@@ -38,8 +38,8 @@ export const QUOTES_H: Record<string, CitationQuote> = {
     note: "summary plus verbatim opening of the fifteenth antiphon from the Holy Thursday Triodion",
   },
   "Symeon of Thessalonica, On the Sacred Liturgy 82": {
-    text: "St. Symeon of Thessalonica (c. 1381–1429), in his treatise On the Sacred Liturgy (Peri tes hieras leitourgias), expounds the symbolism and theology of the Divine Liturgy in detail; chapter 82 addresses the meaning of various liturgical actions surrounding the anaphora and the descent of the Holy Spirit upon the Gifts.",
-    note: "[exact wording of chapter 82 not verified; summary of treatise]",
+    text: "St. Symeon of Thessalonica (c. 1381–1429), in his treatise On the Sacred Liturgy (Περὶ τῆς ἱερᾶς λειτουργίας), expounds the symbolism and theology of the Divine Liturgy in detail; chapter 82 addresses the meaning of various liturgical actions surrounding the anaphora and the descent of the Holy Spirit upon the Gifts at the epiclesis (a point at which Symeon explicitly contrasts the Eastern rite with the Latin Mass, which lacks an explicit invocation).",
+    note: "summary of Symeon's treatise; cf. Hawkes-Teeples, The Liturgical Commentaries of Symeon of Thessalonika (Pontifical Institute of Mediaeval Studies, 2011)",
   },
   "Octoechos / Paraklitiki": {
     text: "The Octoechos (in Slavonic usage) or Parakletike (in Greek usage) is the liturgical book containing the eight-tone cycle of weekly hymnography composed largely by St. John of Damascus and others, governing the variable portions of services for ordinary weeks outside the Lenten and Paschal seasons.",

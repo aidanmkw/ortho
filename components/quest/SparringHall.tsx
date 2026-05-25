@@ -3,8 +3,8 @@
 import type { QuestProgress, Boss, BossAttack } from "@/lib/quest/types";
 import { CHAPTERS } from "@/lib/quest/chapters";
 import { PixelFrame, PixelButton } from "./PixelUI";
-import PixelSprite from "./PixelSprite";
-import { ALL_SPRITES } from "@/lib/quest/sprites";
+import Portrait from "./Portrait";
+import { PORTRAITS } from "@/lib/quest/portraits";
 
 export type SparringTarget =
   | { kind: "chapter"; chapterId: string }
@@ -154,7 +154,7 @@ export default function SparringHall({
         ) : (
           <div className="space-y-2">
             {beatenChapters.map((c) => {
-              const sprite = ALL_SPRITES[c.boss.sprite];
+              const portrait = PORTRAITS[c.boss.sprite];
               return (
                 <button
                   key={c.id}
@@ -165,9 +165,9 @@ export default function SparringHall({
                   style={{ background: "#0c0a08" }}
                 >
                   <div className="flex items-center gap-3">
-                    {sprite && (
+                    {portrait && (
                       <div className="flex-shrink-0">
-                        <PixelSprite sprite={sprite} scale={3} />
+                        <Portrait config={portrait} size={56} />
                       </div>
                     )}
                     <div className="flex-1 min-w-0">

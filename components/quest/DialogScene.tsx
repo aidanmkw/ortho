@@ -1,23 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { DialogLine, Sprite } from "@/lib/quest/types";
-import { ALL_SPRITES, playerSprite } from "@/lib/quest/sprites";
+import type { DialogLine } from "@/lib/quest/types";
 import { PORTRAITS, playerPortraitConfig } from "@/lib/quest/portraits";
 import type { PortraitConfig } from "@/lib/quest/portraits";
-import PixelSprite from "./PixelSprite";
 import Portrait from "./Portrait";
 import { PixelFrame, PixelButton, Typewriter, PixelBackground } from "./PixelUI";
-
-function getSprite(
-  speakerId: string,
-  playerName: string,
-  hairColor: string
-): Sprite | null {
-  if (speakerId === "you") return playerSprite(hairColor);
-  if (speakerId === "narrator") return null;
-  return ALL_SPRITES[speakerId] ?? null;
-}
 
 function getPortraitConfig(
   speakerId: string,
@@ -72,7 +60,6 @@ export default function DialogScene({
   const [index, setIndex] = useState(0);
   const [textDone, setTextDone] = useState(false);
   const line = lines[index];
-  const sprite = line ? getSprite(line.speaker, playerName, hairColor) : null;
   const portraitConfig = line
     ? getPortraitConfig(line.speaker, hairColor)
     : null;
@@ -136,23 +123,19 @@ export default function DialogScene({
 
       {/* Speaker portrait area */}
       <div className="relative z-10 flex-1 flex items-end justify-center pb-2 pt-12 px-4">
-        {!isNarrator && (portraitConfig || sprite) && (
+        {!isNarrator && portraitConfig && (
           <div
             className={`flex flex-col items-center transition-transform ${
               isPlayer ? "translate-x-[-15%]" : "translate-x-[15%]"
             }`}
           >
             <div className={`pixel-shadow-lg pixel-platform ${glowClass}`}>
-              {portraitConfig ? (
-                <Portrait
-                  config={portraitConfig}
-                  size={220}
-                  idle
-                  hairColorHex={isPlayer ? hairColor : undefined}
-                />
-              ) : (
-                sprite && <PixelSprite sprite={sprite} scale={10} idle />
-              )}
+              <Portrait
+                config={portraitConfig}
+                size={220}
+                idle
+                hairColorHex={isPlayer ? hairColor : undefined}
+              />
             </div>
           </div>
         )}

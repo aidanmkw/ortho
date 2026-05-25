@@ -32,8 +32,8 @@ import SparringHall, {
 } from "./SparringHall";
 import QuestMenu from "./QuestMenu";
 import { PixelFrame, PixelButton, ScanlineOverlay } from "./PixelUI";
-import PixelSprite from "./PixelSprite";
-import { ALL_SPRITES, spriteAnthony } from "@/lib/quest/sprites";
+import Portrait from "./Portrait";
+import { PORTRAITS } from "@/lib/quest/portraits";
 
 type Scene =
   | "title"
@@ -499,15 +499,15 @@ function ChapterCard({
           <div className="font-pixel text-parchment/70 text-[10px] italic text-center">
             {chapter.location}
           </div>
-          {chapter.ally && (
-            <div className="mt-4 flex items-center justify-center gap-2">
-              <PixelSprite
-                sprite={ALL_SPRITES[chapter.ally] ?? spriteAnthony}
-                scale={5}
-                idle
-              />
+          {chapter.ally && PORTRAITS[chapter.ally] && (
+            <div className="mt-4 flex flex-col items-center justify-center gap-2">
+              <Portrait config={PORTRAITS[chapter.ally]} size={150} idle />
               <div className="font-pixel text-[9px] text-gold/80">
-                ALLY: <span className="text-parchment">{chapter.ally.replace("st-", "St. ").replace(/-/g, " ")}</span>
+                ALLY:{" "}
+                <span className="text-parchment">
+                  {PORTRAITS[chapter.ally].name ??
+                    chapter.ally.replace("st-", "St. ").replace(/-/g, " ")}
+                </span>
               </div>
             </div>
           )}

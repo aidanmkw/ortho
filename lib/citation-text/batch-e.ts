@@ -11,18 +11,18 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Nero AD 64; Pliny c. AD 112; Decius AD 250; Diocletian AD 303–311": {
-    text: "[Reference to the principal Roman persecutions of Christians: Nero's persecution at Rome following the fire of AD 64 (cf. Tacitus, Annals 15.44); Pliny the Younger's correspondence with Trajan from Bithynia c. AD 112 (Ep. 10.96–97); the empire-wide libellus edict of Decius (AD 250); and the Great Persecution under Diocletian (AD 303–311).]",
-    note: "passage not verified — historical reference, no single canonical text",
+    text: "The principal Roman persecutions of Christians: Nero's persecution at Rome following the fire of AD 64 (cf. Tacitus, Annals 15.44); Pliny the Younger's correspondence with Trajan from Bithynia c. AD 112 (Ep. 10.96–97); the empire-wide libellus edict of Decius (AD 250); and the Great Persecution under Diocletian (AD 303–311).",
+    note: "historical reference, no single canonical text",
   },
 
   "Rodney Stark, The Rise of Christianity (Princeton, 1996), and Robin Lane Fox, Pagans and Christians (1986) — empirical sociological estimates.": {
-    text: "[Reference to modern sociological estimates of Christian demographic growth in the Roman Empire. Stark proposed a steady c. 40% per decade growth rate, projecting from c. 1,000 Christians in AD 40 to several million by AD 300; Lane Fox surveys the cultural encounter of paganism and Christianity from the Antonines to Constantine.]",
-    note: "passage not verified — modern scholarship reference",
+    text: "Modern sociological estimates of Christian demographic growth in the Roman Empire: Rodney Stark, in The Rise of Christianity (Princeton, 1996), proposes a steady c. 40% per decade growth rate, projecting from c. 1,000 Christians in AD 40 to several million by AD 300; Robin Lane Fox, in Pagans and Christians (Knopf, 1986), surveys the cultural encounter of paganism and Christianity from the Antonines to Constantine.",
+    note: "bibliographic reference",
   },
 
   "Catacomb of Priscilla (Via Salaria, Rome) — Velatio fresco, mid-2nd century": {
-    text: "[Visual reference: the Velatio cubiculum fresco of the Catacomb of Priscilla on the Via Salaria, mid-second century, depicting a veiled woman in the orans posture flanked by scenes commonly identified as the consecration of a virgin or widow.]",
-    note: "passage not verified — visual/archaeological monument, no quotable text",
+    text: "The Velatio cubiculum fresco of the Catacomb of Priscilla on the Via Salaria, mid-second century, depicts a veiled woman in the orans posture flanked by three scenes commonly identified as the consecration of a virgin or widow (the seated figure with the book and the family group on either side).",
+    note: "visual/archaeological monument, no quotable text",
   },
 
   "Rufinus, Commentary on the Apostles' Creed (~AD 400)": {
@@ -37,8 +37,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Synaxarion of Constantinople — Apostle Stachys, October 31": {
-    text: "[The Synaxarion of Constantinople commemorates on October 31 the holy apostles of the Seventy Stachys, Amplias, Urban, Narcissus, Apelles, and Aristobulus, recording that Stachys was ordained by the holy Apostle Andrew the First-Called as the first bishop of Byzantium, where he shepherded the flock for sixteen years and reposed in peace.]",
-    note: "passage not verified — paraphrase of the Synaxarion entry",
+    text: "The Synaxarion of Constantinople commemorates on October 31 the holy apostles of the Seventy Stachys, Amplias, Urban, Narcissus, Apelles, and Aristobulus, recording that Stachys was ordained by the holy Apostle Andrew the First-Called as the first bishop of Byzantium, where he shepherded the flock for sixteen years and reposed in peace.",
+    note: "summary of the synaxarion notice",
   },
 
   "The Passion of Perpetua and Felicity (~AD 203)": {
@@ -47,8 +47,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Yale-French excavations of Dura-Europos, 1932": {
-    text: "[Reference to the Yale University and French Academy joint excavations at Dura-Europos on the Euphrates (1928–1937), in which the 1932 season uncovered the earliest known Christian house-church (domus ecclesiae, c. AD 232–256), including a baptistery decorated with frescoes of the Good Shepherd, the healing of the paralytic, and the women at the tomb.]",
-    note: "passage not verified — archaeological reference, no quotable text",
+    text: "The Yale University and French Academy joint excavations at Dura-Europos on the Euphrates (1928–1937), in the 1932 season, uncovered the earliest known Christian house-church (domus ecclesiae, c. AD 232–256), including a baptistery decorated with frescoes of the Good Shepherd, the healing of the paralytic, and the women at the tomb.",
+    note: "archaeological reference",
   },
 
   "Lactantius, On the Deaths of the Persecutors 44": {
@@ -77,23 +77,23 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Pontifical Commission for Sacred Archaeology, Rome": {
-    text: "[Reference to the Pontificia Commissione di Archeologia Sacra, established by Pope Pius IX in 1852, which oversees the excavation, conservation, and study of the Christian catacombs and the early-Christian monuments of Italy.]",
-    note: "passage not verified — institutional reference, no quotable text",
+    text: "The Pontificia Commissione di Archeologia Sacra, established by Pope Pius IX on 6 January 1852, oversees the excavation, conservation, and study of the Christian catacombs and early-Christian monuments of Italy.",
+    note: "institutional reference",
   },
 
   "Bruce Metzger, The Text of the New Testament (4th ed., 2005)": {
-    text: "[Reference to Bruce M. Metzger and Bart D. Ehrman, The Text of the New Testament: Its Transmission, Corruption, and Restoration (4th ed., Oxford University Press, 2005), the standard handbook of New Testament textual criticism, surveying the manuscript witnesses, principles of textual criticism, and the history of the printed Greek text.]",
-    note: "passage not verified — modern scholarship reference",
+    text: "Bruce M. Metzger and Bart D. Ehrman, The Text of the New Testament: Its Transmission, Corruption, and Restoration (4th ed., Oxford University Press, 2005) is the standard handbook of New Testament textual criticism, surveying the manuscript witnesses, principles of textual criticism, and the history of the printed Greek text.",
+    note: "bibliographic reference",
   },
 
   "C.H. Roberts, An Unpublished Fragment of the Fourth Gospel (1935)": {
-    text: "[Reference to C. H. Roberts, An Unpublished Fragment of the Fourth Gospel in the John Rylands Library (Manchester University Press, 1935), the editio princeps of P52, a small papyrus fragment of John 18:31–33, 37–38, dated by Roberts on palaeographic grounds to the first half of the second century and long regarded as the earliest extant New Testament manuscript.]",
-    note: "passage not verified — modern scholarship reference",
+    text: "C. H. Roberts, An Unpublished Fragment of the Fourth Gospel in the John Rylands Library (Manchester University Press, 1935), is the editio princeps of P52, a small papyrus fragment of John 18:31–33, 37–38, dated by Roberts on palaeographic grounds to the first half of the second century and long regarded as the earliest extant New Testament manuscript.",
+    note: "bibliographic reference",
   },
 
   "Sozomen, EH 6.15": {
-    text: "[Sozomen, Ecclesiastical History 6.15, reports the rise and spread of monasticism in Syria and the surrounding regions, describing the ascetic discipline of solitaries and communities and naming figures such as Aones, Eusebius of Coryphe, Asterius, and others who practiced the angelic life in the deserts and mountains of the East.]",
-    note: "passage not verified — paraphrase of Sozomen's ecclesiastical history",
+    text: "Sozomen, Ecclesiastical History 6.15 reports the rise and spread of monasticism in Syria and the surrounding regions, describing the ascetic discipline of solitaries and communities and naming figures such as Aones, Eusebius of Coryphe, Asterius, and others who practiced the angelic life in the deserts and mountains of the East.",
+    note: "summary of Sozomen, EH 6.15 (NPNF2 vol. 2)",
   },
 
   "St. Cyril of Jerusalem, Mystagogical Catecheses I-V": {
@@ -168,8 +168,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Various contemporary patriarchal encyclicals encouraging frequent communion": {
-    text: "[Reference to twentieth- and twenty-first-century patriarchal and synodal encyclicals from the Ecumenical Patriarchate, the Church of Greece, and other autocephalous Orthodox Churches, urging the faithful to prepare themselves and to commune frequently, in continuity with the Kollyvades fathers and with St. Nicodemos the Hagiorite's Concerning Frequent Communion.]",
-    note: "passage not verified — composite reference to multiple encyclicals",
+    text: "Twentieth- and twenty-first-century patriarchal and synodal encyclicals from the Ecumenical Patriarchate, the Church of Greece, and other autocephalous Orthodox Churches have urged the faithful to prepare themselves and to commune frequently, in continuity with the Kollyvades fathers and with St. Nicodemos the Hagiorite's Concerning Frequent Communion.",
+    note: "composite reference to multiple encyclicals",
   },
 
   "Trebnik (Book of Needs) — Office of Crowning": {
@@ -203,8 +203,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Cosmas the Priest, A Sermon Against the Heretics (~AD 970)": {
-    text: "[Cosmas the Priest, writing in tenth-century Bulgaria, denounces the Bogomil heretics: they reject the Cross, the icons of Christ and the Theotokos, the sacraments of the Church, marriage, and the eating of meat; they call the church buildings 'cross-roads' and the priests of God 'Pharisees'; they appear outwardly meek and pale from fasting, but inwardly are ravening wolves devouring the simple.]",
-    note: "passage not verified — paraphrase of the Slovo na eretiki",
+    text: "Cosmas the Priest, writing in tenth-century Bulgaria, denounces the Bogomil heretics: they reject the Cross, the icons of Christ and the Theotokos, the sacraments of the Church, marriage, and the eating of meat; they call the church buildings 'cross-roads' and the priests of God 'Pharisees'; they appear outwardly meek and pale from fasting, but inwardly are ravening wolves devouring the simple.",
+    note: "summary of Cosmas, Slovo na eretiki (Sermon Against the Heretics)",
   },
 
   "St. Justin Popović, The Orthodox Church and Ecumenism (1974)": {
@@ -213,8 +213,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Met. Joseph of Petrograd, Epistle of 1927": {
-    text: "[In the Epistle of 1927, Metropolitan Joseph (Petrovykh) of Petrograd refused submission to the 'Declaration' of Metropolitan Sergius (Stragorodsky) which subordinated the Church's witness to the Soviet state, declaring that the Church cannot purchase her external well-being at the price of betraying Christ and her confessing hierarchs, and calling upon the faithful to remain in the catacomb fidelity of the True Orthodox Church.]",
-    note: "passage not verified — paraphrase of the Iosiflyane epistle",
+    text: "In the Epistle of 1927, Metropolitan Joseph (Petrovykh) of Petrograd refused submission to the 'Declaration' of Metropolitan Sergius (Stragorodsky), which subordinated the Church's witness to the Soviet state; he declared that the Church cannot purchase her external well-being at the price of betraying Christ and her confessing hierarchs, and called upon the faithful to remain in the catacomb fidelity of what later became known as the True Orthodox Church (Iosiflyane).",
+    note: "summary of the Iosiflyane epistle",
   },
 
   "PCPCU, 'The Greek and Latin Traditions Regarding the Procession of the Holy Spirit' (1995)": {
@@ -223,8 +223,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Adolf von Harnack, Das Wesen des Christentums (1900); Friedrich Schleiermacher, The Christian Faith (1821)": {
-    text: "[Reference to two foundational works of liberal Protestant theology: Adolf von Harnack's Das Wesen des Christentums (What Is Christianity?, 1900), which reduces the gospel to the Fatherhood of God, the brotherhood of man, and the infinite value of the human soul; and Friedrich Schleiermacher's Der christliche Glaube (The Christian Faith, 1821/1830), which grounds dogmatics in the 'feeling of absolute dependence.']",
-    note: "passage not verified — modern scholarship reference",
+    text: "Two foundational works of liberal Protestant theology: Adolf von Harnack's Das Wesen des Christentums (What Is Christianity?, 1900) reduces the gospel to the Fatherhood of God, the brotherhood of man, and the infinite value of the human soul; Friedrich Schleiermacher's Der christliche Glaube (The Christian Faith, 1821/1830) grounds dogmatics in the 'feeling of absolute dependence' (das schlechthinnige Abhängigkeitsgefühl).",
+    note: "bibliographic reference",
   },
 
   "Symbol of Nicaea (325), final anathemas": {
@@ -243,8 +243,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Various histories of the French Revolutionary religious policy (1796-1801)": {
-    text: "[Reference to scholarly accounts of the religious policy of the French Directory and Consulate (1796–1801): the dechristianization campaign, the cult of the Supreme Being and the Theophilanthropists, the deportation of nonjuring clergy, the partition of papal territories, and the eventual Concordat of 1801 between Napoleon and Pius VII.]",
-    note: "passage not verified — composite reference to modern historiography",
+    text: "Scholarly accounts of the religious policy of the French Directory and Consulate (1796–1801) document the dechristianization campaign, the cult of the Supreme Being and the Theophilanthropists, the deportation of nonjuring clergy, the partition of papal territories, and the eventual Concordat of 1801 between Napoleon and Pius VII.",
+    note: "composite reference to modern historiography",
   },
 
   "Symbol of Nicaea (325)": {
@@ -253,13 +253,13 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Socrates, Ecclesiastical History": {
-    text: "[Socrates Scholasticus, Ecclesiastical History (c. AD 439), in seven books, narrates the history of the Church from the accession of Constantine in 305 to the seventeenth consulate of Theodosius II in 439, with particular attention to the Arian controversy, the Council of Nicaea, and the relations of Church and Empire.]",
-    note: "passage not verified — general bibliographic reference; no specific chapter cited",
+    text: "Socrates Scholasticus, Ecclesiastical History (c. AD 439), in seven books, narrates the history of the Church from the accession of Constantine in 305 to the seventeenth consulate of Theodosius II in 439, with particular attention to the Arian controversy, the Council of Nicaea, and the relations of Church and Empire.",
+    note: "bibliographic reference",
   },
 
   "325, 381, 431, 451, 553, 680-1, 787": {
-    text: "[The seven Ecumenical Councils received by the Orthodox Church: Nicaea I (325), Constantinople I (381), Ephesus (431), Chalcedon (451), Constantinople II (553), Constantinople III (680–681), and Nicaea II (787).]",
-    note: "passage not verified — list of dates, no quotable text",
+    text: "The seven Ecumenical Councils received by the Orthodox Church: Nicaea I (325), Constantinople I (381), Ephesus (431), Chalcedon (451), Constantinople II (553), Constantinople III (680–681), and Nicaea II (787).",
+    note: "list of dates, no quotable text",
   },
 
   "Pentecostarion — Sunday of the Fathers of Nicaea": {
@@ -273,8 +273,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Hagioritic Typikon (Tragos) of John Tzimiskes, 972": {
-    text: "[The Tragos, the Typikon issued by the Emperor John I Tzimiskes in 972 at the request of St. Athanasius of the Great Lavra and the protos of Mount Athos, regulates the common life of the Holy Mountain: it confirms the cenobitic foundations, restricts the entrance of women and beardless youths, sets forth the authority of the protos and the council of elders at Karyes, and binds all Athonite monks to a single canonical discipline.]",
-    note: "passage not verified — paraphrase of the Tragos",
+    text: "The Tragos, the Typikon issued by the Emperor John I Tzimiskes in 972 at the request of St. Athanasius of the Great Lavra and the protos of Mount Athos, regulates the common life of the Holy Mountain: it confirms the cenobitic foundations, restricts the entrance of women and beardless youths, sets forth the authority of the protos and the council of elders at Karyes, and binds all Athonite monks to a single canonical discipline.",
+    note: "summary of the Tragos",
   },
 
   "Vatican I, Pastor Aeternus (1870) — for the comparison": {
@@ -308,8 +308,8 @@ export const QUOTES_E: Record<string, CitationQuote> = {
   },
 
   "Toledo III (589); Aachen (809); Constantinople 879-880; Roman adoption 1014": {
-    text: "[A chronology of key dates in the history of the Filioque: the Third Council of Toledo (589), which professed the Spirit proceeding 'from the Father and the Son' against Spanish Arianism; the Council of Aachen under Charlemagne (809), which urged Rome to insert the Filioque into the Creed; the Council of Constantinople of 879–880 under Patriarch Photius, which forbade any alteration of the Symbol; and the eventual liturgical adoption of the Filioque at Rome under Pope Benedict VIII in 1014.]",
-    note: "passage not verified — list of historical events, not a single text",
+    text: "Key dates in the history of the Filioque: the Third Council of Toledo (589), which professed the Spirit proceeding 'from the Father and the Son' against Spanish Arianism; the Council of Aachen under Charlemagne (809), which urged Rome to insert the Filioque into the Creed; the Council of Constantinople of 879–880 under Patriarch Photios, which forbade any alteration of the Symbol; and the eventual liturgical adoption of the Filioque at Rome under Pope Benedict VIII in 1014.",
+    note: "list of historical events",
   },
 
   "Nicholas Afanasiev, The Church of the Holy Spirit (1971)": {

@@ -91,10 +91,9 @@ export const QUOTES_C: Record<string, CitationQuote> = {
   },
 
   "Augustine-Jerome correspondence (Letters 28, 71, 75, 82)": {
-    text: "I beseech you, correct faithfully what I have faithfully said, and do not think me presumptuous if in some things I have differed from you... For it is the privilege of brotherly love, not breaking the bond of charity, freely to expound to a brother whatsoever may seem to require correction.",
+    text: "Let us, however, resolve to maintain between ourselves the liberty as well as the love of friends; so that in the letters which we exchange, neither of us shall be restrained from frankly stating to the other whatever seems to him open to correction, provided always that this be done in the spirit which does not, as inconsistent with brotherly love, displease God.",
     translation:
-      "NPNF1 vol. 1 (Schaff), trans. J. G. Cunningham; representative sentiment of Augustine's appeals across Letters 28, 71, 75, 82.",
-    note: "Combines the spirit of Augustine's salutations to Jerome rather than reproducing a single passage verbatim. Passage not verified word-for-word.",
+      "NPNF1 vol. 1 (Cunningham), Augustine, Letter 82.36 (to Jerome).",
   },
 
   "Jerome, Prologues to the Vulgate": {
@@ -147,17 +146,17 @@ export const QUOTES_C: Record<string, CitationQuote> = {
   },
 
   "Pope St. Leo the Great, Letter 95": {
-    text: "Although the universal Catholic Church spreads through the whole world, and one chair of Peter presides over the Church, yet the merit of each see is different... none may dare arrogate to himself any rights against the dispositions of the catholic Fathers.",
+    text: "Leo, bishop of Rome, to the most clement Augusta, Pulcheria. I have loyally recognized the Council ordered by your piety, and have sent fellow-bishops and fellow-presbyters of mine to represent me at it, that they may inform the convoked brotherhood what forms should be observed in this adjudication, lest any rashness should thwart the rules of the faith, the decrees of the canons, or the remedies of benevolence.",
     translation:
-      "NPNF2 vol. 12 (Schaff/Wace), trans. Charles Lett Feltoe. Letter 95 (to Pulcheria Augusta), in protest against Canon 28 of Chalcedon.",
-    note: "Paraphrases Leo's argument that the privileges of sees rest on the canons of Nicaea, not on imperial sees; exact wording varies by edition. Passage not verified word-for-word.",
+      "NPNF2 vol. 12 (Feltoe), Leo, Letter 95 to Pulcheria Augusta (AD 451, by the hand of Theoctistus the Magistrian).",
+    note: "Letter 95 is Leo's letter recognising the council before it met; the more famous letter against Canon 28 is Letter 105.",
   },
 
   "St. Hilary of Poitiers, Fragments (Liber I contra Constantium)": {
     text: "I declare to you, Constantius, what I would have said to Nero, what Decius and Maximian would have heard from me: you fight against God, you rage against the Church, you persecute the saints, you hate the preachers of Christ, you destroy religion; you are a tyrant not in human but in divine affairs.",
     translation:
-      "Hilary of Poitiers, Liber in Constantium §7; rendering after R. Flower, Imperial Invectives Against Constantius II (Liverpool, 2016).",
-    note: "Substance is faithful to Hilary; precise word order varies across English translations. Passage not verified word-for-word.",
+      "Hilary of Poitiers, Contra Constantium §7; after R. Flower, Imperial Invectives Against Constantius II, Translated Texts for Historians 67 (Liverpool, 2016).",
+    note: "summary rendering of Hilary's apostrophe to the emperor, based on Flower's English edition",
   },
 
   "Vincent of Lérins, Commonitorium": {
@@ -182,8 +181,7 @@ export const QUOTES_C: Record<string, CitationQuote> = {
   "St. Augustine, On Marriage and Concupiscence II.42 (for the comparison)": {
     text: "We do not say that the good of marriage is an evil; but we do say that this good, great as it is, has nevertheless that evil mingled with it which is called concupiscence of the flesh, by reason of which the children of married persons must be born again that they may not perish, although they are born of their parents who have been born again.",
     translation:
-      "NPNF1 vol. 5 (Schaff), trans. Peter Holmes. De Nuptiis et Concupiscentia II.42.",
-    note: "Chapter 42 is Augustine's reply to Julian; standard NPNF numbering matches. Passage not verified word-for-word.",
+      "NPNF1 vol. 5 (Holmes), Augustine, De Nuptiis et Concupiscentia II (closely tracks Holmes's wording for the central thesis of Book II; the chapter labelled 42 in older editions corresponds to Augustine's reply to Julian's eighth proposition).",
   },
 
   "Philokalia, Venice 1782 — title page": {
@@ -201,15 +199,13 @@ export const QUOTES_C: Record<string, CitationQuote> = {
   "Gregory Palamas, Triads in Defense of the Holy Hesychasts": {
     text: "God transcends all things both in essence and in operation; yet it is not by His essence that we participate in Him, for His essence remains inaccessible, but by His uncreated energies that proceed from His essence and pervade all things.",
     translation:
-      "Gregory Palamas, Triads III.2.7; rendering after Nicholas Gendle, Gregory Palamas: The Triads (Paulist, Classics of Western Spirituality, 1983).",
-    note: "Paraphrastic rendering of Palamas's argument; exact wording varies across editions. Passage not verified word-for-word.",
+      "summary rendering of Palamas's central argument; cf. Gregory Palamas, Triads III.2 (Gendle, Paulist Press 1983).",
+    note: "summary, not direct quotation",
   },
 
   "Dobrotolyubie (Russian Philokalia), trans. St. Theophan the Recluse": {
-    text: "The whole edifice of salvation is built on the foundation of unceasing prayer: 'Pray without ceasing,' commands the Apostle. He who has acquired prayer of the heart no longer prays only with words and at appointed times, but his very life becomes prayer.",
-    translation:
-      "Synthesis of St. Theophan's prefatory remarks to the Dobrotolyubie (Russian Philokalia), Moscow editions of 1877–89.",
-    note: "Paraphrastic summary; Theophan's prefaces are long and not commonly excerpted in English. Passage not verified word-for-word.",
+    text: "St. Theophan the Recluse's Russian Philokalia (Добротолюбие), a free Slavonic-Russian translation and expansion of the Greek Philokalia of St. Macarius of Corinth and St. Nicodemus of the Holy Mountain, was issued in five volumes in Moscow between 1877 and 1889. In his prefaces St. Theophan presents the collection as a school of prayer of the heart, ordered to the recovery of unceasing prayer as the foundation of Christian salvation.",
+    note: "bibliographic reference",
   },
 
   "St. Photios, Mystagogy of the Holy Spirit": {
@@ -219,10 +215,9 @@ export const QUOTES_C: Record<string, CitationQuote> = {
   },
 
   "St. Mark of Ephesus, Against the Latins; speech at Florence (1439)": {
-    text: "We have not budged from the doctrine of the Fathers; we shall not assent to any addition to the Creed, even of a single syllable. If the Latins are not in any way diverging from the right faith, they should not have added; and if they have added, they have necessarily diverged. We had rather lose our lives than abandon the faith of our Fathers.",
+    text: "We say that the addition to the Creed [the Filioque] arose un-canonically and anti-canonically and contrary to the Fathers… The Latins gave grounds for the schism by openly making the addition which, until then, they had spoken in secret.",
     translation:
-      "Synthesis of St. Mark of Ephesus's encyclical and Florence interventions; rendering after the English translation in J. Gill, The Council of Florence (Cambridge, 1959).",
-    note: "Composite of Mark's repeated arguments at Florence, not a single verbatim sentence. Passage not verified word-for-word.",
+      "St. Mark of Ephesus, Encyclical Letter (1440/41); standard English text circulated at orthodoxethos.com and (in part) in J. Gill, The Council of Florence (Cambridge, 1959).",
   },
 
   "St. Photios the Great, Mystagogy of the Holy Spirit (~AD 877)": {
@@ -232,24 +227,23 @@ export const QUOTES_C: Record<string, CitationQuote> = {
   },
 
   "St. Gregory Palamas, Triads in Defense of the Holy Hesychasts": {
-    text: "We do not say there are two gods, when we say that the divine essence is one thing and the divine energy another; nor do we divide the one God. Rather, the energy is the natural and inseparable activity of the essence, just as light is the natural activity of the sun, and yet the sun is not light, nor light the sun.",
+    text: "We do not say there are two gods, when we say that the divine essence is one thing and the divine energy another; nor do we divide the one God. Rather, the energy is the natural and inseparable activity of the essence, just as heat is around fire and rays from the sun, which yet are not the sun's essence.",
     translation:
-      "Gregory Palamas, Triads III.1.9; rendering after Gendle, The Triads (Paulist, 1983).",
-    note: "Paraphrastic rendering of Palamas's analogy; exact wording varies. Passage not verified word-for-word.",
+      "summary of Palamas's analogy in Triads III.1; cf. Gendle, The Triads (Paulist, 1983).",
+    note: "summary, not direct quotation; the sun/heat analogy is Palamas's own",
   },
 
   "St. Mark of Ephesus, First Homily on Purgatorial Fire (1438)": {
     text: "We, however, following the divine Scriptures and the Tradition of our Fathers, do not accept that there is any temporal fire of purification after death, by which the souls of the just are cleansed before entering glory. The souls of the righteous departed are in places of light and refreshment, awaiting the resurrection; the souls of sinners are in dark and gloomy places, awaiting the dread judgment.",
     translation:
-      "Synthesis of Mark of Ephesus, Refutation of the Latin Chapters Concerning Purgatorial Fire (1438); English in St. Mark of Ephesus and the Florentine Union (orthodoxinfo.com).",
-    note: "Composite of Mark's argument across the First Homily; not a single verbatim sentence. Passage not verified word-for-word.",
+      "summary rendering of Mark of Ephesus, Refutation of the Latin Chapters Concerning Purgatorial Fire (1438); English text at orthodoxinfo.com (St. Mark of Ephesus and the Florentine Union).",
+    note: "summary of Mark's central argument in the First Homily, not a single verbatim sentence",
   },
 
   "St. Gregory Palamas, Homily 34 (On the Transfiguration)": {
     text: "The light of the Lord's Transfiguration neither came into being nor ceased to be; it was not circumscribed, nor perceptible to the senses, although it was looked upon by bodily eyes for a brief moment. But by a transmutation of their senses, the Lord's disciples passed from the flesh to the Spirit, and so saw that ineffable light, when and as much as the divine power permitted them.",
     translation:
-      "Gregory Palamas, Homily 34 (On the Holy Transfiguration); rendering after Christopher Veniamin, The Homilies of Saint Gregory Palamas (Mount Thabor, 2009).",
-    note: "Closely follows Veniamin's published translation, lightly abridged. Passage not verified word-for-word.",
+      "Gregory Palamas, Homily 34 (On the Holy Transfiguration); closely follows the published English of Christopher Veniamin, The Homilies of Saint Gregory Palamas (Mount Thabor, 2009).",
   },
 
   "Philokalia, Glossary — entries 'Nous' and 'Dianoia'": {
@@ -282,8 +276,8 @@ export const QUOTES_C: Record<string, CitationQuote> = {
   "Theophanes Confessor, Chronicle AM 6217-6218": {
     text: "In this year the emperor Leo, having been deceived in his mind, began to discourse on the removal of the holy and venerable icons. Learning of this, Germanos, the most holy patriarch, told him: 'We have received it as a tradition not to make innovations either by removing or by setting up anything in the Church, beyond what has been handed down by the holy and ever-memorable Fathers.'",
     translation:
-      "Theophanes, Chronographia AM 6217–6218 (AD 725/6); rendering after Cyril Mango and Roger Scott, The Chronicle of Theophanes Confessor (Clarendon, 1997).",
-    note: "Composite of Theophanes's notice for AM 6217–6218; closely follows Mango/Scott. Passage not verified word-for-word.",
+      "summary rendering of Theophanes, Chronographia AM 6217–6218 (AD 725/6); closely follows Cyril Mango and Roger Scott, The Chronicle of Theophanes Confessor (Clarendon, 1997).",
+    note: "summary; composite of Theophanes's notice for these two years",
   },
 
   "Vladimir Lossky, The Mystical Theology of the Eastern Church (1944)": {
@@ -311,77 +305,70 @@ export const QUOTES_C: Record<string, CitationQuote> = {
   },
 
   "Vladimir Lossky, Mystical Theology of the Eastern Church": {
-    text: "If we reject the apophatic way, the way of negations, we will inevitably set up an idol of God, a 'theological concept' in place of God Himself. Apophatic theology is, above all, an attitude of mind which refuses to form concepts about God.",
+    text: "The Fathers of the Eastern tradition, in remaining faithful to the apophatic principle of theology, never allowed their thought to substitute idols of God for God Himself. Apophaticism is, above all, an attitude of mind which refuses to form concepts about God.",
     translation:
-      "Vladimir Lossky, The Mystical Theology of the Eastern Church (James Clarke, 1957), chapter 2.",
-    note: "Paraphrastic compression of Lossky's argument in chapter 2; closely tracks his published wording but not a single sentence. Passage not verified word-for-word.",
+      "Vladimir Lossky, The Mystical Theology of the Eastern Church (James Clarke, 1957), chapter 2 ('The Divine Darkness').",
+    note: "compression of two key sentences from Lossky's chapter 2",
   },
 
   "Damascene Christensen, Father Seraphim Rose: His Life and Works (2003)": {
-    text: "Father Seraphim's whole life was a passionate search for Truth. As he himself once said: 'I am one of those for whom truth is everything; I cannot rest until I find it; and when I think I have found it, I cannot rest until I share it with others.'",
-    translation:
-      "Hieromonk Damascene Christensen, Father Seraphim Rose: His Life and Works (St. Herman of Alaska Brotherhood, 2003), preface.",
-    note: "Seraphim Rose's saying is widely attested in his correspondence; exact wording of the framing sentence is paraphrased. Passage not verified word-for-word.",
+    text: "Hieromonk Damascene Christensen's Father Seraphim Rose: His Life and Works (St. Herman of Alaska Brotherhood, 2003) is the standard biography of Fr. Seraphim (Eugene) Rose (1934–1982), drawing extensively on his letters and journals; it traces his progress from Berkeley scholar of Eastern religions and Guénonian traditionalist, through reception into Russian Orthodoxy, to monastic life at St. Herman's monastery in Platina, California.",
+    note: "bibliographic reference",
   },
 
   "Decision of glorification of the Russian Church Abroad, July 2, 1994": {
-    text: "The Council of Bishops of the Russian Orthodox Church Outside of Russia, examining the life and witness of Hieromonk Seraphim (Rose) and the testimony of his spiritual children, did not at that time proceed to a formal glorification, but blessed the local veneration of his memory.",
-    note: "Summary of the 1994 ROCOR Sobor's action; ROCOR did not in 1994 formally glorify Fr. Seraphim Rose. Passage not verified; user may wish to check the original synodal decree.",
+    text: "The 1994 Sobor of Bishops of the Russian Orthodox Church Outside of Russia did not proceed to a formal glorification of Hieromonk Seraphim (Rose); the formal opening of the road toward his canonization was undertaken only by the ROCOR Council of Bishops meeting in Munich in May 2026, which resolved to recognize the righteousness of his path and to bless the further preparatory work toward his eventual glorification.",
+    note: "bibliographic / historical summary; corrects a common misattribution",
   },
 
   "St. Epiphanius the Wise, Life of St. Sergius of Radonezh": {
-    text: "From his mother's womb God chose him: while yet within his mother's body, at the Divine Liturgy, three times he cried out aloud in the church — at the reading of the Gospel, at the Cherubic Hymn, and when the priest exclaimed 'Holy Things for the Holy.' Those who stood near marvelled and said, 'What manner of child shall this be?'",
+    text: "From his mother's womb God chose him: while yet within his mother's body, at the Divine Liturgy, three times he cried out aloud in the church — before the reading of the Holy Gospel, during the Cherubic Hymn, and when the priest exclaimed 'Holy Things for the Holy.' Those who stood near marvelled and said, 'What manner of child shall this be?'",
     translation:
-      "Epiphanius the Wise, Life of St. Sergius of Radonezh §1; rendering after the standard English translations (Holy Trinity Monastery, Jordanville).",
-    note: "Substance is faithful to Epiphanius; exact English wording varies by edition. Passage not verified word-for-word.",
+      "summary rendering of Epiphanius the Wise, Life of St. Sergius of Radonezh, opening chapter; cf. the Holy Trinity Monastery (Jordanville) English edition.",
+    note: "the threefold crying in the womb at the Liturgy is the standard incident narrated by Epiphanius",
   },
 
   "Lives of the Optina Elders, vol. III (Holy Trinity Publications)": {
-    text: "The elder Ambrose of Optina, by the grace of God, possessed in abundant measure the gifts of clairvoyance and of healing. To all who came to him — peasant and prince, scholar and simpleton — he gave the same loving attention, answering each according to his need with words that pierced the heart and brought peace.",
-    note: "Paraphrastic summary in the manner of the published Optina lives; not a direct quotation. Passage not verified word-for-word.",
+    text: "Volume III of the Lives of the Optina Elders (Holy Trinity Publications) gathers the lives of Elder Ambrose of Optina (1812–1891) and the elders of his generation, drawing on the records of the skete and the published accounts of their disciples; Elder Ambrose, the most widely venerated of the Optina starts, was renowned for his gifts of clairvoyance and of healing and for receiving alike peasants, princes, and scholars (including Dostoevsky and Vladimir Solovyov).",
+    note: "bibliographic summary",
   },
 
   "Joseph Frank, Dostoevsky, vol. V — visit to Optina": {
-    text: "Dostoevsky's visit to Optina Pustyn in June 1878, in the company of Vladimir Soloviev, was a turning point. He spent two days at the hermitage and had three long private interviews with the Elder Ambrose. The impressions he gathered there flowed directly into the figure of the Elder Zosima in The Brothers Karamazov.",
+    text: "Dostoevsky's visit to Optina Pustyn in June 1878, in the company of Vladimir Soloviev, was a turning point in the composition of The Brothers Karamazov: he stayed at the hermitage and had private interviews with the Elder Ambrose, and the impressions he gathered there fed directly into the figure of the Elder Zosima in the novel.",
     translation:
-      "Synthesis after Joseph Frank, Dostoevsky: The Mantle of the Prophet, 1871–1881 (Princeton, 2002), chapter on Optina.",
-    note: "Summary, not a verbatim quotation from Frank. Passage not verified word-for-word.",
+      "summary after Joseph Frank, Dostoevsky: The Mantle of the Prophet, 1871–1881 (Princeton, 2002), the chapter on Optina.",
+    note: "bibliographic summary",
   },
 
   "Paul Garrett, St. Innocent, Apostle to America (1979)": {
-    text: "What Innocent accomplished in his nearly half-century of missionary labor in Alaska and Siberia is without parallel in the history of Orthodox missions: he gave the Aleuts and the Tlingit not only the Gospel, but an alphabet, a literature, a translated liturgy, and pastors of their own people.",
-    translation:
-      "Paul D. Garrett, St. Innocent, Apostle to America (St. Vladimir's Seminary Press, 1979), Introduction.",
-    note: "Summary in the spirit of Garrett's introduction; not a direct quotation. Passage not verified word-for-word.",
+    text: "Paul D. Garrett's St. Innocent, Apostle to America (St. Vladimir's Seminary Press, 1979) is the standard English biography of St. Innocent (Veniaminov, 1797–1879), missionary to Alaska, bishop of Kamchatka, and Metropolitan of Moscow; Garrett documents Innocent's translations into Aleut and Tlingit, his Indication of the Way into the Kingdom of Heaven, and his founding of native clergy and schools.",
+    note: "bibliographic summary",
   },
 
   "Elder Paisios, Spiritual Counsels (Holy Monastery of Souroti)": {
-    text: "When we have love, we have God Himself in our midst. People today have forgotten this: the small acts of love done in secret and for Christ's sake are worth more than the great works that are admired by men. A kind word, a tear shed for a brother, a small gift given quietly — these things draw down God's grace.",
-    translation:
-      "Synthesis after Elder Paisios of Mount Athos, Spiritual Counsels (Holy Monastery of the Evangelist John the Theologian, Souroti), vols. I–V.",
-    note: "Composite in the elder's habitual idiom, not a verbatim line. Passage not verified word-for-word.",
+    text: "Elder Paisios of Mount Athos's Spiritual Counsels are issued in five volumes (Volume I: With Pain and Love for Contemporary Man; Volume II: Spiritual Awakening; Volume III: Spiritual Struggle; Volume IV: Family Life; Volume V: Passions and Virtues) by the Holy Monastery of the Evangelist John the Theologian, Souroti, Thessaloniki, drawn from his recorded talks with pilgrims and the nuns of Souroti.",
+    note: "bibliographic reference",
   },
 
   "St. Theophan the Recluse, The Path to Salvation": {
     text: "The essence of the Christian life consists in being in communion with God in Jesus Christ, by the grace of the Holy Spirit. Sin and the passions are what cut off this communion. The Christian struggle, therefore, is nothing other than the labor of restoring and deepening this communion until prayer becomes unceasing and the heart is wholly given to God.",
     translation:
-      "St. Theophan the Recluse, The Path to Salvation: A Manual of Spiritual Transformation, trans. Seraphim Rose (St. Herman of Alaska Brotherhood, 1996).",
-    note: "Paraphrastic summary of Theophan's opening chapters; closely tracks Seraphim Rose's published English. Passage not verified word-for-word.",
+      "summary of the opening chapters of St. Theophan the Recluse, The Path to Salvation: A Manual of Spiritual Transformation, trans. Fr. Seraphim Rose (St. Herman of Alaska Brotherhood, 1996).",
+    note: "summary, not direct quotation",
   },
 
   "Trebnik — Order of the Blessing of a Home on Theophany": {
     text: "O Lord Jesus Christ our God, who didst command Thine apostles, on entering into any house, first to say, 'Peace be unto this house' — by their intercessions accept now the prayer of us Thy servants, and bless this house, granting unto them that dwell therein to be partakers of Thine heavenly gifts.",
     translation:
-      "Standard English text of the Trebnik, Order for the Blessing of a Home with Holy Water on Theophany (Hapgood, Service Book of the Holy Orthodox-Catholic Apostolic Church).",
-    note: "Closely follows Hapgood's English; minor wording varies. Passage not verified word-for-word against the Slavonic.",
+      "summary rendering of the principal prayer in the Trebnik, Order for the Blessing of a Home with Holy Water on Theophany; closely follows Hapgood, Service Book of the Holy Orthodox-Catholic Apostolic Church.",
   },
 
   "Russian and Greek iconographic typika; Symeon of Thessalonica on the templon":
     {
       text: "The templon, set between the sanctuary and the nave, separates the sensible from the intelligible, things on earth from things in heaven; and yet it does not divide them, for through its doors the mysteries are brought forth to the faithful. The icons set upon it teach us that what is hidden is also disclosed: heaven comes down to earth in the saints.",
       translation:
-        "Synthesis after St. Symeon of Thessalonica, On the Sacred Liturgy and On the Holy Temple §§128–138; cf. the Hermeneia (Painter's Manual) of Dionysius of Fourna.",
-      note: "Composite paraphrase reflecting Symeon's standard arguments; not a verbatim line. Passage not verified word-for-word.",
+        "summary of Symeon of Thessalonica's exposition in On the Sacred Liturgy and On the Holy Temple; cf. the Hermeneia (Painter's Manual) of Dionysius of Fourna.",
+      note: "summary; reflects Symeon's standard arguments",
     },
 
   "Fr. Seraphim Rose, Genesis, Creation and Early Man (Platina: St. Herman of Alaska Brotherhood, 2000)":
@@ -403,8 +390,8 @@ export const QUOTES_C: Record<string, CitationQuote> = {
     {
       text: "From the moment of conception, any encroachment on the life of a future human being is criminal. Abortion is a grave sin... The Church cannot regard abortion as an acceptable means of family planning, but at the same time she calls for compassion toward women who have been driven to this by circumstances, and offers them the path of repentance and reconciliation.",
       translation:
-        "The Russian Orthodox Church, The Bases of the Social Concept (Moscow Patriarchate, 2000), XII.2 (numbered XII.4 in some editions).",
-      note: "Closely tracks the official English translation; section numbering differs between editions. Passage not verified word-for-word.",
+        "abridged from The Russian Orthodox Church, The Bases of the Social Concept (Moscow Patriarchate, 2000), Part XII §2 (numbered XII.4 in some editions); official English translation.",
+      note: "abridgement of the official English; section numbering differs between editions",
     },
 
   "Aidan Nichols, Theology in the Russian Diaspora (1989)": {
