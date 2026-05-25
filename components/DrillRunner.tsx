@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { QAItem, Citation } from "@/lib/types";
+import { getScriptureText } from "@/lib/bible-text";
 import { useProgress } from "./ProgressProvider";
 
 type Props = {
@@ -532,35 +533,71 @@ function CitationsList({ citations }: { citations: Citation[] }) {
       </div>
       <ul className="space-y-3">
         {citations.map((c, i) => (
-          <li key={i} className="text-sm">
-            <div className="text-gold">{c.source}</div>
-            {c.scripture && c.scripture !== c.source && (
-              <div className="text-xs text-parchment/60">{c.scripture}</div>
-            )}
-            {c.quote ? (
-              <blockquote className="border-l-2 border-gold/40 pl-3 mt-2 text-parchment/90 italic leading-relaxed">
-                {c.quote}
-              </blockquote>
-            ) : (
-              <div className="text-[11px] text-parchment/40 mt-1 italic">
-                text pending
-              </div>
-            )}
-            {c.url && (
-              <a
-                href={c.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-gold/70 hover:text-gold"
-              >
-                source link →
-              </a>
-            )}
-          </li>
+          <CitationItem key={i} c={c} />
         ))}
       </ul>
     </div>
   );
+}
+
+function CitationItem({ c }: { c: Citation }) {
+  // Prefer an explicitly-stored quote. Otherwise look the reference up
+  // in our Bible-text lookup (covers source AND scripture fields, since
+  // many citations only fill the source).
+  const verse =
+    !c.quote && (getScriptureText(c.scripture ?? "") || getScriptureText(c.source));
+
+  return (
+    <li className="text-sm">
+      <div className="text-gold">{c.source}</div>
+      {c.scripture && c.scripture !== c.source && (
+        <div className="text-xs text-parchment/60">{c.scripture}</div>
+      )}
+      {c.quote ? (
+        <blockquote className="border-l-2 border-gold/40 pl-3 mt-2 text-parchment/90 italic leading-relaxed">
+          {c.quote}
+        </blockquote>
+      ) : verse ? (
+        <blockquote className="border-l-2 border-gold/40 pl-3 mt-2 text-parchment/90 italic leading-relaxed">
+          {verse.text}
+          <footer className="not-italic text-[10px] text-parchment/50 mt-1">
+            — {translationLabel(verse.translation)}
+          </footer>
+        </blockquote>
+      ) : (
+        <div className="text-[11px] text-parchment/40 mt-1 italic">
+          text pending
+        </div>
+      )}
+      {c.url && (
+        <a
+          href={c.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-gold/70 hover:text-gold mt-1 inline-block"
+        >
+          source link →
+        </a>
+      )}
+    </li>
+  );
+}
+
+function translationLabel(t: string): string {
+  switch (t) {
+    case "EOB-NT":
+      return "Eastern Orthodox Bible, New Testament";
+    case "EOB-OT":
+      return "Eastern Orthodox Bible, Old Testament";
+    case "LXX-NETS":
+      return "NETS (Septuagint, English)";
+    case "KJV":
+      return "King James Version";
+    case "RSV":
+      return "Revised Standard Version";
+    default:
+      return t;
+  }
 }
 
 function kindLabel(k: QAItem["kind"]): string {
