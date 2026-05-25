@@ -1,3 +1,9 @@
+import { batch1 } from "@/content/library/saints/batch-1";
+import { batch2 } from "@/content/library/saints/batch-2";
+import { batch3 } from "@/content/library/saints/batch-3";
+import { batch4 } from "@/content/library/saints/batch-4";
+import { batch5 } from "@/content/library/saints/batch-5";
+
 export type SaintCategory =
   | "apostle"
   | "martyr"
@@ -35,7 +41,9 @@ export const CATEGORY_LABELS: Record<SaintCategory, string> = {
   foolforchrist: "Fool for Christ",
 };
 
-export const saints: SaintLife[] = [
+// The seed corpus — the 49 lives written before the research batches.
+// Treated as canonical: when a batch contains a duplicate slug, this wins.
+const seedSaints: SaintLife[] = [
   {
     slug: "anthony-the-great",
     name: "Anthony the Great",
@@ -875,6 +883,27 @@ export const saints: SaintLife[] = [
     ],
   },
 ];
+
+function dedupBySlug(arrays: SaintLife[][]): SaintLife[] {
+  const map = new Map<string, SaintLife>();
+  for (const arr of arrays) {
+    for (const s of arr) {
+      // First entry wins, so the seed corpus takes precedence over batches,
+      // and earlier batches take precedence over later ones.
+      if (!map.has(s.slug)) map.set(s.slug, s);
+    }
+  }
+  return [...map.values()];
+}
+
+export const saints: SaintLife[] = dedupBySlug([
+  seedSaints,
+  batch1,
+  batch2,
+  batch3,
+  batch4,
+  batch5,
+]);
 
 export function getSaint(slug: string): SaintLife | undefined {
   return saints.find((s) => s.slug === slug);
