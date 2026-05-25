@@ -606,6 +606,8 @@ function translationLabel(t: string): string {
       return "Eastern Orthodox Bible, Old Testament";
     case "LXX-NETS":
       return "NETS (Septuagint, English)";
+    case "LXX-Brenton":
+      return "Brenton's Septuagint (1851)";
     case "KJV":
       return "King James Version";
     case "RSV":

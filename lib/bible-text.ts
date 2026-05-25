@@ -6,10 +6,14 @@
 //      github.com/mindiae/ourbible-sveltekit (EOB module).
 //   2. EOB-OT — not yet incorporated; the official online EOB-OT site
 //      (easternorthodoxbible.org) blocks programmatic fetches, and no
-//      free mirror was located, so OT entries fall back to KJV.
-//   3. LXX-NETS — public-domain LXX English; reserved for when its
+//      free mirror was located. OT entries currently use LXX-Brenton
+//      (Sir Lancelot Brenton 1851) as the Orthodox-aligned fallback.
+//   3. LXX-Brenton — Sir Lancelot C. L. Brenton's English translation
+//      of the Septuagint (1851), public domain. Used for Pentateuch and
+//      Psalms OT citations where EOB-OT is unavailable.
+//   4. LXX-NETS — public-domain LXX English; reserved for when its
 //      wording is materially required (Psalms numbering, Deuterocanon).
-//   4. KJV — public domain, used as the safe fallback throughout.
+//   5. KJV — public domain, used as the safe fallback throughout.
 //
 // LXX vs Masoretic Psalm numbering: this app uses LXX numbering (the
 // Orthodox convention). "Ps 50" here = Masoretic Ps 51, "Ps 140" = MT Ps
@@ -20,7 +24,7 @@
 
 export type BibleVerse = {
   text: string;
-  translation: "EOB-NT" | "EOB-OT" | "LXX-NETS" | "KJV" | "RSV";
+  translation: "EOB-NT" | "EOB-OT" | "LXX-NETS" | "LXX-Brenton" | "KJV" | "RSV";
 };
 
 // --- Reference normalization -------------------------------------------------
@@ -122,39 +126,39 @@ export function normalizeRef(reference: string): string {
 export const VERSES: Record<string, BibleVerse> = {
   // ---------- Pentateuch ----------
   "Gen 1:26": {
-    translation: "KJV",
-    text: "And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the fowl of the air, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth.",
+    translation: "LXX-Brenton",
+    text: "And God said, Let us make man according to our image and likeness, and let them have dominion over the fish of the sea, and over the flying creatures of heaven, and over the cattle and all the earth, and over all the reptiles that creep on the earth.",
   },
   "Gen 1:27": {
-    translation: "KJV",
-    text: "So God created man in his own image, in the image of God created he him; male and female created he them.",
+    translation: "LXX-Brenton",
+    text: "And God made man, according to the image of God he made him, male and female he made them.",
   },
   "Gen 3:14-24": {
-    translation: "KJV",
-    text: "And the LORD God said unto the serpent, Because thou hast done this, thou art cursed above all cattle, and above every beast of the field; upon thy belly shalt thou go, and dust shalt thou eat all the days of thy life: And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel. … Therefore the LORD God sent him forth from the garden of Eden, to till the ground from whence he was taken. So he drove out the man; and he placed at the east of the garden of Eden Cherubims, and a flaming sword which turned every way, to keep the way of the tree of life.",
+    translation: "LXX-Brenton",
+    text: "And the Lord God said to the serpent, Because thou hast done this thou art cursed above all cattle and all the brutes of the earth, on thy breast and belly thou shalt go, and thou shalt eat earth all the days of thy life. And I will put enmity between thee and the woman and between thy seed and her seed, he shall watch against thy head, and thou shalt watch against his heel. … So the Lord God sent him forth out of the garden of Delight to cultivate the ground out of which he was taken. And he cast out Adam and caused him to dwell over against the garden of Delight, and stationed the cherubs and the fiery sword that turns about to keep the way of the tree of life.",
   },
   "Gen 14:14": {
-    translation: "KJV",
-    text: "And when Abram heard that his brother was taken captive, he armed his trained servants, born in his own house, three hundred and eighteen, and pursued them unto Dan.",
+    translation: "LXX-Brenton",
+    text: "And Abram having heard that Lot his nephew had been taken captive, numbered his own home-born servants three hundred and eighteen, and pursued after them to Dan.",
   },
   "Exod 20:4-5": {
-    translation: "KJV",
-    text: "Thou shalt not make unto thee any graven image, or any likeness of any thing that is in heaven above, or that is in the earth beneath, or that is in the water under the earth: Thou shalt not bow down thyself to them, nor serve them: for I the LORD thy God am a jealous God, visiting the iniquity of the fathers upon the children unto the third and fourth generation of them that hate me.",
+    translation: "LXX-Brenton",
+    text: "Thou shalt not make to thyself an idol, nor likeness of anything, whatever things are in the heaven above, and whatever are in the earth beneath, and whatever are in the waters under the earth. Thou shalt not bow down to them, nor serve them; for I am the Lord thy God, a jealous God, recompensing the sins of the fathers upon the children, to the third and fourth generation to them that hate me,",
   },
   "Exod 20:12": {
-    translation: "KJV",
-    text: "Honour thy father and thy mother: that thy days may be long upon the land which the LORD thy God giveth thee.",
+    translation: "LXX-Brenton",
+    text: "Honour thy father and thy mother, that it may be well with thee, and that thou mayest live long on the good land, which the Lord thy God gives to thee.",
   },
   "Exod 25:18-22": {
-    translation: "KJV",
-    text: "And thou shalt make two cherubims of gold, of beaten work shalt thou make them, in the two ends of the mercy seat. And make one cherub on the one end, and the other cherub on the other end: even of the mercy seat shall ye make the cherubims on the two ends thereof. And the cherubims shall stretch forth their wings on high, covering the mercy seat with their wings, and their faces shall look one to another; toward the mercy seat shall the faces of the cherubims be. And thou shalt put the mercy seat above upon the ark; and in the ark thou shalt put the testimony that I shall give thee. And there I will meet with thee, and I will commune with thee from above the mercy seat, from between the two cherubims which are upon the ark of the testimony, of all things which I will give thee in commandment unto the children of Israel.",
+    translation: "LXX-Brenton",
+    text: "And thou shalt make two cherubs graven in gold, and thou shalt put them on both sides of the propitiatory. They shall be made, one cherub on this side, and another cherub on the other side of the propitiatory; and thou shalt make the two cherubs on the two sides. The cherubs shall stretch forth their wings above, overshadowing the propitiatory with their wings; and their faces shall be toward each other, the faces of the cherubs shall be toward the propitiatory. And thou shalt set the propitiatory on the ark above, and thou shalt put into the ark the testimonies which I shall give thee. And I will make myself known to thee from thence, and I will speak to thee above the propitiatory between the two cherubs, which are upon the ark of testimony, even in all things which I shall charge thee concerning the children of Israel.",
   },
 
   // ---------- Psalms (LXX numbering — Orthodox convention) ----------
   // Ps 2:2 has identical numbering in LXX and MT.
   "Ps 2:2": {
-    translation: "KJV",
-    text: "The kings of the earth set themselves, and the rulers take counsel together, against the LORD, and against his anointed, saying,",
+    translation: "LXX-Brenton",
+    text: "The kings of the earth stood up, and the rulers gathered themselves together, against the Lord, and against his Christ;",
   },
   // Ps 140 (LXX) = MT Ps 141. Verse 2 is the famous "Let my prayer be set forth as incense".
   "Ps 140:2": {
