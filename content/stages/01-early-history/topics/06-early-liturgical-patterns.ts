@@ -28,14 +28,14 @@ export const earlyLiturgicalPatterns: Topic = {
       prompt:
         "Identify the source of this description of Sunday worship: 'On the day called Sunday, all who live in cities or in the country gather together to one place, and the memoirs of the apostles or the writings of the prophets are read, as long as time permits...'",
       choices: [
-        { id: "a", text: "Didache 9" },
-        { id: "b", text: "Pliny, Epistle 10.96" },
+        { id: "a", text: "Didache 9 (~AD 50-110) — eucharistic prayers from the apostolic generation.", rationale: "Wrong, but Didache 9 IS a real early text about the Eucharist. The Sunday-assembly DESCRIPTION above is Justin's 1 Apol 67." },
+        { id: "b", text: "Pliny the Younger, Letter to Trajan (~AD 112) — describing Christian morning gatherings.", rationale: "Wrong, but Pliny's letter (Epistles 10.96) IS a real source about early Christian worship. The text quoted is Justin's." },
         {
           id: "c",
-          text: "Justin Martyr, First Apology 67 (c. AD 155)",
-          rationale: "Correct — the earliest detailed description of the Sunday Eucharistic assembly.",
+          text: "Justin Martyr, First Apology 67 (c. AD 155) — the earliest detailed Sunday Liturgy description.",
+          rationale: "The classic patristic source on the order of the Sunday Eucharistic assembly.",
         },
-        { id: "d", text: "Tertullian, Apologeticus 39" },
+        { id: "d", text: "Tertullian, Apologeticus 39 (~AD 197) — describing the agape feast and Christian charity.", rationale: "Wrong, but Tertullian's Apologeticus 39 IS a real source describing Christian assembly. The quote is Justin's." },
       ],
       correctChoiceId: "c",
       citations: [
@@ -150,14 +150,14 @@ export const earlyLiturgicalPatterns: Topic = {
       prompt:
         "Which two weekly fast days does the Didache prescribe — explicitly to distinguish Christian fasting from Pharisaic practice?",
       choices: [
-        { id: "a", text: "Monday and Thursday" },
-        { id: "b", text: "Saturday and Sunday" },
+        { id: "a", text: "Monday and Thursday — the days the Pharisees fasted, deliberately avoided by Christians.", rationale: "Wrong, but in fact the Didache says Mon/Thu was the PHARISAIC pattern Christians explicitly DIDN'T use. The Christian days are Wed/Fri." },
+        { id: "b", text: "Saturday and Sunday — the two Sabbaths of the new covenant.", rationale: "Wrong. Sat/Sun are NEVER strict fasting days in the Orthodox typikon (Canon 64 of the Apostolic Canons forbids it, except for Holy Saturday)." },
         {
           id: "c",
-          text: "Wednesday (fourth day) and Friday (Preparation)",
-          rationale: "Correct. Didache 8:1. The same pattern remains in the Orthodox typikon to this day.",
+          text: "Wednesday (the fourth day, the betrayal) and Friday (the Preparation, the crucifixion).",
+          rationale: "Didache 8:1: 'Let not your fastings be with the hypocrites, for they fast on the second and the fifth day of the week; but do ye keep your fast on the fourth day and on the Preparation.' Same pattern in the Orthodox typikon today.",
         },
-        { id: "d", text: "Tuesday and Friday" },
+        { id: "d", text: "Tuesday and Friday — the days associated with the Lord's arrest and crucifixion.", rationale: "Wrong. The Lord's arrest was Wednesday night-Thursday in Synoptic chronology; the days of Christian fasting are Wed and Fri (not Tue and Fri)." },
       ],
       correctChoiceId: "c",
       citations: [
