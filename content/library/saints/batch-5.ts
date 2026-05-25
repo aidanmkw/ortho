@@ -472,7 +472,7 @@ export const batch5: SaintLife[] = [
     feastDate: 2,
     century: "15th–16th",
     dates: "c. 1433 – 1504",
-    categories: ["wonderworker", "father"],
+    categories: ["righteous", "wonderworker"],
     body: [
       "Voivode of Moldavia from 1457 to 1504, Stephen — Ștefan cel Mare — fought thirty-six battles against the Ottomans, the Hungarians, the Poles, and the Tatars, and lost only two. After each victory he founded a church or monastery in thanksgiving: forty-four in all, the painted monasteries of Bukovina — Voroneț, Sucevița, Moldovița, Putna — among them.",
       "His spiritual father was the hermit Daniel of Voroneț, to whom he went on the eve of every campaign. After the disastrous defeat at Războieni in 1476, when his own boyars closed the gates of his capital against him, he rode to Daniel's hermitage; the hermit told him to fight again, and within a year Stephen had retaken the field.",
