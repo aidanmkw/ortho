@@ -534,13 +534,17 @@ function CitationsList({ citations }: { citations: Citation[] }) {
         {citations.map((c, i) => (
           <li key={i} className="text-sm">
             <div className="text-gold">{c.source}</div>
-            {c.scripture && (
+            {c.scripture && c.scripture !== c.source && (
               <div className="text-xs text-parchment/60">{c.scripture}</div>
             )}
-            {c.quote && (
-              <blockquote className="border-l border-gold/30 pl-3 mt-1 text-parchment/85 italic">
+            {c.quote ? (
+              <blockquote className="border-l-2 border-gold/40 pl-3 mt-2 text-parchment/90 italic leading-relaxed">
                 {c.quote}
               </blockquote>
+            ) : (
+              <div className="text-[11px] text-parchment/40 mt-1 italic">
+                text pending
+              </div>
             )}
             {c.url && (
               <a
