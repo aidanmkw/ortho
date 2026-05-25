@@ -46,24 +46,51 @@ export default function RootLayout({
         <ProgressProvider>
         <RankUpBanner />
         <div className="min-h-screen">
-          <header className="border-b border-gold/20">
-            <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-3 no-underline">
-                <span className="text-gold text-2xl">☦</span>
-                <div>
-                  <div className="text-parchment text-base sm:text-lg font-semibold tracking-wide">
+          <header className="border-b border-gold/20 sticky top-0 z-30 bg-[#0c0a08]/95 backdrop-blur">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3">
+              <Link href="/" className="flex items-center gap-2 sm:gap-3 no-underline min-w-0">
+                <span className="text-gold text-2xl shrink-0">☦</span>
+                <div className="min-w-0">
+                  <div className="text-parchment text-sm sm:text-base font-semibold tracking-wide truncate">
                     THE ORTHODOX APOLOGIST
                   </div>
-                  <div className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold/70">
+                  <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-gold/70 hidden sm:block">
                     Be ready always · 1 Peter 3:15
                   </div>
                 </div>
               </Link>
-              <nav className="flex gap-3 sm:gap-6 text-xs sm:text-sm">
-                <Link href="/" className="text-parchment/80 hover:text-gold">Stages</Link>
-                <Link href="/daily" className="text-parchment/80 hover:text-gold">Daily</Link>
-                <Link href="/review" className="text-parchment/80 hover:text-gold">Review</Link>
-                <Link href="/settings" className="text-parchment/80 hover:text-gold">⚙</Link>
+              <nav className="flex gap-1 sm:gap-2 text-[10px] sm:text-xs shrink-0">
+                <Link
+                  href="/"
+                  className="text-parchment/80 hover:text-gold px-2 py-1 rounded hover:bg-gold/5"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/quest"
+                  className="text-parchment/80 hover:text-gold px-2 py-1 rounded hover:bg-gold/5"
+                >
+                  ⚔ Quest
+                </Link>
+                <Link
+                  href="/daily"
+                  className="text-parchment/80 hover:text-gold px-2 py-1 rounded hover:bg-gold/5"
+                >
+                  Daily
+                </Link>
+                <Link
+                  href="/review"
+                  className="text-parchment/80 hover:text-gold px-2 py-1 rounded hover:bg-gold/5"
+                >
+                  Review
+                </Link>
+                <Link
+                  href="/settings"
+                  className="text-parchment/80 hover:text-gold px-2 py-1 rounded hover:bg-gold/5"
+                  aria-label="Settings"
+                >
+                  ⚙
+                </Link>
               </nav>
             </div>
           </header>
