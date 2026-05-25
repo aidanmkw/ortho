@@ -394,8 +394,19 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
 };
 
 // Player portrait config — hair color comes from save data.
+// Maps the chosen hair-hex to the matching AI portrait variant.
+const PLAYER_IMAGE_BY_HAIR: Record<string, string> = {
+  "#7a4f1d": "player-brown.webp",
+  "#1a1a1a": "player-black.webp",
+  "#dca873": "player-blond.webp",
+  "#a63216": "player-auburn.webp",
+  "#3e2c1c": "player-dark.webp",
+  "#cfcfcf": "player-silver.webp",
+};
+
 export function playerPortraitConfig(hairHex: string): PortraitConfig {
   return {
+    image: PLAYER_IMAGE_BY_HAIR[hairHex.toLowerCase()] ?? "player-brown.webp",
     skin: "light",
     hairStyle: "modern",
     hairColor: "brown", // overridden via custom hair color in renderer
