@@ -118,8 +118,8 @@ export const QUOTES_A: Record<string, CitationQuote> = {
     translation: "ANF 1 (Roberts–Donaldson), First Apology 67",
   },
   "Tertullian, On the Resurrection of the Dead 41": {
-    text: "[Quotation not located at the exact chapter in available editions. The chapter, with the surrounding context of De Resurrectione Carnis, argues that the very same flesh which dies will rise — not a substituted body but the identical flesh, transformed into incorruption.]",
-    note: "passage not verified",
+    text: "It is still the same sentiment which he follows up in the passage in which he puts the recompense above the sufferings: 'For we know,' says he, 'that if our earthly house of this tabernacle were dissolved, we have a building of God, a house not made with hands, eternal in the heavens.' In short, owing to the fact that our flesh is undergoing dissolution through its sufferings, we shall be provided with a home in heaven.",
+    translation: "ANF 3 (Holmes), On the Resurrection of the Flesh 41 (opening)",
   },
   "Tertullian, Against Marcion 5.10": {
     text: "We say, therefore, that the flesh rises again, but that when changed it obtains the kingdom. 'For the dead shall be raised incorruptible,' even those who had been corruptible when their bodies fell into decay; 'and we shall be changed, in a moment, in the twinkling of an eye.'",
@@ -138,8 +138,8 @@ export const QUOTES_A: Record<string, CitationQuote> = {
     translation: "ANF 1 (Roberts–Donaldson), First Apology 66",
   },
   "Common Declaration of Pope Paul VI and Patriarch Athenagoras, 7 December 1965": {
-    text: "[Pope Paul VI and Patriarch Athenagoras I] regret the offensive words, the reproaches without foundation, and the reprehensible gestures which, on both sides, have marked or accompanied the sad events of this period… they likewise regret and remove both from memory and from the midst of the Church the sentences of excommunication which followed these events, the memory of which has influenced actions up to our day.",
-    translation: "Vatican / Ecumenical Patriarchate official text (7 December 1965)",
+    text: "They regret the offensive words, the reproaches without foundation, and the reprehensible gestures which, on both sides, have marked or accompanied the sad events of this period… They likewise regret and remove both from memory and from the midst of the Church the sentences of excommunication which followed these events, the memory of which has influenced actions up to our day and has hindered closer relations in charity; and they commit these excommunications to oblivion.",
+    translation: "Vatican / Ecumenical Patriarchate official English text (7 December 1965)",
   },
   "Evagrius Ponticus, Praktikos; Chapters on Prayer": {
     text: "If you are a theologian, you will pray truly, and if you pray truly, you are a theologian.",
@@ -192,8 +192,8 @@ export const QUOTES_A: Record<string, CitationQuote> = {
     note: "abridged paraphrase reflecting the cumulative argument of the eight books",
   },
   "Eusebius, Life of Constantine III.4–15": {
-    text: "[Constantine] convoked a General Council, inviting the speedy attendance of bishops from all quarters… More than two hundred and fifty bishops were present, the number of presbyters, deacons, and acolytes being almost beyond computation. Of these ministers of God, some were distinguished by wisdom and eloquence, others by the gravity of their lives and patient fortitude of character, while others again united in themselves all these graces.",
-    translation: "abridged from NPNF2 1 (Richardson), Life of Constantine 3.6–9",
+    text: "He convoked a general council, inviting the speedy attendance of bishops from all quarters, in letters expressive of the honorable estimation in which he held them… The number of bishops exceeded two hundred and fifty, while that of the presbyters and deacons in their train, and the crowd of acolytes and other attendants was altogether beyond computation. Of these ministers of God, some were distinguished by wisdom and eloquence, others by the gravity of their lives and by patient fortitude of character, while others again united in themselves all these graces.",
+    translation: "NPNF2 1 (Richardson), Life of Constantine 3.6, 3.9 (abridged)",
   },
   "Eusebius, Ecclesiastical History 3.36": {
     text: "At this time flourished in Asia Polycarp, the disciple of the apostles, who had been appointed bishop of the church of Smyrna by those who had seen and heard the Lord. And at the same time… Ignatius, who is celebrated by very many even to the present day, the second after Peter to succeed to the bishopric of Antioch. Report says that he was sent from Syria to Rome, and became food for wild beasts on account of his testimony to Christ.",
@@ -238,8 +238,8 @@ export const QUOTES_A: Record<string, CitationQuote> = {
     translation: "NPNF2 1 (McGiffert), Eusebius EH 3.15",
   },
   "Eusebius, Life of Constantine IV.61-62": {
-    text: "[At Helenopolis Constantine] knelt upon the pavement and entreated [the bishops] like a suppliant, requesting to receive baptism from their hands… 'No more ambiguity now: if it should please the Lord of life and death that I live longer, I am determined to live according to such rules as are pleasing to God.' Saying these things, the prelates performed the sacred ceremonies in the usual manner, and… imparted to him the divine seal.",
-    translation: "abridged from NPNF2 1 (Richardson), Life of Constantine 4.61–62",
+    text: "He poured forth his supplications and confessions to God, kneeling on the pavement in the church itself, in which he also now for the first time received the imposition of hands with prayer (IV.61). … 'The time is arrived which I have long hoped for, with an earnest desire and prayer that I might obtain the salvation of God. The hour is come in which I too may have the blessing of that seal which confers immortality.' … After this the prelates performed the sacred ceremonies in the usual manner, and, having given him the necessary instructions, made him a partaker of the mystic ordinance (IV.62).",
+    translation: "NPNF2 1 (Richardson), Life of Constantine 4.61–62 (abridged)",
   },
   "Eusebius EH 3.1.1": {
     text: "Such was the condition of the Jews. Meanwhile the holy apostles and disciples of our Saviour were dispersed throughout the world. Parthia, according to tradition, was allotted to Thomas as his field of labour, Scythia to Andrew, and Asia to John, who, after he had lived some time there, died at Ephesus.",
