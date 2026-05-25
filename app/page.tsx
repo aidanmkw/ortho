@@ -1,5 +1,5 @@
 import { curriculum } from "@/lib/content";
-import PrimaryActions from "@/components/PrimaryActions";
+import HubScene from "@/components/HubScene";
 import StageGrid from "@/components/StageGrid";
 
 export default function Home() {
@@ -19,21 +19,10 @@ export default function Home() {
 
   return (
     <div>
-      {/* Compact hero */}
-      <section className="mb-6 sm:mb-8">
-        <h1 className="font-display text-2xl sm:text-4xl text-parchment leading-tight">
-          Train as an Apologist.
-        </h1>
-        <p className="text-parchment/70 text-sm sm:text-base mt-2 max-w-2xl">
-          Pick what to do right now — or scroll down to browse the 14
-          stages of the curriculum.
-        </p>
-      </section>
+      {/* Visual-novel hub: tap an object in the study to begin */}
+      <HubScene />
 
-      {/* The "what now?" panel — main entry point */}
-      <PrimaryActions />
-
-      {/* Curriculum browser */}
+      {/* Curriculum browser (reached by tapping the codex above, or scrolling) */}
       <section id="stages" className="scroll-mt-20">
         <div className="flex items-baseline justify-between mb-4">
           <h2 className="text-base sm:text-xl font-display text-gold tracking-widest uppercase">
