@@ -428,7 +428,7 @@ export const batch5: SaintLife[] = [
     body: [
       "Born Jovan Dabović in San Francisco to Serbian immigrant parents — the first child born in America to be later ordained an Orthodox priest — Sebastian served at the Russian cathedral in San Francisco before being tonsured monk in 1892 and ordained priest the following year by Bishop Nicholas.",
       "He founded the first Serbian Orthodox parishes in the United States: Jackson, California (1894); Angels Camp; McKeesport, Pennsylvania; Chicago. He preached in English, Serbian, and Russian; he wrote The Holy Orthodox Church and Lives of the Serbian Saints, the first Orthodox catechetical works composed in English in America; and he traveled tirelessly between mining camps in the West and immigrant industrial towns in the East.",
-      "Returning to Serbia after the First World War to assist the recovery of his ancestral church, he was caught by the German occupation in 1941 and reposed at the monastery of Žiča on November 30, 1940. The Serbian Orthodox Church and the Orthodox Church in America jointly glorified him in 2015.",
+      "Returning to Serbia after the First World War to assist the recovery of his ancestral church, he served there for the rest of his life and reposed at the monastery of Žiča on November 30, 1940. The Serbian Orthodox Church and the Orthodox Church in America jointly glorified him in 2015.",
     ],
   },
   {
