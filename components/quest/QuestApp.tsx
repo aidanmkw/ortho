@@ -30,6 +30,7 @@ import SparringHall, {
   buildSkirmishBoss,
   type SparringTarget,
 } from "./SparringHall";
+import QuestMenu from "./QuestMenu";
 import { PixelFrame, PixelButton, ScanlineOverlay } from "./PixelUI";
 import PixelSprite from "./PixelSprite";
 import { ALL_SPRITES, spriteAnthony } from "@/lib/quest/sprites";
@@ -54,6 +55,7 @@ export default function QuestApp() {
   const [scene, setScene] = useState<Scene>("title");
   const [muted, setMutedState] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   // Outcomes from the most recent battle (for the review screen)
   const [lastResolved, setLastResolved] = useState<ResolvedAttack[]>([]);
   const [lastOutcome, setLastOutcome] = useState<"victory" | "defeat">("victory");
@@ -315,26 +317,45 @@ export default function QuestApp() {
     <div className="font-pixel fixed inset-0 z-[100] bg-black overflow-y-auto">
       <ScanlineOverlay />
 
-      {/* Mute toggle */}
-      {scene !== "title" && (
-        <button
-          onClick={toggleMute}
-          className="fixed top-2 right-2 z-[60] font-pixel text-[10px] bg-black/70 border-2 border-gold/40 text-gold px-2 py-1"
-          aria-label="Toggle sound"
-        >
-          {muted ? "🔇" : "🔊"}
-        </button>
-      )}
-      {scene !== "title" && scene !== "create" && (
-        <button
-          onClick={resetGame}
-          className="fixed top-2 left-2 z-[60] font-pixel text-[10px] bg-black/70 border-2 border-crimson/40 text-crimson px-2 py-1"
-          aria-label="Reset quest"
-          title="Reset Quest"
-        >
-          ⟲
-        </button>
-      )}
+      {/* Persistent menu button — visible from EVERY scene */}
+      <button
+        onClick={() => {
+          sfx.click();
+          setMenuOpen(true);
+        }}
+        className="fixed top-2 right-2 z-[60] font-pixel text-[11px] bg-black/85 border-2 border-gold/60 text-gold px-3 py-1.5 active:translate-y-[1px] hover:border-gold transition"
+        aria-label="Open menu"
+        style={{ boxShadow: "0 2px 0 0 rgba(0,0,0,0.6)" }}
+      >
+        ☰ Menu
+      </button>
+
+      <QuestMenu
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onReturnToTitle={() => {
+          setSparringBoss(null);
+          setScene("title");
+        }}
+        onOpenSparringHall={() => {
+          setSparringBoss(null);
+          setScene("sparring-hall");
+        }}
+        onResetQuest={() => {
+          clearProgress();
+          setProgress(emptyProgress());
+          setSparringBoss(null);
+          setScene("title");
+        }}
+        muted={muted}
+        onToggleMute={toggleMute}
+        hasSave={progress.hero !== null}
+        inSparring={
+          scene === "sparring-hall" ||
+          scene === "sparring-battle" ||
+          scene === "sparring-review"
+        }
+      />
 
       {scene === "title" && (
         <TitleScreen
