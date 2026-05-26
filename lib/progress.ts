@@ -8,9 +8,11 @@ export type ItemRecord = {
   correct: number;
   // 0..1 - moving mastery score, exponential weighted.
   masteryScore: number;
-  // SM-2 lite: interval in days; ease factor.
-  intervalDays: number;
-  ease: number;
+  // FSRS-lite scheduling: memory stability (days until recall ~ target
+  // retention) and difficulty (1..10). Replaces the old SM-2 interval/ease,
+  // whose "ease hell" permanently over-scheduled lapsed items.
+  stability: number;
+  difficulty: number;
   // last seen / next due, epoch ms
   lastSeenAt: number;
   nextDueAt: number;
@@ -19,7 +21,7 @@ export type ItemRecord = {
 };
 
 export type ProgressState = {
-  version: 2;
+  version: 3;
   xp: number;
   rank: ApologistRank;
   streakDays: number;
@@ -75,9 +77,65 @@ export function xpForCorrect(difficulty: Difficulty, isFirstTry: boolean) {
   return isFirstTry ? base : Math.floor(base / 2);
 }
 
+// --- FSRS-lite scheduling ---------------------------------------------------
+
+const DAY_MS = 86400000;
+const TARGET_RETENTION = 0.9;
+
+type Grade = "again" | "hard" | "good";
+
+const INIT_STABILITY: Record<Grade, number> = { again: 0.4, hard: 1.0, good: 3.0 };
+const INIT_DIFFICULTY: Record<Grade, number> = { again: 7.0, hard: 5.5, good: 4.5 };
+
+function clamp(v: number, lo: number, hi: number) {
+  return Math.max(lo, Math.min(hi, v));
+}
+
+// FSRS power-forgetting curve: R falls to ~0.9 at t = stability.
+function retrievability(elapsedDays: number, stability: number): number {
+  if (stability <= 0) return 0;
+  return Math.pow(1 + elapsedDays / (9 * stability), -1);
+}
+
+function scheduleNext(
+  prevStability: number,
+  prevDifficulty: number,
+  elapsedDays: number,
+  grade: Grade,
+  isFirst: boolean
+): { stability: number; difficulty: number } {
+  if (isFirst || prevStability <= 0) {
+    return {
+      stability: INIT_STABILITY[grade],
+      difficulty: INIT_DIFFICULTY[grade],
+    };
+  }
+
+  const R = retrievability(elapsedDays, prevStability);
+
+  // Difficulty: wrong pushes harder, good eases; then mean-revert toward 5.
+  const delta = grade === "again" ? 1.0 : grade === "hard" ? 0.3 : -0.15;
+  let d = clamp(prevDifficulty + delta, 1, 10);
+  d = clamp(d + 0.05 * (5 - d), 1, 10);
+
+  let stability: number;
+  if (grade === "again") {
+    // Proportional lapse — recovery scales with prior stability, no full reset.
+    stability = Math.max(0.4, prevStability * 0.4);
+  } else {
+    const ease = grade === "good" ? 3.0 : 0.5;
+    const diffFactor = (11 - d) / 10;
+    // Bigger gains when the card was actually due (low R) and not too hard.
+    const mult = 1 + ease * diffFactor * clamp(1.15 - R, 0.05, 1.15);
+    stability = Math.max(prevStability + 0.5, prevStability * mult);
+  }
+
+  return { stability, difficulty: d };
+}
+
 export function emptyProgress(): ProgressState {
   return {
-    version: 2,
+    version: 3,
     xp: 0,
     rank: "Inquirer",
     streakDays: 0,
@@ -114,13 +172,13 @@ export function recordResult(
 ): ProgressState {
   const now = Date.now();
   const today = todayKey();
-  const prev = state.items[itemId] ?? {
+  const prev: ItemRecord = state.items[itemId] ?? {
     itemId,
     attempts: 0,
     correct: 0,
     masteryScore: 0,
-    intervalDays: 0,
-    ease: 2.5,
+    stability: 0,
+    difficulty: 5,
     lastSeenAt: 0,
     nextDueAt: 0,
     lastResult: null,
@@ -133,28 +191,29 @@ export function recordResult(
   const target = wasCorrect ? 1 : result === "wrong" ? 0 : prev.masteryScore;
   const masteryScore = prev.masteryScore * 0.6 + target * 0.4;
 
-  // SM-2 lite scheduling.
-  let interval = prev.intervalDays;
-  let ease = prev.ease;
-  if (wasCorrect) {
-    if (interval === 0) interval = 1;
-    else if (interval === 1) interval = 3;
-    else interval = Math.round(interval * ease);
-    ease = Math.max(1.3, ease + 0.1);
-  } else if (result === "wrong") {
-    interval = 0;
-    ease = Math.max(1.3, ease - 0.2);
-  }
+  // FSRS-lite scheduling.
+  const grade: Grade =
+    result === "correct" ? "good" : result === "skipped" ? "hard" : "again";
+  const elapsedDays = prev.lastSeenAt ? (now - prev.lastSeenAt) / DAY_MS : 0;
+  const sched = scheduleNext(
+    prev.stability,
+    prev.difficulty,
+    elapsedDays,
+    grade,
+    isFirstTry
+  );
+  // Interval to the target-retention point; with R=0.9 this is ~= stability.
+  const intervalDays = 9 * sched.stability * (1 / TARGET_RETENTION - 1);
 
   const updatedItem: ItemRecord = {
     ...prev,
     attempts: prev.attempts + 1,
     correct: prev.correct + (wasCorrect ? 1 : 0),
     masteryScore,
-    intervalDays: interval,
-    ease,
+    stability: sched.stability,
+    difficulty: sched.difficulty,
     lastSeenAt: now,
-    nextDueAt: now + interval * 86400000,
+    nextDueAt: now + Math.max(DAY_MS * 0.5, intervalDays * DAY_MS),
     lastResult: result,
   };
 
@@ -238,18 +297,43 @@ export function loadProgress(): ProgressState {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return emptyProgress();
     const parsed = JSON.parse(raw) as Record<string, unknown>;
-    const version = parsed.version;
-    // Migrate v1 → v2: add the grace-freeze fields, keep everything else.
-    if (version === 1) {
-      return {
-        ...(parsed as unknown as ProgressState),
-        version: 2,
-        freezesAvailable: 1,
-        freezeMonth: null,
-      };
+    const version = parsed.version as number | undefined;
+    if (version !== 1 && version !== 2 && version !== 3) {
+      return emptyProgress();
     }
-    if (version !== 2) return emptyProgress();
-    return parsed as unknown as ProgressState;
+    const state = parsed as unknown as ProgressState & {
+      freezesAvailable?: number;
+      freezeMonth?: string | null;
+    };
+    // v1 → +grace-freeze fields.
+    if (version === 1) {
+      state.freezesAvailable = 1;
+      state.freezeMonth = null;
+    }
+    // v1/v2 → migrate each item record from SM-2 (intervalDays/ease) to
+    // FSRS-lite (stability/difficulty), preserving due dates.
+    if (version === 1 || version === 2) {
+      const items: Record<string, ItemRecord> = {};
+      for (const [id, raw0] of Object.entries(state.items ?? {})) {
+        const old = raw0 as ItemRecord & { intervalDays?: number; ease?: number };
+        items[id] = {
+          itemId: old.itemId ?? id,
+          attempts: old.attempts ?? 0,
+          correct: old.correct ?? 0,
+          masteryScore: old.masteryScore ?? 0,
+          stability:
+            old.stability ??
+            (old.intervalDays && old.intervalDays > 0 ? old.intervalDays : 0.4),
+          difficulty: old.difficulty ?? 5,
+          lastSeenAt: old.lastSeenAt ?? 0,
+          nextDueAt: old.nextDueAt ?? 0,
+          lastResult: old.lastResult ?? null,
+        };
+      }
+      state.items = items;
+    }
+    state.version = 3;
+    return state;
   } catch {
     return emptyProgress();
   }
