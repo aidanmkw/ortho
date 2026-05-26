@@ -1,10 +1,11 @@
 import type { Chapter } from "./types";
+import { EXPANSION_CHAPTERS } from "@/content/quest/expansion";
 
 // Each chapter: setting + 2-6 narrative dialog lines + boss with 3-5 attacks +
 // outro + reward. Speaker IDs match sprite ids in lib/quest/sprites.ts.
 // "$you" is replaced at runtime with the hero's name.
 
-export const CHAPTERS: Chapter[] = [
+const BASE_CHAPTERS: Chapter[] = [
   // ===================================================================
   // CHAPTER 1 — THE OPENING (Modern → Antioch road)
   // ===================================================================
@@ -3873,6 +3874,47 @@ export const CHAPTERS: Chapter[] = [
     reward: { xp: 2, healHp: true },
   },
 ];
+
+// Assemble the full campaign in chronological order, weaving the expansion
+// chapters between the original arc, then renumber for display. Progression is
+// by array index, so order here IS the play order.
+function byId(id: string): Chapter {
+  const found =
+    BASE_CHAPTERS.find((c) => c.id === id) ??
+    EXPANSION_CHAPTERS.find((c) => c.id === id);
+  if (!found) throw new Error(`chapter not found: ${id}`);
+  return found;
+}
+
+const CHRONOLOGICAL_ORDER: string[] = [
+  "ch1-antioch", //          AD 107
+  "ch101-polycarp", //       AD 155
+  "ch102-justin", //         AD 165
+  "ch2-catacombs", //        AD 250
+  "ch3-nicaea", //           AD 325
+  "ch4-desert", //           AD 360
+  "ch103-cappadocians", //   AD 381
+  "ch104-chrysostom", //     AD 404
+  "ch105-ephesus", //        AD 431
+  "ch5-chalcedon", //        AD 451
+  "ch106-maximus", //        AD 662
+  "ch6-icons", //            AD 787
+  "ch107-cyril-methodius", // AD 867
+  "ch108-photios", //        AD 879
+  "ch109-rus", //            AD 988
+  "ch7-schism", //           AD 1054
+  "ch8-florence", //         AD 1439
+  "ch9-soviets", //          AD 1937
+  "ch10-modern", //          present
+  "ch10b-reformed", //       present
+  "ch10c-atheist", //        present
+  "ch11-doubt", //           beyond time (finale)
+];
+
+export const CHAPTERS: Chapter[] = CHRONOLOGICAL_ORDER.map((id, i) => ({
+  ...byId(id),
+  number: i + 1,
+}));
 
 export function getChapter(index: number): Chapter | undefined {
   return CHAPTERS[index];
