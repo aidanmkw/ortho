@@ -3201,22 +3201,12 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "You wake. Light through cheap curtains. Your phone, your coffee maker, the hum of traffic below. The black leather book with the three-bar cross sits on your nightstand, exactly where you left it. And yet nothing is the same. You have been gone for centuries and home for no time at all.",
-      },
-      {
-        speaker: "narrator",
-        text:
-          "You can still hear St. Ignatius's chains scraping the road to Rome, still feel the grit of Macarius's desert between your teeth, still see Mark of Ephesus's hollow eyes refusing the pen at Florence. They walk with you now. 'The great cloud of witnesses' is no longer a phrase from a Sunday-school felt-board. You have met them.",
+          "You wake. Light through cheap curtains. Your phone, your coffee maker, the hum of traffic below. The black leather book with the three-bar cross sits on your nightstand, exactly where you left it. And yet nothing is the same. You have been gone for centuries and home for no time at all. You can still hear St. Ignatius's chains scraping the road to Rome, still feel the grit of Macarius's desert between your teeth, still see Mark of Ephesus's hollow eyes refusing the pen at Florence. 'The great cloud of witnesses' is no longer a Sunday-school phrase. You have met them.",
       },
       {
         speaker: "st-anthony",
         text:
-          "You have walked the whole path — from the Apostolic Age through the Councils, through the dark night of the desert, through Schism and Council, through the Gulag. The Church survived all of it.",
-      },
-      {
-        speaker: "st-anthony",
-        text:
-          "Now comes the test you came for: defending the faith in the AGE YOU LIVE IN. The persecutions are less bloody but more subtle — no centurion, no NKVD captain, only the air itself, which has quietly forgotten God. In Pavlov's day a man had to be DRAGGED from the faith. In yours, men drift from it without ever noticing they have moved.",
+          "You have walked the whole path — from the Apostolic Age through the Councils, the dark night of the desert, the Schism, the Gulag. The Church survived all of it. Now comes the test you came for: defending the faith in the AGE YOU LIVE IN. The persecutions are less bloody but more subtle — no centurion, no NKVD captain, only the air itself, which has quietly forgotten God. In Pavlov's day a man had to be DRAGGED from the faith. In yours, men drift from it without ever noticing they have moved.",
       },
       {
         speaker: "you",
@@ -3225,21 +3215,7 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "st-anthony",
         text:
-          "It is far more dangerous, child. The martyr knows he is in a battle. Your neighbors do not. They will not threaten you — they will simply find your faith quaint, or offer you a brighter, easier version of it. Three voices will come to you today, each sincere, each speaking what millions believe. None of them hates Christ. That is what makes them hard.",
-      },
-      {
-        speaker: "st-anthony",
-        text:
-          "Be ready always to give an account for the hope that is in you — but with meekness and reverence (1 Peter 3:15). Note the meekness, $you. The world does not need another debater who must win. It needs a SAINT who can answer, and still love the one he answers. Win the argument and lose the soul, and you have lost.",
-      },
-      {
-        speaker: "you",
-        text: "Then where do I even begin with people who already think they have the answer?",
-      },
-      {
-        speaker: "st-anthony",
-        text:
-          "Begin where you began with the centurion — by taking them seriously. The first voice today claims that the whole Church you have just walked through, from Ignatius to the New Martyrs, FELL into total darkness, and had to be started over from scratch eighteen centuries late. You have stood in that 'darkness.' You know better than any living scholar that it never went out. Let them tell their story; then tell them what you have seen.",
+          "It is far more dangerous, child. The martyr knows he is in a battle; your neighbors do not. Three voices will come to you today, each sincere, each speaking what millions believe. None of them hates Christ — that is what makes them hard. Be ready always to give an account for the hope that is in you — but with meekness and reverence (1 Peter 3:15). Note the meekness, $you. The world does not need another debater who must win. It needs a SAINT who can answer, and still love the one he answers. Win the argument and lose the soul, and you have lost. The first voice today will claim the whole Church you walked through FELL into darkness and had to be started over. You have stood in that 'darkness.' You know it never went out. Let them tell their story; then tell them what you have seen.",
       },
       {
         speaker: "narrator",
@@ -3250,6 +3226,78 @@ const BASE_CHAPTERS: Chapter[] = [
         speaker: "lds",
         text:
           "Good morning! I'm Elder Williams, and this is Elder Park. We're missionaries for the Church of Jesus Christ of Latter-day Saints. May we share with you a message about Jesus Christ and the restoration of His true Church?",
+      },
+      {
+        speaker: "you",
+        text: "Restoration. So you believe something was lost — that the Church Christ founded ceased to exist, and had to be brought back.",
+      },
+      {
+        speaker: "lds",
+        text:
+          "Exactly, yes. We call it the Great Apostasy. After the original Apostles were killed, the authority to act in God's name — the priesthood — was taken from the earth. Truth got mingled with Greek philosophy and the traditions of men. For centuries there was no true Church anywhere. Then in 1820, God the Father and Jesus Christ appeared to the boy Joseph Smith in a grove in New York, and the fullness of the Gospel was restored.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "He is sincere, and the story is beautiful — a young man, a grove, light from heaven. But mark the keystone: that the Church FELL. Everything rests on that one stone. You alone have walked those 'lost' centuries. You watched the lamp they say went out. Begin there.",
+      },
+      {
+        speaker: "you",
+        text: "Elder Williams — I have to tell you something strange. I have read the men who came right after the Apostles. Clement of Rome, writing while John may still have been alive. Ignatius of Antioch, on his way to the lions in 107. There is no gap. No silent century where the lights went out. The same faith, unbroken, bishop after bishop.",
+      },
+      {
+        speaker: "lds",
+        text:
+          "But that's just it — the men were still there, the buildings were still there, but the authority was gone. The priesthood keys were lost. That's why a restoration was needed, not a reformation. You can't reform something that's dead.",
+      },
+      {
+        speaker: "you",
+        text: "Then point me to the century when it died. Christ said the gates of hell would not prevail against His Church (Matthew 16:18). If you are right, the gates of hell DID prevail — totally, for seventeen hundred years — until 1820. Either Christ's promise failed, or the apostasy never happened. It cannot be both.",
+      },
+      {
+        speaker: "lds",
+        text:
+          "That's... a fair question. We'd say the Church survived as a remnant of believers, but without the priesthood authority to administer saving ordinances. The fruits were corrupted.",
+      },
+      {
+        speaker: "you",
+        text: "Then set the history aside for a moment. How do you yourself know it is true? When you knelt and asked God about the Book of Mormon, what answered you?",
+      },
+      {
+        speaker: "lds",
+        text:
+          "A feeling. A warmth, right here — a burning in the bosom. Moroni promises it: read it, ponder it, ask God with a sincere heart, and the Holy Ghost will manifest the truth of it to you. I FELT it. That's my witness, and no one can take it from me.",
+      },
+      {
+        speaker: "you",
+        text: "I believe that you felt something real. But here is my trouble with it: the Muslim feels peace reciting the Qur'an, the Hindu feels bliss in meditation, the Pentecostal feels fire at the altar — and they contradict each other and you. If a warm feeling proves a book true, it proves a hundred contradictory books true at once. The feeling cannot be the judge, because it has no way to tell them apart. The faith was not handed down as a private glow, but as a public, witnessed deposit.",
+      },
+      {
+        speaker: "you",
+        text: "Saint Paul wrote: even if WE, or an angel from heaven, preach any other gospel than the one you received, let him be accursed (Galatians 1:8). Joseph Smith said an angel brought his message. Paul tells me to test the angel against the deposit already delivered — the faith once for all handed to the saints (Jude 3). The test is not the warmth in my chest. It is whether it matches what the Apostles actually taught.",
+      },
+      {
+        speaker: "lds",
+        text:
+          "But the deposit grew. We believe in continuing revelation — that God still speaks, that there are living prophets and apostles today. Why would He go silent? The Bible itself was written by prophets. Why couldn't there be more scripture, like the Book of Mormon?",
+      },
+      {
+        speaker: "you",
+        text: "Because the canon was not closed by accident, and the Church that closed it is the same Church I have read from the beginning. The same bishops who handed down Matthew and John, who fought Arius and confessed Christ before the lions, are the ones who said: this, and no more. To accept the Bible from their hands and then reject their judgment about what Scripture IS — that is to saw off the branch you are sitting on.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "There is one matter deeper than priesthood or plates, $you: WHO GOD IS. Their God was once a man who rose to become God; and they teach that men may become gods in turn, ruling worlds of their own. It sounds, at first, almost like our own theosis. It is its exact inversion. Be clear.",
+      },
+      {
+        speaker: "lds",
+        text:
+          "And actually — your own Saint Athanasius said it: 'God became man that man might become God.' We teach exaltation, that we can become like our Heavenly Father, even gods ourselves. You're closer to us than you think! As one of our prophets put it, 'As man now is, God once was; as God now is, man may become.'",
+      },
+      {
+        speaker: "you",
+        text: "I know that line of Athanasius — but read the whole sentence. He says we become god BY GRACE, not by nature. We are made partakers of the divine nature (2 Peter 1:4), filled with God like iron in a fire — but the iron never becomes the fire. There is one Creator and everything else is creature, and that line is never crossed. Your scripture says God was once a man who progressed to deity. Mine says: 'Before me there was no God formed, neither shall there be after me. I, even I, am the LORD; and beside me there is no saviour' (Isaiah 43:10-11). We are not closer than I think. We are on opposite sides of the one line that matters.",
       },
     ],
     boss: {
@@ -3507,10 +3555,6 @@ const BASE_CHAPTERS: Chapter[] = [
           "Coffee mugs and the hiss of the espresso machine. Hardwood tables, the smell of roasted beans and old book-pages. Mid-afternoon light slants across a young woman with cropped hair and quick, intelligent eyes. A worn copy of Calvin's Institutes rests on the chair beside her, two highlighters and a flurry of sticky tabs poking from the pages.",
       },
       {
-        speaker: "you",
-        text: "She is already reading something. She looks like she came prepared for a fight.",
-      },
-      {
         speaker: "narrator",
         text:
           "Sarah Kelley. A seminarian in the Presbyterian Church in America — confessional, Reformed, the daughter and granddaughter of pastors. She has been a Christian her whole life: devout, serious, up at six every morning with her Bible and a notebook. She lost a younger sister to leukemia at sixteen and prayed her way through the grave, and her faith came out of it harder and brighter, not broken. She is not the enemy.",
@@ -3527,27 +3571,85 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "st-anthony",
         text:
-          "The deepest things, child — though they wear quiet names. Where does the Church's authority finally rest: in the Book alone, or in the living Body that gave us the Book and tells us which writings ARE Scripture? Is salvation a courtroom verdict declared over us, or a healing that we must live into? She inherited her answers from the sixteenth century. You will offer her the answers of the first.",
+          "The deepest things, child, though they wear quiet names. Where does the Church's authority finally rest: in the Book alone, or in the living Body that gave us the Book and tells us which writings ARE Scripture? Is salvation a courtroom verdict declared over us, or a healing we must live into? She inherited her answers from the sixteenth century. You will offer her the answers of the first. And mark this above all: the danger here is not losing the argument, but winning it and losing the person — a humiliated Protestant walks away from Christ, not toward Him. Speak the truth in love (Ephesians 4:15), and mean both words equally.",
       },
       {
         speaker: "st-anthony",
         text:
-          "And mark this above all: the danger in this conversation is not losing the argument. It is winning it and losing the person. A defeated Protestant who feels humiliated walks away from Christ, not toward Him. Speak the truth in love (Ephesians 4:15) — and mean both words equally.",
-      },
-      {
-        speaker: "st-anthony",
-        text:
-          "Remember, $you: she stands in a true protest against real sins — indulgences sold for coin, a piety grown mechanical, the Word buried under abuse. The Reformers were RIGHT to be angry. Where they erred was the cure: they cut away fifteen centuries to reach the first, not knowing the first century is preserved IN those fifteen. Honor her protest. Then show her the Church the Reformers never saw — the one older than the abuses.",
+          "Remember too: she stands in a true protest against real sins — indulgences sold for coin, a piety grown mechanical, the Word buried under abuse. The Reformers were RIGHT to be angry. They erred only in the cure: they cut away fifteen centuries to reach the first, not knowing the first is preserved IN those fifteen. Honor her protest. Then show her the Church the Reformers never saw.",
       },
       {
         speaker: "narrator",
         text:
-          "She sets down her latte, slides Calvin's Institutes off the chair so you can sit, and folds her hands on the table with the calm of someone who has had this conversation a dozen times and never lost.",
+          "She slides Calvin's Institutes off the chair so you can sit, and folds her hands on the table with the calm of someone who has had this conversation a dozen times and never lost.",
       },
       {
         speaker: "reformed",
         text:
           "Look — I genuinely respect the Eastern tradition. The history, the beauty, I get the appeal. But the Reformation recovered the GOSPEL. We are saved by grace alone, through faith alone — not by sacraments, not by venerating saints, not by a Church hierarchy standing between us and God. Scripture alone is the rule. Show me where the Bible teaches what you're about to defend.",
+      },
+      {
+        speaker: "you",
+        text: "I'll try. But let me start by agreeing with you, because I think you're right about more than you expect. Grace alone — yes. We are saved by grace from first to last; no Orthodox has ever said otherwise. The quarrel isn't over whether grace saves. It's over how we receive it, and where the rule of faith finally sits. So — sola scriptura. Where does the Bible teach that Scripture ALONE is the rule?",
+      },
+      {
+        speaker: "reformed",
+        text:
+          "Second Timothy 3:16. 'All Scripture is God-breathed and profitable... that the man of God may be complete, equipped for every good work.' Complete. Equipped for every good work. That's a sufficient rule — we don't need a Magisterium bolted on top of it.",
+      },
+      {
+        speaker: "you",
+        text: "I love that verse — but notice what it says and doesn't say. 'Profitable,' 'equips' — it never says 'alone.' And when Paul wrote it, the 'Scripture' Timothy had known from childhood (verse 15) was the Old Testament. By that logic the New Testament would be unnecessary. The same Paul told the Thessalonians: 'Hold fast the traditions you were taught, whether by word OR by our epistle' (2 Thess 2:15). Word and letter, both.",
+      },
+      {
+        speaker: "reformed",
+        text:
+          "But 'tradition' is exactly the problem. Tradition is how you got prayers to Mary, indulgences, all the accretions. Christ rebuked the Pharisees for 'making void the word of God by your tradition.' Once you let tradition stand beside Scripture, who decides which tradition is apostolic and which is corruption?",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "A fair and sharp question, $you — the sharpest she has. Do not dodge it. Tradition with a small 't' can indeed go bad; Christ said so. But there is a Tradition that is simply the Gospel itself, living in the Body that carried it. Answer her with the one thing she cannot get from the Book alone: the Book itself.",
+      },
+      {
+        speaker: "you",
+        text: "Here is the test, then. Open your Bible to the table of contents. Twenty-seven books in the New Testament — not twenty-six, not twenty-eight. Where does Scripture list its own contents? It doesn't. No verse names the canon. The Church discerned it over centuries — Athanasius's festal letter in 367, the councils of Carthage. You'll say the Church recognized the canon, didn't create it, and I'd agree. But recognized HOW? Through the same Spirit-led Body, the same bishops in succession, the same liturgy where those books were read. You ALREADY trust that Tradition every time you decide Hebrews is in and the Shepherd of Hermas is out. Take the Bible from the Church's altar and then tell the Church it has no authority — that's standing on a floor while sawing through the beam.",
+      },
+      {
+        speaker: "reformed",
+        text:
+          "All right, set the canon aside — I'll think about it. But the heart of it for me is justification. Sola fide. Romans 3:28, 'a man is justified by faith apart from works of the law.' We're declared righteous on Christ's account, not made righteous by anything in us. If you add our works, you've added to a finished cross. That's the gospel I'd die for.",
+      },
+      {
+        speaker: "you",
+        text: "And I'd never tell you to add to the Cross. But the only place the New Testament puts the words 'faith' and 'alone' in one sentence is James 2:24 — 'a man is justified by works, and NOT by faith alone.' Paul fights works of the LAW, circumcision and the badges of Judaism; James fights a dead faith that does nothing. They aren't enemies. Paul himself says what counts is 'faith working through love' (Galatians 5:6). Not faith plus love as a tax — faith that, if alive, IS love, the way a living fire IS warmth.",
+      },
+      {
+        speaker: "you",
+        text: "Underneath this is your TULIP, isn't it? Total inability, unconditional election, irresistible grace. If grace cannot be resisted, then the lost were simply never given it — and God authored their damnation. But Christ stands at the door and KNOCKS (Rev 3:20); He does not kick it in. 'How often I WOULD have gathered you, and you would NOT' (Matthew 23:37). We're not co-saviors — God does all the saving. But He waits for the yes. Mary's 'be it unto me' is the pattern: grace offered, freedom answering. We call it synergy, working together (1 Cor 3:9).",
+      },
+      {
+        speaker: "reformed",
+        text:
+          "But synergy makes salvation depend partly on me, and I know myself too well to trust that. The comfort of monergism is that it rests entirely on God. If my 'yes' is the deciding factor, then the glory is partly mine, and my assurance evaporates. Doesn't your view just smuggle merit back in through the side door?",
+      },
+      {
+        speaker: "you",
+        text: "No — because even the 'yes' is grace. The capacity to say it, the desire that prompts it, the strength to mean it: all gift. We don't cooperate with grace the way two men lift a beam; we cooperate the way a sail cooperates with the wind. The sail does nothing but stay open — yet without it the wind drives nothing. And that points to the deepest difference between us: what salvation even IS.",
+      },
+      {
+        speaker: "reformed",
+        text:
+          "Meaning what? Justification is a legal verdict — God the Judge declares the sinner righteous because Christ's righteousness is imputed to him. Forensic, external, secure. What's your alternative?",
+      },
+      {
+        speaker: "you",
+        text: "Healing, not just a verdict. Your model is a courtroom: God the Judge, the gavel falls, the record is cleared — but you walk out the same sick man you walked in. Ours is a hospital. 'God became man that man might become god' — not a god by nature, but filled with God as iron is filled with fire (2 Peter 1:4). Theosis. Christ doesn't just cover the leper; He cleanses him. Justification is real, but it's the door, not the whole house. The whole house is being made, slowly, into the likeness of Christ.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "She does not answer at once. She turns her coffee cup a slow quarter-turn on the table, the way a serious mind does when it meets something it cannot immediately file away. The certainty she walked in with is still there — but it has gone quiet, and listening.",
       },
     ],
     boss: {
@@ -3847,6 +3949,60 @@ const BASE_CHAPTERS: Chapter[] = [
         speaker: "st-anthony",
         text:
           "Then answer them one by one, patiently, through the long hours of the night — but never lose the thread back to that prayer he prayed for his sister. Every argument tonight is really circling that one wound. Meet the arguments honestly; aim everything, in the end, at the wound. Now — he is waiting. Speak.",
+      },
+      {
+        speaker: "you",
+        text: "Alex, I'm not going to dodge the Holocaust — we'll get there, and I won't give you a greeting-card answer. But can I start somewhere underneath it? Before 'why is there evil,' there's an older question: why is there anything at all? You and I, the laptop, the universe — none of it had to exist. It's contingent. It doesn't explain itself.",
+      },
+      {
+        speaker: "atheist",
+        text:
+          "Sure it does. The universe is just a brute fact. It's here, it banged, here we are. 'Why is there something rather than nothing' is a pseudo-question — you're just smuggling God into a gap. And even if you got a 'first cause,' that's a long way from the God who supposedly cares whether I masturbate.",
+      },
+      {
+        speaker: "you",
+        text: "Fair shot. But 'brute fact' is itself a faith claim — it says the buck stops at the universe and we're not allowed to ask further. I'm asking further. Every physical thing is conditioned by something prior; a chain of conditioned things, however long, never grounds itself. You eventually need something that isn't borrowing its existence from anything else — that just IS. Not a thing IN the universe. The reason there's a universe at all. That's not a gap in the science. It's the question science can't reach, because science describes what exists; it never asks why there's existence to describe.",
+      },
+      {
+        speaker: "atheist",
+        text:
+          "See, this is the move I distrust. Science keeps closing those gaps. Lightning was Zeus, now it's static discharge. Disease was demons, now it's germs. Give it time and 'why is there something' goes the same way. You're betting on the one question we haven't answered yet.",
+      },
+      {
+        speaker: "you",
+        text: "But notice what science actually answered in those cases — the MECHANISM. How lightning works, how disease spreads. It never touched meaning. Tell me everything about the physics of a sound wave and you still haven't told me whether the music is beautiful or what the song means. A complete account of the mechanism of my sister's love wouldn't make it not love. Science is the best tool we have for HOW. It's mute on WHY — and 'why' is the only question that was ever keeping you up at night.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Good, $you. He has conceded the ground without seeing it — he admits science answers 'how' and is reaching for 'why.' Now he will swing back to the wound. Brace for it. And remember: do not defend God as if God needs a lawyer. Show him the God who was crucified.",
+      },
+      {
+        speaker: "atheist",
+        text:
+          "Okay, meaning, fine. Then here's the meaning I see: six million murdered. My sister on a bathroom floor. If your 'why' has a person behind it, that person watched and did nothing. I'd rather have a blind universe than a God who could've stopped Auschwitz and chose front-row seats.",
+      },
+      {
+        speaker: "you",
+        text: "I won't pretend that doesn't land. And I'm not going to tell you it was 'part of a plan' — I'd want to walk out of this call if someone said that to me. Here's the only thing I have that's honest: Christianity is the one story where God doesn't watch from the front row. He gets on the cross. The God I'm defending was tortured to death by an empire. Whatever suffering is, He's not outside it pronouncing verdicts — He's inside it, bleeding. That doesn't EXPLAIN your sister's pain. It means she wasn't alone in it.",
+      },
+      {
+        speaker: "atheist",
+        text:
+          "...That's a better answer than I expected. It's still a story, though. A beautiful one, maybe. But beautiful isn't true. The resurrection's the load-bearing wall, right? And dead people don't get up. The simplest explanation is that scared disciples made it up, like every other myth.",
+      },
+      {
+        speaker: "you",
+        text: "Then explain the data without the myth. Within a few years of the crucifixion — not centuries — you've got named eyewitnesses, including people who were hostile, like James and Paul, claiming they saw Him alive. And then they died for it. People die for things they believe are true all the time; almost no one dies for what they KNOW they invented. The empty tomb's first witnesses were women, useless as legal witnesses in that world — exactly the detail you'd never fabricate. I'm not asking you to take it on a feeling. I'm asking you to weigh it like the historian you'd be about anything else.",
+      },
+      {
+        speaker: "atheist",
+        text:
+          "Even granting the sincerity — look at what the Church DID with it. Crusades. Inquisitions. Galileo. Residential schools. The body count of organized Christianity is its own argument against the thing. How do you defend that?",
+      },
+      {
+        speaker: "you",
+        text: "I don't defend it. A lot of it is indefensible, and the Church's own saints said so louder than its critics. But here's the thing — the Church has never claimed to be a museum of the righteous. It calls itself a hospital for the sick. You don't judge a hospital by the fact that everyone inside is ill; you judge it by whether anyone walks out healed. Same Church that produced inquisitors produced the people who invented the hospital, abolished the slave trade, sat with the dying nobody else would touch. The Gospel diagnoses the disease in its own members first. That it gets betrayed by its members isn't a bug in the argument — it's the argument: we are exactly as broken as it says we are.",
       },
     ],
     boss: {
