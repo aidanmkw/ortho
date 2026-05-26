@@ -1168,7 +1168,23 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "st-anthony",
-        text: "Rastislav, prince of Moravia, sent to Constantinople begging for teachers who could give his people the faith in their own speech. So the Emperor and the Patriarch Photios sent these brothers. But the Slavs had no letters at all — no alphabet, no written word. So Constantine did a thing no man had dared: he sat down and forged an alphabet from nothing, shaping signs to fit the very sounds of the Slavic tongue, and into it he poured the Gospel of John: 'In the beginning was the Word.'",
+        text: "Constantine was no stranger to such errands. He had already gone east to the Saracens to dispute over the Holy Trinity, and north to the Khazars beyond the Black Sea, to reason of the faith before their khan with Jews and Muslims at his side in the debate. The Emperor knew there was no sharper mind in the empire to send where the Gospel had not yet been heard.",
+      },
+      {
+        speaker: "you",
+        text: "And it was the Slavs of Moravia who called for him?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Rastislav, prince of Moravia, sent to Constantinople begging for teachers who could give his people the faith in their own speech, and not merely in Latin words they could not follow. So the Emperor Michael and the Patriarch Photios sent these brothers north. But here was the wall against which every missionary before them had broken: the Slavs had no letters at all — no alphabet, no written word, nothing but speech that died on the air.",
+      },
+      {
+        speaker: "you",
+        text: "A whole people with no way to write down a single word?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "So Constantine did a thing no man had dared. He shut himself away in prayer and fasting, and then he sat down and forged an alphabet out of nothing — the Glagolitic, he called it — shaping each new sign to fit the very sounds of the Slavic tongue, sounds that Greek and Latin letters could not even spell. And into those fresh-made letters he poured the first words ever written in Slavonic: the opening of the Gospel of John. 'In the beginning was the Word.'",
       },
       {
         speaker: "you",
@@ -1176,19 +1192,39 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "Constantine turns from the altar, weary from the long road but bright-eyed. 'A nation without books is naked,' he says. 'They told me the Slavs were beasts, fit only to grunt. But when they heard the prophets and the Gospel in their mother's words, they wept. Should the praise of God be locked in three tongues, like a treasure none may spend?'",
+        text: "Constantine turns from the altar, weary from the long road but bright-eyed. 'A nation without books is naked,' he says. 'They told me the Slavs were beasts, fit only to grunt. But when they heard the prophets and the Gospel and the Liturgy in their mother's words, they wept like children come home. Should the praise of God be locked away in three tongues, like a treasure that none may spend?'",
+      },
+      {
+        speaker: "you",
+        text: "Three tongues? Who has said it must be only three?",
       },
       {
         speaker: "st-anthony",
-        text: "But the Frankish clergy of the West are furious, $you, for Moravia lies on the edge of their domain, and they had claimed those souls for the Latin rite. They hold a strange doctrine: that God may be worshipped in three sacred languages only — Hebrew, Greek, and Latin — because Pilate wrote the charge above the Cross in those three. Constantine has named their error the 'trilingual heresy,' and likens them to Pilate himself, who wished to confine the Word to a board of wood.",
+        text: "The Frankish clergy of the West, $you — and they are furious, for Moravia lies on the edge of their domain, and they had claimed those souls for the Latin rite. They hold a strange doctrine: that God may be worshipped in three sacred languages only — Hebrew, Greek, and Latin — because Pilate wrote the charge above the Cross in those three. Constantine has named their error the 'trilingual heresy.'",
       },
       {
         speaker: "narrator",
-        text: "Constantine lays a hand on the Slavonic books stacked upon the altar. 'Does not the rain fall on all alike? Does not the sun shine on all? Do we not all breathe the same air? How then are you not ashamed to allow only three tongues, and to leave all other peoples blind and deaf? Tell me — would you have a man hear thunder but never the meaning of the thunder?'",
+        text: "Constantine's eyes flash at the word. 'They make Pilate a Father of the Church,' he says, 'and his board of wood a fourth Gospel! Pilate wished to nail the Word to three tongues as he nailed the Lord to the Cross. But on the day of Pentecost the Spirit fell, and Parthians and Medes and Elamites and the dwellers in Mesopotamia each heard the wonders of God in his own language. Did the Spirit know only three?'",
+      },
+      {
+        speaker: "narrator",
+        text: "He lays a hand on the Slavonic books stacked upon the altar. 'Does not the rain fall on all alike? Does not the sun shine on all? Do we not all draw the same breath? How then are you not ashamed to allow only three tongues, and to leave all other peoples blind and deaf? Would you have a man hear the thunder, but never the meaning of the thunder?'",
+      },
+      {
+        speaker: "you",
+        text: "But David the Psalmist himself cried, 'Let every breath praise the Lord.' Every breath — not merely those breathed in Greek or Latin.",
       },
       {
         speaker: "st-anthony",
-        text: "A Frankish archpriest comes to confront you, certain that letting barbarians hear the Liturgy in their own crude speech profanes the holy things and steals his flock besides. Defend the brothers' work, $you — for on it hangs the faith of nations not yet born: the Bulgarians, the Serbs, and far to the north, the Rus.",
+        text: "Well spoken, $you — and it is exactly the Scripture Constantine pressed upon them. 'O sing unto the Lord, all the earth'; 'Let all nations praise Him.' The Psalter is full of it. The Spirit was poured out upon all flesh, the prophet Joel foretold — not upon three nations only. Now hold to that as the storm breaks.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "For the Frankish bishops have brought their complaint all the way to Rome, hoping the Pope will forbid these books and silence the brothers for good. A Frankish archpriest comes now to confront you, certain that letting barbarians hear the Liturgy in their own crude speech profanes the holy things — and steals his flock besides.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Defend the brothers' work, $you. For on it hangs the faith of nations not yet born — the Bulgarians, the Serbs, and far to the north, the Rus. If the Word can be given to one people in their own tongue, it can be given to all; if it is chained to three, it is chained forever.",
       },
       {
         speaker: "humbert",
@@ -1282,7 +1318,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "Pope Adrian himself blessed the Slavonic books, laying them upon the altar of Santa Maria Maggiore, and the brothers sang the Liturgy in Slavonic in the very churches of Rome. But Constantine's strength was spent. He took the monastic habit and the name Cyril, and fifty days later he died in Rome, only forty-two years old, and was buried beside the relics of St. Clement he had carried so far.",
+        text: "Pope Adrian himself blessed the Slavonic books, laying them upon the altar of Santa Maria Maggiore, and the brothers sang the Liturgy in Slavonic in the very churches of Rome through the night. The trilingual men were overruled in the chair of Peter itself. But Constantine's strength was spent. He took the monastic habit and the name Cyril, and fifty days later he died in Rome, only forty-two years old, and was buried beside the relics of St. Clement he had carried so far.",
       },
       {
         speaker: "you",
@@ -1290,11 +1326,19 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "On his deathbed he begged his brother not to forsake the Slavs for the quiet of the monastery. Methodius obeyed. He returned north as archbishop, and though the Frankish bishops imprisoned him for years in a cold cell, he endured, and the books endured. After him his disciples carried the alphabet south into Bulgaria, where it took root and flowered.",
+        text: "On his deathbed he begged his brother not to forsake the Slavs for the quiet of the monastery. 'We are two oxen who have plowed one furrow,' he said; 'do not abandon the field.' Methodius obeyed. He returned north as archbishop of the Slavs, and labored on alone.",
+      },
+      {
+        speaker: "you",
+        text: "And the Franks — did they let him be, once Rome had spoken?",
+      },
+      {
+        speaker: "narrator",
+        text: "They did not. The Frankish bishops seized Methodius, tried him in their own synod, and shut him in a cold cell for nearly three years, until a Pope's command forced his release. Yet he endured, and the books endured. He lived to translate almost the whole of Scripture into Slavonic before he died. After him his disciples — driven out of Moravia — carried the letters south into Bulgaria, where they took root and flowered.",
       },
       {
         speaker: "st-anthony",
-        text: "From that root grew the script the Slavs still write to this day — Cyrillic, named for the Philosopher. The Scriptures, the Liturgy, the prayers of a hundred peoples yet unborn all flowed from the alphabet one dying monk made out of nothing.",
+        text: "From that root grew the script the Slavs still write to this day — Cyrillic, named for the Philosopher who first dreamed it. The Scriptures, the Liturgy, the prayers and hymns and laws of a hundred peoples yet unborn all flowed from the alphabet one dying monk made out of nothing.",
       },
       {
         speaker: "st-anthony",
@@ -1323,15 +1367,23 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "photios",
-        text: "Photios the Great, $you. He was a layman, a statesman and a scholar with a library few emperors could match, raised to the patriarchate in a single week when the throne fell empty. His enemies never forgave him for it, and Rome and Constantinople have quarreled bitterly over his see. Yet here they sit reconciled — and a graver matter is on the table.",
+        text: "Photios, $you — though I would not choose 'the Great' for myself. I was a layman, a statesman and a scholar with a library few emperors could match. When the throne of the patriarchate fell empty, they raised me through every clerical degree in a single week and set me upon it. My enemies never forgave me for it, and Rome and Constantinople have quarreled bitterly over my see for twenty years.",
       },
       {
         speaker: "you",
-        text: "What matter could be graver than a quarrel between Rome and Constantinople themselves?",
+        text: "So you are the cause of the quarrel between the two great cities?",
       },
       {
         speaker: "photios",
-        text: "A single word, creeping westward like damp through a wall. Filioque — 'and from the Son.' Where the Fathers at the Second Council confessed the Spirit 'who proceeds from the Father,' the Frankish churches have begun to sing 'who proceeds from the Father AND the Son,' and have inserted it into the very Creed. Photios sees the danger while the sky is still clear, before almost any other man alive.",
+        text: "I was its occasion; I am not its cause. That feud is all but mended now — see the Roman legates seated here in honor. But a graver matter is on the table, one that touches not a man's see but the very faith of the Church. A single word, creeping westward like damp through a wall.",
+      },
+      {
+        speaker: "you",
+        text: "One word? What word could be worth the gathering of four hundred bishops?",
+      },
+      {
+        speaker: "photios",
+        text: "Filioque — 'and from the Son.' Where the Fathers at the Second Council confessed the Holy Spirit 'who proceeds from the Father,' the Frankish churches have begun to sing 'who proceeds from the Father AND the Son.' Worse, they have stitched the word into the very Creed itself, the common confession of all the Councils. I have seen the danger while the sky is still clear, before almost any other man alive.",
       },
       {
         speaker: "you",
@@ -1339,15 +1391,43 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "Photios lifts a copy of the Creed in both hands, as a deacon lifts the Gospel. 'The Lord Himself said the Spirit proceeds from the Father,' he says. 'To this confession the Second Council bound the whole Church, and the Third forbade any man to compose or add another. The harm, friend, is twofold. To add to the Creed is to set one's own judgment above an Ecumenical Council. And to say the Spirit proceeds from the Son as well as the Father is to give the Spirit two sources — to wound the Father's place as the one fountainhead of the Godhead.'",
+        text: "Photios lifts a copy of the Creed in both hands, as a deacon lifts the Gospel. 'Hear the Lord Himself,' he says. 'In the Gospel of John He tells us of the Comforter, the Spirit of truth, \"which proceedeth from the Father.\" From the Father — He does not add, \"and from Me.\" To this confession the Second Council bound the whole Church, and the Third forbade any man to compose or impose another.'",
       },
       {
         speaker: "photios",
-        text: "Mark the distinction he will draw, $you, for it is the heart of the matter. The Son SENDS the Spirit into the world in time — this is true, and Scripture says it. But the Spirit's eternal ORIGIN, His procession within the Trinity, is from the Father alone. The Filioque confuses the mission with the origin, the gift given in time with the everlasting begetting and proceeding. A small word; a great confusion.",
+        text: "The harm, $you, is twofold. First, to add even a true word to the Creed without the whole Church gathered in council is to set one's own judgment above an Ecumenical Council — and if one see may add one word, another may add a second, and the Creed unravels. That is a wound to the Church's order.",
+      },
+      {
+        speaker: "you",
+        text: "And the second harm? The word itself?",
       },
       {
         speaker: "photios",
-        text: "A Frankish theologian, schooled in the new teaching and proud of it, comes to argue that the addition merely glorifies Christ. Hold to the Creed as the three hundred Fathers gave it, $you — for this one small word, harmless as it seems today, will one day be the wound that splits the Church in two.",
+        text: "The word itself wounds the doctrine of God. The Father alone is the source — the fountainhead, the single principle — from whom the Son is eternally begotten and the Spirit eternally proceeds. We call this the monarchy of the Father: one origin, not two. Say that the Spirit proceeds from the Son as well, and you give the Spirit two sources, two beginnings — and the Father is no longer the one fountain of the Godhead.",
+      },
+      {
+        speaker: "you",
+        text: "Two sources — but the Latins answer that Father and Son are one God, so it is still one source, not two.",
+      },
+      {
+        speaker: "photios",
+        text: "A keen objection, $you, and the very one they raise. But hear it: what the Father and the Son share is the one divine essence, which they hold in common with the Spirit also. To be the origin of the Spirit, however, is not a property of the shared essence — for then the Spirit would proceed from Himself! It is a property of the Person of the Father alone. The Persons are distinguished precisely by their relations of origin: the Father unbegotten, the Son begotten, the Spirit proceeding. Blur the origin, and you blur the Persons.",
+      },
+      {
+        speaker: "you",
+        text: "Yet the Franks say Christ sends the Spirit — and Scripture does say that, does it not?",
+      },
+      {
+        speaker: "photios",
+        text: "It does, and here is the heart of the matter, so mark it well. The Son SENDS the Spirit into the world in time — at Pentecost, upon the Church; this is true, and the Gospel says it plainly. But the Spirit's eternal ORIGIN, His procession within the life of the Trinity before all worlds, is from the Father alone. The Filioque confuses the temporal mission with the eternal origin — the gift sent in time with the everlasting procession. A small word; a great confusion.",
+      },
+      {
+        speaker: "photios",
+        text: "A Frankish theologian, schooled in the new teaching and proud of it, comes now to argue that the addition merely glorifies Christ. He will quote great Augustine to you, and he will not be wrong that Augustine wrote so — but a single Father, however blessed, is not an Ecumenical Council.",
+      },
+      {
+        speaker: "photios",
+        text: "Hold to the Creed as the Fathers gave it, $you. For this one small word, harmless as it seems on this bright morning, will one day be the wound that splits the one Church into East and West, and the splitting will not be healed in a thousand years.",
       },
       {
         speaker: "humbert",
@@ -1486,35 +1566,71 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "vladimir",
-        text: "Vladimir, $you. When he took the throne he raised idols on that very hill — Perun the thunder-god first among them, with his silver head and golden mustache — and the Rus offered even human blood before them. Yet the worship of wood did not still the hunger in him. So he sent out envoys to weigh the great faiths of the world, and learn which was true.",
+        text: "Vladimir, $you. When I took this throne I raised idols on that very hill — Perun the thunder-god first among them, with his silver head and his mustache of gold — and we Rus offered even the blood of men before them. Lots were cast, and a Christian father and his son were slain at Perun's feet. Their blood is on my hands. Yet the worship of wood did not still the hunger in me.",
       },
       {
         speaker: "you",
-        text: "He sent men to shop among religions, like a merchant pricing wares?",
+        text: "And so what did you do? A warlord does not simply lay down his gods.",
       },
       {
         speaker: "vladimir",
-        text: "In a manner, yes — but listen to what they found. He sent them to the Bulgars of the Volga, who follow Muhammad; the envoys found no gladness in them, and Vladimir laughed that his people would never give up wine, for 'drinking is the joy of the Rus.' He sent them to the Germans with their Latin rite, and to the Jews of the Khazars — but the Jews had lost Jerusalem, and Vladimir asked how they could commend a faith their own God had scattered them from. At last he sent them south, to the Queen of Cities.",
-      },
-      {
-        speaker: "narrator",
-        text: "The prince turns to you, and his weathered face is strangely soft. 'When my men came home from Constantinople,' he says, 'they could scarcely speak for wonder. They had stood in the Great Church of the Greeks for the Divine Liturgy, and they told me: \"We knew not whether we were in heaven or on earth. We only know that there God dwells among men, and we cannot forget that beauty.\"'",
+        text: "I sent out envoys to weigh the great faiths of the world, and learn which was true. Good men, sober men — I bade them go to the nations, watch how each worshipped, and bring me back the truth of what they saw.",
       },
       {
         speaker: "you",
-        text: "They chose a faith because its worship was beautiful?",
+        text: "You sent men to shop among religions, like a merchant pricing wares?",
       },
       {
         speaker: "vladimir",
-        text: "Do not despise it, $you. To the Rus, beauty was not a mere ornament but a window — they saw heaven opened in that worship, and knew the living God was truly present. And there was more than beauty. His grandmother Olga, wisest of all the Rus, had been baptized in that same city a generation before, and her prayers followed him all his life. Beauty drew him; the witness of a holy grandmother and the prophets of old confirmed him.",
+        text: "Call it that if you will — but listen to what they found. I sent them first to the Bulgars of the Volga, who follow Muhammad; my envoys found no gladness in their worship, only sorrow and a stench, they said. And I myself laughed that the Rus would never give up wine, for drinking is the joy of the Rus, and we cannot live without it.",
+      },
+      {
+        speaker: "you",
+        text: "And the Christians of the West — and the Jews? Did they go to them as well?",
+      },
+      {
+        speaker: "vladimir",
+        text: "They went to the Germans with their Latin rite, and saw no beauty in it that moved them. And the Jews of the Khazars came to me too, and pressed their law — but I asked them: where is your homeland? And they confessed God was angry with their fathers and had scattered them and given Jerusalem to others. How then, I said, can you teach your faith to me, when your own God has driven you from your land? At last I sent the envoys south, to the Queen of Cities, to Constantinople.",
       },
       {
         speaker: "narrator",
-        text: "Vladimir lifts his eyes to the toppled idol of Perun, then back to the river crowded now with the people of Kiev, waiting at his command. 'I have known war and women and gold,' he says, 'and none of it filled the hollow in me. My grandmother chose this faith; my envoys saw heaven in it. Today my people go down into this water — and I with them. Let Perun float down to the rapids and be gone.'",
+        text: "The prince turns to you, and his weathered, scarred face goes strangely soft. 'When my men came home from the city of the Greeks,' he says, 'they could scarcely speak for wonder. The Emperor had set them in the Great Church of Holy Wisdom for the Divine Liturgy — the singing, the gold, the clouds of incense, the priests like angels. And they said to me:'",
+      },
+      {
+        speaker: "narrator",
+        text: "'\"We knew not whether we were in heaven or on earth. For on earth there is no such splendor or beauty, and we are at a loss how to describe it. We know only that there God dwells among men, and their worship is fairer than that of all other nations. We cannot forget that beauty.\"'",
+      },
+      {
+        speaker: "you",
+        text: "They chose a faith because its worship was beautiful? Is that not a thin reason to baptize a nation?",
       },
       {
         speaker: "vladimir",
-        text: "But not all rejoice. A priest of the old gods — a volkhv, a sorcerer-priest of the woods — comes raging from the trees, certain the prince has betrayed the ancestors and doomed the land to famine and the wrath of Perun. Defend the prince's choice, $you. For from this gray river will flow the whole baptism of the Russian land — a thousand years of saints, monks, and martyrs not yet born.",
+        text: "Do not despise it, $you. To us the beauty was no mere ornament; it was a window. My men did not merely admire the gold — they saw heaven thrown open, and knew the living God was truly present there among men. A thing the idols on that hill never gave, for all their silver and blood.",
+      },
+      {
+        speaker: "you",
+        text: "Then it was beauty alone that turned you?",
+      },
+      {
+        speaker: "vladimir",
+        text: "Not beauty alone. My grandmother Olga — wisest of all the Rus, whom the Church now calls a saint — had gone to that same city a generation before, and was baptized there, and her prayers have followed me all my life. Beauty drew me; the witness of a holy grandmother and the prophets of old confirmed me. The hollow that war and women and gold could never fill, I felt it begin to close.",
+      },
+      {
+        speaker: "you",
+        text: "And the people of Kiev — do they follow you willingly into this river, or only because their prince commands it?",
+      },
+      {
+        speaker: "vladimir",
+        text: "A fair question, $you, and one that pricks me. I have proclaimed that whoever does not come to the river is no friend of mine — I will not deny it. But hear what is said in the streets: 'If this were not good, the prince and the nobles would not have accepted it.' They saw their gods of wood and silver gain them nothing, and they saw their prince humble his own neck before the water. I do not drive them as cattle; I go down first, and they follow because I lead.",
+      },
+      {
+        speaker: "narrator",
+        text: "Vladimir lifts his eyes to the toppled idol of Perun, then back to the river, crowded now with the people of Kiev who wait at his command. 'I have ordered Perun bound to a horse's tail and dragged down to the water,' he says, 'and twelve men to beat him with rods as he goes — not because the wood can feel it, but that the people may see their god is only wood. Let him float down to the rapids and be gone. Today my people go down into this water — and I with them.'",
+      },
+      {
+        speaker: "vladimir",
+        text: "But not all rejoice. A priest of the old gods — a volkhv, a sorcerer-priest of the deep woods — comes raging from the trees, certain I have betrayed the ancestors and doomed the land to famine and the wrath of Perun. Defend the choice, $you. For from this gray river will flow the whole baptism of the Russian land — a thousand years of saints, monks, and martyrs not yet born.",
       },
       {
         speaker: "tempter",
