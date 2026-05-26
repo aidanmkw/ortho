@@ -35,27 +35,47 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Constantinople burns. The crusaders who took the Cross to free Jerusalem have stormed the greatest Christian city on earth instead. For three days they have plundered, slaughtered, and burned. Smoke hangs in the dome of Hagia Sophia like a stormcloud sealed indoors.",
-      },
-      {
-        speaker: "st-anthony",
-        text: "Look what they do, $you. They have torn the silver and gold from the altar, hacked the icons for their settings, smashed the tombs of the emperors. They are Christians — men who wear the Cross on their shoulders — and they ride their mules into the sanctuary to carry off the holy vessels.",
+        text: "Constantinople burns. The greatest Christian city on earth — the city of a thousand churches, of emperors and councils — is being torn apart. The men who took the Cross to free Jerusalem have stormed these walls instead. The year is twelve hundred and four, and for three days they have plundered, slaughtered, and burned.",
       },
       {
         speaker: "narrator",
-        text: "A common woman has been hauled up onto the Patriarch's throne. She sings filthy songs and dances while soldiers laugh, passing wine in the chalices. Niketas Choniates, who saw it, will write that even the Saracens were more merciful than these.",
+        text: "You stand within Hagia Sophia itself, the Holy Wisdom that has stood for seven centuries. Smoke hangs beneath the great dome like a stormcloud sealed indoors. The golden mosaics look down on horror.",
       },
       {
-        speaker: "narrator",
-        text: "The schism of 1054 was a quarrel of bishops and a single word. This is a wound in the body itself. Today the people of the East learn what the West has become to them, and they will not forget it for eight hundred years.",
+        speaker: "you",
+        text: "Crusaders did this? I thought the Crusades were against the armies of Islam, to free the Holy Land.",
       },
       {
         speaker: "st-anthony",
-        text: "Here comes their commander, $you, his surcoat still bearing the Cross, his hands still red. He will call this holy war and the city's fall the judgment of God. Do not let him baptize plunder with the name of piety.",
+        text: "So they began, $you. But this army never reached Jerusalem. Debts to Venice, a deposed prince promising gold, a city too rich to pass by — and the Cross turned backward, against fellow Christians. Look what they do. They have ripped the silver and gold from the altar, hacked the icons apart for their settings, broken open the tombs of the emperors for the jewels.",
+      },
+      {
+        speaker: "narrator",
+        text: "Soldiers lead mules and horses up the nave to carry off the holy vessels; the beasts slip on the marble slick with wine and worse, and the men beat them, cursing. A drunken common woman has been hauled up onto the Patriarch's throne, where she sings filthy songs and dances while the soldiers laugh and pass the consecrated chalices like tavern cups.",
+      },
+      {
+        speaker: "you",
+        text: "And these men wear the Cross?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "On their very shoulders. Niketas Choniates, a Roman of this city who is fleeing even now with his family through these streets, will write of this day that even the Saracens, when Jerusalem fell to them, were more merciful than these men who bear the name of Christ.",
+      },
+      {
+        speaker: "you",
+        text: "But there was already a schism between East and West, was there not? In 1054?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "There was — a quarrel of bishops over the word filioque added to the Creed, over leavened or unleavened bread, over the claims of Rome; a thing of theologians and a mutual excommunication. Grievous, but a wound men hoped might heal. This is no longer a quarrel of words. This is a sword driven into the body of the Church itself. After today the people of the East will know in their flesh what the West has become to them — and they will not forget it for eight hundred years.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Here comes a commander now, $you, his surcoat still bearing the Cross, his hands still red. Mark how he speaks: he will name this slaughter a holy war and the city's fall the verdict of God Himself. Do not let him baptize plunder with the name of piety.",
       },
       {
         speaker: "humbert",
-        text: "Schismatic! This city defied the Holy Father and clung to its Greek errors — and see, God has delivered it into our hands. We bear the Cross; what we take, we take for Rome and for Christ. Will you, too, defy the Vicar of Peter? Speak, and I will show you what crusaders do to rebels.",
+        text: "Schismatic! This proud city defied the Holy Father in Rome and clung to its Greek errors — and behold, God has delivered it into our hands! We bear the Cross of Christ; what we take, we take for Rome and for the true faith. Will you also defy the Vicar of Peter? Speak — and I will show you what crusaders do to rebels.",
       },
     ],
     boss: {
@@ -144,12 +164,24 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     },
     outro: [
       {
+        speaker: "humbert",
+        text: "Enough... The horses in the sanctuary, the throne defiled, the relics carted off like loot. We came to save Jerusalem, and we have crucified the East instead. God forgive us — there will be no absolving this.",
+      },
+      {
         speaker: "narrator",
-        text: "The crusaders set up a Latin emperor in the city and ruled it for fifty-seven years before the Byzantines retook a ruined, impoverished capital. The plundered relics and bronze horses adorn Western churches still. When Pope Innocent III learned what had been done, he wrote that the crusaders had turned their swords against Christians, sparing neither religion nor age nor sex.",
+        text: "The crusaders set up a Latin emperor in the city and ruled it for fifty-seven years before the Byzantines retook a ruined, impoverished capital that never recovered its glory. The plundered relics and the bronze horses of the Hippodrome adorn Western churches and squares to this day.",
+      },
+      {
+        speaker: "you",
+        text: "Did no one in the West condemn it?",
       },
       {
         speaker: "st-anthony",
-        text: "The schism passed that day from the minds of theologians into the memory of a whole people, $you. A word divided the Church; a sack hardened the division into the heart. Yet even now the faith endures in the East. Come north, to a land where one monk will wed holiness to a whole nation.",
+        text: "Pope Innocent III himself did, when he learned the truth: he wrote that the crusaders had turned their swords against Christians, sparing neither religion nor age nor sex, and had given the Greeks every reason to detest the Latins. And eight centuries hence, in the year 2001, Pope John Paul II will speak words of sorrow for this very day.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Remember the lesson, $you: a word divided the Church, but a sack drove the division into the heart of a whole people. Yet the faith endures even in the ashes. Come — north now, to a young Serbian prince who fled a palace for a mountain, and who will wed holiness to a whole nation without ever making it the nation's idol.",
       },
     ],
     reward: { xp: 1, item: "relic-cross", healHp: true },
@@ -170,27 +202,47 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "A young prince of Serbia named Rastko fled his father's palace by night for the Holy Mountain of Athos, taking the monastic name Sava. There, with his father — who abdicated his throne to become the monk Symeon — he raised up the monastery of Hilandar, a Serbian house among the Greek monasteries of the Mountain.",
+        text: "Green mountains, cold and clean after the smoke of Constantinople. You stand on the Holy Mountain of Athos, where for centuries monks of many tongues have prayed beneath the peak that rises straight from the sea. Among the Greek monasteries stands a newer house, its frescoes fresh: Hilandar, the monastery of the Serbs.",
       },
       {
         speaker: "st-anthony",
-        text: "Sava, $you — son of Stefan Nemanja, the great founder of the Serbian kingdom. He has come down from Athos to give his people what no nation can buy: not merely a church, but their own Church, ordering, teaching, and praying in their own tongue, knit into the very life of the Serbs.",
+        text: "A generation ago, $you, a young prince of Serbia named Rastko slipped from his father's palace by night and came to this Mountain, taking the monastic name Sava. In time his own father followed him — Stefan Nemanja, founder of the Serbian state, who laid down his crown to die a monk here under the name Symeon. Together, father and son, they raised up Hilandar.",
       },
       {
-        speaker: "narrator",
-        text: "In 1219 Sava travelled to Nicaea, where the exiled Patriarch of Constantinople then dwelt, and received from him the autocephaly of the Serbian Church and consecration as its first archbishop. He returned to crown and to teach, to build and to reconcile his quarreling royal brothers.",
-      },
-      {
-        speaker: "narrator",
-        text: "Sava turns to you, the simple black robe of Athos still on him though an archbishop now. 'A people without their own Church are sheep scattered. I have given the Serbs their shepherds and their books. But there is a temptation that follows close behind such a gift.'",
+        speaker: "you",
+        text: "A king who gave up his throne to become a monk? And his son a prince turned hermit?",
       },
       {
         speaker: "st-anthony",
-        text: "Mark it, $you. A prince, hearing of a Church for the Serbian people, sees a Church OF the Serbian crown — a thing to be owned, bent to the throne, used as a weapon of the state. That is the lie that creeps in now, smooth as a courtier. Do not let holiness be made the servant of power.",
+        text: "So it was. But Sava could not stay hidden on the Mountain. His people needed him. A young nation, newly Christian, lacked what no gold can buy: not merely a church building, but their own Church — bishops of their own, books and services in their own Slavonic tongue, the faith woven into the very life and law of the Serbs.",
+      },
+      {
+        speaker: "narrator",
+        text: "In the year twelve hundred and nineteen Sava travelled to Nicaea, where the Patriarch of Constantinople then dwelt in exile — for the Latins still held the Queen of Cities. From him Sava received autocephaly for the Serbian Church and was consecrated its first archbishop. Now he has come home, to crown and to teach, to build and to reconcile his own quarreling royal brothers.",
+      },
+      {
+        speaker: "you",
+        text: "Autocephaly — what does the word mean?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "'Self-headed' — a Church that governs its own affairs, chooses its own bishops, yet holds the one identical Orthodox faith shared with the Greeks, the Bulgars, the Rus. Not a separate religion; a household ordering its own table within the one great house. Here is the archbishop himself.",
+      },
+      {
+        speaker: "narrator",
+        text: "A man in the plain black robe of an Athonite monk crosses the courtyard — though an omophorion now marks him archbishop. His face is gentle, but there is iron beneath it. He turns to you: 'A people without their own Church are sheep scattered on the hills. I have given the Serbs their shepherds and their books. But a temptation follows close behind every such gift, smiling like a friend.'",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Mark that temptation well, $you. A prince hears 'a Church FOR the Serbian people' and twists it to 'a Church OF the Serbian crown' — a thing to be owned, bent to the throne, made to bless the king's wars and silence the king's rivals. It comes smooth as a courtier's bow. Do not let holiness be made the servant of power, nor the faith be made a banner of one blood above all others.",
+      },
+      {
+        speaker: "narrator",
+        text: "A figure in princely silks approaches, gold at his throat, ambition behind his smile. He eyes the archbishop's plain robe with thinly veiled contempt and addresses you, the easier mark.",
       },
       {
         speaker: "tempter",
-        text: "Archbishop's friend. A Serbian Church — excellent! Now it answers to the Serbian king, blesses his wars, anoints his cause, and silences his rivals. The crown made it; the crown shall command it. Is this not the glory of a Christian nation? Speak — or learn that princes do not suffer monks to lecture them.",
+        text: "Ah — the archbishop's young friend. A Serbian Church! Excellent work, truly. And now it answers to the Serbian king, does it not? It blesses his wars, anoints his cause, declares his rivals enemies of God. The crown made it; the crown shall command it. Is this not the very glory of a Christian nation? Speak — or learn that princes do not suffer monks and their friends to lecture them.",
       },
     ],
     boss: {
@@ -279,12 +331,24 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     },
     outro: [
       {
+        speaker: "tempter",
+        text: "So the Church belongs to no king... It serves the King of kings, and serves the people only by serving Him. The monk has bested the courtier. Keep your free Church, then — though I think kings will try this trick again, in ages you cannot dream of.",
+      },
+      {
         speaker: "narrator",
-        text: "Sava reconciled his warring brothers, crowned his brother Stefan 'the First-Crowned,' wrote the law and the typika of his people, and made two pilgrimages to the Holy Land. He died at Tarnovo in 1236 returning from the East. Centuries later the Ottomans, fearing his memory, burned his relics on a hill above Belgrade — and the Serbs only loved him the more.",
+        text: "Sava reconciled his warring brothers, crowned his brother Stefan 'the First-Crowned,' wrote the laws and the monastic rules of his people, and twice made pilgrimage to the Holy Land. He died at Tarnovo in 1236, returning from the East. Centuries later the Ottomans, fearing his memory still, burned his relics on the hill of Vracar above Belgrade — and the Serbs only loved him the more.",
+      },
+      {
+        speaker: "you",
+        text: "He gave them a Church of their own, yet kept it from becoming a weapon of the throne or a boast of the blood.",
       },
       {
         speaker: "st-anthony",
-        text: "He is the Enlightener of the Serbs, $you — holiness wedded to a people without being enslaved to its princes. A faith planted in a nation, yet never the nation's idol. Now east and south, to Constantinople and the Holy Mountain, for the deepest question of all: whether the saints truly see God.",
+        text: "That is his whole greatness, $you. The Church names him the Enlightener of the Serbs — holiness wedded to a people without being enslaved to its princes, a faith planted deep in a nation yet never made the nation's idol. The later ages will call that idol phyletism, and a council will condemn it; but Sava saw the danger first.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Now we go back, east and south, to Constantinople and to that Holy Mountain we glimpsed — for the deepest question of this whole journey awaits us there: whether a living man may truly behold God, and what, exactly, he beholds. Take my hand.",
       },
     ],
     reward: { xp: 1, item: "synodikon", healHp: true },
@@ -307,31 +371,63 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Mount Athos. In the silence of the cells, monks sit with bowed heads, breathing slowly, repeating without ceasing the words: 'Lord Jesus Christ, Son of God, have mercy on me, a sinner.' They call this stillness hesychia, and they say that in it, by grace, a man may behold the very Light of God — the same Light that shone from Christ on Mount Tabor.",
+        text: "Mount Athos at the hour before dawn. In a stone cell lit by one small lamp, an old monk sits utterly still, head bowed to his breast, breathing slow and deep. With each breath his lips move soundlessly around the same words, over and over, without ceasing: 'Lord Jesus Christ, Son of God, have mercy on me, a sinner.'",
       },
       {
         speaker: "st-anthony",
-        text: "These are the hesychasts, $you. And their champion is the monk Gregory Palamas, once of Athos, now in the thick of war. A learned philosopher from Calabria in Italy — Barlaam — has come east and mocks these monks. He calls them omphalopsychoi, 'navel-soul men,' and says no man living can see God at all.",
+        text: "They call this stillness hesychia, $you, and these monks the hesychasts. They seek to draw the wandering mind down into the heart and there to pray without ceasing, as the Apostle commands. And they say — softly, for it is a holy thing — that in this stillness, by grace, a man may behold the very Light of God: the same uncreated Light that blazed from Christ when He was transfigured upon Mount Tabor.",
       },
       {
-        speaker: "narrator",
-        text: "Barlaam reasons thus: God's essence is utterly unknowable and beyond all sight; therefore whatever light the monks see can be no more than a created thing, a glow in the mind, or a trick of the body. To claim a vision of God Himself, he says, is delusion or pride.",
-      },
-      {
-        speaker: "narrator",
-        text: "Palamas answers with a distinction sharp as a sword. 'God in His essence is indeed unknowable, imparticipable, beyond all creatures. But God in His energies — His powers, His grace, His glory — truly goes forth and is partaken. The Light of Tabor is not a creature; it is God Himself as He acts and shines, uncreated, yet not His hidden essence.'",
+        speaker: "you",
+        text: "See the Light of God? With his own eyes? That sounds almost too bold to say aloud.",
       },
       {
         speaker: "st-anthony",
-        text: "Hold to this, $you, for everything hangs upon it: that we are truly made 'partakers of the divine nature' (2 Peter 1:4) — not of the unknowable essence, but of the uncreated energies. If Barlaam is right, then grace is a creature, deification is a fable, and the saints have seen nothing. Three councils at Constantinople will sit upon this question.",
+        text: "A learned man thinks so too, and has come east to say it loudly. Barlaam, a philosopher of Calabria in Italy — brilliant, sharp-tongued, schooled in the subtleties of the Greeks and the Latins both. He has visited these monks, watched them pray with bowed heads, and gone away to mock them. He calls them omphalopsychoi — 'men with their souls in their navels' — and declares that no living man can see God at all.",
+      },
+      {
+        speaker: "you",
+        text: "But why does it matter so much? Let the philosopher mock; let the monks pray. Where is the harm?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Because under the quarrel lies the whole of our salvation. Hear how Barlaam reasons: God's essence — what God IS in Himself — is utterly unknowable, beyond all mind and all sight. So far, true. But then he concludes: therefore whatever light the monks see can only be a created thing — a glow conjured in the imagination, or some trick of the fasting body. To claim a vision of God Himself, he says, is either delusion or pride.",
+      },
+      {
+        speaker: "you",
+        text: "And if no one can truly see or touch God, then... what becomes of being saved? Of being joined to Him?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "You have found the very wound, $you. If God can in no way be partaken, then grace is merely a created gift He hands us from outside, like a coin; deification — our true sharing in the divine life — is a fable; and every saint who ever wept for joy in prayer saw nothing but his own fancy. The Gospel itself hangs on the answer.",
       },
       {
         speaker: "narrator",
-        text: "The councils gather — 1341 in the great hall, and again, and a third time in 1351. Barlaam's cause is taken up after him by Akindynos and Gregoras. And now the philosopher himself fixes you with a cold and brilliant eye.",
+        text: "Into this quarrel steps a monk of Athos, once a hesychast in these very cells, now drawn into the war of words: Gregory Palamas. He answers Barlaam with a distinction sharp as a sword — a distinction the Church has long known but never so fully spoken.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Listen closely, for everything turns on it. Palamas grants Barlaam half his point: God in His ESSENCE — His innermost being — is indeed unknowable, imparticipable, forever beyond every creature. No man sees that and lives. But, says Palamas, God is not only His hidden essence.",
+      },
+      {
+        speaker: "narrator",
+        text: "Palamas teaches it thus: 'God in His energies — His powers, His grace, His glory, His very life as it goes forth and acts — truly comes out to us and is partaken. The Light of Tabor was no creature, no symbol kindled for an hour. It was God Himself as He shines and acts: uncreated, divine, and yet not the unapproachable essence. God is partaken in His energies, and imparticipable in His essence.'",
+      },
+      {
+        speaker: "you",
+        text: "Essence and energies — is that not splitting God in two? Barlaam will surely cry that you preach two gods.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "He will cry exactly that. But it is no division, $you — it is the one undivided God known in two ways: as He is in Himself, hidden; and as He freely gives Himself, shining. The sun is one, yet we cannot stare at its disk while we live wholly in its light and warmth. Hold to this, for upon it rests the promise that we are made 'partakers of the divine nature' (2 Peter 1:4) — not of the unknowable essence, but of the uncreated energies. That is deification. That is the whole hope.",
+      },
+      {
+        speaker: "narrator",
+        text: "The scene shifts to the great hall of Constantinople. Three times the Church will sit in council upon this question — in 1341, and again, and a third time in 1351 — and three times vindicate the monks. Barlaam will lose and return to the West; his cause taken up after him by Akindynos and by the historian Gregoras. But here, now, the philosopher himself turns and fixes you with a cold and brilliant eye.",
       },
       {
         speaker: "humbert",
-        text: "So you side with these navel-gazing monks who imagine they stare at God with bodily eyes! Listen, novice: God's essence is one and simple. Either you see it — and you do not, for it is invisible — or you see a creature and call it God, which is idolatry. Your 'uncreated light' is a contradiction. Defend it, if a peasant's superstition can be defended at all.",
+        text: "So! You side with these navel-gazing monks who fancy they stare at the Almighty with the eyes in their heads. Listen well, novice. God's essence is one, simple, indivisible — to speak of 'energies' apart from it is to hack God into pieces and worship two gods. And His essence is invisible. So either you claim to see THAT — and you lie, for none can — or you see some created glimmer and call it God, which is rank idolatry. Your 'uncreated light' is a contradiction in terms. Defend it, if a peasant's superstition can be defended at all.",
       },
     ],
     boss: {
@@ -451,16 +547,28 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     },
     outro: [
       {
+        speaker: "humbert",
+        text: "The Tomos condemns me... 'God is partaken, yet imparticipable.' I demanded that God be either wholly seen or wholly hidden — and I forgot that He is the LIVING God, who gives Himself and yet remains beyond. My logic was clean; my heart was empty. I see it now.",
+      },
+      {
         speaker: "narrator",
         text: "The Councils of Constantinople vindicated Palamas: in 1341 against Barlaam, in 1347 and again in 1351 against Akindynos and Gregoras. The Tomos of 1351 set the seal upon the teaching — that the divine energies are uncreated, that God is truly partaken in His energies though imparticipable in His essence, and that the saints behold the uncreated Light.",
       },
       {
         speaker: "st-anthony",
-        text: "Barlaam returned to the West and to Rome; Palamas was made archbishop of Thessalonica, and after his repose the Church numbered him among the saints. To this day, $you, the Second Sunday of Great Lent — the very week after the Triumph of Orthodoxy — is kept as the Sunday of Saint Gregory Palamas, a second triumph of Orthodoxy.",
+        text: "Barlaam returned to the West and to Rome; Palamas was made archbishop of Thessalonica, and after his repose the Church numbered him among the saints. To this day, $you, the Second Sunday of Great Lent — the week after the Triumph of Orthodoxy — is kept as the Sunday of Saint Gregory Palamas: a second triumph of Orthodoxy.",
+      },
+      {
+        speaker: "you",
+        text: "I think I understand now why three whole councils were needed. It was never a dispute about words. It was about whether 'have mercy on me, a sinner' goes anywhere at all.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Just so. If God cannot be partaken, that prayer echoes into an empty heaven, and all our striving is loneliness dressed as piety. But because His energies are uncreated and freely given, the least monk in the poorest cell — and you, $you, wherever your own age sends you back — may be filled with the very Light of Tabor.",
       },
       {
         speaker: "narrator",
-        text: "For the question was never academic. If God cannot be partaken, then 'have mercy on me, a sinner' echoes into an empty heaven. But because His energies are uncreated and freely given, the least monk in the poorest cell may be filled with the very Light of Tabor — and so may you.",
+        text: "And somewhere on the Mountain, before dawn, an old man bows his head to his breast and breathes the Name once more, and the small cell fills, little by little, with a light that casts no shadow.",
       },
     ],
     reward: { xp: 1, item: "philokalia", healHp: true },

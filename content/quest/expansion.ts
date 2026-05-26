@@ -35,35 +35,67 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Smyrna. The crowd in the stadium roars like a single beast. The smell of dust and torches and fear. A festival mob, drunk on blood, chants for the death of the old man they have dragged from his hiding place.",
+        text: "Smyrna, jewel of the Asian coast. The stadium is packed to its highest tier, and the crowd roars like a single beast. The smell of dust and torches and pitch hangs in the air. A festival mob, drunk on wine and blood, chants for the death of the old man they have dragged from his hiding place in a farmhouse outside the walls.",
+      },
+      {
+        speaker: "narrator",
+        text: "They had hunted him for days. When the soldiers found him at last, he ordered a meal set before them, and asked only for one hour to pray. He prayed for two — for every soul he had ever met, and for the whole Church throughout the world.",
       },
       {
         speaker: "st-anthony",
-        text: "Half a century since Ignatius went to the lions, $you. The bishop they hunt today is Polycarp — disciple of John the Apostle himself. He has held the faith handed down from the hands that touched the risen Lord.",
+        text: "Half a century has passed since Ignatius went to the lions, $you. The bishop they hunt today is Polycarp — and he is no ordinary bishop. As a young man he sat at the feet of John, the beloved disciple, the Apostle who leaned on the Lord's breast at the Supper.",
+      },
+      {
+        speaker: "you",
+        text: "He knew an Apostle? An actual eyewitness of Christ?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "He knew John, and John knew the Lord. Polycarp would tell how John fled the public bath at Ephesus when the heretic Cerinthus entered — 'lest the roof fall, for the enemy of truth is within.' What you receive today comes to you across only two pairs of hands: from Christ, to John, to this old man in the sand.",
       },
       {
         speaker: "narrator",
-        text: "An old man stands in the center of the sand, white-bearded, unbound, strangely calm. The proconsul Statius Quadratus leans forward from his seat.",
+        text: "He stands in the center of the arena now — white-bearded, unbound, strangely calm, as if he were the only man present not afraid. Above him the proconsul Statius Quadratus leans forward from his marble seat.",
       },
       {
         speaker: "narrator",
-        text: "'Swear by the genius of Caesar,' the proconsul calls. 'Revile Christ, and I release you.'",
+        text: "'Have respect for your age, old man,' the proconsul calls. 'Swear by the genius of Caesar. Say, \"Away with the atheists.\" Revile Christ, and I release you.'",
+      },
+      {
+        speaker: "you",
+        text: "Atheists? They call Christians atheists?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Because we will not bow to their many gods, they say we believe in none at all. To Rome, a man who refuses the public cult is a danger to the whole city — for if the gods are slighted, they reason, the gods will send plague and famine on all. To be a Christian here is to be an enemy of the people.",
       },
       {
         speaker: "narrator",
-        text: "Polycarp lifts his head. His voice is steady enough to carry to the highest tier of the crowd.",
+        text: "Polycarp lifts his head and looks slowly across the crowd. Then he raises his hand toward them — the howling, pagan mob — and says, 'Away with the atheists.' A ripple of confusion runs through the stands. He has turned their own word against them.",
+      },
+      {
+        speaker: "narrator",
+        text: "'Swear,' the proconsul presses, 'and I set you free. Reproach Christ.' The old man answers, and his voice is steady enough to carry to the highest tier.",
       },
       {
         speaker: "narrator",
         text: "'Eighty and six years have I served Him, and He has done me no wrong. How then can I blaspheme my King who saved me?'",
       },
       {
+        speaker: "you",
+        text: "Eighty-six years. He has been a Christian longer than most men live.",
+      },
+      {
         speaker: "st-anthony",
-        text: "The proconsul will offer escape after escape. Each is a snare. Stand near, $you — the officer of the games has marked you. He thinks you can be made to recant where Polycarp will not.",
+        text: "He has never known a world without Christ in it. And mark his answer well, $you — he does not argue, he does not bargain. He simply confesses loyalty to a King. The proconsul will threaten him with beasts, then with fire, and to each threat the old man will only smile.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The proconsul will offer escape after escape. Each is a snare. And the officer of the games has marked you — he thinks a younger man, a stranger, can be made to recant where Polycarp will not. He comes to break you first, and parade your fall before the bishop's eyes.",
       },
       {
         speaker: "centurion",
-        text: "You there — friend of the old fool. He will burn within the hour. Why share his pyre? A pinch of incense, a word for Caesar, and you walk free. Answer me, Christ-follower, or join him.",
+        text: "You there — friend of the old fool. He will burn within the hour, and his god will not lift one finger to save him. Why share his pyre? A pinch of incense, a word for Caesar, and you walk free into the sunlight. Be sensible, Christ-follower. Answer me — or join him on the wood.",
       },
     ],
     boss: {
@@ -150,11 +182,31 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "The flames rise around Polycarp, and the Smyrnaeans will later swear the fire arched over him like a sail, refusing to consume him, until a soldier was sent with a dagger. They gathered his bones at dawn.",
+        text: "They bound the old man to the stake, but he asked not to be nailed: 'Leave me thus. He who gives me strength to endure the fire will grant me to remain in the flames unmoved.' He lifted his eyes and gave thanks, as over a chalice, that he was counted worthy to share the cup of the martyrs.",
+      },
+      {
+        speaker: "narrator",
+        text: "The flames rose around him, and the Smyrnaeans would later swear the fire arched over him like a sail filled with wind, refusing to consume him, until at last a soldier was sent forward with a dagger. The crowd that had howled for his blood fell silent.",
+      },
+      {
+        speaker: "centurion",
+        text: "...He died as if he were going home. Not one scream. I have watched a thousand men die, stranger. I have never watched one die like that.",
+      },
+      {
+        speaker: "narrator",
+        text: "At dawn the Christians crept back and gathered up his bones, 'more precious than costly gems and finer than gold,' to keep his memory and to celebrate the day of his birth — the day he died.",
+      },
+      {
+        speaker: "you",
+        text: "The day he died... they call it his birthday?",
       },
       {
         speaker: "st-anthony",
-        text: "He learned the faith from John, and John from the Lord. The chain is unbroken, $you — and now a link of it runs through you. Come. The philosophers are next, and they fight with reasons, not fire.",
+        text: "To the Church, the death of a martyr is a birth into life. Thus began the keeping of the saints' feast days, $you — on the very date of their martyrdom. Polycarp learned the faith from John, and John from the Lord. The chain is unbroken, and now a link of it runs through you.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Come. The next foe will not fight with fire. He fights with reasons — for the world is about to ask the Church whether her faith can stand among the philosophers. Take my hand. We go to Rome.",
       },
     ],
     reward: { xp: 1, item: "relic-cross", healHp: true },
@@ -175,23 +227,47 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Rome. A cramped upper room. Scrolls everywhere. A man in a philosopher's worn cloak — the pallium — teaches a handful of students. He still wears the dress of the philosophers, for he says he found in Christ the philosophy that does not fail.",
+        text: "Rome, in the reign of Marcus Aurelius — a philosopher-emperor who has no love for Christians. A cramped upper room above the baths of one Timiotinus. Scrolls everywhere, stacked to the rafters. A middle-aged man in a philosopher's worn cloak — the pallium, the threadbare badge of a teacher of wisdom — instructs a handful of students.",
       },
       {
         speaker: "st-anthony",
-        text: "Justin, they call him. A pagan who tried every school — Stoic, Platonist — and found them all empty, until an old man by the sea pointed him to the prophets and to Christ. Now he teaches openly in Rome.",
+        text: "Justin, they call him. Born in Samaria of pagan parents, he wandered through every school of his age, $you — Stoic, Peripatetic, Pythagorean, at last Platonist — sure each in turn would show him God, and disappointed by each.",
+      },
+      {
+        speaker: "you",
+        text: "And none of them satisfied him?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "He thought the Platonists had nearly reached heaven. Then one day, walking by the sea, he met an old man who asked him gently: how can the philosophers speak truly of God, when they have never seen Him, nor listened to those who did? The old man pointed him to the prophets — men older than all the philosophers, who spoke by the Spirit and foretold Christ. 'Straightway a flame was kindled in my soul,' Justin says.",
       },
       {
         speaker: "narrator",
-        text: "Justin turns from his lectern. 'We do not babble in secret,' he says. 'I have written to the Emperor himself, an Apology, to show that we are no enemies of reason — that the Word who became flesh is the same Logos that scattered seeds of truth among the wise of every nation.'",
+        text: "Justin turns from his lectern, his pupils watching. 'I did not abandon philosophy when I found Christ,' he tells you. 'I found philosophy itself — the only sure and profitable one. So I keep the cloak. Let them see that a man may love wisdom and worship the Crucified, and that these are not two things but one.'",
+      },
+      {
+        speaker: "you",
+        text: "But Rome surely sees Christians as the enemies of reason — atheists, you said, ignorant folk who meet in the dark.",
+      },
+      {
+        speaker: "narrator",
+        text: "'Which is why I write,' Justin says. 'I have sent an Apology to the Emperor himself, and a second to the Senate — open letters, signed in my own name, that any man may read. We do not babble in secret. I show them that whatever was nobly said by anyone belongs to us Christians, for the Word who became flesh in Jesus is the same Logos who scattered seeds of truth among the wise of every nation.'",
       },
       {
         speaker: "st-anthony",
-        text: "The prefect Rusticus watches this school. Justin has already disputed with the Cynic Crescens and bested him — and a beaten philosopher is a dangerous enemy. Be ready, $you. Today they come with subtler weapons than the sword.",
+        text: "Hear the boldness of it, $you. Justin claims that Socrates and Heraclitus, when they spoke truly, spoke by a share in the same Word that was made flesh. He does not flee reason — he baptizes it. This is the answer the Church gives to the proud mind: not retreat, but conquest.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "But it makes him enemies. The prefect Rusticus watches this school with cold eyes. And Justin has already bested the Cynic philosopher Crescens in public debate — a humiliated philosopher is a dangerous foe, for he fights not with arguments now but with denunciations. Be ready. Today they come with subtler weapons than fire.",
+      },
+      {
+        speaker: "narrator",
+        text: "A man in a fine cloak mounts the stairs, two students of his own behind him. His smile does not reach his eyes. This is no Roman soldier but a rival teacher, sent to expose the Christians as frauds before they can win another mind.",
       },
       {
         speaker: "marcus",
-        text: "So this is the Christian 'school.' Crescens warned me of you. Let us see whether your faith is philosophy or mere superstition for slaves and women. Defend it — if you can reason at all.",
+        text: "So this is the Christian 'school.' Crescens warned me of you Galileans — that you steal the robes of philosophy to dress up a peasant superstition fit only for slaves and women. Let us see, then. Is your 'faith' a philosophy that can be reasoned, or merely a fear that must be felt? Defend it — if you can reason at all.",
       },
     ],
     boss: {
@@ -280,11 +356,23 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "Within months Justin and six companions would stand before the prefect Rusticus. Asked if he supposed he would ascend to heaven, Justin answered, 'I do not suppose it; I know and am fully persuaded of it.' They were scourged and beheaded.",
+        text: "Within a few short years Justin and six companions would be denounced — by Crescens, it was whispered — and dragged before the prefect Rusticus. 'What doctrines do you practice?' the prefect demanded. Justin answered plainly, and refused to sacrifice.",
+      },
+      {
+        speaker: "narrator",
+        text: "'If you are scourged and beheaded,' Rusticus pressed, 'do you suppose you will ascend into heaven?' Justin replied: 'I do not suppose it — I know it, and am fully persuaded of it.' They were scourged and beheaded together.",
+      },
+      {
+        speaker: "you",
+        text: "He was so certain. Not hoping — knowing.",
       },
       {
         speaker: "st-anthony",
-        text: "Thus 'Justin Martyr' — the philosopher who gave his head for the Logos he loved. The faith is not the enemy of reason, $you; it is reason's home. Now north and forward, to a council that must finish what Nicaea began.",
+        text: "Thus the Church remembers him forever as Justin Martyr — the philosopher who gave his head for the Logos he loved. He left us the earliest portrait of the Sunday Liturgy, and the bold confession that reason itself, rightly followed, leads home to Christ.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The faith is not the enemy of the mind, $you; it is the mind's true homeland. But a far greater storm gathers. Soon a single word — whether the Son is God or merely the highest creature — will set the whole empire ablaze. Constantinople, where the Creed must be completed, awaits.",
       },
     ],
     reward: { xp: 1, item: "icon-christ", healHp: true },
@@ -305,27 +393,47 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Constantinople. One hundred and fifty bishops gather in the imperial city. Fifty-six years have passed since Nicaea. Athanasius is dead; the great Basil died two years ago. But their work is not finished — for now men deny not the Son but the Spirit.",
+        text: "Constantinople, the capital, under the Emperor Theodosius. One hundred and fifty bishops gather in the imperial city. Fifty-six years have passed since Nicaea — and they were terrible years. Arianism, condemned at Nicaea, had risen again and seized emperors, bishops, whole provinces. For a generation the heretics held the great churches and the Nicene faithful met in barns and fields.",
+      },
+      {
+        speaker: "you",
+        text: "But Nicaea settled it! The Son is one in essence with the Father. How did the heresy come back?",
+      },
+      {
+        speaker: "st-athanasius",
+        text: "A word on parchment does not still a storm in men's hearts, $you. I — Athanasius — was exiled five times for that one word, homoousios. When I lay dying they said the world had become Arian and groaned to find itself so. But God raised up new champions after me: three from the rough hill-country of Cappadocia.",
+      },
+      {
+        speaker: "st-athanasius",
+        text: "Basil the Great, who built the language of the Trinity stone by stone: one essence — ousia — in three persons — hypostases. His brother Gregory of Nyssa, deepest of mystics. And Gregory the Theologian, who with a voice like fire won this very city back to the faith, preaching in a house-chapel he called Anastasia — Resurrection — while the heretics held every cathedral.",
+      },
+      {
+        speaker: "you",
+        text: "Then is the battle not already won? What remains to decide?",
       },
       {
         speaker: "st-anthony",
-        text: "The Pneumatomachi, $you — the 'Spirit-fighters.' They grant the Son is God, but call the Holy Spirit a creature, a servant, a thing made. If they are right, then the One who sanctifies us is no God, and we are not truly made divine.",
-      },
-      {
-        speaker: "narrator",
-        text: "A frail, brilliant man rises to preside — Gregory the Theologian, lately preacher of the Five Theological Orations in a tiny chapel, who almost single-handedly won the city back to Nicene faith. The Cappadocians' fingerprints are on every line of the new Creed.",
-      },
-      {
-        speaker: "narrator",
-        text: "'We worship the Spirit,' Gregory says quietly, 'the Spirit who makes me bold to speak. If He is not God, let Him first make me divine — and then I shall fear no man.'",
+        text: "A new front, $you. The Pneumatomachi — the 'Spirit-fighters.' Cornered on the Son, they have retreated to the Holy Spirit. They will grant the Son is God, then call the Spirit a creature, a servant, the highest of things made. They demand: show us the word 'God' applied to the Spirit in Scripture, and we will yield.",
       },
       {
         speaker: "st-anthony",
-        text: "Their leader will press you hard. Hold to what Basil taught: the Spirit is glorified together with the Father and the Son. Speak, $you — the Creed we say every Sunday is being forged in this room.",
+        text: "Do you see the trap? If the Spirit is a creature, then the One who sanctifies us, who dwells in us, who makes us partakers of the divine nature — is no God at all. And a creature cannot make us divine. Our whole salvation hangs on the answer.",
+      },
+      {
+        speaker: "narrator",
+        text: "A frail, brilliant man rises to preside over the Council — Gregory the Theologian himself, worn thin by sickness and by the long war for the city. The Cappadocians' fingerprints are on every line of the Creed now taking shape.",
+      },
+      {
+        speaker: "narrator",
+        text: "'They ask why I do not shout the bare word \"God\" of the Spirit on every page,' Gregory says quietly. 'Scripture unveils the Father, then the Son, then the Spirit — light added to light, as our weak eyes can bear it. We worship the Spirit who makes me bold to speak. If He is not God, let Him first make me divine — and then I shall fear no man.'",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Their leader comes now, a disciple of the arch-logician Eunomius — cold, precise, armed with airtight syllogisms. Hold to what Basil taught: the Spirit is glorified together with the Father and the Son. Speak, $you — the very Creed your people will confess every Sunday until the end of the world is being forged in this room.",
       },
       {
         speaker: "arius",
-        text: "I am Eunomius's disciple. Grant me this: the Father is unbegotten, the Son begotten — and the Spirit? Neither. Therefore the Spirit is the first of the things the Son made. A creature, however exalted. Refute me, if you can.",
+        text: "I am a disciple of Eunomius, and I deal in plain logic. Grant me only this: the Father is unbegotten. The Son is begotten. And the Spirit — neither begotten nor unbegotten. He is therefore neither the Father nor the Son. He must then be the first and highest of the things the Son made: a creature, however glorious. Refute that, if you can.",
       },
     ],
     boss: {
@@ -412,11 +520,23 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "The Council added to Nicaea its confession of the Spirit, 'the Lord, the Giver of Life.' This — the Niceno-Constantinopolitan Creed — is the very Creed the Orthodox Church confesses to this day, unchanged.",
+        text: "The Council confessed the Spirit as 'the Lord, the Giver of Life, who proceeds from the Father, who together with the Father and the Son is worshipped and glorified.' Nicaea's Creed was now complete. This — the Niceno-Constantinopolitan Creed — is the very Creed the Orthodox Church sings to this day, unchanged, word for word.",
+      },
+      {
+        speaker: "you",
+        text: "Word for word? Even now, sixteen centuries later?",
+      },
+      {
+        speaker: "st-athanasius",
+        text: "Word for word. Guard it so. Men will be tempted in ages to come to 'improve' it, to add a phrase here, a clause there. Resist them. What three hundred Fathers and the Spirit composed, let no single hand amend.",
+      },
+      {
+        speaker: "narrator",
+        text: "Worn out by the intrigues of the bishops, Gregory the Theologian resigned the throne of Constantinople rather than be the cause of strife, and retired to write poetry and pray. The work was done; the Trinity was confessed.",
       },
       {
         speaker: "st-anthony",
-        text: "Basil, Gregory the Theologian, Gregory of Nyssa — the three Cappadocians gave the Church her language for the Trinity: one essence, three Persons. Remember it, $you. Now to Constantinople again, where a golden-mouthed preacher pays for telling the truth to an empress.",
+        text: "Basil, Gregory the Theologian, Gregory of Nyssa — the three great Cappadocians gave the Church her language for the Trinity: one essence, three Persons, distinguished by their relations of origin. Remember it, $you. Now back to this same imperial city, a generation on, where a preacher with a golden mouth will pay dearly for telling the truth to an empress.",
       },
     ],
     reward: { xp: 1, item: "synodikon", healHp: true },
@@ -437,23 +557,43 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Constantinople, the New Rome. The great church is packed to the doors; people climb the columns to hear him. John, archbishop of the city — they have already nicknamed him Chrysostomos, 'golden-mouth' — preaches without flattery to rich and poor alike.",
+        text: "Constantinople, the New Rome, capital of a Christian empire. The great church is packed to its doors; people climb the columns and crowd the galleries to hear him, and break into applause in the middle of his sermons until he begs them to stop. John, archbishop of the city — the people have already given him a name that will outlast every emperor: Chrysostomos, the golden-mouthed.",
       },
       {
         speaker: "st-anthony",
-        text: "He came from the Antiochene school, $you, a man who fasted in a cave until his health was broken, who gives the Church's wealth to the hungry and calls the silver dishes of the rich a theft from the poor. The court of the Empress Eudoxia does not love him for it.",
+        text: "He came up from Antioch, $you, schooled in reading Scripture plainly and preaching it whole. As a young man he fled to the mountains and lived in a cave two years, standing, scarcely sleeping, until his health was ruined for life. He came down from that mountain unable to be frightened by anything the world could do to him.",
+      },
+      {
+        speaker: "you",
+        text: "And now he is archbishop of the greatest city in the world. Surely that is comfort enough after a cave.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "He treats the office as a trust, not a prize. He sold the costly furnishings of the bishop's palace and gave the silver to the poor. He thunders from the pulpit against luxury while the poor starve at the gates, against the games, against the powerful who devour the weak. He says the rich man's extra cloak belongs by right to the naked man who has none. The court loves him not at all for it.",
+      },
+      {
+        speaker: "you",
+        text: "Who at court has he angered most?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The Empress Eudoxia — proud, generous, and easily wounded. When he preaches against vanity and greed, the whole city knows whom he means, and so does she. And he has a powerful enemy in Theophilus, the patriarch of Alexandria, who envies the dignity of this upstart see and would gladly see John fall.",
       },
       {
         speaker: "narrator",
-        text: "John descends from the ambo. 'I have only ever feared one thing,' he tells you, 'and it is not exile, nor the sword, nor poverty. It is sin. The rest are shadows. Take away my see, and you take Eudoxia's — the Church is the Lord's, not the Empress's.'",
+        text: "John descends from the ambo, the crowd still murmuring. He turns to you, and there is no fear in his face at all. 'I have only ever feared one thing,' he says, 'and it is not exile, nor the sword, nor poverty, nor death. It is sin. Everything else is a shadow that passes.'",
+      },
+      {
+        speaker: "narrator",
+        text: "'Let them banish me,' he goes on. 'The earth is the Lord's and the fullness thereof. Let them saw me in two — Isaiah was sawn. Let them drown me — that was Jonah's road. The Church is not Eudoxia's; she is the bride of Christ, and no power on earth can take her from Him.'",
       },
       {
         speaker: "st-anthony",
-        text: "His enemies have convened a sham synod against him — they call it the Synod of the Oak. A courtier comes now, smooth and sure, to make you see 'reason' before the soldiers come for John.",
+        text: "His enemies have already convened a rigged synod against him across the water — they call it the Synod of the Oak. Trumped-up charges, packed with his foes, John not even permitted to defend himself. Exile is decided before the trial begins. A courtier comes now, smooth and reasonable, to break the archbishop's friends before they break the man.",
       },
       {
         speaker: "marcus",
-        text: "Archbishop's friend. The Empress is most generous, and most easily offended. John insults her from the pulpit and squanders the Church's gold on beggars. Counsel him to silence — or share his fate. Now: defend this reckless 'golden mouth.'",
+        text: "Archbishop's friend. Let us speak as practical men. The Empress is most generous to those who please her, and most dangerous to those who do not. Your John insults her from the pulpit before the whole city, and melts down sacred treasures to throw gold at beggars in the street. Counsel him to silence — a season of quiet, no more — or share his ruin. Now: defend this reckless 'golden mouth,' if there is a defense to give.",
       },
     ],
     boss: {
@@ -542,11 +682,27 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "John was exiled, recalled, and exiled again. Marched on foot through autumn rains to the edge of the empire, he collapsed at Comana. His last words were the doxology he had taught a city: 'Glory to God for all things.' Thirty-one years later his relics returned to Constantinople in triumph.",
+        text: "John was exiled, recalled when the people rioted and an earthquake frightened the court, then exiled again — farther this time, to the bleak edge of the empire. His guards drove the sick old man on foot through summer heat and autumn rains, refusing him rest, until he collapsed at a little chapel in Comana.",
+      },
+      {
+        speaker: "narrator",
+        text: "There, knowing the end had come, he asked for white baptismal robes, received the holy Mysteries, and spoke the doxology he had taught a whole city to say in every sorrow: 'Glory to God for all things.' And so he died.",
+      },
+      {
+        speaker: "you",
+        text: "Glory to God — even for that? Even for the road that killed him?",
       },
       {
         speaker: "st-anthony",
-        text: "His Divine Liturgy is sung in Orthodox churches across the world to this hour. Power could exile the man; it could not silence the prayer. Come — to Ephesus, where the Mother of God is given her name.",
+        text: "Even for that. It is the hardest and the highest prayer, $you: to bless God not only in the harvest but in the famine, not only on the throne but on the exile's road. The empress's power could march him to his death; it could not wring one curse from his lips.",
+      },
+      {
+        speaker: "narrator",
+        text: "Thirty-one years later, the city that had failed him brought his relics home in triumph, and a later emperor — Eudoxia's own son — begged forgiveness in his mother's name before the body of the saint.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "And his Divine Liturgy is sung in Orthodox churches across the whole world to this very hour — every Sunday, in a hundred tongues. Power exiled the man; it could not silence the prayer. Come now to Ephesus, where the Mother of God is about to be given her true and ancient name.",
       },
     ],
     reward: { xp: 1, item: "epitrachelion", healHp: true },
@@ -567,27 +723,43 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Ephesus — the very city where, tradition says, the Theotokos lived her last years in the care of John. Two hundred bishops gather in the church that bears her name. Outside, the people of the city wait through the night with torches.",
+        text: "Ephesus — the great city of Asia, where Paul once silenced the silversmiths of Artemis, and where, ancient tradition holds, the Theotokos lived her last years under the care of John the beloved disciple. Two hundred bishops gather in the basilica that bears her name, the Church of Saint Mary. Outside, the whole city waits through the long summer day, anxious for word.",
       },
       {
         speaker: "st-cyril",
-        text: "I am Cyril of Alexandria. Nestorius, archbishop of Constantinople, will not call the Virgin Theotokos — God-bearer. He says she bore only a man, to whom God was joined as in a temple. He would split the one Christ into two sons.",
+        text: "I am Cyril, archbishop of Alexandria. A new error has come from the capital itself. Nestorius, archbishop of Constantinople, forbids the people to call the Virgin Theotokos — God-bearer. He will allow only 'Christ-bearer,' Christotokos.",
+      },
+      {
+        speaker: "you",
+        text: "Is that not a small thing — a quarrel over a single title for Mary?",
+      },
+      {
+        speaker: "st-cyril",
+        text: "It is no small thing, and it is not first of all about Mary. It is about her Son. Nestorius teaches that she bore only a man, Jesus, to whom God the Word was afterward joined — dwelling in him as in a temple, as one might dwell in a house. Two sons, he makes: the man whom Mary bore, and the God who came to lodge in him.",
       },
       {
         speaker: "st-anthony",
-        text: "Mark the danger, $you. This is not a quarrel about Mary first of all — it is about her Son. If she did not bear God in the flesh, then God did not truly become man, and we are not saved. The title guards the Incarnation itself.",
+        text: "Mark the danger, $you. If Mary did not bear God-made-flesh, then God did not truly become man — He only drew near to a man. And if God did not truly become man, then man is not truly joined to God, and we are not saved. The whole Incarnation hangs on this one word. The title of the Mother is the shield of her Son's divinity.",
+      },
+      {
+        speaker: "you",
+        text: "But how can a woman be the mother of God, who has no beginning? That is the part I do not understand.",
       },
       {
         speaker: "st-cyril",
-        text: "Confess this with me: there is one Lord Jesus Christ, the Word made flesh; and she who bore Him in the flesh truly bore God. Not that the Godhead took its origin from her — but that He who is God took flesh from her.",
+        text: "A mother does not give birth to a nature, $you — she gives birth to a person, a someone. And the someone she bore is the eternal Word, now made flesh. We do not say the Godhead took its beginning from her; God is without beginning. We say that He who is God took His flesh from her. She bore a Person, and that Person is God. Therefore she is truly Theotokos.",
+      },
+      {
+        speaker: "st-cyril",
+        text: "Confess it with me: one Lord Jesus Christ, the Word made flesh; one Son, not two; and she who bore Him in the flesh truly bore God in the flesh. I have sent Nestorius twelve anathemas. He will not yield. So the Council must speak.",
       },
       {
         speaker: "narrator",
-        text: "Word comes that the people are massing in the streets, anxious for the Mother of God. A learned partisan of Nestorius approaches you, certain the new title is an overreach that makes the Virgin a goddess.",
+        text: "Word arrives that the people are massing in the streets with lamps and torches, weeping and praying, terrified that the bishops will strip the Virgin of her honor. A learned partisan of Nestorius pushes through to you, certain the new title is a reckless overreach that makes a creature into a goddess.",
       },
       {
         speaker: "eutyches",
-        text: "I speak for Archbishop Nestorius. Mary is mother of Christ — Christotokos — not 'mother of God.' How can a creature be mother of her own Creator? You make the Virgin a pagan goddess. Answer, if Cyril has not blinded you.",
+        text: "I speak for Archbishop Nestorius, and for plain sense. Mary is the mother of Christ — Christotokos — and that is honor enough. How can a creature be the mother of her own Creator? How can the eternal God have a birthday? You make the Virgin a fourth person of the Godhead, a pagan goddess in a Christian veil. Answer me — if Cyril has not already blinded your reason.",
       },
     ],
     boss: {
@@ -676,11 +848,23 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "When the Council confessed the Virgin as Theotokos, the people of Ephesus escorted the bishops home by torchlight through the night, crying out and rejoicing for the Mother of God.",
+        text: "When the Council confessed the Virgin as Theotokos and deposed Nestorius, the news ran out into the streets. The whole city erupted in joy. The people of Ephesus escorted the bishops to their lodgings by torchlight through the night, swinging censers before them, crying out the name of the Mother of God until dawn.",
+      },
+      {
+        speaker: "you",
+        text: "All this — for the honor of one title?",
       },
       {
         speaker: "st-cyril",
-        text: "One Lord, one Christ, one Son — and His Mother truly the God-bearer. Hold this fast, $you. Twenty years hence at Chalcedon they will need it against an error that runs the other way. The road of the councils is narrow on both sides.",
+        text: "For the honor of her Son in her. They sensed, even those who could not have argued it, that to lose her name was to lose His nature. One Lord, one Christ, one Son — and His Mother truly the God-bearer. Hold this fast.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "But the road of the councils is narrow on both sides, $you. Today you fought a man who divided Christ into two. Twenty years hence, at Chalcedon, the danger will run the opposite way — men who melt the two natures into one, and so dissolve His humanity altogether.",
+      },
+      {
+        speaker: "st-cyril",
+        text: "Guard the balance. Christ is one Person in two natures — fully God, fully man, without confusion and without division. Bear that truth onward. Far ahead lies a confessor who will lose his very tongue rather than let it be obscured.",
       },
     ],
     reward: { xp: 1, item: "icon-theotokos", healHp: true },
@@ -701,23 +885,43 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "A cold cell. An old monk sits very straight on the stone bench, hands folded. He has been dragged across the empire and back, tried, beaten, and tried again. He is past seventy. They have come for his answer one final time.",
+        text: "A cold stone cell in Constantinople. An old monk sits very straight on the bench, hands folded in his lap, his face hollowed by years of hardship. He was once a high official in the imperial palace, secretary to an emperor — and gave it all up for the monastery. Now he is past seventy, dragged across the empire and back, tried, beaten, tried again.",
       },
       {
         speaker: "st-anthony",
-        text: "Maximus, called the Confessor, $you. The emperor and the patriarch alike command silence on a single question: does Christ have one will or two? They want peace with the Monophysites and offer a compromise — one will in Christ. Maximus will not say it.",
+        text: "Maximus, called the Confessor, $you. He has fought the heretics with his pen across three continents, from Africa to Rome to here. The emperor and the patriarch alike now command one thing of him: silence, on a single question.",
+      },
+      {
+        speaker: "you",
+        text: "What question could be worth all this — the prison, the beatings, an old man hauled across the world?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Whether Christ has one will, or two. The empire is torn — half of Egypt and Syria reject Chalcedon, holding to one nature in Christ. To win them back, the emperor's theologians crafted a compromise: grant two natures, as Chalcedon said, but confess only one will, one operation. One activity in the Saviour. They call it peace.",
+      },
+      {
+        speaker: "you",
+        text: "And is it not? If it heals the schism and harms no one?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "It harms everyone, $you, for it is false. The will belongs to the nature, not merely to the person. If Christ has a complete human nature, He must have a human will — or His humanity is a hollow mask. And what is not assumed is not healed. If He did not take our willing, our willing — the very thing that fell in Eden — is not saved.",
       },
       {
         speaker: "narrator",
-        text: "'If the whole world should commune with the patriarch,' Maximus says softly, 'I would not. For the Holy Spirit, through the Apostle, anathematizes even angels who innovate against the Gospel. To deny Christ a human will is to deny that He healed our willing.'",
+        text: "The old monk speaks, his voice quiet but utterly without fear. 'They tell me the Roman see has signed it, the patriarchs have signed it. They ask why I alone hold out. But truth is not counted by heads. If the whole world should commune with the patriarch in this, I would not — for the Apostle anathematizes even an angel that preaches another gospel.'",
+      },
+      {
+        speaker: "narrator",
+        text: "'In Gethsemane,' Maximus goes on, 'the Lord prayed, \"Let this cup pass — yet not my will, but Thine.\" Whose was the will that shrank, and then submitted? It was His own human will, real and entire, freely bowing to the divine. There — in that prayer — our broken willing was made whole. Take that human will from Christ, and you take away my salvation.'",
       },
       {
         speaker: "st-anthony",
-        text: "They will tell you a layman has no right to decide what emperors and patriarchs have settled. They will threaten his tongue and his writing hand. Stand with him, $you. Constantinople III will one day vindicate every word he refused to take back.",
+        text: "They will tell you a mere monk, a layman in their eyes, has no right to overrule emperors and patriarchs. They will threaten the tongue that argues and the hand that writes. Stand with him, $you. The Sixth Ecumenical Council, two decades hence, will read his every word aloud and vindicate it — but he will not live to see it.",
       },
       {
         speaker: "iconoclast",
-        text: "Monk's friend. The Emperor himself, and the Patriarch, have decreed one will in Christ, for the sake of peace in the empire. Who are you — who is this stubborn old man — to set yourselves against the throne and the altar both? Recant, or lose what speaks and what writes.",
+        text: "Monk's friend. Be reasonable. The Emperor himself and the Patriarch of this city have decreed one will in Christ, for the peace of a bleeding empire. Who are you — who is this broken old man — to set your private judgment against the throne and the altar together? Obedience is a Christian virtue, is it not? Recant — or the old man loses what speaks and what writes, and so, perhaps, do you.",
       },
     ],
     boss: {

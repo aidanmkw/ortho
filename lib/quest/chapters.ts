@@ -35,7 +35,11 @@ const BASE_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "And then — dust. Olive trees. A Roman road. The smell of crushed thyme. The year is one hundred and seven.",
+        text: "And then — dust. Olive trees. A Roman road, paved with worn basalt and rutted by ox-carts. The smell of crushed thyme. Somewhere a soldier's hobnailed sandals scrape the stone. The year is one hundred and seven.",
+      },
+      {
+        speaker: "narrator",
+        text: "The Mediterranean sun is merciless. To the south, the walls of Smyrna. The Apostle John has been dead barely a decade; men still live who heard him preach. The faith is young, illegal, and growing like a fire in dry grass.",
       },
       {
         speaker: "st-anthony",
@@ -43,27 +47,55 @@ const BASE_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "you",
-        text: "Who are you?",
+        text: "Who are you? Where — when — am I?",
       },
       {
         speaker: "st-anthony",
-        text: "Anthony, of Egypt. The Lord granted me a vision of you. The Church needs witnesses in every age — and the age you come from is starved of them.",
+        text: "Anthony, of Egypt — though my own desert is two centuries yet to come. The Lord granted me a vision of you. The Church needs witnesses in every age, $you — and the age you come from is starved of them.",
       },
       {
         speaker: "st-anthony",
-        text: "We have not much time. You must learn quickly. There is a man up the road in chains — he goes to Rome to die. Speak with him.",
+        text: "You stand in the reign of Trajan. To follow Christ now is to live under sentence of death. There is no Christendom, no cathedrals, no Bible bound between two covers — only the breaking of bread in secret, and bishops who remember the Apostles' faces.",
+      },
+      {
+        speaker: "you",
+        text: "Then why bring me to a road?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Because a man walks it under guard, and he is the heart of this hour. There — see the chains? Ten leopards, he calls his soldiers, for they grow crueler the kinder he is to them. Speak with him before they take him to the ships. We have not much time.",
       },
       {
         speaker: "st-ignatius",
-        text: "Stranger. I am Ignatius, bishop of Antioch. They take me to the beasts. I rejoice — for I shall be the wheat of God.",
+        text: "Stranger. I am Ignatius, bishop of Antioch — Theophoros, the God-bearer, they have called me since I was a child. They take me to Rome, to the beasts in the amphitheatre.",
+      },
+      {
+        speaker: "you",
+        text: "You speak of it so calmly. You are going to die.",
       },
       {
         speaker: "st-ignatius",
-        text: "But first, take this. Read my letter to the Smyrnaeans. The Eucharist is the flesh of our Saviour Jesus Christ. Remember this.",
+        text: "I rejoice — for I shall be the wheat of God, ground by the teeth of beasts to be found the pure bread of Christ. Do not, I beg you, try to save me by your kindness. Let me be poured out while the altar is ready.",
+      },
+      {
+        speaker: "st-ignatius",
+        text: "I write letters along this road — to Ephesus, to the Romans, to my beloved Polycarp of Smyrna. Take this one, to the Smyrnaeans. Read it, and learn what they will deny in ages to come: the Eucharist IS the flesh of our Saviour Jesus Christ, which suffered for our sins and which the Father raised.",
+      },
+      {
+        speaker: "st-ignatius",
+        text: "And learn this too: where the bishop is, there let the people be, even as where Christ is, there is the Catholic Church. The flock is not scattered sheep; it is one Body, knit in one altar, one cup.",
+      },
+      {
+        speaker: "you",
+        text: "Why does Rome hate you so? You harm no one.",
+      },
+      {
+        speaker: "st-ignatius",
+        text: "Because we will not call Caesar a god. We confess one Lord, and Rome cannot abide a kingdom not its own. To them we are 'atheists' — for we deny their many gods. The price of that word is the arena.",
       },
       {
         speaker: "narrator",
-        text: "A Roman centurion approaches. His face is dark with hatred and confusion.",
+        text: "Hobnails on stone. A Roman centurion strides up the road, hand on the pommel of his gladius. His face is dark with hatred and confusion — and something else, buried deep: fear of these people who do not fear him.",
       },
       {
         speaker: "centurion",
@@ -307,13 +339,30 @@ const BASE_CHAPTERS: Chapter[] = [
         text: "Enough! ...I will report you spoke well. Go. But know that Rome remembers.",
       },
       {
+        speaker: "narrator",
+        text: "The centurion turns away — but he glances back once, and his men are murmuring among themselves. A seed has fallen on hard ground. Whether it takes root, only God knows.",
+      },
+      {
         speaker: "st-ignatius",
         text:
-          "Well spoken, $you. Take my letter as your shield. And remember: 'I am the wheat of God, ground by the teeth of beasts to be found the pure bread of Christ.'",
+          "Well spoken, $you. You see now that the Faith is not argued into the world — it is bled into it. Take my letter as your shield. And remember: 'I am the wheat of God, ground by the teeth of beasts to be found the pure bread of Christ.'",
+      },
+      {
+        speaker: "you",
+        text: "Bishop — will I see you again?",
+      },
+      {
+        speaker: "st-ignatius",
+        text:
+          "In the Kingdom, child. Pray for me, that I may not merely be CALLED a Christian, but be found one. Now go — your road is longer than mine.",
+      },
+      {
+        speaker: "narrator",
+        text: "He shuffles on toward the ships and the city of his crown. In a few weeks his blood will water Rome. His letters will outlast the empire that killed him.",
       },
       {
         speaker: "st-anthony",
-        text: "Onward. Two hundred years pass in a breath. Take my hand.",
+        text: "He goes to his glory. Hold his words close — they will be your first lesson when the world says the early Church believed nothing definite. Onward, $you. The persecutions deepen. Take my hand.",
       },
     ],
     reward: { xp: 1, item: "icon-christ", healHp: true },
@@ -333,35 +382,58 @@ const BASE_CHAPTERS: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Darkness. The smell of clay and old bone. A torch sputters. Frescoes on the walls — a young shepherd carries a lamb, a woman cradles a child.",
-      },
-      {
-        speaker: "st-anthony",
-        text:
-          "The Decian Persecution. The Emperor demands every citizen sacrifice to the gods or be killed. Many Christians have fled here, beneath the streets.",
-      },
-      {
-        speaker: "st-anthony",
-        text:
-          "Look — there, on the wall. A woman with her child, painted before the Apostles' bones grew cold. The very first depiction of the Theotokos.",
-      },
-      {
-        speaker: "you",
-        text: "I have heard Protestants say making images of saints is idolatry.",
-      },
-      {
-        speaker: "st-anthony",
-        text:
-          "Then they have not entered a catacomb. Image-making in the Christian community is as old as the community itself.",
+        text: "Darkness. The smell of clay and old bone. A torch sputters in a wall-niche. You descend a narrow stair cut into volcanic tufa, past shelf upon shelf of loculi — the wrapped dead, sealed behind marble and tile.",
       },
       {
         speaker: "narrator",
-        text: "Footsteps. A man steps from the shadows in a fine toga. He is no friend.",
+        text: "The passage opens into a small chamber. Frescoes glow on the curved ceiling — a young beardless shepherd carries a lamb across his shoulders; a woman cradles a child; a man stands praying with arms raised, an orant.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "The Catacomb of Priscilla, beneath the Via Salaria. The year is two hundred and fifty. The Emperor Decius has issued an edict: every soul in the Empire must sacrifice to the gods and receive a certificate — a libellus — or die. Many Christians have fled here, beneath the streets of Rome.",
+      },
+      {
+        speaker: "you",
+        text: "It is a city of the dead.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "And the living gather here to break bread upon the tombs of the martyrs — the first altars are slabs over holy bones. From this the Church will never part: every altar, in every age, will hold a relic. Here is where that began.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Look — there, on the wall. A woman with her child, and beside her a prophet pointing to a star. Painted while men who knew the Apostles still drew breath. The oldest image of the Theotokos in all the world.",
+      },
+      {
+        speaker: "you",
+        text: "I have heard it said — in my own age — that making images of Christ and the saints is idolatry. That the first Christians never did such things.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Then they have not entered a catacomb. Look around you — the Good Shepherd, Jonah and the whale, Daniel among the lions, the raising of Lazarus. Image-making in the Christian community is as old as the community itself. The wall preaches what some will one day deny.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "But beware — the worst danger now is not the lions. It is the certificate. Some buy a libellus through bribes, or burn a pinch of incense 'just for show,' and tell themselves their heart is still Christ's. The Church will spend years deciding how to receive such lapsed back. The act of denial is itself the denial.",
+      },
+      {
+        speaker: "narrator",
+        text: "Footsteps echo down the gallery. A man steps from the shadows into the torchlight — tall, clean-shaven, in a fine senatorial toga edged with purple. He is no fugitive. He is no friend.",
       },
       {
         speaker: "marcus",
         text:
-          "Marcus Aurelius Verus. Roman citizen. I have come to debate, not to arrest. Show me your god, Christ-follower — show me you are no idolater.",
+          "Marcus Aurelius Verus. Roman citizen, and a man of philosophy. I followed your people down here. I have come to debate, not to arrest — yet. Show me your god, Christ-follower. Show me you are no idolater, no atheist, no enemy of Rome.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Answer him truly, $you. He is the better sort of pagan — curious, not cruel. Win his mind and you may win his soul. Tertullian will soon write that the blood of the martyrs is seed; so too is a question honestly answered.",
       },
     ],
     boss: {
@@ -600,12 +672,27 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "marcus",
         text:
-          "I came to mock and stay to think. You have not been like the others. Tell me — where can I find the woman in your fresco who feeds you all?",
+          "I came to mock and stayed to think. You have not been like the others — you do not rave, you do not flatter. Tell me, then — where can I find the woman in your fresco, the one who feeds you all? I would learn more.",
+      },
+      {
+        speaker: "you",
+        text:
+          "She is no woman of paint, Marcus. The child she holds is God. Come — there is a bishop who will teach you, and water that makes a man new.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "He lingers a long moment before the fresco of the Theotokos, the torchlight trembling on his face. Then he turns and climbs back toward the sunlit streets of Rome — a different man than the one who descended.",
       },
       {
         speaker: "st-anthony",
         text:
-          "He may yet become a brother. The seed of the martyrs is the seed of the Church (Tertullian, c. 197). $you, you have earned an icon of the Theotokos. Carry her with you.",
+          "He may yet become a brother. 'The blood of Christians is seed,' Tertullian will write within a generation — and so are the questions answered in the dark. The Church grows downward, into the catacombs, before it ever rises into basilicas.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "$you, you have earned an icon of the Theotokos. Carry her with you. Now — Constantine's vision is coming. The age of blood gives way to the age of councils, and a far subtler enemy than any centurion. To Nicaea.",
       },
     ],
     reward: { xp: 1, item: "icon-theotokos", healHp: true },
@@ -626,52 +713,75 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "A grand hall. Three hundred and eighteen bishops in council. Constantine seated at the head, attentive. Some bear scars from the persecutions — eyes put out, hands missing. The Edict of Milan is twelve years old. They remember the lions.",
+          "A grand hall in the imperial palace at Nicaea, in Bithynia. Three hundred and eighteen bishops are gathered — the first time the bishops of the whole world have ever assembled in one place. Summer of three hundred and twenty-five.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Many bear the scars of Diocletian's terror — an eye gouged out, a hand crippled, the tendons of a leg severed. The Edict of Milan is only twelve years old. These men remember the lions; some were freed from the mines mere months ago.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "At the head of the hall sits Constantine himself, robed in gold and purple, the first emperor to bow to Christ. He has called this council to heal a quarrel that has split his new empire down the middle.",
       },
       {
         speaker: "st-anthony",
         text:
-          "The First Ecumenical Council. The greatest crisis since the Apostles. A presbyter named Arius teaches that the Son is a creature — that there was a time when He was not.",
+          "The First Ecumenical Council, $you. The greatest crisis since the Apostles. A presbyter of Alexandria named Arius teaches that the Son of God is a creature — the first and highest of all created things, but a creature still. That there was, as he sings it, 'a time when He was not.'",
       },
       {
         speaker: "st-anthony",
         text:
-          "He has set the empire on fire with his song: 'There was when He was not.' Sailors sing it at the docks. Bakers sing it at their ovens. The Church may yet be lost — not by the sword, but by a slogan.",
+          "And the song has caught fire across the world. Sailors chant it on the docks. Bakers hum it at their ovens. Money-changers debate the Begotten and the Unbegotten in the marketplace. The Church may yet be lost — not by the sword this time, but by a slogan.",
+      },
+      {
+        speaker: "you",
+        text: "If it is only a quarrel about a word, why does it matter so much?",
       },
       {
         speaker: "narrator",
         text:
-          "A deacon — perhaps thirty years old, intense, dark-eyed — pushes through the throng to you. His robe is plain. His voice will outlast emperors.",
+          "A deacon — perhaps thirty years old, slight of build, intense, dark-eyed — pushes through the throng toward you. His robe is plain. His voice, history will record, will outlast emperors.",
       },
       {
         speaker: "st-athanasius",
         text:
-          "I am Athanasius, deacon of Alexandria. If we yield to Arius, the Gospel is undone — for if the Son is not God, He cannot save us. Only God can heal us. Only God can be worshipped.",
+          "It is not 'only a word,' friend. I am Athanasius, deacon to Bishop Alexander of Alexandria. Hear me: if the Son is not truly God, then He cannot save us — for only God can rejoin us to God. A creature cannot deify creatures.",
       },
       {
         speaker: "st-athanasius",
         text:
-          "Hear what is at stake: if the Son is a creature, then we Christians worship a CREATURE — and we are idolaters. There is no middle road.",
+          "And there is worse. We Christians worship the Son. We sing to Him, baptize into His name, kneel before Him in the Mysteries. If He is a creature — then we are idolaters, every one of us, worshipping the work of God's hands. There is no middle road. Either He is God, or our whole worship is sin.",
+      },
+      {
+        speaker: "you",
+        text: "But Arius quotes Scripture, does he not? 'The firstborn of all creation.' How is he to be answered?",
+      },
+      {
+        speaker: "st-athanasius",
+        text:
+          "With Scripture rightly read, and with the rule of faith handed down. 'Firstborn' is a word of rank, not of making — for the very next line says all things were made BY Him. We must hold a word the Fathers will hammer out here: homoousios, of one essence with the Father. It is not in the Bible — but it guards what the Bible means.",
       },
       {
         speaker: "narrator",
         text:
-          "An old bishop with a scarred face turns to you. You recognize his name from the road: Nicholas of Myra. He bows slightly.",
+          "An old bishop with a scarred face — a man who confessed Christ in prison under Diocletian — turns to you and bows slightly. His name is Nicholas, of the city of Myra in Lycia. His eyes burn at the mention of Arius.",
       },
       {
         speaker: "narrator",
         text:
-          "Arius rises to speak. He is tall, ascetic, charismatic — the kind of voice crowds follow. The hall falls silent.",
+          "Then Arius himself rises to speak. He is tall, gaunt with fasting, magnetic — the kind of voice crowds follow off a cliff. The hall falls silent.",
       },
       {
         speaker: "arius",
         text:
-          "Beloved bishops! Let us reason. Surely the Son is begotten — and what is begotten must HAVE A BEGINNING. The Father alone is uncreated.",
+          "Beloved bishops! Let us reason together, not shout. Surely the Son is begotten — and what is begotten must have a beginning, for a father is before his son. The Father alone is unoriginate, alone uncreated, alone truly God. The Son is His most glorious work. Is this not simple? Is this not pious?",
       },
       {
         speaker: "st-anthony",
         text:
-          "Stand, $you. The Council needs every voice. Answer the heresiarch — and the deposit of faith may yet be confessed.",
+          "It is poison in a cup of honey. Stand, $you. The Council needs every voice that can speak truth. Answer the heresiarch — and the deposit of faith, the very confession of who Christ is, may yet be sealed for all the ages to come.",
       },
     ],
     boss: {
@@ -904,14 +1014,33 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
+        speaker: "narrator",
+        text:
+          "The bishops sign, one after another. Only two refuse and are exiled with Arius. Constantine orders the heresiarch's books burned. The Symbol of Faith is sealed: 'begotten, not made, of one essence with the Father.'",
+      },
+      {
         speaker: "st-athanasius",
         text:
-          "The Council has spoken: homoousios with the Father. Arius is condemned. May the Lord preserve this faith to the ages of ages!",
+          "The Council has spoken: homoousios with the Father. Arius is condemned. We have confessed that the Word who saves us is true God of true God. May the Lord preserve this faith to the ages of ages!",
+      },
+      {
+        speaker: "you",
+        text: "Then it is finished. The heresy is dead.",
+      },
+      {
+        speaker: "st-athanasius",
+        text:
+          "Would that it were so simple. The word is written, but the war is not won. Within a year the court will turn; emperors will favor Arius's friends; I will be driven from my see again and again. Truth is confessed in an hour and defended over a lifetime.",
       },
       {
         speaker: "st-anthony",
         text:
-          "You stood with Athanasius. He will stand alone, exiled five times, against the world — 'Athanasius contra mundum.' But the truth of Nicaea will endure.",
+          "He speaks plainly. Athanasius will be exiled five times, hunted across the desert, declared an outlaw — yet he will not bend. The world will call it 'Athanasius against the world.' But Nicaea will endure when all his enemies are dust.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Take this, $you — the Synodikon, the Church's roll of right belief and her anathemas. Now come. The cities are full of half-converted Christians who do not know their own hearts. To win battles out there, you must first conquer the heretic within. To the desert.",
       },
     ],
     reward: { xp: 1, item: "synodikon", healHp: true },
@@ -932,51 +1061,74 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Heat. Sand. The wind hisses across endless dunes. The dust between your sandals is the dust of centuries. You have come, you realize, to the cradle of monasticism.",
+          "Heat. Sand. The wind hisses across endless dunes the color of bone. The dust between your sandals is the dust of centuries. The salt flats of the Wadi Natrun shimmer to the horizon; mud-brick cells dot the wasteland, each a hand's-span apart.",
       },
       {
         speaker: "narrator",
         text:
-          "A cave mouth, and inside, a tall thin monk. He has the eyes of a man who has not been afraid of anything for a very long time.",
+          "The year is three hundred and sixty. Antony the Great died only a few years ago in his mountain cell; the desert he opened is now peopled by thousands. You have come, you realize, to the very cradle of monasticism — the school of the soul.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A low cave mouth, and inside, a tall thin monk weaving palm-rope by feel in the dark. He has the eyes of a man who has not been afraid of anything for a very long time.",
       },
       {
         speaker: "st-macarius",
         text:
-          "I am Macarius. Welcome to Scetis. Here we wrestle not with men but with the powers of the air.",
+          "I am Macarius. Welcome to Scetis. Here we wrestle not against flesh and blood, but against the powers of the air. The whole world calls this a wasteland. We call it the front line.",
+      },
+      {
+        speaker: "you",
+        text: "Why would men leave the cities — now that the Church is free at last — to live in caves and eat bread and salt?",
       },
       {
         speaker: "st-anthony",
         text:
-          "$you, listen. The cities have grown large with Christians who do not know themselves. The desert is the proving ground. To stand against heretics out there, you must conquer the heretic in here — your own passions.",
+          "That very freedom is the danger, $you. The cities have grown crowded with Christians who do not know themselves — baptized, but never tested. When Constantine made faith safe, the deepest souls fled to the desert seeking a harder crown.",
       },
       {
         speaker: "st-macarius",
         text:
-          "The fathers came here in their thousands when the persecutions ended. Without lions, they sought another martyrdom — the slow one. Of the appetites. Of the tongue.",
+          "When the lions were taken away, we sought another martyrdom — the slow one. Of the appetites. Of the tongue. Of the wandering thoughts. A brother once asked Antony, 'What must I do to be saved?' He answered, 'Sit in your cell, and your cell will teach you everything.'",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Hear him. To stand against heretics in the great councils — Arius, and worse to come — you must first conquer the heretic in HERE. Your own pride. Your own despair. The passions that whisper in your own voice.",
+      },
+      {
+        speaker: "you",
+        text: "And how does one fight such an enemy? It has no body to strike.",
       },
       {
         speaker: "st-macarius",
         text:
-          "I will give you three weapons before he comes. The Jesus Prayer: Lord Jesus Christ, Son of God, have mercy on me. Fasting — to remind the body it is not god. Vigilance — for he is subtle.",
+          "I will give you three weapons before he comes. First, the Prayer of the heart: 'Lord Jesus Christ, Son of God, have mercy on me, a sinner.' Breathe it without ceasing. Second, fasting — to remind the body that it is a servant, not a god. Third, watchfulness — nepsis — for the enemy is subtle, and his sweetest lies sound like mercy.",
+      },
+      {
+        speaker: "st-macarius",
+        text:
+          "And know this, $you: he does not come with horns and fire. He comes as an angel of light. He will tell you that you are doing well. He will tell you to rest a little. He will tell you that God surely wants you happy. Test every thought.",
       },
       {
         speaker: "narrator",
         text:
-          "Outside, a goat bleats and is suddenly silent. Macarius's face hardens. He turns to face the cave mouth.",
+          "Outside, a goat bleats and is suddenly, utterly silent. The little flame in the cave gutters. Macarius's weathered face hardens. He sets down the rope and turns to face the cave mouth.",
       },
       {
         speaker: "st-macarius",
-        text: "He is here. Stand behind me, $you. But do not look away.",
+        text: "He is here. Stand behind me, $you — but do not look away. To flee his gaze is to lose already.",
       },
       {
         speaker: "narrator",
         text:
-          "The light of the cave fails. Shadow pools at the entrance, gathering shape — a hooded figure with red eyes that do not blink.",
+          "The light of the cave fails. Shadow pools at the entrance, gathering shape — a hooded figure with red eyes that do not blink, and a voice like cool water over stones.",
       },
       {
         speaker: "tempter",
         text:
-          "$you. We have not met. But I have known your name since you were born. Let us speak of comforting things.",
+          "$you. We have not met. But I have known your name since you were born. Put down your fear; I have not come to frighten you. Let us speak, you and I, of comforting things.",
       },
     ],
     boss: {
@@ -1211,14 +1363,33 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
+        speaker: "narrator",
+        text:
+          "The shadow shrinks back from the cave mouth, hissing, and is swallowed by the noon glare. The goat bleats again, alive. The little flame steadies.",
+      },
+      {
         speaker: "st-macarius",
         text:
-          "You have done well. The demons fear most a soul that knows itself sinful and prays anyway. Take this — a hundred-knot rope. Pray it daily.",
+          "You have done well. Know what the demons fear most — not the great ascetic who boasts of his fasts, but the soul that knows itself a sinner and prays anyway. Pride opens the door to them; humility bars it.",
+      },
+      {
+        speaker: "you",
+        text: "He said he would return. He said all the saints fail at least once.",
+      },
+      {
+        speaker: "st-macarius",
+        text:
+          "And in that he spoke truth, twisted to despair. We DO fall — and we rise, and fall, and rise again, seventy times seven. The monk's whole art is in the rising. To fall and not despair: that is the desert's secret.",
+      },
+      {
+        speaker: "st-macarius",
+        text:
+          "Take this — a hundred-knot prayer rope, woven so the demons cannot untie the knots. Pray it daily, in the light and in the dark, when you feel God near and when you feel nothing at all.",
       },
       {
         speaker: "st-anthony",
         text:
-          "The desert taught you what no book could. Now to Chalcedon — where Christ Himself is to be confessed.",
+          "The desert has taught you what no book could. Carry it forward. Now the storm moves from the soul to the very Person of the Saviour — to Chalcedon, where the Church must confess exactly WHO and WHAT Christ is, lest our salvation slip away.",
       },
     ],
     reward: { xp: 1, item: "prayer-rope", healHp: true },
@@ -1239,47 +1410,61 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Chalcedon. Six hundred and thirty bishops gathered — the largest council yet. Empress Pulcheria has called it. The Robber Council of Ephesus, two years ago, beat a deacon to death on the floor. This time imperial guards line the walls.",
+          "The church of Saint Euphemia, across the strait from Constantinople, in the city of Chalcedon. Six hundred and thirty bishops are gathered — the largest council the Church has ever seen. The year is four hundred and fifty-one.",
       },
       {
         speaker: "narrator",
         text:
-          "The Tome of Leo of Rome has just been read aloud. The hall erupts: 'Peter has spoken through Leo! Cyril and Leo teach the same!'",
+          "Two years ago, in this very region, a synod at Ephesus turned to violence — monks and soldiers beat the aged bishop Flavian so savagely that he died of his wounds. History will name it the Latrocinium: the Robber Council. This time, imperial guards line the walls, and the Empress Pulcheria and her consort Marcian preside.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A letter is being read aloud — the Tome of Leo, bishop of Rome. As the last words fall, the hall erupts in a single roar: 'Peter has spoken through Leo! This is the faith of the Fathers! Cyril and Leo teach the same!'",
       },
       {
         speaker: "st-anthony",
         text:
-          "$you. We are between two errors. One says: Christ is so divided He is two persons. The other says: He is so united His humanity vanishes. The truth is one Person, two natures — without confusion, without division.",
+          "$you, we stand on a knife's edge between two abysses. On one side, Nestorius taught that Christ is so divided He is nearly two persons — a man indwelt by God, with Mary the mother of the man alone. On the other, a new error: that Christ is so utterly one that His humanity simply vanishes into His divinity.",
       },
       {
-        speaker: "narrator",
-        text:
-          "A bishop with a long beard and weary eyes turns from the chair. This is Cyril of Alexandria — or his memory; he died seven years ago. The Spirit makes him present.",
-      },
-      {
-        speaker: "st-cyril",
-        text:
-          "I am Cyril. Twenty years ago I deposed Nestorius for dividing Christ. Now a different error rises — Eutyches teaches that Christ has only one nature, the human swallowed by the divine like a drop in the ocean.",
-      },
-      {
-        speaker: "st-cyril",
-        text:
-          "I once wrote — incautiously — of 'one nature of the Word incarnate.' He uses my words to break the faith. Help me clarify what I meant, $you.",
+        speaker: "you",
+        text: "And the truth runs between them?",
       },
       {
         speaker: "st-anthony",
         text:
-          "If Eutyches is right, Christ's humanity is illusory — and 'what is not assumed is not healed' (St. Gregory the Theologian). The very ground of our salvation is at stake.",
+          "One Person, in two natures — divine and human — without confusion, without change, without division, without separation. Four small words that will guard the Saviour for a thousand years. Lose them, and we lose Him.",
       },
       {
         speaker: "narrator",
         text:
-          "A robed archimandrite is brought forward. His face is composed, his bearing certain. He has been a monk in Constantinople for seventy years. He is not a fool.",
+          "A bishop with a long grey beard and weary, brilliant eyes turns from his place near the chair. This is Cyril of Alexandria — or rather his living memory, for he reposed seven years ago. The Spirit makes him present to you.",
+      },
+      {
+        speaker: "st-cyril",
+        text:
+          "I am Cyril. Twenty years ago, at Ephesus, I led the deposing of Nestorius for tearing Christ in two, and I won the title Theotokos — God-bearer — for the Virgin. But the pendulum has swung. Now Eutyches, an old archimandrite of the capital, teaches that after the union Christ has but one nature: the human swallowed up by the divine, like a drop of vinegar lost in the ocean.",
+      },
+      {
+        speaker: "st-cyril",
+        text:
+          "And here is my grief, $you: I myself once wrote, against Nestorius, of 'one incarnate nature of the Word.' I meant the deep unity of the one Christ. Eutyches has seized my words to break the very faith I defended. Help me make plain what I truly meant — that the unity does not devour the manhood.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Mark the stakes. If Eutyches is right, Christ's humanity is a phantom — and as Gregory the Theologian warns, 'that which is not assumed is not healed.' If He did not truly take our flesh, our flesh is not saved. The whole ground of our salvation trembles on this word.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A robed archimandrite is led forward to the center of the hall. His face is composed, his bearing certain. He has been a monk in Constantinople for seventy years and is godfather to the chamberlain Chrysaphius himself. He is no fool — and that makes him the more dangerous.",
       },
       {
         speaker: "eutyches",
         text:
-          "Before the union, two natures. AFTER the union — one. The lesser is consumed by the greater. Why is this so hard?",
+          "I confess what I have always confessed. Before the union, two natures. After the union — one. The Word took flesh, and the flesh was made wholly His own, as a drop is made the sea. Why do you make so simple a mystery so hard?",
       },
     ],
     boss: {
@@ -1514,14 +1699,28 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
+        speaker: "narrator",
+        text:
+          "The bishops rise as one and acclaim the Definition: 'one and the same Christ, in two natures, inconfusedly, unchangeably, indivisibly, inseparably.' Eutyches is condemned and deposed. The faith of Nicaea is confirmed and crowned.",
+      },
+      {
         speaker: "st-cyril",
         text:
-          "The Tome of Leo + my own letters + the Definition — the orthodox confession is sealed. May it endure!",
+          "The Tome of Leo, my own letters to Nestorius, and now this Definition — all sing one song. The orthodox confession of the one Christ is sealed. May it endure to the end of the world!",
+      },
+      {
+        speaker: "you",
+        text: "Yet I saw bishops weeping who would not sign. Some of the East will not accept this.",
+      },
+      {
+        speaker: "st-cyril",
+        text:
+          "You see truly, and it is the great sorrow. Many who love Christ no less than we will hear 'two natures' and fear it means 'two sons.' Whole churches of Egypt and Syria will walk apart over a confusion of words. Guard the Definition — and guard your love for those who stumble at it.",
       },
       {
         speaker: "st-anthony",
         text:
-          "The Tome of Leo is yours. It will steady you when the iconoclasts come — they too will appeal to 'no images of the divine.'",
+          "Take the Tome of Leo, $you. It will steady you three centuries hence, when the iconoclasts arise — for they too will cry 'no image of the divine,' and you will answer them from the truth confessed here: God has truly taken visible flesh. Onward, to Constantinople and the war over the holy icons.",
       },
     ],
     reward: { xp: 1, item: "tome-leo", healHp: true },
@@ -1542,47 +1741,61 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Hagia Sophia rises around you, vast and golden — and DEFACED. Where mosaics of Christ Pantocrator and the Theotokos once gazed down, plaster covers raw stone. Sixty years of iconoclast emperors have left their mark.",
+          "The Great Church of Holy Wisdom — Hagia Sophia — rises around you, vast and golden, its dome seeming to hang from heaven on a chain of light. And yet it is DEFACED. Where mosaics of Christ Pantocrator and the Theotokos once gazed down upon the faithful, bare plaster now covers raw stone. In their place: a single great cross, the only image the iconoclasts would allow.",
       },
       {
         speaker: "st-anthony",
         text:
-          "The Eastern Roman Empire has been at war with itself over PAINT. Constantine V the Iconoclast burned monasteries and tortured monks. He died nineteen years ago — but his spirit has come back to test you.",
-      },
-      {
-        speaker: "narrator",
-        text:
-          "Empress Irene presides on a small wooden chair — she has summoned the Seventh Ecumenical Council to restore the icons. Three hundred and fifty bishops fill the nave.",
-      },
-      {
-        speaker: "narrator",
-        text:
-          "A monk steps from the column shadow. He wears the habit of Mar Sabba. His name has carried across the empire from the lands of the Caliph.",
-      },
-      {
-        speaker: "st-john-damascus",
-        text:
-          "I am John, called of Damascus. From beneath Muslim rule — where my hand was once cut off and restored by the Theotokos — I wrote three treatises defending the icons. I will be with you.",
-      },
-      {
-        speaker: "st-john-damascus",
-        text:
-          "Hear this — the deepest answer: 'I do not paint an invisible Godhead, but the flesh of God which was seen.' The Incarnation IS the dogmatic foundation of the icon.",
+          "For sixty years the Eastern Roman Empire has waged war upon itself over images — paint and gold and wood. The Emperor Leo III began it; his son, Constantine the Fifth, made it a terror — burning monasteries, dispersing monks, blinding and exiling those who painted Christ. They called him Kopronymos, the dung-named, for what he did.",
       },
       {
         speaker: "st-anthony",
         text:
-          "If God truly became MATTER, then matter can bear His image. Iconoclasm is fundamentally a denial of the Incarnation. Win this and the senses themselves are baptized.",
+          "He has been dead nineteen years. But the year is now seven hundred and eighty-seven, and his teaching walks abroad still. Tonight, by a power beyond the grave, his very spirit returns to test you.",
       },
       {
         speaker: "narrator",
         text:
-          "The air grows cold. A figure in imperial purple materializes at the altar end, crowned, eyes hard. He died nineteen years ago — but his teaching has not.",
+          "On a small wooden chair sits the Empress Irene, regent for her young son. She has summoned the Seventh Ecumenical Council to restore the holy icons. Three hundred and fifty bishops fill the nave, and the air hums with the long-suppressed hope of a Church about to be made whole.",
+      },
+      {
+        speaker: "you",
+        text: "Sixty years of bloodshed — over pictures? I confess I do not yet see why it matters so terribly.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "A monk steps from the shadow of a great porphyry column. He wears the rough black habit of the Lavra of Mar Sabba in the Judean desert. He has been dead for over thirty years — but his books shook the empire, and his name has carried even from the lands of the Caliph.",
+      },
+      {
+        speaker: "st-john-damascus",
+        text:
+          "I am John, called of Damascus. I served the Caliph as a treasurer before I fled to the desert — and there, safe from the Christian emperor's reach, I wrote three treatises in defense of the holy images. The Theotokos herself, men say, restored my hand when it was struck off by a tyrant's order. I will stand with you tonight.",
+      },
+      {
+        speaker: "st-john-damascus",
+        text:
+          "Here is why it matters, child — here is the heart of the whole war. Hear the deepest answer and never forget it: 'I do not depict the invisible Godhead, but the flesh of God which was seen.' The Incarnation IS the dogmatic foundation of the icon.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Do you grasp it now, $you? Once God could not be portrayed, for no man had seen Him. But in Christ the unseen God took visible flesh, ate, wept, was touched. If God truly became MATTER, then matter can bear His image. To smash the icon is, at the root, to deny that He truly came in the flesh.",
+      },
+      {
+        speaker: "st-john-damascus",
+        text:
+          "And learn the second key: when I kiss an icon, I do not worship wood and pigment. The honor passes to the one depicted — to the prototype. We give icons honor, proskynesis; we give to God alone worship, latreia. Confuse the two and you have idolatry; deny the first and you have iconoclasm. Hold both.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "The air grows cold as a tomb. At the far end of the nave, before the altar, a figure in imperial purple materializes — crowned, hard-eyed, every inch the emperor. Constantine V, dead these nineteen years, stands again in the church his armies once stripped bare.",
       },
       {
         speaker: "iconoclast",
         text:
-          "I am Constantine, called the Fifth. I have smashed your idols across the Empire. The God of Israel forbids images. Why do you still cling to them?",
+          "I am Constantine, called the Fifth, Equal of the Apostles by my own decree. I smashed your idols from one end of the Empire to the other and made the realm pure. The God of Israel thundered: 'Thou shalt not make any graven image.' Why do you cling still to your painted boards? Answer me, and I will grind you with them.",
       },
     ],
     boss: {

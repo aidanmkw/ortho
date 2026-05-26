@@ -36,27 +36,71 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "A poor village under the Turkish yoke. The people have nearly forgotten their letters; some have forgotten the Creed. A barefoot monk plants a tall wooden cross in the dust and stands on a stool beside it. Thousands have walked through the night from the hills to hear him.",
-      },
-      {
-        speaker: "st-anthony",
-        text: "Cosmas of Aetolia, $you — once a teacher on Mount Athos, now an itinerant preacher with the Patriarch's blessing. For three hundred years the faith has been ground down under the Ottomans; children grow up unbaptized, churches stand empty. He walks from village to village, opening schools and calling the people back.",
+        text: "Heat and dust and the smell of crushed olives. You stand at the edge of a poor village in the mountains of Epirus, under a sky the color of beaten brass. A great plane tree spreads its shade over the square, and beneath it a crowd has gathered — peasants in homespun, shepherds smelling of their flocks, women with infants on their hips. They have walked all night down from the hills.",
       },
       {
         speaker: "narrator",
-        text: "Cosmas raises his hand for silence. 'My brethren, I have left Athos and all comfort for love of you. Build a school in every parish — for without learning the children walk in darkness, and the soul that knows not God is poorer than the beggar at the gate.'",
+        text: "It is the year of our Lord seventeen hundred and seventy-nine. For three centuries this land has lain under the Ottoman yoke. The churches stand half-ruined; the children grow up scarcely knowing the Creed; some cannot make the sign of the cross. And yet — the people have come. Thousands of them, silent, waiting.",
       },
       {
         speaker: "st-anthony",
-        text: "While Cosmas rekindles the people's faith here, on the Holy Mountain two others labor in the same Spirit: Nicodemus the Hagiorite and Macarius of Corinth, who are even now gathering the writings of the Fathers on prayer of the heart into a single book — the Philokalia, 'love of the beautiful.' The age of reason calls such prayer a peasant's superstition.",
+        text: "Look there, $you — the barefoot monk planting a tall wooden cross in the dust, climbing onto a low stool beside it. Cosmas of Aetolia. Once a teacher on Mount Athos, now he walks from village to village with the Patriarch's blessing, opening schools and calling the people back from the edge of forgetting.",
+      },
+      {
+        speaker: "you",
+        text: "Why does he go barefoot? A teacher from the Holy Mountain — surely he could preach from a pulpit in a great city.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "He left the Mountain and all its quiet for love of these forgotten ones. Hear him yourself; he is beginning.",
       },
       {
         speaker: "narrator",
-        text: "A man in the dress of a Western-schooled gentleman pushes to the front, contemptuous of the ragged crowd and the barefoot monk.",
+        text: "Cosmas raises a thin brown hand, and the murmur dies away. 'My brethren and my children,' he calls, 'I have left Athos and every comfort for love of you. Listen: build a school in every parish. Without letters the children walk in darkness, and a soul that does not know God is poorer than the beggar who sleeps at your gate.'",
+      },
+      {
+        speaker: "narrator",
+        text: "An old woman near you weeps openly. A shepherd lifts his son onto his shoulders so the boy can see. The monk speaks of baptizing the unbaptized, of keeping the fasts, of frequent communion — of holding fast to Christ though the Sultan's tax-collectors take everything else.",
+      },
+      {
+        speaker: "narrator",
+        text: "'My child,' Cosmas says to a trembling girl, 'guard your faith and your freedom as you guard your eyes. The Faith of Christ, my brethren, is sweeter than honey, more precious than gold. Better to lose your fields and your flocks than to lose your soul.'",
+      },
+      {
+        speaker: "you",
+        text: "The people are so poor, and he asks them to give what little they have to build schools. Will they not resent it?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "On the contrary — they sell their last ornaments to raise the schoolhouses. He has founded more than two hundred. Where he passes, the children begin to read again, and the Liturgy is sung where it had fallen silent. He will be called Equal-to-the-Apostles for this.",
+      },
+      {
+        speaker: "you",
+        text: "He speaks much of prayer of the heart. What does he mean?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The unceasing prayer of the Name — 'Lord Jesus Christ, Son of God, have mercy on me.' And he is not alone in this labor. Far off on the Holy Mountain, two others work in the same Spirit: Nicodemus the Hagiorite and Macarius of Corinth. Even now they gather the writings of the Fathers on this prayer into one great book.",
+      },
+      {
+        speaker: "you",
+        text: "A book? What do they call it?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The Philokalia — 'the love of the beautiful.' In three years' time it will be printed in Venice, and it will set the whole Orthodox world aflame with prayer. But mark this, $you: the age now dawning in the West calls such prayer the muttering of peasants. It trusts only in reason, and it is coming even here.",
+      },
+      {
+        speaker: "narrator",
+        text: "As if summoned by the word, a man pushes forward through the ragged crowd. He is dressed in the coat and powdered manner of a gentleman schooled in the cities of Europe, and he looks upon the barefoot monk and the unlettered peasants with open contempt.",
       },
       {
         speaker: "atheist",
-        text: "Old man, you fill these wretches' heads with talk of demons and unceasing prayer while Europe wakes to reason and the rights of man. Why drag a conquered people backward into monkish dreams? Answer me — if your 'prayer of the heart' is anything more than the muttering of slaves.",
+        text: "Old man! You fill these wretches' heads with demons and endless whispered prayers while Europe wakes to reason and the rights of man. Why drag a conquered people backward into monkish dreams? Tell me — if your 'prayer of the heart' is anything more than the babble of slaves who have nothing better to do.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "He will not be answered by Cosmas, $you — he has fixed his eyes on you, the stranger. Stand, and answer him. The whole square is listening.",
       },
     ],
     boss: {
@@ -146,11 +190,27 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "St. Cosmas was hanged by the Ottomans in 1779, betrayed by men who feared his influence; he is honored as a hieromartyr and Equal-to-the-Apostles. Three years later, in 1782, the Philokalia was printed in Venice. From these two springs — his preaching and that book — the prayer of the heart was rekindled across the Orthodox world.",
+        text: "The gentleman departs without a word, but you see him pause at the edge of the square — turning once to watch the people stream away from the plane tree, fed and weeping and unafraid. They came with nothing; they leave with everything.",
+      },
+      {
+        speaker: "narrator",
+        text: "Cosmas of Aetolia comes down from his stool and lays a worn hand upon your shoulder. 'Well spoken, my child. The wisdom of this world is foolishness before God. Seek the wisdom of God, and you will fear nothing under heaven — not even the rope.'",
       },
       {
         speaker: "st-anthony",
-        text: "The Philokalia traveled north, $you, translated into Slavonic and Russian. It will set a whole land aflame with prayer — and in a forest hermitage a man will pray it so deeply that his very body will shine. Come; we go to Sarov.",
+        text: "He speaks of the rope, $you, because he knows. Later this very year the Ottomans will hang him, betrayed by men who feared his influence over the people. He dies a hieromartyr, blessing his executioners.",
+      },
+      {
+        speaker: "you",
+        text: "And the schools? The book? Does it all die with him?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "No. In seventeen eighty-two the Philokalia is printed in Venice, and from these two springs — his preaching and that book — the prayer of the heart is rekindled across the whole Orthodox world. The book travels north, translated into Slavonic and into Russian.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "And in a frozen forest hermitage to the north, a man will pray it so deeply that his very body shines like the sun on snow. Come, $you. We go to Sarov.",
       },
     ],
     reward: { xp: 1, item: "philokalia", healHp: true },
@@ -171,27 +231,63 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Deep Russian winter. Snow to the knee, the forest silent and white. In a clearing sits a bent old monk in a white peasant's smock, a sack on his back, an axe in his belt. For years he lived as a hermit, fed bears from his hand, knelt a thousand nights on a rock in prayer. Now pilgrims come from across the empire to his cell.",
-      },
-      {
-        speaker: "st-seraphim",
-        text: "My joy! Christ is risen! Come closer — sit beside me on this stump. Do not fear the cold. Acquire the Spirit of peace, and thousands around you will be saved.",
-      },
-      {
-        speaker: "st-anthony",
-        text: "Seraphim of Sarov, $you. He greets every soul, in any season, with the Paschal cry — 'My joy, Christ is risen!' He has read the Philokalia until it is part of his breath. Beside him kneels Nicholas Motovilov, a landowner whom Seraphim healed; today the old man will show him what 'acquiring the Spirit' truly means.",
+        text: "The book closes on Epirus, and when it opens again you are standing knee-deep in snow. A Russian forest in the dead of winter — birches white against white, the silence so complete you can hear your own heart. The cold bites through everything. It is the year eighteen hundred and thirty-one.",
       },
       {
         speaker: "narrator",
-        text: "A cold dread gathers at the edge of the clearing — not the honest cold of winter, but a heavier weight: the gray, listless heaviness the Fathers name accidie, the noonday demon, that whispers that prayer is pointless and joy a lie.",
+        text: "In a small clearing sits a bent old monk on a tree-stump. He wears a white peasant's smock, a sack upon his back, an axe tucked in his belt. His face is round and seamed and luminous, and though the cold should kill a man his age, he seems not to feel it at all.",
+      },
+      {
+        speaker: "st-seraphim",
+        text: "My joy! Christ is risen! Come closer, come — sit beside me on this stump. Do not fear the cold, my joy. Acquire the Spirit of peace, and thousands around you will be saved.",
+      },
+      {
+        speaker: "you",
+        text: "He calls me 'my joy'... and he greets me with the Paschal cry, in the depth of winter.",
       },
       {
         speaker: "st-anthony",
-        text: "That heaviness is no mere mood, $you. It is the spirit of despondency, which would have you set down your prayer rope and call all of this — the snow, the old man, the Risen Lord — a sad delusion. Stand fast. Seraphim will show you the answer is not argument but the very fire of the Holy Spirit.",
+        text: "Seraphim of Sarov. He greets every soul, in every season, with 'My joy, Christ is risen!' For years he lived alone as a hermit deep in these woods — he fed the wild bears from his hand, and knelt a thousand days and nights upon a bare stone in prayer. He has read the Philokalia until it has become his very breath.",
+      },
+      {
+        speaker: "you",
+        text: "A thousand nights on a stone? Robbers might have come, or wild beasts. Was he never afraid out here alone?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Robbers did come once, and beat him so cruelly that he was bent for the rest of his life — you see how he stoops. Yet when they were caught he begged that they be spared. The man you are looking at has made himself a furnace of forgiveness. Such a soul the demons cannot abide.",
+      },
+      {
+        speaker: "you",
+        text: "And the man kneeling beside him in the snow?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Nicholas Motovilov, a landowner whom the elder healed of a long sickness. He has come with a question that has troubled him for years — what is the true aim of the Christian life? Today the old man will not merely answer him. He will show him.",
+      },
+      {
+        speaker: "st-seraphim",
+        text: "My son Nicholas asks me the purpose of our life in Christ. Many say it is to pray, to fast, to keep the vigils and give alms. These are good — but they are the road, not the journey's end. The true aim of the Christian life is to acquire the Holy Spirit of God.",
+      },
+      {
+        speaker: "you",
+        text: "To acquire the Spirit — but how can a man see such a thing? How can he know he has it?",
+      },
+      {
+        speaker: "st-seraphim",
+        text: "You shall see, my joy. Only first there comes a testing. Be watchful.",
+      },
+      {
+        speaker: "narrator",
+        text: "Even as he speaks, a change creeps over the clearing. Not the honest cold of winter, but a heavier thing — a gray, listless weight settling on your shoulders, on your eyelids, on your very will. It whispers that the snow is endless, that prayer is wasted breath, that the smiling old man is only a fool freezing to death.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Mark it well, $you — this is no mere mood. The Fathers name it accidie, the noonday demon, the spirit of despondency. It would have you lay down your prayer rope and call all of this — the snow, the old man, the Risen Lord — a sad delusion. Stand fast. Seraphim's answer is not argument but the very fire of the Holy Spirit.",
       },
       {
         speaker: "tempter",
-        text: "Look at him — a deluded old peasant freezing in the woods, mistaking his own exhaustion for 'grace.' There is no Spirit, no peace, no risen Christ. Only the cold, and the long gray nothing after. Why pray? Why hope? Lay it down. Sleep. Despair is only honesty.",
+        text: "Look at him — a deluded old peasant freezing in the woods, mistaking his own exhaustion for 'grace.' There is no Spirit, no peace, no risen Christ. Only the cold, and the long gray nothing that comes after. Why pray? Why hope? Lay it down. Sleep. Despair is only honesty, and I am the only honest thing in this white waste.",
       },
     ],
     boss: {
@@ -281,11 +377,27 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "Motovilov later wrote how, in that clearing, the old man's face shone brighter than the sun on snow, and he himself was filled with a peace, warmth, and sweetness no words could hold — the grace of the Holy Spirit, shown rather than explained. St. Seraphim reposed in 1833, kneeling before his icon of the Theotokos, 'Joy of All Joys.'",
+        text: "The gray weight breaks, and the clearing fills with light. Not the pale glint of sun on snow but a living radiance pouring from the old man's face — too bright to look upon, and yet you cannot look away. Where there was no fire, there is warmth; where there was dread, an unspeakable sweetness.",
+      },
+      {
+        speaker: "you",
+        text: "I feel it — peace, and warmth, and a stillness I have no words for. This is what he meant. This is the Spirit, shown and not explained.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "So Motovilov will write of this very hour: that the elder's face shone brighter than the sun, and he himself was flooded with a peace and joy no tongue could hold. The grace of the Holy Spirit is no idea, $you. It is fire, and it can be tasted even now.",
       },
       {
         speaker: "st-seraphim",
-        text: "There is no despondency for those who carry Christ in their heart, my joy. Go now where the gray weight is heaviest of all — to an age that has tried to bury God entirely. Carry the peace, and thousands shall be saved around you.",
+        text: "There is no despondency for those who carry Christ within the heart, my joy. The demon flees the soul that is glad in the Lord. Go now where that gray weight lies heaviest of all — to an age that has labored to bury God entirely.",
+      },
+      {
+        speaker: "st-seraphim",
+        text: "Carry the peace you have tasted here, and thousands shall be saved around you. Christ is risen, my joy! Truly He is risen!",
+      },
+      {
+        speaker: "narrator",
+        text: "Two years later, in eighteen thirty-three, St. Seraphim of Sarov reposed on his knees before his beloved icon of the Theotokos, the 'Joy of All Joys.' His body was found bowed in prayer, as if he had only fallen asleep mid-conversation with the One he loved.",
       },
     ],
     reward: { xp: 1, item: "prayer-rope", healHp: true },
@@ -306,27 +418,59 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "Mount Athos, the Holy Mountain. In the storehouse of a Russian monastery, a great, broad-shouldered peasant-monk weighs sacks of flour and oversees the workmen — and prays without ceasing for the whole world. He was once a strong, hot-tempered young soldier; now grief for every living soul has worn his face soft.",
-      },
-      {
-        speaker: "st-anthony",
-        text: "Silouan the Athonite, $you. He came to the Mountain barely literate, was tormented for years by demons and by his own despair, until Christ appeared to him living. In the depth of that struggle he was given a word he could not have invented — and it has saved many from the abyss you are about to face.",
+        text: "The Holy Mountain. Athos rises from a wine-dark sea, its slopes terraced with vineyards and crowned with monasteries that have prayed without ceasing for a thousand years. But you are not in a church. You stand in the storehouse and mill of a great Russian monastery, among sacks of flour and the dust of grain, and the rough laughter of hired workmen. The year is nineteen hundred and thirty-eight.",
       },
       {
         speaker: "narrator",
-        text: "Silouan looks up from his ledgers. 'I was near to despair,' he says quietly, 'and the Lord said to me: Keep thy mind in hell, and despair not. Do not flee the knowledge of your own nothingness — stand in it, and yet hope in God. There the proud demon cannot follow you, for he cannot bear to despair-not.'",
+        text: "A huge, broad-shouldered monk moves among the sacks, weighing the flour, settling the workers' wages with a patience that never breaks. His hands are a laborer's hands. Yet his face — scarred once by anger, you sense — has been worn soft and luminous, like a stone smoothed by long water.",
       },
       {
         speaker: "st-anthony",
-        text: "His disciple, the monk Sophrony, will one day write these words down and carry them to Paris and to England. And Silouan will teach you the hardest thing of all: that a man who does not love his enemies does not yet know God. The age you now enter has made a god of the void — but it has never met a love like this.",
+        text: "Silouan the Athonite, $you. He came to the Mountain a strong, hot-tempered young soldier, barely able to read. For years the demons and his own despair tormented him almost past bearing — until the living Christ appeared to him. In the depth of that fire he was given a word he could never have invented.",
+      },
+      {
+        speaker: "you",
+        text: "A storekeeper, weighing flour, who has seen Christ? And he stays here, among sacks and laborers?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "He hides his greatness under the simplest work, and prays for the whole world as he weighs the grain. Ask him of his word. He will not boast of it — but he will give it to you, for you will need it where you are going.",
       },
       {
         speaker: "narrator",
-        text: "The clearing dims to a featureless gray; not winter now, but a modern emptiness — the smooth, reasonable nihilism of a century that has declared God dead and meaning a delusion. A voice rises from the void, calm and almost kind.",
+        text: "The monk looks up from his ledger and regards you with eyes that seem to grieve and rejoice at once. 'I was near to despair,' he says quietly, 'for the demons would not leave me, and I could not tell where God was. And the Lord said to me: Keep thy mind in hell, and despair not.'",
+      },
+      {
+        speaker: "you",
+        text: "Keep thy mind in hell? That sounds like cruelty, Father — like a counsel of darkness.",
+      },
+      {
+        speaker: "st-silouan",
+        text: "No, my child. It is this: do not flee the knowledge of your own nothingness, nor the world's. Stand in that hell of self-knowledge — and yet hope wholly in God. There the proud demon cannot follow you, for he can drive a man to despair, but he cannot endure to despair-not. The hope undoes him.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "His disciple, the monk Sophrony, will write these words down one day and carry them to Paris and to England, and they will save many. But Silouan has a second teaching, harder still. Tell him, Father.",
+      },
+      {
+        speaker: "st-silouan",
+        text: "He who does not love his enemies does not yet know God. I wept for years, even for those who hate the Lord — even for the demons who once tormented me, that they too might know His mercy. This is the sure sign of the Spirit of God: love for enemies. Without it, all the rest is nothing.",
+      },
+      {
+        speaker: "you",
+        text: "Love even those who would destroy us? In the age I come from, that is called weakness — or madness.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The age you now enter has made a god of the void itself, $you. It declares God dead and meaning a delusion, and it wears the calm face of reason. But it has never once met a love like this. Stand ready — it comes.",
+      },
+      {
+        speaker: "narrator",
+        text: "The walls of the mill seem to thin and fade. The warm dust of grain gives way to a featureless gray — not the honest cold of Sarov, but a smooth, modern emptiness, the reasonable nihilism of a century that has buried God and salted the grave. A voice rises from the void, calm, articulate, almost kind.",
       },
       {
         speaker: "atheist",
-        text: "Monk, you waste a strong man's life weeping for strangers in a flour-mill. There is no God, no soul, no hell to keep your mind in — only matter, decay, and the brief flicker before the dark. Love your enemies? They will eat you. Despair is not a sin; it is the truth that grown men face. Why hope?",
+        text: "Monk, you waste a strong man's life weeping for strangers in a flour-mill. There is no God, no soul, no hell to keep your mind in — only matter, and decay, and the brief flicker before the dark closes for good. Love your enemies? They will eat you alive. Despair is not a sin; it is simply the truth that grown men learn to face. So tell me, pilgrim — why hope?",
       },
     ],
     boss: {
@@ -416,11 +560,27 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "St. Silouan reposed in 1938. His disciple Sophrony gathered his writings and gave the world his words. In the same dark century, others carried the same fire: St. John of Shanghai bore Orthodoxy across China to San Francisco; and after him St. Paisios and St. Porphyrios on the Mountain and in Athens would comfort a doubting age with the same unhurried love.",
+        text: "The void does not so much retreat as dissolve. For the monk has answered it not with argument but with tears — weeping, openly, for the whole world: for the lost, for his enemies, even for the dark voice itself. Such grief is not weakness. It is a fire, and the void cannot put it out.",
+      },
+      {
+        speaker: "st-silouan",
+        text: "Do you see, my child? The void is not the deepest thing. Love is. Pray for the whole world, and weep for all who do not yet know God — and you will find Him nearer than your own breath, even in the hell you keep in your mind.",
+      },
+      {
+        speaker: "you",
+        text: "I think I understand now, Father. To despair not is not to pretend the darkness away. It is to stand in it and still love.",
       },
       {
         speaker: "st-anthony",
-        text: "You began as a catechumen pulled out of your own gray, godless century, $you — and you have walked the whole road, from Ignatius and his lions to Silouan and his mill. The same Spirit, the same Cross, the same Risen Lord, unbroken across two thousand years. Keep thy mind in hell, and despair not. The line runs through you now. Go home, and pray.",
+        text: "Well said. St. Silouan reposes this very year, in nineteen thirty-eight, and his disciple Sophrony will gather his words and give them to the world. And he is not the last, $you. In this same dark century the fire is carried on.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "St. John of Shanghai bears Orthodoxy across China and on to San Francisco. St. Paisios and St. Porphyrios, on the Mountain and in Athens, comfort a doubting age with the same unhurried love you have just seen. The line is unbroken.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "You began as a soul pulled out of your own gray, godless century — and you have walked the whole road, from Ignatius and his lions to Silouan and his mill. The same Spirit, the same Cross, the same Risen Lord, across two thousand years. The line runs through you now. Keep thy mind in hell, and despair not. Go home, $you — and pray.",
       },
     ],
     reward: { xp: 1, item: "icon-christ", healHp: true },
@@ -441,27 +601,59 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     intro: [
       {
         speaker: "narrator",
-        text: "A pine wood and a white-walled skete a little apart from the great monastery. A line of visitors waits at the door of a low cell: peasants and princes, scholars wracked with doubt and mothers wild with grief, all come to one bent, smiling elder who can scarcely walk. From dawn to dark he receives them, one by one.",
-      },
-      {
-        speaker: "st-anthony",
-        text: "Optina Pustyn, $you. The Philokalia, carried north and translated, has borne fruit here in a line of elders — startsy — beginning with Leonid, then Macarius, and now Ambrose. They are spiritual physicians: they read the heart, give a word, and a soul that came in despair walks out healed. All Russia knows the road to their door.",
+        text: "A hush of pines, resin-scented, and the low white walls of a skete set a little apart from the great monastery of Optina. Birds sing in the high branches. The year is eighteen hundred and seventy-eight, and Russia is feverish with new ideas — but here, at the edge of the forest, time seems to move at the pace of prayer.",
       },
       {
         speaker: "narrator",
-        text: "Elder Ambrose, propped on his pillows, laughs softly at a worried pilgrim. 'Live simply,' he tells her, 'and do good, not seeking great things. Where it is simple, there are angels by the hundred; but where it is clever, there are none at all.'",
+        text: "A long line of visitors waits at the door of a low wooden cell. Peasants in bast shoes stand beside princes in fine coats; scholars wracked with doubt wait behind mothers wild with grief. All have come to one bent, smiling old man who can scarcely rise from his bed, and who from dawn to dark receives them, one by one.",
       },
       {
         speaker: "st-anthony",
-        text: "A famous visitor came not long ago, $you — Dostoevsky, the novelist, half-broken by the death of his little son. Elder Ambrose spoke with him, and the writer carried that meeting into his last great book. But many come to Optina not to be healed; they come to argue. One stands behind you now.",
+        text: "Optina Pustyn, $you. Remember the Philokalia, carried north out of Venice? Here is its fruit. A line of elders — startsy — has risen in this place: first Leonid, then Macarius, and now the one you see, Ambrose. They are physicians of the soul. They read the heart, give a single word, and a man who came in despair walks out healed.",
+      },
+      {
+        speaker: "you",
+        text: "All these people, for one frail old monk? What can he give them that their own priests cannot?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Discernment, and a love that has been purified by a lifetime of obedience and prayer. He sees the wound beneath the words. All Russia knows the road to his door — and not only the simple. The learned come too, though some come only to argue.",
+      },
+      {
+        speaker: "you",
+        text: "And the others before him — Leonid, Macarius. Did the people not fear such elders, who can read the secrets of a heart?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "At first some did, and the powerful in the Church distrusted them — eldership was suspected, even forbidden for a time. But the fruit silenced the fear. Souls came in chains of despair and walked out free. You cannot argue with a healed man, $you. You can only wonder what healed him.",
       },
       {
         speaker: "narrator",
-        text: "A pale, intense young man in a student's coat — clever, modern, full of the new ideas from the capital — turns from the cell door with a sneer.",
+        text: "Through the open door you glimpse Elder Ambrose, propped on his pillows, laughing softly with a worried peasant woman. 'Live simply,' he tells her, 'and do good, not seeking after great things. Where it is simple, there are angels by the hundred — but where it is clever, there are none at all.'",
+      },
+      {
+        speaker: "you",
+        text: "He jokes, and yet she is weeping with relief. He has lifted something off her without my even hearing what it was.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "That is the gift of the elders. A famous man came here not long ago — Dostoevsky, the novelist, half-broken by the death of his little son. Ambrose spoke with him, and the writer is even now carrying that meeting into his last and greatest book, where a holy elder named Zosima will speak with the voice of Optina.",
+      },
+      {
+        speaker: "you",
+        text: "Then this place will outlive its walls. But who is that — the young man turning from the door?",
+      },
+      {
+        speaker: "narrator",
+        text: "A pale, intense youth in a student's threadbare coat steps back from the cell with a sneer twisting his clever face. He is full of the new ideas of the capital — of science and progress and the death of old superstitions — and he looks upon the praying peasants as a man looks upon children who will not grow up.",
       },
       {
         speaker: "doubt",
-        text: "Peasants and weeping women, and a senile monk handing out platitudes. This is the great wisdom of Optina? If God were good, my brother would not have died screaming at six years old. I will not love a Creator who permits the suffering of one innocent child. Answer that, pilgrim — your elders cannot.",
+        text: "Peasants and weeping women, and a senile monk dispensing platitudes — this is the famous wisdom of Optina? Listen, pilgrim. If God were good, my little brother would not have died screaming in fever at six years old. I will not bow to a Creator who builds His world on the torture of one innocent child. Answer me that. Your gentle elders cannot.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "He flings the hardest question of all at you, $you — the suffering of the innocent. Do not answer it the way the world answers, with a clever argument. Answer it as Optina answers. Stand.",
       },
     ],
     boss: {
@@ -552,11 +744,23 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "Dostoevsky drew the saintly Elder Zosima of 'The Brothers Karamazov' from his visit to Optina and from Elder Ambrose. Sts. Leonid, Macarius, and Ambrose, with the elders after them, are numbered among the saints; Optina was crushed under the Soviets and rose again. The line of holy elders had passed the Philokalia's fire from cell to cell, and from cell to the wide doubting world.",
+        text: "The young man's sneer falters, then breaks. The elder did not argue with him; the elder wept with him, and embraced him, and said the word 'love' until something long-frozen in the boy's chest cracked apart. He came to return God His ticket. He leaves unable to stop weeping.",
+      },
+      {
+        speaker: "you",
+        text: "I almost answered him with a syllogism. But the Cross is not a syllogism. God did not explain the child's suffering — He entered it, and bore it, and rose.",
       },
       {
         speaker: "st-anthony",
-        text: "They healed an age of doubt not with arguments but with love, $you — the same love that runs from the Upper Room to this skete in the pines. Hold to it. Now to the Mountain, and to a soldier-monk who was given a word from the lips of Christ Himself.",
+        text: "You have learned the secret of Optina, $you. They healed an age of doubt not with arguments but with love — the same love that runs unbroken from the Upper Room to this skete in the pines. Hold fast to it.",
+      },
+      {
+        speaker: "narrator",
+        text: "Dostoevsky will draw the saintly Elder Zosima of 'The Brothers Karamazov' from this place and from Ambrose himself. Sts. Leonid, Macarius, and Ambrose, and the elders after them, will be numbered among the saints. Optina will be crushed under the coming Soviet darkness — and will rise again.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The fire of the Philokalia passed from cell to cell here, and from these cells into the wide doubting world. Now come — to the Holy Mountain, and to a soldier turned monk who was given a word from the very lips of Christ. The hardest age of all still waits for you.",
       },
     ],
     reward: { xp: 1, item: "prayer-rope", healHp: true },
