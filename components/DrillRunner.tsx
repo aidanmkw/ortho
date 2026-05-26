@@ -28,6 +28,10 @@ export default function DrillRunner({ items, stageTitle, topicTitle }: Props) {
   const [selfRated, setSelfRated] = useState<null | "correct" | "wrong" | "skipped">(
     null
   );
+  // Multi-turn cross-examination: which rejoinder we're on, and whether its
+  // reply has been revealed yet.
+  const [rejIdx, setRejIdx] = useState(0);
+  const [rejRevealed, setRejRevealed] = useState(false);
 
   const item = items[index];
 
@@ -38,6 +42,8 @@ export default function DrillRunner({ items, stageTitle, topicTitle }: Props) {
     setAttemptText("");
     setLastXpAward(null);
     setSelfRated(null);
+    setRejIdx(0);
+    setRejRevealed(false);
   }
 
   function commitResult(result: "correct" | "wrong" | "skipped") {
@@ -326,25 +332,59 @@ export default function DrillRunner({ items, stageTitle, topicTitle }: Props) {
                 {item.rejoinders && item.rejoinders.length > 0 && (
                   <div className="space-y-3">
                     <div className="text-xs uppercase tracking-widest text-gold/70">
-                      Rejoinders
+                      Cross-Examination · {rejIdx + 1} / {item.rejoinders.length}
                     </div>
-                    {item.rejoinders.map((r, i) => (
-                      <div
-                        key={i}
-                        className="border-l-2 border-byzantine pl-3 sm:pl-4 py-1"
-                      >
-                        <div className="text-parchment/75 italic text-sm">
-                          {r.objection}
-                        </div>
-                        <div className="text-parchment mt-2 text-sm">
-                          {r.reply}
-                        </div>
+                    <div className="border-l-2 border-byzantine pl-3 sm:pl-4 py-1">
+                      <div className="text-[10px] uppercase tracking-widest text-[#c4a0d8] mb-1">
+                        The objection
                       </div>
-                    ))}
+                      <div className="text-parchment/90 italic text-sm">
+                        {item.rejoinders[rejIdx].objection}
+                      </div>
+                      {!rejRevealed ? (
+                        <button
+                          onClick={() => setRejRevealed(true)}
+                          className="btn-quiet mt-3 px-3 py-1.5 rounded text-xs"
+                        >
+                          How do you answer?
+                        </button>
+                      ) : (
+                        <>
+                          <div className="text-[10px] uppercase tracking-widest text-gold/70 mt-3 mb-1">
+                            The reply
+                          </div>
+                          <div className="text-parchment text-sm leading-relaxed">
+                            {item.rejoinders[rejIdx].reply}
+                          </div>
+                          {item.rejoinders[rejIdx].citations &&
+                            item.rejoinders[rejIdx].citations!.length > 0 && (
+                              <ul className="mt-3 space-y-2">
+                                {item.rejoinders[rejIdx].citations!.map((c, i) => (
+                                  <CitationItem key={i} c={c} />
+                                ))}
+                              </ul>
+                            )}
+                          {rejIdx < item.rejoinders.length - 1 && (
+                            <button
+                              onClick={() => {
+                                setRejIdx(rejIdx + 1);
+                                setRejRevealed(false);
+                              }}
+                              className="btn-gold mt-3 px-3 py-1.5 rounded text-xs"
+                            >
+                              Next objection →
+                            </button>
+                          )}
+                        </>
+                      )}
+                    </div>
                   </div>
                 )}
 
-                {selfRated === null && (
+                {selfRated === null &&
+                  (!item.rejoinders ||
+                    item.rejoinders.length === 0 ||
+                    (rejIdx >= item.rejoinders.length - 1 && rejRevealed)) && (
                   <div className="border-t border-gold/20 pt-4 mt-4">
                     <div className="text-xs uppercase tracking-widest text-gold/70 mb-2">
                       Rate your answer (honor system)
