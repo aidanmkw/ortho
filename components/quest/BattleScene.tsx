@@ -435,7 +435,7 @@ export default function BattleScene({
               >
                 <Portrait
                   config={PORTRAITS[bossSpriteId]}
-                  size={400}
+                  size={300}
                   fullBody
                   idle
                   flashing={bossFlash}
@@ -501,23 +501,23 @@ export default function BattleScene({
           {phase === "action-select" && attack && (
             <PixelFrame variant="default" className="p-3">
               <div className="font-pixel text-gold text-[9px] uppercase tracking-widest mb-2 flex items-center justify-between">
-                <span>Your Move</span>
+                <span>Your Move · 5 actions ▾</span>
                 <span className="text-parchment/60">
                   HP {hero.hp}/{hero.maxHp} · FP {hero.faith}/{hero.maxFaith}
                 </span>
               </div>
-              <div className="grid grid-cols-1 gap-2">
+              <div className="grid grid-cols-1 gap-1.5">
                 <ActionBtn
                   icon="⚔"
                   title="Strike"
-                  desc="Answer the boss's claim. Correct = damage."
+                  desc="Answer the claim — correct deals damage."
                   onClick={() => chooseStrike(false)}
                   accent="gold"
                 />
                 <ActionBtn
                   icon="✦"
                   title={`Power Strike  (−6 FP)`}
-                  desc="Stake Faith for 1.6× damage on correct, but 1.4× pain on wrong."
+                  desc="Stake Faith: 1.6× damage, 1.4× risk on a miss."
                   onClick={() => chooseStrike(true)}
                   accent="purple"
                   disabled={hero.faith < 6}
@@ -525,14 +525,14 @@ export default function BattleScene({
                 <ActionBtn
                   icon="🛡"
                   title="Defend"
-                  desc="Skip the attack. Halve the boss's counter-strike this round."
+                  desc="Skip; halve the boss's counter this round."
                   onClick={performDefend}
                   accent="muted"
                 />
                 <ActionBtn
                   icon="🙏"
                   title="Pray"
-                  desc="+5 HP, +12 FP. But the boss strikes you unanswered."
+                  desc="+5 HP, +12 FP — but the boss hits unanswered."
                   onClick={performPray}
                   accent="muted"
                 />
@@ -541,8 +541,8 @@ export default function BattleScene({
                   title="Witness Strike"
                   desc={
                     cloud >= CLOUD_MAX
-                      ? "Spend all 5 charges for a massive blow (80 dmg base)."
-                      : `Need ${CLOUD_MAX - cloud} more correct answers to unleash.`
+                      ? "Spend all 5 charges — a massive 80-dmg blow."
+                      : `Locked — ${CLOUD_MAX - cloud} more correct answers.`
                   }
                   onClick={performWitnessStrike}
                   accent="crimson"
@@ -757,17 +757,17 @@ function ActionBtn({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`pixel-btn block w-full text-left p-2.5 border-2 transition active:translate-y-[1px] font-pixel ${
+      className={`pixel-btn block w-full text-left px-2.5 py-1.5 border-2 transition active:translate-y-[1px] font-pixel ${
         borders[accent]
       } ${disabled ? "opacity-40 pointer-events-none" : ""}`}
     >
-      <div className="flex items-center gap-2 mb-1">
-        <span className={`text-[14px] ${iconColors[accent]}`}>{icon}</span>
+      <div className="flex items-baseline gap-2">
+        <span className={`text-[13px] ${iconColors[accent]}`}>{icon}</span>
         <span className="text-[11px] text-parchment uppercase tracking-widest">
           {title}
         </span>
       </div>
-      <div className="font-pixel text-[9px] text-parchment/60 leading-relaxed pl-7">
+      <div className="font-pixel text-[9px] text-parchment/55 leading-snug pl-7 mt-0.5">
         {desc}
       </div>
     </button>
