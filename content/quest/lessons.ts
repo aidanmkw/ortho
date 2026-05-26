@@ -774,6 +774,22 @@ export const EXPANSION_LESSONS: Chapter[] = [
       },
       {
         speaker: "you",
+        text: "But Master, if He truly became flesh, did His humanity not simply dissolve into His divinity, like a drop of wine in the sea? How does He remain truly man?",
+      },
+      {
+        speaker: "st-cyril",
+        text: "A vital question, friend, and you must hold the rope at both ends or it slips. The union is real — one Person, not two — but the natures are not blended into some third thing that is neither God nor man. He is fully God and fully man, and remains so. The divinity did not swallow the humanity, nor did the two mix to make a half-God. Think of a live coal: fire and wood are truly one in it, yet the fire does not cease to be fire nor the wood to be wood. So in Christ the Godhead and the manhood are united without confusion and without separation. He is whole God and whole man — and your manhood is safe in Him precisely because it was not dissolved but taken up entire.",
+      },
+      {
+        speaker: "you",
+        text: "Why does it matter so much that His humanity stays whole and unblended?",
+      },
+      {
+        speaker: "st-cyril",
+        text: "Because what is not assumed is not healed, friend. If His humanity dissolved away, then it is not your humanity that was joined to God, and the bridge does not reach you. He must be fully man — body, soul, mind, will, all of it real and entire — or else there is some part of you He did not take, and therefore some part of you He did not save. The whole of you was sick; the whole of you had to be assumed. So we guard His complete manhood as jealously as His complete Godhead. Lose either, and you lose your salvation: a God who only seemed human saves no human, and a man who is not truly God cannot lift you into God.",
+      },
+      {
+        speaker: "you",
         text: "Then comes my hardest stumbling-block, Master. How can a woman be mother of God, who is eternal and has no beginning? She did not exist before Him. How can the creature mother her Creator?",
       },
       {
@@ -1036,6 +1052,22 @@ export const EXPANSION_LESSONS: Chapter[] = [
       },
       {
         speaker: "you",
+        text: "But the Father, and the Spirit — surely those we may not paint, for no one has seen them. Does the same not then condemn the icons after all?",
+      },
+      {
+        speaker: "st-john-damascus",
+        text: "A sharp eye, friend, and you have found the very rule that governs us! You are quite right: we do not paint the Father, for the Father was never seen, never took flesh, has no body or form a brush could trace. To depict the divine nature in itself would indeed be the old idolatry, inventing a shape for the shapeless. We paint only what has been seen. We paint Christ, because the Son took visible flesh. We paint the Theotokos and the saints, because they were men and women who walked the earth. The rule is the Incarnation: what has appeared in the flesh may be imaged; the invisible Godhead in itself may not. So your objection does not overturn the icons — it draws their exact boundary.",
+      },
+      {
+        speaker: "you",
+        text: "So the icon never tries to capture God's invisible essence — only the face He took, and the holy ones who shared our flesh.",
+      },
+      {
+        speaker: "st-john-damascus",
+        text: "Just so, and that restraint is itself a confession of humility before the mystery. We do not presume to paint the unpaintable. We paint the condescension of God — the moment the Invisible chose to be seen, the Uncircumscribable chose to be held in a manger and nailed to a circumscribing Cross. Every icon of Christ is therefore a thanksgiving: it says, He came down far enough to be depicted, He loved us enough to take a face. And the saints we paint are the proof of what that descent accomplished — flesh like ours, flooded with His grace, glorified. The icon does not reach up to grasp the hidden God; it celebrates the God who reached down to be seen.",
+      },
+      {
+        speaker: "you",
         text: "But even granting we may paint Him — why bow before the painting? That still feels like worshipping the wood and the paint.",
       },
       {
@@ -1148,6 +1180,22 @@ export const EXPANSION_LESSONS: Chapter[] = [
       {
         speaker: "palamas",
         text: "There the scattered mind is reunited with itself and turned wholly toward God. Most men live with the mind flung outward, broken into a thousand fragments by every sight and worry — a king's army scattered across the countryside, useless. The Jesus Prayer is the trumpet that recalls the mind from its wanderings and gathers it back into the heart, its proper home, where alone it can stand before God. We even bow the head and watch the breath, not because the body saves us, but because the body and soul are one man, and the whole man must pray, not a disembodied intellect floating above the flesh.",
+      },
+      {
+        speaker: "you",
+        text: "But Father, my mind never stops wandering. The moment I say the Name, a hundred thoughts rush in. Am I failing at the prayer before I have begun?",
+      },
+      {
+        speaker: "palamas",
+        text: "No, friend — the wandering is not the failure; the giving up is. Every monk on this mountain, even after fifty years, finds the mind scampering off like a child the instant the prayer begins. The work is not to have a still mind from the start; the work is to bring the mind back, gently, each time it strays — back to the Name, back to the heart — a thousand times in an hour if need be. Each return is the prayer. You do not conquer the wandering by force or by frowning at yourself; you simply, patiently, lead the mind home again, and again, and again. In time the returns grow longer and the wanderings shorter, but that is His gift, not your achievement. Your part is only the humble bringing-back.",
+      },
+      {
+        speaker: "you",
+        text: "So the constant returning is itself the labor — not some perfect stillness I am supposed to manufacture.",
+      },
+      {
+        speaker: "palamas",
+        text: "Exactly so, and never forget it, for the enemy will tell you that because your mind wanders you are no good at prayer and may as well stop. That is a lie, friend. The faithful bringing-back of a wandering mind, done in humility year after year, is worth more than a stillness you might be tempted to take pride in. The Lord prizes the broken, persevering heart, not the polished performance. Keep saying the Name; keep leading the mind home; keep your eyes on Christ and not on your own progress — and leave the stillness to ripen in His season, as fruit ripens, not when the gardener commands but when the sun has done its work.",
       },
       {
         speaker: "you",
@@ -1418,6 +1466,22 @@ export const EXPANSION_LESSONS: Chapter[] = [
       {
         speaker: "silouan",
         text: "It is the surest sign there is, brother, surer than visions or tears or any feeling. Anyone can love those who love him; even the thieves and the godless do that much. But to love the one who wrongs you, to pray for him with a warm heart, to grieve for his soul as for your own brother's — this no man can do by his own strength. It is only the Holy Spirit who loves like that, and so where you find that love, you have found the Spirit, and where you do not, He is not yet there. The Lord taught me to love the enemies so deeply that my soul wept and prayed for the whole world.",
+      },
+      {
+        speaker: "you",
+        text: "But Father, surely there is a righteous anger? When men do terrible evil, should we not hate the wickedness, even if we spare the man?",
+      },
+      {
+        speaker: "silouan",
+        text: "Hate the sin, brother — yes, with all your strength, beginning with your own. But take care, for the heart is cunning and dresses its bitterness in the robes of righteousness. So often what we call 'hatred of evil' is only our own wounded pride, our own resentment, wearing a holy mask. The Spirit grieves over the sinner; the spirit of darkness rejoices to condemn him. Here is how I test myself: when I think of the man who has done wickedly, does my soul grieve for him and long for his salvation, or does it secretly enjoy his ruin? If I enjoy his ruin, then whatever I call it, it is not the love of God in me. The Lord wept over Jerusalem even as He named its sin. He hated the evil and wept for the evildoer in the same breath.",
+      },
+      {
+        speaker: "you",
+        text: "So even my hatred of evil must be soaked in grief for the one who does it, or it has gone bad.",
+      },
+      {
+        speaker: "silouan",
+        text: "That is the whole of it, brother. The saints hated sin more than anyone, and yet they prayed for sinners with burning tears — the two grew together in them. When the love of God enters a soul, it cannot bear that even the worst should perish; it would empty hell if it could, and weeps that it cannot. I have felt this love, and I tell you it is heavier and sweeter than anything in this world, and it leaves no room for the gladness we take in another's downfall. Pray for the Spirit to give you that love, and watch what it does to your anger. It does not make you blind to evil. It makes you weep over it instead of feeding on it.",
       },
       {
         speaker: "you",
@@ -1846,6 +1910,14 @@ export const EXPANSION_LESSONS: Chapter[] = [
       },
       {
         speaker: "you",
+        text: "But Mother — why would God let the passions torment you so long after you had given yourself to Him? Would mercy not simply lift them away at once?",
+      },
+      {
+        speaker: "st-mary-egypt",
+        text: "I asked Him that very thing, child, lying in the sand and weeping. And in time I understood. Had He taken the struggle from me at once, I would have learned nothing, and I would have grown proud, thinking myself cured by my own crossing of a river. Instead He let the battle remain, that I might learn day by day how weak I was and how strong He is — that every small victory was His gift and not my strength. The long war did not mean He had abandoned me. It was the school in which He taught me to lean on Him for everything. The struggle itself was His mercy, not the absence of it. He was not punishing me. He was forming me.",
+      },
+      {
+        speaker: "you",
         text: "Seventeen years of struggle even after you had repented? That frightens me, Mother. I want my repentance to be over quickly.",
       },
       {
@@ -1867,6 +1939,22 @@ export const EXPANSION_LESSONS: Chapter[] = [
       {
         speaker: "st-mary-egypt",
         text: "Always, child. Despair is the lie that says your sin is greater than God's mercy — and that is the one truly blasphemous thought, for it makes your wretchedness bigger than His love, which is impossible. There is no sin so great that the love of God is not greater. The harlot, the thief on the cross, I myself — none of us was too far gone, because no one is too far gone. The road back is long, yes; it cost me forty-seven years in this waste. But it was open the whole way. It is always open. The only way to truly be lost is to stop walking the road because you have believed the lie that it leads nowhere.",
+      },
+      {
+        speaker: "you",
+        text: "Mother, you have read my own heart. The thing that paralyzes me is not the sin itself but the shame of it — I feel too unclean even to approach Him. How did you dare to come, the worst of women?",
+      },
+      {
+        speaker: "st-mary-egypt",
+        text: "I dared because I had no other hope, child, and that, strange to say, is the very best place to begin. The clean and the careful keep their distance, weighing whether they are worthy; but the one who knows herself utterly lost has nothing left to lose by running to Him. So I, who could not even pass the threshold of the church, did not run from God — I ran to His Mother and cast myself on her mercy, exactly as I was, unclean and ashamed. The shame would have kept me away forever if I had listened to it. But the shame is the enemy's last trap: it dresses itself up as reverence and whispers, 'Stay back, you are not fit.' Do not believe it. The unfit are precisely the ones He came for. Come dirty, child. He will wash you. He does not wait for you to wash yourself; you cannot.",
+      },
+      {
+        speaker: "you",
+        text: "Come dirty, because I cannot wash myself first. That is the opposite of everything my shame tells me.",
+      },
+      {
+        speaker: "st-mary-egypt",
+        text: "Your shame tells you to clean yourself before you dare approach the only One who can clean you — do you see the cruelty of the lie? It is a circle that keeps the sinner forever outside the door. Break it, child. Come as the leper came, as the woman caught in sin came, as I came in all my filth to the icon of the Pure One. The shame says, 'wait until you are better.' Christ says, 'come now, while you are sick, for that is why I came.' Repentance is not making yourself presentable. It is turning, just as you are, toward the open arms — and letting Him do the rest across the long years it takes.",
       },
       {
         speaker: "you",
