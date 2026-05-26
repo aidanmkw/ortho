@@ -324,6 +324,14 @@ export default function DrillRunner({ items, stageTitle, topicTitle }: Props) {
                     {item.expectedAnswer}
                   </RevealBlock>
                 )}
+                {(item.kind === "qa" || item.kind === "debate") &&
+                  item.expectedAnswer &&
+                  attemptText.trim().length > 0 && (
+                    <KeywordFeedback
+                      attempt={attemptText}
+                      expected={item.expectedAnswer}
+                    />
+                  )}
                 {item.orthodoxRebuttal && (
                   <RevealBlock label="Orthodox Response" accent="gold">
                     {item.orthodoxRebuttal}
@@ -535,6 +543,107 @@ function Stat({ label, value }: { label: string; value: string | number }) {
       <div className="text-gold text-lg sm:text-2xl font-mono">{value}</div>
       <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-parchment/60">
         {label}
+      </div>
+    </div>
+  );
+}
+
+const STOPWORDS = new Set([
+  "the","and","that","this","with","from","which","whom","were","was","are",
+  "for","not","but","his","her","they","them","their","into","unto","upon",
+  "also","who","whose","what","when","where","does","did","has","have","had",
+  "been","being","its","you","your","our","ours","than","then","there","these",
+  "those","such","may","can","will","would","could","should","shall","must",
+  "one","two","each","all","any","some","more","most","other","because",
+  "therefore","thus","hence","while","whereas","against","between","among",
+  "through","over","under","about","after","before","during","without","within",
+  "both","either","neither","nor","yet","whom","they","theirs","himself",
+]);
+
+function tokenize(s: string): string[] {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function keywordCheck(attempt: string, expected: string) {
+  const keyTerms = Array.from(
+    new Set(tokenize(expected).filter((w) => w.length >= 4 && !STOPWORDS.has(w)))
+  );
+  const attemptWords = new Set(tokenize(attempt));
+  const matched: string[] = [];
+  const missed: string[] = [];
+  for (const term of keyTerms) {
+    let hit = attemptWords.has(term);
+    if (!hit) {
+      // loose stem match: shared 5-char prefix
+      const stem = term.slice(0, 5);
+      for (const aw of attemptWords) {
+        if (aw.length >= 4 && (aw.startsWith(stem) || term.startsWith(aw.slice(0, 5)))) {
+          hit = true;
+          break;
+        }
+      }
+    }
+    (hit ? matched : missed).push(term);
+  }
+  const ratio = keyTerms.length ? matched.length / keyTerms.length : 0;
+  return { matched, missed, ratio, total: keyTerms.length };
+}
+
+function KeywordFeedback({
+  attempt,
+  expected,
+}: {
+  attempt: string;
+  expected: string;
+}) {
+  const { matched, missed, ratio, total } = keywordCheck(attempt, expected);
+  if (total === 0) return null;
+
+  const suggestion =
+    ratio >= 0.6 ? "Got it" : ratio >= 0.3 ? "Partial" : "Missed";
+  const suggestionColor =
+    ratio >= 0.6
+      ? "text-gold"
+      : ratio >= 0.3
+      ? "text-parchment/80"
+      : "text-crimson";
+
+  return (
+    <div className="border border-parchment/15 rounded p-3 bg-black/20">
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-xs uppercase tracking-widest text-gold/70">
+          Recall check
+        </div>
+        <div className="text-xs text-parchment/60">
+          {matched.length}/{total} key terms ·{" "}
+          <span className={suggestionColor}>suggests &ldquo;{suggestion}&rdquo;</span>
+        </div>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {matched.map((t) => (
+          <span
+            key={t}
+            className="text-[11px] px-1.5 py-0.5 rounded bg-gold/15 text-gold border border-gold/30"
+          >
+            ✓ {t}
+          </span>
+        ))}
+        {missed.map((t) => (
+          <span
+            key={t}
+            className="text-[11px] px-1.5 py-0.5 rounded bg-crimson/10 text-crimson/80 border border-crimson/30"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+      <div className="text-[10px] text-parchment/40 mt-2 italic">
+        A rough keyword match against the expected answer — your honest
+        self-rating below is what counts.
       </div>
     </div>
   );
