@@ -55,11 +55,35 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
       },
       {
         speaker: "you",
+        text: "Stop them! Can no one stop this?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "We are shadows here, $you, sent to witness and to learn, not to stay the hand of history. Look, and let it brand your memory. This is what happens when men make the faith a flag for their hungers — when 'for Christ' becomes the cloak for what Christ forbids. The grief of this day will outlive every man who profited from it.",
+      },
+      {
+        speaker: "you",
         text: "And these men wear the Cross?",
       },
       {
         speaker: "st-anthony",
         text: "On their very shoulders. Niketas Choniates, a Roman of this city who is fleeing even now with his family through these streets, will write of this day that even the Saracens, when Jerusalem fell to them, were more merciful than these men who bear the name of Christ.",
+      },
+      {
+        speaker: "you",
+        text: "How could men set out to free the tomb of Christ and end by sacking a Christian city? What turned them?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Debt and greed, $you, robed in piety. They owed the Venetians more than they could pay for their ships; a fugitive Byzantine prince promised them a fortune to restore his father's throne; and when the promise proved empty, the unpaid army found a city overflowing with gold and called its taking the will of God. Every great evil first persuades itself that it is good.",
+      },
+      {
+        speaker: "you",
+        text: "Then I must beware: the worst sins are the ones that come dressed as holiness.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "You have seen the heart of it. When the commander comes, he will not boast like a thief; he will preach like a priest. He will say the city's fall proves God judged it, and that schismatics deserve no mercy. Answer him from the Lord's own words — for Christ Himself rebuked the sword, and called the meek, not the conqueror, blessed.",
       },
       {
         speaker: "you",
@@ -229,12 +253,36 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "'Self-headed' — a Church that governs its own affairs, chooses its own bishops, yet holds the one identical Orthodox faith shared with the Greeks, the Bulgars, the Rus. Not a separate religion; a household ordering its own table within the one great house. Here is the archbishop himself.",
       },
       {
+        speaker: "you",
+        text: "Why does it matter so greatly that the Serbs pray in their own tongue and have their own bishops? Could they not simply be Greeks in their faith?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Because the Gospel is for every nation in its own voice — recall the Apostles at Pentecost, when every man heard the mighty works of God in his own language. The faith does not erase a people; it baptizes them. Sava gives the Serbs the Scriptures, the services, the saints' lives in words their grandmothers can pray. A faith that must be borrowed in a foreign tongue stays a guest; a faith prayed in the mother tongue becomes home.",
+      },
+      {
+        speaker: "you",
+        text: "Yet you warned of a temptation hidden in this very gift.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The same gift can be twisted two ways, $you. A king may seize the people's Church and make it his servant — that is one snare. Or a people may make the Church a trophy of their blood, loving it because it is THEIRS and despising other Orthodox who are not — that is the other. Sava walks between both pits. Watch how he refuses the prince who would own what God has given.",
+      },
+      {
         speaker: "narrator",
         text: "A man in the plain black robe of an Athonite monk crosses the courtyard — though an omophorion now marks him archbishop. His face is gentle, but there is iron beneath it. He turns to you: 'A people without their own Church are sheep scattered on the hills. I have given the Serbs their shepherds and their books. But a temptation follows close behind every such gift, smiling like a friend.'",
       },
       {
         speaker: "st-anthony",
         text: "Mark that temptation well, $you. A prince hears 'a Church FOR the Serbian people' and twists it to 'a Church OF the Serbian crown' — a thing to be owned, bent to the throne, made to bless the king's wars and silence the king's rivals. It comes smooth as a courtier's bow. Do not let holiness be made the servant of power, nor the faith be made a banner of one blood above all others.",
+      },
+      {
+        speaker: "you",
+        text: "How does a man hold both at once — to love his people dearly, yet never let that love become an idol?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "By loving them in God and not instead of Him, $you. Sava's love for the Serbs is fierce — he gives them their whole spiritual life — yet he never forgets that a Serb and a Greek and a Bulgar kneel at the one altar, confess the one faith, are saved by the one Christ. The nation is a field he plants; it is not the seed, and it is never the Lord of the harvest.",
       },
       {
         speaker: "narrator",
@@ -420,6 +468,22 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
       {
         speaker: "st-anthony",
         text: "He will cry exactly that. But it is no division, $you — it is the one undivided God known in two ways: as He is in Himself, hidden; and as He freely gives Himself, shining. The sun is one, yet we cannot stare at its disk while we live wholly in its light and warmth. Hold to this, for upon it rests the promise that we are made 'partakers of the divine nature' (2 Peter 1:4) — not of the unknowable essence, but of the uncreated energies. That is deification. That is the whole hope.",
+      },
+      {
+        speaker: "you",
+        text: "And the breathing, the bowed heads, the endless repeating of the one prayer — Barlaam mocks that most of all. Is the body not a hindrance to so high a thing as seeing God?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Barlaam is a Platonist at heart; he would save only the mind and leave the body behind as a husk. But the Word became FLESH, $you. The body is a temple of the Holy Spirit, and it shall rise. So the hesychast prays with his whole self — drawing the scattered mind down into the heart, steadying it with the breath, anchoring it on the Holy Name. It is not magic and not mere repetition; it is the whole man, body and soul, turned toward God and waiting.",
+      },
+      {
+        speaker: "you",
+        text: "Then if Barlaam wins, it is not only the monks who lose, but every Christian's hope of ever truly reaching God.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Now you see why three councils will be summoned over what looks like a quarrel of monks. Strip away the uncreated energies and grace becomes a created trinket, the Light of Tabor a parlor trick, and 'have mercy on me' a cry into the dark. All of it stands or falls here. Steel yourself — the philosopher's logic is keen, and he means to cut.",
       },
       {
         speaker: "narrator",

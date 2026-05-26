@@ -467,11 +467,43 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
       },
       {
         speaker: "you",
+        text: "But is that not a danger? A man could mistake his own feelings, even some demon's flattery, for the light of God.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "A real danger, and Symeon knows it well — which is why he never tells a soul to chase visions. He says: humble yourself, repent with tears, obey your spiritual father, keep the commandments. Only then, to the humble and not the proud, may God grant the gift. The counterfeit always feeds pride; the true light burns it away and leaves only sorrow for sin and a great, quiet joy.",
+      },
+      {
+        speaker: "you",
+        text: "And does Scripture truly speak of such a thing? Or is it only the experience of monks?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Remember the words you will hear: 'The Spirit Himself beareth witness with our spirit that we are the children of God' (Rom 8:16). Moses came down from the mountain with his face shining so the people could not look on him. Christ was transfigured on Tabor and His garments became as light. The deacon Stephen, dying, saw the heavens opened and the glory of God. Symeon claims nothing the Scriptures have not already promised.",
+      },
+      {
+        speaker: "you",
         text: "And who leads them?",
       },
       {
         speaker: "st-anthony",
         text: "Stephen, once archbishop of Nicomedia — the sharpest mind of the court, a man who can shred an argument like parchment. He will try to make Symeon look a wild enthusiast, an unlettered fanatic weeping over visions. Do not let him. Stand with the abbot, and answer not from feeling but from the Scriptures and the Fathers.",
+      },
+      {
+        speaker: "you",
+        text: "But if grace is given in the sacraments — in baptism, in the Eucharist — why does Symeon press so hard that it be FELT? Is the gift not enough, whether we sense it or not?",
+      },
+      {
+        speaker: "st-anthony",
+        text: "The gift is real either way, $you, and Symeon never doubts the mysteries. But picture a man who owns a treasure and never once opens the chest, never knows what he holds. So the court would have it: grace locked away, unopened, the Christian's life a round of forms with the Giver Himself a stranger. Symeon cries out: open the chest! The Spirit was given that you might KNOW the One you received, and be changed by Him.",
+      },
+      {
+        speaker: "you",
+        text: "Then the quarrel is whether God means to be a distant rule-giver or a present fire.",
+      },
+      {
+        speaker: "st-anthony",
+        text: "Exactly so. And do not mistake the court for villains, $you. They fear pride; they have seen false mystics deceive the simple, and they guard the Church's order against every wild claim. Their caution is not wholly wrong — only it has hardened into a wall against the living God. Help the abbot show them the difference between the fanatic and the saint.",
       },
       {
         speaker: "narrator",
