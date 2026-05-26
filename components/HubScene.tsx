@@ -171,6 +171,23 @@ export default function HubScene() {
         )}
       </div>
 
+      {/* Review call-to-action — the primary daily action when items are due */}
+      {stats.dueReview > 0 && (
+        <div className="relative z-20 px-4 pt-1">
+          <Link
+            href="/review"
+            className="mx-auto max-w-md flex items-center justify-center gap-2 no-underline rounded-lg border-2 border-crimson/70 bg-gradient-to-br from-[#1a0808] to-[#0c0a08] px-4 py-2.5 text-center hover:border-crimson transition animate-[pulse_3s_ease-in-out_infinite]"
+          >
+            <span className="text-crimson text-lg">↻</span>
+            <span className="font-display text-parchment text-sm sm:text-base">
+              {stats.dueReview} {stats.dueReview === 1 ? "item" : "items"} ready
+              to review
+            </span>
+            <span className="text-crimson/80 text-sm">→</span>
+          </Link>
+        </div>
+      )}
+
       {/* Painting centered in remaining space */}
       <div className="relative z-10 flex-1 flex items-center justify-center px-1 sm:px-2 py-1">
         <div className="relative w-full max-w-5xl">
