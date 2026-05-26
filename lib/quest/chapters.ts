@@ -3,6 +3,7 @@ import { EXPANSION_CHAPTERS } from "@/content/quest/expansion";
 import { EXPANSION_CHAPTERS_2 } from "@/content/quest/expansion-2";
 import { EXPANSION_CHAPTERS_3 } from "@/content/quest/expansion-3";
 import { EXPANSION_CHAPTERS_4 } from "@/content/quest/expansion-4";
+import { EXPANSION_LESSONS } from "@/content/quest/lessons";
 
 // Each chapter: setting + 2-6 narrative dialog lines + boss with 3-5 attacks +
 // outro + reward. Speaker IDs match sprite ids in lib/quest/sprites.ts.
@@ -4505,53 +4506,28 @@ const ALL_SOURCES: Chapter[] = [
   ...EXPANSION_CHAPTERS_2,
   ...EXPANSION_CHAPTERS_3,
   ...EXPANSION_CHAPTERS_4,
+  ...EXPANSION_LESSONS,
 ];
 
-function byId(id: string): Chapter {
-  const found = ALL_SOURCES.find((c) => c.id === id);
-  if (!found) throw new Error(`chapter not found: ${id}`);
-  return found;
+// Derive a chronological sort key from the chapter's era string so the battle
+// chapters and the catechesis lessons interleave by date automatically.
+function eraSortKey(c: Chapter): number {
+  const era = c.era;
+  let base: number;
+  if (/beyond/i.test(era)) base = 99999;
+  else if (/present day/i.test(era))
+    base = /evening/i.test(era) ? 9002 : /hour later/i.test(era) ? 9001 : 9000;
+  else {
+    const m = era.match(/\d{1,4}/);
+    base = m ? parseInt(m[0], 10) : 5000;
+  }
+  // A lesson sorts just after same-year events (the teaching follows them).
+  return base + (c.kind === "lesson" ? 0.5 : 0);
 }
 
-const CHRONOLOGICAL_ORDER: string[] = [
-  "ch1-antioch", //            AD 107
-  "ch101-polycarp", //         AD 155
-  "ch102-justin", //           AD 165
-  "ch2-catacombs", //          AD 250
-  "ch3-nicaea", //             AD 325
-  "ch4-desert", //             AD 360
-  "ch103-cappadocians", //     AD 381
-  "ch104-chrysostom", //       AD 404
-  "ch105-ephesus", //          AD 431
-  "ch5-chalcedon", //          AD 451
-  "ch201-constantinople-ii", // AD 553
-  "ch106-maximus", //          AD 662
-  "ch202-john-damascus", //    AD 730
-  "ch6-icons", //              AD 787
-  "ch107-cyril-methodius", //  AD 867
-  "ch108-photios", //          AD 879
-  "ch109-rus", //              AD 988
-  "ch203-symeon", //           AD 1000
-  "ch7-schism", //             AD 1054
-  "ch301-fourth-crusade", //   AD 1204
-  "ch302-sava-serbia", //      AD 1219
-  "ch303-palamas", //          AD 1341–1351
-  "ch8-florence", //           AD 1439
-  "ch401-cosmas", //           AD 1779
-  "ch402-seraphim", //         AD 1831
-  "ch404-optina", //           AD 1878
-  "ch9-soviets", //            AD 1937
-  "ch403-silouan", //          AD 1938
-  "ch10-modern", //            present
-  "ch10b-reformed", //         present
-  "ch10c-atheist", //          present
-  "ch11-doubt", //             beyond time (finale)
-];
-
-export const CHAPTERS: Chapter[] = CHRONOLOGICAL_ORDER.map((id, i) => ({
-  ...byId(id),
-  number: i + 1,
-}));
+export const CHAPTERS: Chapter[] = [...ALL_SOURCES]
+  .sort((a, b) => eraSortKey(a) - eraSortKey(b))
+  .map((c, i) => ({ ...c, number: i + 1 }));
 
 export function getChapter(index: number): Chapter | undefined {
   return CHAPTERS[index];
