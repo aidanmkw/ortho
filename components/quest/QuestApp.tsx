@@ -501,7 +501,12 @@ function ChapterCard({
           </div>
           {chapter.ally && PORTRAITS[chapter.ally] && (
             <div className="mt-4 flex flex-col items-center justify-center gap-2">
-              <Portrait config={PORTRAITS[chapter.ally]} size={150} idle />
+              <Portrait
+                config={PORTRAITS[chapter.ally]}
+                size={300}
+                fullBody
+                idle
+              />
               <div className="font-pixel text-[9px] text-gold/80">
                 ALLY:{" "}
                 <span className="text-parchment">

@@ -22,6 +22,10 @@ type Props = {
   flashing?: boolean;
   // For the player only: override hair color directly with hex.
   hairColorHex?: string;
+  // Render a frameless full-body icon-style sprite (from /public/sprites)
+  // standing in the scene, instead of the framed 3:4 bust. `size` is treated
+  // as the figure HEIGHT in this mode.
+  fullBody?: boolean;
 };
 
 // Shared palettes
@@ -81,6 +85,7 @@ export default function Portrait({
   idle = false,
   flashing = false,
   hairColorHex,
+  fullBody = false,
 }: Props) {
   // If a real image is provided, use it.
   const base =
@@ -88,6 +93,34 @@ export default function Portrait({
       ? process.env.NEXT_PUBLIC_BASE_PATH ?? ""
       : (window as { __NEXT_DATA__?: { assetPrefix?: string } }).__NEXT_DATA__
           ?.assetPrefix ?? process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+  // Full-body icon-style sprite: frameless, transparent, standing in the
+  // scene. `size` is the figure height here.
+  if (fullBody && config.image) {
+    return (
+      <div
+        className={`relative ${className} ${idle ? "pixel-idle" : ""} ${
+          flashing ? "pixel-flash" : ""
+        }`}
+        style={{ height: size, maxHeight: "62vh" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${base}/sprites/${config.image}`}
+          alt={config.name ?? ""}
+          draggable={false}
+          style={{
+            height: "100%",
+            width: "auto",
+            objectFit: "contain",
+            display: "block",
+            filter: "drop-shadow(0 8px 12px rgba(0,0,0,0.6))",
+          }}
+        />
+      </div>
+    );
+  }
+
   if (config.image) {
     return (
       <div

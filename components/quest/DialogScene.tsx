@@ -132,7 +132,8 @@ export default function DialogScene({
             <div className={`pixel-shadow-lg pixel-platform ${glowClass}`}>
               <Portrait
                 config={portraitConfig}
-                size={220}
+                size={520}
+                fullBody
                 idle
                 hairColorHex={isPlayer ? hairColor : undefined}
               />

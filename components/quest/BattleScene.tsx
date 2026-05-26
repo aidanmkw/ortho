@@ -435,7 +435,8 @@ export default function BattleScene({
               >
                 <Portrait
                   config={PORTRAITS[bossSpriteId]}
-                  size={180}
+                  size={400}
+                  fullBody
                   idle
                   flashing={bossFlash}
                 />

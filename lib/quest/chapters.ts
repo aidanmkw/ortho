@@ -408,6 +408,16 @@ const BASE_CHAPTERS: Chapter[] = [
           "Look — there, on the wall. A woman with her child, and beside her a prophet pointing to a star. Painted while men who knew the Apostles still drew breath. The oldest image of the Theotokos in all the world.",
       },
       {
+        speaker: "narrator",
+        text:
+          "Down the gallery a low chant rises — a dozen voices in the dark, ragged and unafraid. A bishop in a plain tunic breaks a loaf over a marble slab; the slab is a grave. Children press close. An old woman weeps without sound.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "These are people who buried a son last week — Decius took him. They sing anyway. This is the Church you have come from, $you, before it had a single basilica: a frightened, joyful flock breaking bread over the bones of those who would not bow.",
+      },
+      {
         speaker: "you",
         text: "I have heard it said — in my own age — that making images of Christ and the saints is idolatry. That the first Christians never did such things.",
       },
@@ -422,8 +432,17 @@ const BASE_CHAPTERS: Chapter[] = [
           "But beware — the worst danger now is not the lions. It is the certificate. Some buy a libellus through bribes, or burn a pinch of incense 'just for show,' and tell themselves their heart is still Christ's. The Church will spend years deciding how to receive such lapsed back. The act of denial is itself the denial.",
       },
       {
+        speaker: "you",
+        text: "Then a man may keep Christ in his heart and still betray Him with his hand?",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Just so. A bishop named Cyprian, in Carthage, fights this very battle now — the lapsi, the fallen, weeping at the church doors begging to return. He will not turn them away forever, but neither will he pretend the fall did not happen. Mercy and truth must kiss, $you, or they are neither.",
+      },
+      {
         speaker: "narrator",
-        text: "Footsteps echo down the gallery. A man steps from the shadows into the torchlight — tall, clean-shaven, in a fine senatorial toga edged with purple. He is no fugitive. He is no friend.",
+        text: "Footsteps echo down the gallery — measured, unhurried, the tread of a man who has never had to run. A figure steps from the shadows into the torchlight: tall, clean-shaven, in a fine senatorial toga edged with purple. He is no fugitive. He is no friend.",
       },
       {
         speaker: "marcus",
@@ -685,9 +704,23 @@ const BASE_CHAPTERS: Chapter[] = [
           "He lingers a long moment before the fresco of the Theotokos, the torchlight trembling on his face. Then he turns and climbs back toward the sunlit streets of Rome — a different man than the one who descended.",
       },
       {
+        speaker: "narrator",
+        text:
+          "Behind you, the bishop finishes the breaking of bread. The mourners come forward one by one — even the weeping old woman — and the dark chamber fills with a strange, stubborn peace, the peace of people who have already buried their fear with their dead.",
+      },
+      {
         speaker: "st-anthony",
         text:
           "He may yet become a brother. 'The blood of Christians is seed,' Tertullian will write within a generation — and so are the questions answered in the dark. The Church grows downward, into the catacombs, before it ever rises into basilicas.",
+      },
+      {
+        speaker: "you",
+        text: "They have nothing — no temple, no safety, no law on their side. Yet they sing as though they have already won.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Because they have, child. Remember this chamber when men tell you the early Church was a vague brotherhood with no altar, no Theotokos, no images, no martyrs' bones. You have stood in the proof.",
       },
       {
         speaker: "st-anthony",
@@ -1429,6 +1462,15 @@ const BASE_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "you",
+        text: "Why must the Church split hairs so finely? Surely it is enough to say Christ is God and man and leave the mystery alone.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Would that it were, child. But heretics do not leave mysteries alone — they explain them away, and the people follow the explanation. Each false road LOOKS like piety. Nestorius thinks he honors God by keeping Him from the manger and the Cross. Eutyches thinks he honors Christ by making Him too divine for true flesh. Both, meaning well, would unmake your salvation.",
+      },
+      {
+        speaker: "you",
         text: "And the truth runs between them?",
       },
       {
@@ -1452,9 +1494,27 @@ const BASE_CHAPTERS: Chapter[] = [
           "And here is my grief, $you: I myself once wrote, against Nestorius, of 'one incarnate nature of the Word.' I meant the deep unity of the one Christ. Eutyches has seized my words to break the very faith I defended. Help me make plain what I truly meant — that the unity does not devour the manhood.",
       },
       {
+        speaker: "you",
+        text: "Then even a saint's words can be turned into a weapon against the saint?",
+      },
+      {
+        speaker: "st-cyril",
+        text:
+          "Words are vessels, $you, and heresy pours its own wine into them. This is why the Church does not trust a single phrase but the whole symphony of the Fathers, read together. When I said 'one nature,' I meant one Christ — not a Christ whose manhood is a drop swallowed by the sea. Hold the man Jesus and the eternal Word as ONE who acts, suffers, and saves — yet truly God and truly man.",
+      },
+      {
         speaker: "st-anthony",
         text:
           "Mark the stakes. If Eutyches is right, Christ's humanity is a phantom — and as Gregory the Theologian warns, 'that which is not assumed is not healed.' If He did not truly take our flesh, our flesh is not saved. The whole ground of our salvation trembles on this word.",
+      },
+      {
+        speaker: "you",
+        text: "So if His body were not real as mine is real, then my body — my death — has no Saviour at all.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Now you see why six hundred bishops crossed land and sea for this. It is not philosophers' quibbling. It is whether the hand that will raise YOU from the grave is a true human hand that once knew nails. Steady yourself. The old man approaches, and he is utterly sincere — which is what makes him so hard to answer.",
       },
       {
         speaker: "narrator",
@@ -1718,6 +1778,20 @@ const BASE_CHAPTERS: Chapter[] = [
           "You see truly, and it is the great sorrow. Many who love Christ no less than we will hear 'two natures' and fear it means 'two sons.' Whole churches of Egypt and Syria will walk apart over a confusion of words. Guard the Definition — and guard your love for those who stumble at it.",
       },
       {
+        speaker: "you",
+        text: "Then victory and grief came in the same hour. The faith was sealed, and the Body of Christ was torn.",
+      },
+      {
+        speaker: "st-cyril",
+        text:
+          "Such is the burden of truth in a fallen world, $you. We do not get to choose between purity and unity as we would wish — we keep the faith whole and weep for those who cannot follow. Pray for the Copt and the Syrian as for your own kin; one day, in ways we cannot now see, the Lord may heal what councils could not.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "The empress Pulcheria rises; the lamps of Saint Euphemia gutter in the sea-wind off the Bosphorus. The Definition is sealed in the acts. Outside, the bishops who would not sign are already gathering their robes to sail home to a divided East.",
+      },
+      {
         speaker: "st-anthony",
         text:
           "Take the Tome of Leo, $you. It will steady you three centuries hence, when the iconoclasts arise — for they too will cry 'no image of the divine,' and you will answer them from the truth confessed here: God has truly taken visible flesh. Onward, to Constantinople and the war over the holy icons.",
@@ -1756,7 +1830,12 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "On a small wooden chair sits the Empress Irene, regent for her young son. She has summoned the Seventh Ecumenical Council to restore the holy icons. Three hundred and fifty bishops fill the nave, and the air hums with the long-suppressed hope of a Church about to be made whole.",
+          "On a small wooden chair sits the Empress Irene, regent for her young son Constantine VI. She has summoned the Seventh Ecumenical Council to restore the holy icons that her predecessors tore down. Three hundred and fifty bishops fill the nave; monks who were beaten and exiled now stand vindicated, and the air hums with the long-suppressed hope of a Church about to be made whole.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Look at them, $you — old men with scarred faces, monks who hid icons in their cells at the price of their eyes and noses. For sixty years it has been a crime to paint the face of Christ. Tonight the Church gathers to say, with one voice, that it never was.",
       },
       {
         speaker: "you",
@@ -1776,6 +1855,15 @@ const BASE_CHAPTERS: Chapter[] = [
         speaker: "st-john-damascus",
         text:
           "Here is why it matters, child — here is the heart of the whole war. Hear the deepest answer and never forget it: 'I do not depict the invisible Godhead, but the flesh of God which was seen.' The Incarnation IS the dogmatic foundation of the icon.",
+      },
+      {
+        speaker: "you",
+        text: "But the iconoclasts say they honor God MORE by refusing all images — that they are the purer Christians. How can purity be the error?",
+      },
+      {
+        speaker: "st-john-damascus",
+        text:
+          "Because their 'purity' is a return to before Bethlehem. They would worship the God of Sinai who could not be seen — and quietly forget the God of the manger who could be held in an old man's arms in the Temple. They think themselves more spiritual than the Incarnation itself. That is the oldest temptation in a new mask.",
       },
       {
         speaker: "st-anthony",
@@ -2026,14 +2114,37 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
+        speaker: "narrator",
+        text:
+          "The purple figure thins like smoke drawn up a chimney. Where bare plaster scarred the dome a moment ago, gold seems to bleed back into the stone — and high above, the great Christ Pantocrator gazes down once more on the church His enemies had stripped.",
+      },
+      {
         speaker: "st-john-damascus",
         text:
-          "The icons return to the walls. Every First Sunday of Lent forever, the Church will sing of this triumph — the Triumph of Orthodoxy.",
+          "The icons return to the walls. The Council confesses it: the honor passes to the prototype. And every First Sunday of Lent forever, the Church will carry the holy images in procession and sing of this hour — the Triumph of Orthodoxy.",
+      },
+      {
+        speaker: "you",
+        text: "But you told me the war ran on after this Council. Will they not rise again?",
+      },
+      {
+        speaker: "st-john-damascus",
+        text:
+          "They will, child — a second iconoclasm, thirty years more of it, until the Empress Theodora at last restores the icons in 843. The truth, once confessed, must still be defended in blood. But it is confessed, and it will never be unsaid. The Word became flesh; the flesh may be painted; the painting may be kissed.",
       },
       {
         speaker: "st-anthony",
         text:
-          "Now west. Three centuries fall away. A schism approaches — and it will be your hardest to face, for it severs the Church from herself.",
+          "Take this — the Philokalia, the love of the beautiful: the prayers of the Fathers gathered like coals from a thousand desert fires. When images fail you and feeling fails you, the Jesus Prayer within these pages will not.",
+      },
+      {
+        speaker: "you",
+        text: "And now?",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Now west. Three centuries fall away. A schism approaches — and it will be your hardest to face, for it does not pit you against pagan or heretic, but against brothers. It severs the Church from herself. Take my hand.",
       },
     ],
     reward: { xp: 1, item: "philokalia", healHp: true },
@@ -2054,42 +2165,64 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "July, 1054. The Great City. Two centuries since Photius confronted Rome over the same addition; nothing has been resolved. Pope Leo IX is dying in Italy, but his legates have not heard the news.",
+          "Saturday, the sixteenth of July, in the year of our Lord 1054. Hagia Sophia again — but the gold seems colder now. The Divine Liturgy is being sung; the great doors stand open; clergy in their vestments move toward the altar through clouds of incense. It is the hour of the offering.",
       },
       {
         speaker: "st-anthony",
         text:
-          "The Christian world will not see itself whole again in this age. Today is the day it tears. You are a witness — and a defender. Hold the Symbol unaltered.",
+          "The Christian world will not see itself whole again in this age, $you. For a thousand years the Church has breathed with two lungs — the Greek East and the Latin West, one in faith though they prayed in different tongues. Today that breath catches. You are a witness to the wound, and a defender of the Symbol. Hold it unaltered.",
       },
       {
-        speaker: "narrator",
-        text:
-          "The patriarchate of Constantinople under Michael Cerularius is at uneasy peace with Rome. Then a Roman legate strides into the Liturgy itself, with a parchment.",
-      },
-      {
-        speaker: "narrator",
-        text:
-          "Cardinal Humbert lays the parchment on the altar of Hagia Sophia: an excommunication of the Patriarch. He turns and leaves, shouting in Latin: 'God see and judge!' The Greek deacons stand in shock. One picks it up. Reads it. Falls to his knees.",
+        speaker: "you",
+        text: "If they have been one Church for a thousand years, what has gone so wrong now?",
       },
       {
         speaker: "st-anthony",
         text:
-          "The breach has been forming for centuries. The trigger: the Latin addition to the Symbol of Faith — 'and the Son' — Filioque. The Pope claims authority to add to what the Councils forbade adding to.",
-      },
-      {
-        speaker: "st-anthony",
-        text:
-          "But there are other quarrels: unleavened bread, married priests, the very nature of Peter's primacy. The Roman court has hardened from primacy of honor into supremacy of jurisdiction.",
+          "Slowly, child, slowly. Latin and Greek grew apart — different empires, different languages, a West overrun by barbarians while the East kept the philosophers' tongue. Two centuries ago a patriarch named Photios already saw the danger: Rome was adding a word to the Creed that no Council had sanctioned. The wound was bound up then. It was never healed. Today it bursts.",
       },
       {
         speaker: "narrator",
         text:
-          "Humbert wheels at the door and sees you — a stranger in foreign garb, plainly Western yet standing among the Greeks. His eyes narrow.",
+          "Pope Leo IX is dying in Italy this very week — though his legates do not yet know it, which means the authority they carry has, in truth, already lapsed. The patriarchate of Constantinople under Michael Cerularius holds an uneasy, bristling peace with Rome. Then a Roman legate strides into the Liturgy itself, parchment in hand, his boots loud on the marble.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Cardinal Humbert lays the parchment upon the altar of Hagia Sophia, in the very midst of the offering: a bull of excommunication against the Patriarch. He turns on his heel and sweeps toward the doors, shouting in Latin: 'Let God see and judge!' The Greek deacons stand frozen. One stoops, lifts the parchment, reads it — and falls to his knees.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "There — the act itself. The trigger of it all is one small phrase added to the Symbol of Faith: Filioque, 'and the Son.' Rome confesses that the Holy Spirit proceeds from the Father AND the Son. The East confesses, with the Council that wrote the Creed, that He proceeds from the Father. And Rome claims authority to add to a Creed the Councils forbade any man to touch.",
+      },
+      {
+        speaker: "you",
+        text: "A single word, in a prayer most men recite without thinking. Can a syllable truly divide the Church?",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "It is not the syllable, $you — it is what stands behind it. Who may speak for the whole Church? The East answers: the bishops gathered in Council, the Pope first among equals in honor. The West now answers: the Pope alone, by his own authority, even over a Council. There are lesser quarrels too — unleavened bread, the marriage of priests — but THIS is the root: the addition, and the claim to a power to make it.",
+      },
+      {
+        speaker: "you",
+        text: "And the East and West never settled it together, in Council, the way Nicaea settled Arius?",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "That is the tragedy, child. The seven great Councils were called WHILE East and West still met as one. After today they will not gather so again. There will be no eighth Council that both halves of Christendom receive — only Rome's councils for the West and the East's for itself. The schism is not merely a quarrel; it is the silencing of the one voice that could end the quarrel.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Humbert checks his stride at the great doors and sees you — a stranger in foreign garb, plainly a Westerner, yet standing among the Greeks. His eyes narrow to slits.",
       },
       {
         speaker: "humbert",
         text:
-          "You! Greek! Defend your heretical refusal of the Filioque! The Spirit proceeds from the Father AND the Son — every wise theologian knows it!",
+          "You! A Latin face among these stubborn Greeks! Defend, then, their heretical refusal of the Filioque! The Spirit proceeds from the Father AND the Son — Augustine taught it, the schools of Rome teach it, every wise theologian in Christendom knows it. Or are you, too, a schismatic?",
       },
     ],
     boss: {
@@ -2324,14 +2457,37 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
-        speaker: "st-mark-ephesus",
+        speaker: "narrator",
         text:
-          "I will see this same dispute again, four centuries hence, at Florence. The truth does not change. Hold firm.",
+          "Humbert's certainty cracks. He looks down at the bull still lying on the altar, then at the kneeling deacon weeping over it, and for the first time something like doubt crosses his face. Without another word he gathers his legation and is gone. The great doors boom shut behind him.",
+      },
+      {
+        speaker: "you",
+        text: "He has withdrawn — but the parchment is still on the altar. Nothing is mended. Did I win anything at all?",
       },
       {
         speaker: "st-anthony",
         text:
-          "The schism deepens. To Florence — where one bishop will stand alone for all of us.",
+          "You held the Symbol unaltered before a hardened man, and you planted a doubt in him. But no, child — the day is not undone. Cerularius will burn the bull and excommunicate the legates in return. The Church of East and West will not break clean today, but break it will, and centuries will pass before either side speaks of healing.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "From the shadow of a porphyry column, a thin monk you have not seen before steps forward — hollow-eyed from fasting, dressed plainly, his gaze fixed on you across four hundred years.",
+      },
+      {
+        speaker: "st-mark-ephesus",
+        text:
+          "I am Mark — of Ephesus, of an age not yet born. I will see this same dispute again, four centuries hence, in a great hall in Florence, when an emperor begs and a pope demands and every bishop but one signs the word away. The truth does not change with the century. Hold firm, $you. I shall need you there.",
+      },
+      {
+        speaker: "you",
+        text: "Then the wound torn today is the wound you will be asked to seal with a lie?",
+      },
+      {
+        speaker: "st-mark-ephesus",
+        text:
+          "Just so. And I will not seal it. Come — take this stole, the epitrachelion, the yoke the priest wears to bind sinners loose. Wear the memory of this day under it. The schism deepens. To Florence.",
       },
     ],
     reward: { xp: 1, item: "epitrachelion", healHp: true },
@@ -2352,42 +2508,74 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Florence, June 1439. The Byzantine Empire has hours to live; the Sultan's armies are at the walls of Constantinople. The Emperor John VIII has come west — pleading. The Pope has him over a barrel: sign for union, or die.",
+          "Florence, July 1439. The marble of the Duomo gleams; Italy is rich, fed, at peace. But the men who matter here came from a dying city. The Byzantine Empire has barely a decade to live; the Ottoman armies press ever closer to the walls of Constantinople, and only Latin ships and Latin soldiers can hold them back.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "The Emperor John VIII Palaiologos has crossed the sea to beg for that help — and the price of it is union. After centuries of schism, the Greeks have come to Italy to reconcile with Rome. But reconciliation, the Latins have made plain, means submission: the Greeks must simply confess that Rome was right all along.",
       },
       {
         speaker: "st-anthony",
         text:
-          "$you. Truth is purchased here for ships and soldiers. The Emperor will pay it. Most of the bishops will pay it. One man will not. Watch him.",
+          "$you. Truth is purchased here for ships and soldiers, and the merchants are hungry. The Emperor will pay it — he must, or his city falls. Most of the bishops will pay it, worn down by months of hunger, exile, and fear far from home. One man will not. Watch him. Everything turns on him.",
       },
       {
-        speaker: "narrator",
-        text:
-          "The Greek bishops have signed, one by one, under pressure — bishops denied food, bishops threatened with loss of their sees. The Filioque accepted. Purgatory accepted. Azymes accepted. Papal supremacy accepted.",
-      },
-      {
-        speaker: "narrator",
-        text:
-          "Only one bishop refuses. He is forty-six years old, thin, hollow-eyed from fasting. The Pope sent for him last night and offered him a cardinal's hat. He returned the offer untouched.",
-      },
-      {
-        speaker: "st-mark-ephesus",
-        text:
-          "I am Mark, of Ephesus. I have read every line of every Father on the Filioque. I will not sign. May God preserve me. May He preserve the Faith — though every other bishop in this hall has fled.",
-      },
-      {
-        speaker: "st-mark-ephesus",
-        text:
-          "$you, listen well. When this Council ends and we sail home, the people of Constantinople will see our signatures and TEAR THEM. The union will be void. But here, today, I must speak it — for them.",
+        speaker: "you",
+        text: "Then is he merely stubborn? If the city falls and the people die, will one bishop's pride have been worth it?",
       },
       {
         speaker: "st-anthony",
         text:
-          "Stand with him. The empires fall; the faith does not. 'Better the loss of all, than to deny one syllable of the holy doctrine.'",
+          "That is the very question the Pope will press upon you — and it is the sharpest blade in this hall. Listen to how the man answers it, $you, for it is not pride. It is the difference between saving a city by losing the Faith, and losing a city while keeping it. Decide now which of those is truly defeat.",
       },
       {
         speaker: "narrator",
         text:
-          "The Pope of Rome enters in red. Eugene IV — tall, intelligent, weary. The papacy is recovering from the conciliarist crisis. He must have THIS union to consolidate his throne. He has read the file on Mark.",
+          "The Greek bishops have signed, one by one, under months of pressure — bishops denied their stipends, bishops threatened with the loss of their sees, bishops simply desperate to sail home. The Filioque, accepted. Purgatory, accepted. Unleavened bread, accepted. The supremacy of the Pope of Rome, accepted.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Only one bishop refuses. He is forty-six years old, thin, hollow-eyed from fasting, the metropolitan of Ephesus and the finest theologian the Greeks have brought. The Pope sent for him last night and offered him a cardinal's hat to change his mind. He returned the offer untouched.",
+      },
+      {
+        speaker: "st-mark-ephesus",
+        text:
+          "We meet again, $you — and now in the flesh of my own age. I am Mark, of Ephesus. I have read every line of every Father on the procession of the Spirit; I have answered the Latins point by point for two years in this hall. And still they will have their word. I will not sign. May God preserve me. May He preserve the Faith — though every other bishop here has fled into it.",
+      },
+      {
+        speaker: "st-mark-ephesus",
+        text:
+          "$you, listen well. When this Council ends and we sail home, the people of Constantinople will see our signatures and TEAR THEM. The faithful will not commune with a unionist bishop; the monks of Athos will reject the decree outright. The union will be void on the day it lands. But here, today, in this hall, I must still speak the truth — for them, who cannot speak here.",
+      },
+      {
+        speaker: "you",
+        text: "Then why speak at all, if it will be undone the moment the decree leaves this room?",
+      },
+      {
+        speaker: "st-mark-ephesus",
+        text:
+          "Because someone must stand in the record, child. Centuries from now, men will open the acts of this Council and find that not every Greek bowed — that the Faith had a witness even here, even when an emperor's crown and a city's life were laid against it. A truth unspoken because it seemed futile is a truth betrayed.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Stand with him. The empires fall; the faith does not. 'Better the loss of all,' the Fathers say, 'than to deny one syllable of the holy doctrine.' Remember the catacombs, $you — those mourners who sang over their dead. They lost everything and kept Christ. So must you, here.",
+      },
+      {
+        speaker: "you",
+        text: "But how do I face a pope — the man half of Christendom calls the Vicar of Christ — and tell him to his face that he is wrong?",
+      },
+      {
+        speaker: "st-mark-ephesus",
+        text:
+          "Not with contempt, child, but with the Fathers. Honor the man; refuse the error. He will offer you mercy that is really fear, and necessity that is really a threat. Answer him with what cannot change — the Councils, the Scriptures, the unbroken witness — and let him do what he will.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "The Pope of Rome enters in white and red, attended by cardinals. Eugene IV — tall, intelligent, gray with weariness. He has only lately survived a council at Basel that tried to depose him; he MUST have this union with the Greeks to consolidate his shaken throne. His clerks have prepared a dossier on the troublesome Ephesian, and he has read every page.",
       },
       {
         speaker: "pope-eugene",
@@ -2628,14 +2816,33 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
+        speaker: "narrator",
+        text:
+          "Eugene's gaze drops to the great decree of union, with its long column of signatures. He runs his eye to the bottom, where one name should be and is not. 'Then,' he says quietly, 'we have done nothing.' The Latins called it the document that reunited the Church. The Greeks would soon call it the document no one signed who mattered.",
+      },
+      {
         speaker: "st-mark-ephesus",
         text:
-          "Today I have stood alone, but with the company of the Fathers. The signature of the others will not save Constantinople — but my refusal may save the Faith.",
+          "Today I have stood alone, but with the company of the Fathers. The signature of the others will not save Constantinople — the city will fall in fourteen years, and no Western army will come. But my refusal may save the Faith. When my brothers sail home, the people will not even let the unionist bishops serve. The union will die at the harbor.",
+      },
+      {
+        speaker: "you",
+        text: "They say a dying emperor begged you, and you would not yield. Did you never doubt that you might be the one in error — alone against them all?",
+      },
+      {
+        speaker: "st-mark-ephesus",
+        text:
+          "Every hour, child. But Athanasius, too, stood alone against the world, and the world was wrong. I do not trust my own stubbornness — I trust the Councils and the Fathers, who do not lie even when emperors weep. If they receive me in death, I am content to be received as he was.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Mark of Ephesus will die nine years from now. On his deathbed he will beg that no unionist bishop attend his funeral. The Orthodox will glorify him as a saint — the Pillar of Orthodoxy, the man who would not sign.",
       },
       {
         speaker: "st-anthony",
         text:
-          "Now the bleakest century. To Moscow, 1937. The Soviets. The Catacomb. The blood that endures.",
+          "You have learned the costliest lesson of all: that faithfulness is sometimes indistinguishable from defeat, until eternity sorts the two. Hold it close. Now the bleakest century awaits. To Moscow, 1937 — the Soviets, the cellars, the blood that endures. Take my hand.",
       },
     ],
     reward: { xp: 1, healHp: true },
@@ -2660,37 +2867,59 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "A man in gray uniform sits across the table, calm, almost kind. He has a wife and two daughters. He believes — sincerely — that he is building paradise on earth. He has signed three hundred and seven execution orders this month.",
+          "A man in a gray uniform sits across the table, calm, almost kind. He has a wife and two daughters at home and a photograph of them in his breast pocket. He believes — sincerely — that he is building paradise on earth, and that the old religion is the chief obstacle to it. He has signed three hundred and seven execution orders this month.",
       },
       {
         speaker: "st-anthony",
         text:
-          "In this year alone, eighty thousand Russian Orthodox will be executed. Bishops shot in cellars. Priests buried alive. Many of them you have walked among — Patriarch Tikhon, Hilarion of Troitsky, the Royal Family, Mother Maria of Paris.",
+          "In this year alone, $you, some eighty thousand Orthodox Christians will be shot in Russia. Bishops killed in cellars like this one. Priests drowned, buried alive, worked to death in the snow of the far north. The dynamite has already brought down the great Cathedral of Christ the Saviour in Moscow; the bells of a thousand churches have been melted for coin.",
+      },
+      {
+        speaker: "you",
+        text: "Twenty years ago the Tsar reigned and Russia was called Holy. How could a whole Christian nation come to THIS in a single lifetime?",
       },
       {
         speaker: "st-anthony",
         text:
-          "But also — Fr. Arseny in the Camp of Death. Mother Matrona praying in her hiding-place. Sergei Bulgakov writing theology in exile. The Church does not die when its bishops are killed; it goes underground and grows.",
+          "Because faith that is merely inherited is not yet tested, child — and an age came that tested it to the root. The Revolution promised heaven without God, and the men who built it learned quickly that the God they had denied was the one rival they could not abide. So they set out to erase Him. And they have learned, as Decius learned, that the Church does not erase.",
       },
       {
         speaker: "st-anthony",
         text:
-          "You will not survive this chapter with words alone. You must learn that some questions are not answered with argument but with blood. And yet — you must speak the truth as long as you can.",
+          "You have walked among the witnesses already, though you did not know them: Patriarch Tikhon, who blessed his executioners; Hilarion of Troitsky, dying in the camp of the Solovki islands; the Royal Family in their cellar at Ekaterinburg; Mother Maria of Paris, who will give her own place in the gas chamber to another. And the hidden ones — Father Arseny in the camp of death, the blind Saint Matrona praying in her corner.",
+      },
+      {
+        speaker: "you",
+        text: "And the man across the table — does he hate Christ, the way the centurion did, the way Decius did?",
       },
       {
         speaker: "st-anthony",
         text:
-          "The Captain wants you to denounce a priest, a friend, a name. Anything that proves cooperation. Anything that 'just gets you home.' Do not give it.",
+          "No, $you — and that is what makes him a man of his century. He does not hate God; he believes he has outgrown Him. He thinks he is being kind, dragging the people up out of superstition into the daylight of science and the State. The lions roared; this man will reason with you, softly, and offer you your life. The reasonable executioner is a colder thing than the cruel one.",
+      },
+      {
+        speaker: "you",
+        text: "If they killed the bishops and burned the churches, then what is left of the Church to defend?",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Everything that matters. The Church does not die when its bishops are killed; it goes underground, into the catacombs again, and grows. You will not win this chapter with clever words, $you. You must learn the hardest truth of all: that some questions are not answered with argument but with blood — and that the answer can still be spoken, as long as breath remains.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Hear me closely. The Captain does not truly want your soul tonight. He wants a NAME — a priest, a friend, anyone — a signature that proves you have cooperated, that 'just gets you home.' That signature is the libellus of this age. Do not give it. To name another to that table is to deny Christ in him.",
       },
       {
         speaker: "narrator",
         text:
-          "The door opens behind you. Two guards take their positions. Captain Pavlov gestures to the chair across from him.",
+          "The door opens behind you. Two guards take their positions against the wall. A single bulb sways and steadies. Captain Pavlov gestures, almost courteously, to the chair across the bare table.",
       },
       {
         speaker: "nkvd",
         text:
-          "Sit down, comrade. I am Captain Pavlov. You have been arrested for anti-revolutionary religious activity. Let us have a calm conversation. Confess, and you live.",
+          "Sit down, comrade. I am Captain Pavlov. You have been arrested for anti-revolutionary religious activity — a serious charge, but not, perhaps, beyond mending. Let us have a calm conversation, you and I. I have a family; you have a mother. Confess what I need, and you live. It is very simple.",
       },
     ],
     boss: {
@@ -2925,14 +3154,33 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
+        speaker: "nkvd",
+        text:
+          "Take him away. ...No. Wait. I have broken professors and generals and bishops at this table, and they all, in the end, were afraid. You are not. I find I cannot make you afraid, and I do not understand it. ...Take him.",
+      },
+      {
         speaker: "narrator",
         text:
-          "You are led from the cell. The light behind you closes. In the truck, in the labor camp, in the snow — you remember the verses you spoke and you do not unsay them.",
+          "You are led from the cell. The door closes on the swaying light behind you. In the truck, in the freight car, in the labor camp at the edge of the white silence — you remember the verses you spoke, and the name you would not give, and you do not unsay them.",
+      },
+      {
+        speaker: "you",
+        text: "I gave no name. But I am being driven into the snow to die, and the Captain goes home to his daughters. What was won here?",
       },
       {
         speaker: "st-anthony",
         text:
-          "Eighty thousand confessors of your faith died in this year of grace. You walked among them. Now — back to your own time. The hardest chapter of all.",
+          "A soul kept whole, child. And perhaps a second — for the man who 'cannot make you afraid' will think on you for the rest of his life. The blood of the martyrs is seed; it does not water only the ground that the martyr can see. Some of those Pavlovs end their days secretly baptized.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Across this one year, eighty thousand confessors of the faith are killed for refusing to do what you refused. They are not forgotten. The Church will glorify them in their thousands as the New Martyrs of Russia, and the cellars where they died will become altars.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "You walked among them and did not break. Now — back to your own time, $you, and to the strangest battlefield of all. The lions are gone and the cellars are empty, but the war is not over. It has only grown quiet. The hardest chapter is the one you live in. Come.",
       },
     ],
     reward: { xp: 1, healHp: true },
@@ -2952,12 +3200,12 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "You wake. Light through cheap curtains. Your phone, your coffee maker. The book is on your nightstand, where you left it. But everything is DIFFERENT now.",
+          "You wake. Light through cheap curtains. Your phone, your coffee maker, the hum of traffic below. The black leather book with the three-bar cross sits on your nightstand, exactly where you left it. And yet nothing is the same. You have been gone for centuries and home for no time at all.",
       },
       {
         speaker: "narrator",
         text:
-          "You can still hear St. Ignatius in chains, still smell the desert under Macarius's feet, still see Mark of Ephesus refusing to sign. They walk with you now. The 'cloud of witnesses' is no longer a Sunday-school phrase.",
+          "You can still hear St. Ignatius's chains scraping the road to Rome, still feel the grit of Macarius's desert between your teeth, still see Mark of Ephesus's hollow eyes refusing the pen at Florence. They walk with you now. 'The great cloud of witnesses' is no longer a phrase from a Sunday-school felt-board. You have met them.",
       },
       {
         speaker: "st-anthony",
@@ -2967,22 +3215,40 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "st-anthony",
         text:
-          "Now comes the test you came for: defending the faith in the AGE YOU LIVE IN. The persecutions are less bloody but more subtle — the air itself is unbelief. Three encounters await you today. Three voices speaking what your neighbors believe.",
+          "Now comes the test you came for: defending the faith in the AGE YOU LIVE IN. The persecutions are less bloody but more subtle — no centurion, no NKVD captain, only the air itself, which has quietly forgotten God. In Pavlov's day a man had to be DRAGGED from the faith. In yours, men drift from it without ever noticing they have moved.",
+      },
+      {
+        speaker: "you",
+        text: "That sounds almost gentler than the lions and the cellars.",
       },
       {
         speaker: "st-anthony",
         text:
-          "Be ready always to give an account for the hope that is in you — but with meekness and reverence (1 Peter 3:15). The world does not need debaters; it needs SAINTS who can answer.",
+          "It is far more dangerous, child. The martyr knows he is in a battle. Your neighbors do not. They will not threaten you — they will simply find your faith quaint, or offer you a brighter, easier version of it. Three voices will come to you today, each sincere, each speaking what millions believe. None of them hates Christ. That is what makes them hard.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Be ready always to give an account for the hope that is in you — but with meekness and reverence (1 Peter 3:15). Note the meekness, $you. The world does not need another debater who must win. It needs a SAINT who can answer, and still love the one he answers. Win the argument and lose the soul, and you have lost.",
+      },
+      {
+        speaker: "you",
+        text: "Then where do I even begin with people who already think they have the answer?",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Begin where you began with the centurion — by taking them seriously. The first voice today claims that the whole Church you have just walked through, from Ignatius to the New Martyrs, FELL into total darkness, and had to be started over from scratch eighteen centuries late. You have stood in that 'darkness.' You know better than any living scholar that it never went out. Let them tell their story; then tell them what you have seen.",
       },
       {
         speaker: "narrator",
         text:
-          "There is a knock at the door. Through the peephole: two young men in white shirts and ties, holding small books.",
+          "Morning light. There is a knock at the door — bright, practiced, hopeful. Through the peephole: two young men, perhaps nineteen, in crisp white shirts and dark ties, black nametags on their breasts, small blue books in their hands. They have walked a long way and been turned away at a hundred doors.",
       },
       {
         speaker: "lds",
         text:
-          "Good morning! I'm Elder Williams. May we share with you a message about Jesus Christ and the restoration of His true Church?",
+          "Good morning! I'm Elder Williams, and this is Elder Park. We're missionaries for the Church of Jesus Christ of Latter-day Saints. May we share with you a message about Jesus Christ and the restoration of His true Church?",
       },
     ],
     boss: {
@@ -3186,19 +3452,38 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
-        speaker: "st-anthony",
+        speaker: "lds",
         text:
-          "He left with a question in his mind. That is more than many missionaries leave with. You spoke well, $you.",
+          "I... thank you. Most people just close the door. You actually knew our history — better than I expected. I don't have an answer for some of what you said. I'll look at the essays on the Church's own website tonight. Maybe we can talk again.",
       },
       {
         speaker: "narrator",
         text:
-          "Your phone buzzes. A friend wants coffee. She brings someone — a divinity student. The next encounter has begun.",
+          "The two young men walk back down the path, heads close together, talking low. Elder Park glances back once at your door. Whatever else happened, the practiced script did not run as usual today.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "He left with a question lodged in his mind — and a question is a crack through which light can enter. That is more than most doors give those boys. You did not crush him; you answered him and let him keep his dignity. That is the whole art, $you.",
+      },
+      {
+        speaker: "you",
+        text: "He seemed so certain — and so kind. I almost felt cruel correcting him.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Kindness without truth is not kindness, child; it merely leaves a man comfortable in error. You gave him both. Now — the next voice comes, and it will be harder, for it springs from within Christianity itself. Rest a moment. Then answer the door of your heart again.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "Your phone buzzes. A friend wants coffee in an hour, and she is bringing someone she thinks you should meet — a seminarian, sharp and devout, who heard you were 'turning Orthodox' and has opinions. The next encounter has begun.",
       },
       {
         speaker: "reformed",
         text:
-          "Wait, you're going Orthodox? That's the church with all the icons and the smells, right? Don't you know sola scriptura?",
+          "Wait — you're going Orthodox? That's the church with all the icons and the incense, right? The one that prays to Mary? Don't tell me you've forgotten sola scriptura. We have to talk.",
       },
     ],
     reward: { xp: 1, healHp: true },
@@ -3218,27 +3503,50 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Coffee mugs. Hardwood tables. The smell of espresso and old book pages. A young woman with cropped hair and intelligent eyes sits across from you. A copy of Calvin's Institutes on the chair beside her, two highlighters tucked in.",
+          "Coffee mugs and the hiss of the espresso machine. Hardwood tables, the smell of roasted beans and old book-pages. Mid-afternoon light slants across a young woman with cropped hair and quick, intelligent eyes. A worn copy of Calvin's Institutes rests on the chair beside her, two highlighters and a flurry of sticky tabs poking from the pages.",
+      },
+      {
+        speaker: "you",
+        text: "She is already reading something. She looks like she came prepared for a fight.",
       },
       {
         speaker: "narrator",
         text:
-          "Sarah Kelley. PCA seminarian. She has been a Christian her whole life — devout, serious, prayerful. She lost a sister to cancer at sixteen and prayed her way through it. She is not the enemy.",
+          "Sarah Kelley. A seminarian in the Presbyterian Church in America — confessional, Reformed, the daughter and granddaughter of pastors. She has been a Christian her whole life: devout, serious, up at six every morning with her Bible and a notebook. She lost a younger sister to leukemia at sixteen and prayed her way through the grave, and her faith came out of it harder and brighter, not broken. She is not the enemy.",
       },
       {
         speaker: "st-anthony",
         text:
-          "$you. Be GENTLE. She loves Christ. Her categories differ — sola scriptura, sola fide, sola gratia — but the heart is open. Listen first; correct without crushing.",
+          "$you. Be GENTLE here — more gentle than with the missionary, for this one is your own kin in Christ. She loves the Lord truly. She knows her Bible better than most priests. Her categories differ from ours — sola scriptura, sola fide, sola gratia, the five solas of the Reformation — but they were forged against real abuses, and there is honesty in them. Listen first. Correct without crushing.",
+      },
+      {
+        speaker: "you",
+        text: "If she already loves Christ and reads the Scriptures, what is even left to disagree about?",
       },
       {
         speaker: "st-anthony",
         text:
-          "The danger in this conversation is not losing the argument. It is winning it and losing the person. Speak the truth in love (Eph 4:15).",
+          "The deepest things, child — though they wear quiet names. Where does the Church's authority finally rest: in the Book alone, or in the living Body that gave us the Book and tells us which writings ARE Scripture? Is salvation a courtroom verdict declared over us, or a healing that we must live into? She inherited her answers from the sixteenth century. You will offer her the answers of the first.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "And mark this above all: the danger in this conversation is not losing the argument. It is winning it and losing the person. A defeated Protestant who feels humiliated walks away from Christ, not toward Him. Speak the truth in love (Ephesians 4:15) — and mean both words equally.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Remember, $you: she stands in a true protest against real sins — indulgences sold for coin, a piety grown mechanical, the Word buried under abuse. The Reformers were RIGHT to be angry. Where they erred was the cure: they cut away fifteen centuries to reach the first, not knowing the first century is preserved IN those fifteen. Honor her protest. Then show her the Church the Reformers never saw — the one older than the abuses.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "She sets down her latte, slides Calvin's Institutes off the chair so you can sit, and folds her hands on the table with the calm of someone who has had this conversation a dozen times and never lost.",
       },
       {
         speaker: "reformed",
         text:
-          "Look, I respect the Eastern tradition, but the Reformation recovered the Gospel. We are saved by GRACE THROUGH FAITH — not by sacraments, not by veneration of saints. Scripture alone.",
+          "Look — I genuinely respect the Eastern tradition. The history, the beauty, I get the appeal. But the Reformation recovered the GOSPEL. We are saved by grace alone, through faith alone — not by sacraments, not by venerating saints, not by a Church hierarchy standing between us and God. Scripture alone is the rule. Show me where the Bible teaches what you're about to defend.",
       },
     ],
     boss: {
@@ -3443,19 +3751,38 @@ const BASE_CHAPTERS: Chapter[] = [
     },
     outro: [
       {
-        speaker: "st-anthony",
+        speaker: "reformed",
         text:
-          "She is honest. She will read what you suggested. Some come slowly to the Church and arrive more deeply than those who came easily.",
+          "OK. OK. I came in here pretty sure I'd be the one explaining things. I didn't know the early Church Fathers said... half of that. I'm not converting over a latte. But — I want to read 1 Clement this week. And the letters of Ignatius. Can we do this again?",
       },
       {
         speaker: "narrator",
         text:
-          "You leave the coffee shop. Your phone buzzes again. A Discord ping. Your old roommate from college, Alex, the philosophy major, the atheist.",
+          "She is already typing the titles into her phone, brow furrowed. The certainty she walked in with has not collapsed, but it has made room — a small, honest space where a question can grow.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "She is honest, $you, and honesty is the soil the Church grows in. She will read what you gave her, and 1 Clement — written while apostles' disciples still lived — will not say what she expects. Some come slowly to the Church, fighting every step, and arrive more deeply rooted than those who came easily.",
+      },
+      {
+        speaker: "you",
+        text: "I wanted to press harder. I had three more answers ready.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "And you were right to hold them. You do not have to win every point in one sitting; you have to keep the door open for the next. A soul is not argued into the Church in an afternoon — it is loved and reasoned toward it over years. You planted; God gives the growth.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "You leave the coffee shop into the cool of late afternoon. Your phone buzzes again — a Discord ping this time. Alex Chen, your old college roommate: the philosophy major, the software engineer, the one who reads Nietzsche for fun. The atheist.",
       },
       {
         speaker: "atheist",
         text:
-          "Saw your post. Orthodox? Seriously? Religion in 2026? Auschwitz. The pandemic. The problem of evil. Defend yourself.",
+          "saw your post. Orthodox?? seriously?? religion, in 2026, after everything? Auschwitz. the pandemic. kids with cancer. you used to be the smart one. call tonight. defend yourself.",
       },
     ],
     reward: { xp: 1, healHp: true },
@@ -3475,27 +3802,50 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Two a.m. Your apartment. Headphones on. The Discord call has been going for three hours. Alex Chen — old college friend, software engineer, brilliant. His dad was Catholic; his mom was Buddhist; he is neither.",
+          "Two a.m. Your apartment, lit only by the glow of the monitor. Headphones on. The Discord call has been going for three hours and shows no sign of ending. Alex Chen — old college roommate, now a software engineer, genuinely brilliant, the kind of mind that took apart every comforting thing you believed at nineteen and handed you the pieces.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Look at how far you have come, $you. Once this man's questions would have left you stammering. You have stood in the council halls where the Church learned to think; you have seen the martyrs answer with their blood. The arguments that frightened you at nineteen are small things now. But do not grow proud — pride is the doubt's own doorway.",
       },
       {
         speaker: "narrator",
         text:
-          "He has read Dawkins, Harris, Hitchens, and beyond — also Nietzsche, also Camus. He is not a dabbler. He is also not unkind. The respect is real, in both directions.",
+          "He has read Dawkins, Harris, Hitchens — and gone past them, into Nietzsche and Camus, the atheists who at least took the abyss seriously. He is not a dabbler with a meme. He is also not unkind. You have stayed up like this with him before, years ago, in a dorm room. The respect runs both ways and it is real.",
       },
       {
         speaker: "st-anthony",
         text:
-          "He has the most painful question last on his list: his sister attempted suicide in college. He prayed for her. She survived. He thanks medication, not God. The wound is fresh.",
+          "Listen to me before he begins, $you. He keeps his sharpest wound for last and disguises it as an argument. In college his sister tried to take her own life. He prayed — actually prayed, the only time he ever has — and she lived. He thanks the medication and the doctors, not God. The grief is still raw under the philosophy. Whatever you say about suffering tonight, you are speaking to that.",
+      },
+      {
+        speaker: "you",
+        text: "Then he is not really asking me to win a debate.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "No. He is asking whether the universe heard him that night. Hold that beneath every clever thing he says. The arguments are real and you must meet them — but the man behind them is bleeding. Do not answer the question and miss the person.",
       },
       {
         speaker: "atheist",
         text:
-          "I'm not trying to be a jerk. I genuinely don't get it. A good and all-powerful God would not allow the Holocaust. So either He's not good or He's not all-powerful.",
+          "Look, I'm not trying to be a jerk about this. I genuinely don't get it. A good and all-powerful God would not allow the Holocaust. He could stop it. He didn't. So either He's not good, or He's not all-powerful, or He's not there. Pick one. That's not snark — that's just logic.",
       },
       {
         speaker: "st-anthony",
         text:
-          "This is the deepest question of the modern world. Do not answer it with cleverness. Answer it from your own life — and from the Cross. The Cross IS the answer.",
+          "This is the deepest question of the age you live in, $you, and it has driven more souls from God than all the persecutions combined. Do not answer it with cleverness — he has heard every clever answer and they made him angrier. Answer it from your own life, and from the Cross. The Cross is not God's excuse for suffering. It is God climbing INTO it. That is the answer.",
+      },
+      {
+        speaker: "you",
+        text: "He'll have ten more questions ready behind that one. Science, the Crusades, the resurrection, hell. He always did.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Then answer them one by one, patiently, through the long hours of the night — but never lose the thread back to that prayer he prayed for his sister. Every argument tonight is really circling that one wound. Meet the arguments honestly; aim everything, in the end, at the wound. Now — he is waiting. Speak.",
       },
     ],
     boss: {
@@ -3730,12 +4080,35 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "atheist",
         text:
-          "Coffee next week. I'll bring the questions. You bring the patience.",
+          "...It's almost five. I should sleep. Look — I'm not converting tonight, don't get excited. But this is the longest I've ever talked about God without getting angry and hanging up. You didn't try to fix me. That's new.",
+      },
+      {
+        speaker: "you",
+        text: "I wasn't trying to fix you. I was trying to tell you the truth, and stay your friend while I did it.",
+      },
+      {
+        speaker: "atheist",
+        text:
+          "Yeah. I noticed. ...Hey. When I prayed for my sister, that night — you really think Someone was in the room? ...Forget it. Coffee next week. I'll bring the questions. You bring the patience.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "The call ends. The little green dot beside his name winks out. Outside your window the sky is going gray toward dawn. You realize you are praying for him before you have decided to.",
       },
       {
         speaker: "st-anthony",
         text:
-          "One conversation. One soul. This is the kingdom growing. And now — one final battle remains.",
+          "One conversation. One soul, cracked open just wide enough for grace. You did not convert him, $you — that is not yours to do. You loved him and told him the truth, and you left the rest to God. This is exactly how the Kingdom grew in the catacombs, and how it grows still.",
+      },
+      {
+        speaker: "you",
+        text: "Three encounters in one day, and not one of them ended in surrender. It feels unfinished.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Faithfulness usually does, child. But there is one enemy you have not yet faced — the one who waits in the silence after everyone has gone home and the arguments are spent. He has your face. To the final battle.",
       },
     ],
     reward: { xp: 1, healHp: true },
@@ -3755,42 +4128,74 @@ const BASE_CHAPTERS: Chapter[] = [
       {
         speaker: "narrator",
         text:
-          "Three in the morning. You cannot sleep. You sit on the floor of your room, in front of your icon corner. The Theotokos looks at you. The lampada burns low.",
+          "Three in the morning. You cannot sleep. You have given up trying. You sit on the bare floor of your room, in front of the little icon corner you built last month. The Theotokos looks at you out of the dark wood. The flame of the lampada has burned down to a bead of light, trembling.",
       },
       {
         speaker: "narrator",
         text:
-          "You have done everything they asked. You answered the centurion. You stood against Arius, Eutyches, Constantine the Iconoclast. You did not sign with the Greek bishops at Florence. You did not denounce a friend to the NKVD.",
+          "Outside, the city sleeps. No knock at the door, no Discord ping, no missionary, no captain. Just the hum of the refrigerator and the weight of the hour. The book is closed on the nightstand. The journey, it seems, is over.",
       },
       {
         speaker: "narrator",
         text:
-          "And yet — here, alone, at three a.m., the silence is loud. You realize you have one enemy left. The hardest one. Not a heretic. Not an emperor. Not a tempter. Yourself.",
+          "You have done everything they asked of you. You answered the centurion on the road to Rome. You stood against Arius, against Eutyches, against Constantine the Iconoclast risen from the grave. You refused to sign with the frightened bishops at Florence. You gave no name to the NKVD. You met the missionary, the seminarian, the atheist, and you held your ground with each.",
+      },
+      {
+        speaker: "narrator",
+        text:
+          "And yet — here, alone, at three in the morning, the silence is louder than any of them. And you understand, with a cold certainty, that there was always one enemy left. The hardest one. Not a heretic. Not an emperor. Not even the tempter in Macarius's cave. Yourself.",
       },
       {
         speaker: "st-anthony",
         text:
-          "Every soul that follows Christ comes to this room. The desert fathers called it acedia. The mystics called it the dark night. Modernity calls it depression and unbelief. It is not new. But it is yours now.",
+          "Every soul that follows Christ comes, sooner or later, to this room. The desert fathers I taught called it acedia — the noonday demon, the listlessness that whispers that none of it was ever real. The mystics called it the dark night of the soul. Your own age calls it depression, or simply unbelief. It is not new, child. But it is yours now, and you must walk through it.",
+      },
+      {
+        speaker: "you",
+        text: "But I won every battle. I gave the right answers. Why does it feel like nothing — like I made all of it up to be less alone?",
       },
       {
         speaker: "st-anthony",
         text:
-          "I cannot help you here. This battle is yours alone. But know — you carry all the saints with you. They prayed for the one who would come. They are praying NOW. Macarius, Ignatius, Athanasius, Cyril, John Damascene, Mark, the New Martyrs. Listen.",
+          "Because the deepest doubt does not come when you are losing. It comes after the victory, in the quiet, when the feeling drains away and only the bare choice remains. Saint Antony — my own self, the first of the desert — was assaulted by demons most fiercely not in his weakness but at the height of his prayer. This is the same battle. You are in good company.",
+      },
+      {
+        speaker: "you",
+        text: "Then tell me what to do. Give me the argument, the proof, the answer that ends it.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "There is no argument that ends this one, child — that is precisely why it is last. I cannot fight it for you; no saint can. This battle is yours alone. But hear me: you do not enter it alone. You carry all of them with you — Ignatius in his chains, Macarius in his cave, Athanasius against the world, Cyril, John of Damascus, Mark who would not sign, the eighty thousand who died in the cellars. They prayed for the one who would come after them. They are praying for you NOW. Listen for them.",
       },
       {
         speaker: "narrator",
         text:
-          "And in the corner of the room, where the shadow always pools, the shadow speaks. And it has your face. It speaks with your voice. It uses your memories.",
+          "The lampada gutters. And in the corner of the room where the shadow always pools, the shadow gathers itself, leans forward — and speaks. It has your face. It speaks in your own voice. It knows your memories, because they are yours.",
       },
       {
         speaker: "doubt",
         text:
-          "$you. I am all the doubts you've ever had. I am every late-night question. I have watched you these past weeks. I know exactly where you are weak.",
+          "$you. There you are. I'm not a demon with horns — you're too clever for that. I'm just you, at three in the morning, with no one watching and nothing left to prove. I am every late-night question you've ever swallowed. I've been with you the whole way. And I know exactly where you are weak.",
+      },
+      {
+        speaker: "you",
+        text: "You sound exactly like me. How am I supposed to fight something that wears my own face and uses my own voice?",
       },
       {
         speaker: "st-anthony",
         text:
-          "Pray the Jesus Prayer. Lord Jesus Christ, Son of God, have mercy on me. Even — especially — when you do not feel it.",
+          "You do not fight it as you fought Arius or the iconoclast, child — with the right answer that defeats the wrong one. Some of what it says will even be TRUE: you are weak, you will fall again, you cannot prove all of it. The lie is not in the facts. The lie is in the conclusion it draws from them: that therefore you should stop. Refuse the conclusion, not the facts.",
+      },
+      {
+        speaker: "doubt",
+        text:
+          "He's stalling. He knows I'm right. Ask yourself honestly — when did you last FEEL God? Not think about Him. Feel Him. The silence is the only honest thing in this room.",
+      },
+      {
+        speaker: "st-anthony",
+        text:
+          "Do not argue with it on its own ground; it will always have one more question. Pray. The Jesus Prayer — Lord Jesus Christ, Son of God, have mercy on me, a sinner. Pray it even when the words feel hollow. Especially then. Now stand, $you. This is the last adversary.",
       },
     ],
     boss: {

@@ -142,7 +142,8 @@ export default function CharacterCreate({
                   {PORTRAITS[patron.id] && (
                     <Portrait
                       config={PORTRAITS[patron.id]}
-                      size={180}
+                      size={340}
+                      fullBody
                       idle
                     />
                   )}
