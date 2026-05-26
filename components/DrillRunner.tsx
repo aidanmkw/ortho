@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { QAItem, Citation } from "@/lib/types";
 import { getScriptureText } from "@/lib/bible-text";
 import { getCitationQuote } from "@/lib/citation-text";
+import { isSaved, toggleSaved } from "@/lib/commonplace";
 import { useProgress } from "./ProgressProvider";
 
 type Props = {
@@ -700,9 +701,41 @@ function CitationItem({ c }: { c: Citation }) {
     !c.quote && (getScriptureText(c.scripture ?? "") || getScriptureText(c.source));
   const patristic = !c.quote && !verse && getCitationQuote(c.source);
 
+  const bodyText =
+    c.quote ?? (verse ? verse.text : patristic ? patristic.text : undefined);
+  const [saved, setSaved] = useState(false);
+  useEffect(() => {
+    setSaved(isSaved(c.source));
+  }, [c.source]);
+
+  function toggle() {
+    const now = toggleSaved({
+      key: c.source,
+      source: c.source,
+      text: bodyText,
+      scripture: c.scripture,
+    });
+    setSaved(now);
+  }
+
   return (
     <li className="text-sm">
-      <div className="text-gold">{c.source}</div>
+      <div className="flex items-start justify-between gap-2">
+        <div className="text-gold">{c.source}</div>
+        {bodyText && (
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={saved ? "Remove from Commonplace Book" : "Save to Commonplace Book"}
+            title={saved ? "Saved to Commonplace Book" : "Save to Commonplace Book"}
+            className={`shrink-0 text-base leading-none transition ${
+              saved ? "text-gold" : "text-parchment/30 hover:text-gold/70"
+            }`}
+          >
+            {saved ? "★" : "☆"}
+          </button>
+        )}
+      </div>
       {c.scripture && c.scripture !== c.source && (
         <div className="text-xs text-parchment/60">{c.scripture}</div>
       )}
