@@ -183,6 +183,15 @@ export default function HubScene() {
         <p className="text-parchment/60 text-[11px] sm:text-xs italic">
           Tap an object in the room to begin.
         </p>
+        <button
+          type="button"
+          onClick={() =>
+            window.dispatchEvent(new Event("open-devotional"))
+          }
+          className="mt-1 text-[11px] sm:text-xs text-gold/80 hover:text-gold underline-offset-2 hover:underline"
+        >
+          ✛ Today&rsquo;s Devotional
+        </button>
       </div>
 
       {/* First-time tutorial overlay — dismissible scrim with the legend */}

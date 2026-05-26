@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ProgressProvider } from "@/components/ProgressProvider";
 import RankUpBanner from "@/components/RankUpBanner";
 import ChantController from "@/components/ChantController";
+import DailyDevotional from "@/components/DailyDevotional";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body>
         <ProgressProvider>
         <RankUpBanner />
+        <DailyDevotional />
         <div className="min-h-screen">
           <header className="border-b border-gold/20 sticky top-0 z-30 bg-[#0c0a08]/95 backdrop-blur">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3">
