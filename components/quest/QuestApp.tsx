@@ -121,7 +121,45 @@ export default function QuestApp() {
   }
 
   function onIntroComplete() {
+    if (!chapter) return;
+    // Lesson chapters have no boss — the teaching IS the chapter. Grant the
+    // reward and go straight to the outro.
+    if (!chapter.boss) {
+      grantChapterReward();
+      sfx.levelUp();
+      setScene("outro");
+      return;
+    }
     setScene("battle");
+  }
+
+  // Apply a chapter's reward to the hero and mark it complete. Shared by the
+  // battle-victory path and the lesson path.
+  function grantChapterReward() {
+    if (!chapter) return;
+    const newHero = { ...(progress.hero as HeroState) };
+    newHero.level += chapter.reward.xp;
+    newHero.xp += chapter.reward.xp;
+    newHero.rank = rankForLevel(newHero.level);
+    if (chapter.reward.item) {
+      const item = getItem(chapter.reward.item);
+      if (item && !newHero.items.includes(item.id)) {
+        newHero.items.push(item.id);
+        if (item.maxHpBonus) newHero.maxHp += item.maxHpBonus;
+        if (item.maxFaithBonus) newHero.maxFaith += item.maxFaithBonus;
+      }
+    }
+    if (chapter.reward.healHp) {
+      newHero.hp = newHero.maxHp;
+      newHero.faith = newHero.maxFaith;
+    }
+    persist({
+      ...progress,
+      hero: newHero,
+      chaptersBeaten: progress.chaptersBeaten.includes(chapter.id)
+        ? progress.chaptersBeaten
+        : [...progress.chaptersBeaten, chapter.id],
+    });
   }
 
   function mergeAttackStates(
@@ -160,7 +198,7 @@ export default function QuestApp() {
     const updatedStates = mergeAttackStates(progress.attackStates, resolved);
     setLastResolved(resolved);
     setLastOutcome(result);
-    setLastBossName(chapter.boss.name);
+    setLastBossName(chapter.boss?.name ?? "");
     if (result === "victory") {
       persist({
         ...progress,
@@ -186,30 +224,7 @@ export default function QuestApp() {
   function onReviewComplete() {
     if (!chapter) return;
     if (lastOutcome === "victory") {
-      // Apply reward + go to outro
-      const newHero = { ...(progress.hero as HeroState) };
-      newHero.level += chapter.reward.xp;
-      newHero.xp += chapter.reward.xp;
-      newHero.rank = rankForLevel(newHero.level);
-      if (chapter.reward.item) {
-        const item = getItem(chapter.reward.item);
-        if (item && !newHero.items.includes(item.id)) {
-          newHero.items.push(item.id);
-          if (item.maxHpBonus) newHero.maxHp += item.maxHpBonus;
-          if (item.maxFaithBonus) newHero.maxFaith += item.maxFaithBonus;
-        }
-      }
-      if (chapter.reward.healHp) {
-        newHero.hp = newHero.maxHp;
-        newHero.faith = newHero.maxFaith;
-      }
-      persist({
-        ...progress,
-        hero: newHero,
-        chaptersBeaten: progress.chaptersBeaten.includes(chapter.id)
-          ? progress.chaptersBeaten
-          : [...progress.chaptersBeaten, chapter.id],
-      });
+      grantChapterReward();
       setScene("outro");
     } else {
       // Retry battle
@@ -224,7 +239,7 @@ export default function QuestApp() {
   function onSparringSelect(t: SparringTarget) {
     if (t.kind === "chapter") {
       const ch = CHAPTERS.find((c) => c.id === t.chapterId);
-      if (ch) {
+      if (ch && ch.boss) {
         setSparringBoss({ ...ch.boss });
         setLastBossName(ch.boss.name);
         setScene("sparring-battle");
@@ -388,7 +403,7 @@ export default function QuestApp() {
         />
       )}
 
-      {scene === "battle" && chapter && progress.hero && (
+      {scene === "battle" && chapter && chapter.boss && progress.hero && (
         <BattleScene
           boss={chapter.boss}
           bossSpriteId={chapter.boss.sprite}
@@ -508,7 +523,7 @@ function ChapterCard({
                 idle
               />
               <div className="font-pixel text-[9px] text-gold/80">
-                ALLY:{" "}
+                {chapter.boss ? "ALLY:" : "TEACHER:"}{" "}
                 <span className="text-parchment">
                   {PORTRAITS[chapter.ally].name ??
                     chapter.ally.replace("st-", "St. ").replace(/-/g, " ")}
@@ -539,7 +554,7 @@ function ChapterCard({
         </PixelFrame>
 
         <PixelButton variant="primary" onClick={onContinue} className="w-full">
-          Begin Chapter ▶
+          {chapter.boss ? "Begin Chapter ▶" : "Sit and Learn ▶"}
         </PixelButton>
       </div>
     </div>

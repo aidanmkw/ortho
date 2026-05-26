@@ -21,7 +21,9 @@ export default function SparringHall({
   onBack: () => void;
 }) {
   const beatenIds = new Set(progress.chaptersBeaten);
-  const beatenChapters = CHAPTERS.filter((c) => beatenIds.has(c.id));
+  // Only battle chapters can be re-fought in the Sparring Hall (lessons have
+  // no boss).
+  const beatenChapters = CHAPTERS.filter((c) => c.boss && beatenIds.has(c.id));
 
   // Compute mistake count from attackStates
   const attackStates = progress.attackStates ?? {};
@@ -154,7 +156,8 @@ export default function SparringHall({
         ) : (
           <div className="space-y-2">
             {beatenChapters.map((c) => {
-              const portrait = PORTRAITS[c.boss.sprite];
+              const boss = c.boss!;
+              const portrait = PORTRAITS[boss.sprite];
               return (
                 <button
                   key={c.id}
@@ -175,10 +178,10 @@ export default function SparringHall({
                         Ch. {c.number} · {c.era}
                       </div>
                       <div className="font-pixel text-parchment text-[11px] mt-0.5">
-                        {c.boss.name}
+                        {boss.name}
                       </div>
                       <div className="font-pixel text-parchment/60 text-[9px] italic">
-                        {c.boss.title}
+                        {boss.title}
                       </div>
                     </div>
                     <div className="text-gold text-xl flex-shrink-0">→</div>
@@ -200,11 +203,11 @@ export default function SparringHall({
 /** Build a synthetic Skirmish boss from a sampled set of attacks. */
 export function buildSkirmishBoss(progress: QuestProgress): Boss | null {
   const beatenIds = new Set(progress.chaptersBeaten);
-  const sourceChapters = CHAPTERS.filter((c) => beatenIds.has(c.id));
+  const sourceChapters = CHAPTERS.filter((c) => c.boss && beatenIds.has(c.id));
   if (sourceChapters.length === 0) return null;
 
   // Pool all attacks from beaten bosses
-  const pool: BossAttack[] = sourceChapters.flatMap((c) => c.boss.attacks);
+  const pool: BossAttack[] = sourceChapters.flatMap((c) => c.boss!.attacks);
   // Shuffle and take up to 10
   const arr = [...pool];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -241,8 +244,8 @@ export function buildMistakesBoss(progress: QuestProgress): Boss | null {
   // Look up the BossAttack objects from chapters
   const lookups: BossAttack[] = [];
   for (const s of wrong) {
-    const ch = CHAPTERS.find((c) => c.boss.id === s.bossId);
-    if (!ch) continue;
+    const ch = CHAPTERS.find((c) => c.boss && c.boss.id === s.bossId);
+    if (!ch || !ch.boss) continue;
     const att = ch.boss.attacks[s.attackIdx];
     if (att) lookups.push(att);
   }

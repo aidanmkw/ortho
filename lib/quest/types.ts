@@ -97,12 +97,15 @@ export type Chapter = {
   title: string;
   // Background palette / motif id
   background: string;
+  // "battle" (default) = intro → boss fight → outro.
+  // "lesson" = a no-combat catechesis: intro (the teaching) → outro, no boss.
+  kind?: "battle" | "lesson";
   // Patron saint allied with the player this chapter.
   ally?: string;
   // Story before battle
   intro: DialogLine[];
-  // Boss
-  boss: Boss;
+  // Boss — omitted for "lesson" chapters.
+  boss?: Boss;
   // Story after battle
   outro: DialogLine[];
   // Reward
