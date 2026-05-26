@@ -1,5 +1,8 @@
 import type { Chapter } from "./types";
 import { EXPANSION_CHAPTERS } from "@/content/quest/expansion";
+import { EXPANSION_CHAPTERS_2 } from "@/content/quest/expansion-2";
+import { EXPANSION_CHAPTERS_3 } from "@/content/quest/expansion-3";
+import { EXPANSION_CHAPTERS_4 } from "@/content/quest/expansion-4";
 
 // Each chapter: setting + 2-6 narrative dialog lines + boss with 3-5 attacks +
 // outro + reward. Speaker IDs match sprite ids in lib/quest/sprites.ts.
@@ -3878,37 +3881,53 @@ const BASE_CHAPTERS: Chapter[] = [
 // Assemble the full campaign in chronological order, weaving the expansion
 // chapters between the original arc, then renumber for display. Progression is
 // by array index, so order here IS the play order.
+const ALL_SOURCES: Chapter[] = [
+  ...BASE_CHAPTERS,
+  ...EXPANSION_CHAPTERS,
+  ...EXPANSION_CHAPTERS_2,
+  ...EXPANSION_CHAPTERS_3,
+  ...EXPANSION_CHAPTERS_4,
+];
+
 function byId(id: string): Chapter {
-  const found =
-    BASE_CHAPTERS.find((c) => c.id === id) ??
-    EXPANSION_CHAPTERS.find((c) => c.id === id);
+  const found = ALL_SOURCES.find((c) => c.id === id);
   if (!found) throw new Error(`chapter not found: ${id}`);
   return found;
 }
 
 const CHRONOLOGICAL_ORDER: string[] = [
-  "ch1-antioch", //          AD 107
-  "ch101-polycarp", //       AD 155
-  "ch102-justin", //         AD 165
-  "ch2-catacombs", //        AD 250
-  "ch3-nicaea", //           AD 325
-  "ch4-desert", //           AD 360
-  "ch103-cappadocians", //   AD 381
-  "ch104-chrysostom", //     AD 404
-  "ch105-ephesus", //        AD 431
-  "ch5-chalcedon", //        AD 451
-  "ch106-maximus", //        AD 662
-  "ch6-icons", //            AD 787
-  "ch107-cyril-methodius", // AD 867
-  "ch108-photios", //        AD 879
-  "ch109-rus", //            AD 988
-  "ch7-schism", //           AD 1054
-  "ch8-florence", //         AD 1439
-  "ch9-soviets", //          AD 1937
-  "ch10-modern", //          present
-  "ch10b-reformed", //       present
-  "ch10c-atheist", //        present
-  "ch11-doubt", //           beyond time (finale)
+  "ch1-antioch", //            AD 107
+  "ch101-polycarp", //         AD 155
+  "ch102-justin", //           AD 165
+  "ch2-catacombs", //          AD 250
+  "ch3-nicaea", //             AD 325
+  "ch4-desert", //             AD 360
+  "ch103-cappadocians", //     AD 381
+  "ch104-chrysostom", //       AD 404
+  "ch105-ephesus", //          AD 431
+  "ch5-chalcedon", //          AD 451
+  "ch201-constantinople-ii", // AD 553
+  "ch106-maximus", //          AD 662
+  "ch202-john-damascus", //    AD 730
+  "ch6-icons", //              AD 787
+  "ch107-cyril-methodius", //  AD 867
+  "ch108-photios", //          AD 879
+  "ch109-rus", //              AD 988
+  "ch203-symeon", //           AD 1000
+  "ch7-schism", //             AD 1054
+  "ch301-fourth-crusade", //   AD 1204
+  "ch302-sava-serbia", //      AD 1219
+  "ch303-palamas", //          AD 1341–1351
+  "ch8-florence", //           AD 1439
+  "ch401-cosmas", //           AD 1779
+  "ch402-seraphim", //         AD 1831
+  "ch404-optina", //           AD 1878
+  "ch9-soviets", //            AD 1937
+  "ch403-silouan", //          AD 1938
+  "ch10-modern", //            present
+  "ch10b-reformed", //         present
+  "ch10c-atheist", //          present
+  "ch11-doubt", //             beyond time (finale)
 ];
 
 export const CHAPTERS: Chapter[] = CHRONOLOGICAL_ORDER.map((id, i) => ({
