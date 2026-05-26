@@ -224,6 +224,12 @@ export default function HubScene() {
           >
             ★ Commonplace Book
           </Link>
+          <Link
+            href="/reliquary"
+            className="text-[11px] sm:text-xs text-gold/80 hover:text-gold no-underline underline-offset-2 hover:underline"
+          >
+            ✦ Reliquary
+          </Link>
         </div>
       </div>
 

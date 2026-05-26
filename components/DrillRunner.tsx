@@ -6,15 +6,23 @@ import type { QAItem, Citation } from "@/lib/types";
 import { getScriptureText } from "@/lib/bible-text";
 import { getCitationQuote } from "@/lib/citation-text";
 import { isSaved, toggleSaved } from "@/lib/commonplace";
+import { rollReward, collectReward, type Reward } from "@/lib/collection";
 import { useProgress } from "./ProgressProvider";
 
 type Props = {
   items: QAItem[];
   stageTitle: string;
   topicTitle?: string;
+  // When set, completing the run rolls a collectible reward (Daily Trial).
+  rewardSeed?: string;
 };
 
-export default function DrillRunner({ items, stageTitle, topicTitle }: Props) {
+export default function DrillRunner({
+  items,
+  stageTitle,
+  topicTitle,
+  rewardSeed,
+}: Props) {
   const { record, progress } = useProgress();
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
@@ -106,6 +114,7 @@ export default function DrillRunner({ items, stageTitle, topicTitle }: Props) {
         xpThisRun={xpThisRun}
         totalXp={progress.xp}
         onRestart={restart}
+        rewardSeed={rewardSeed}
       />
     );
   }
@@ -486,13 +495,28 @@ function SummaryScreen({
   xpThisRun,
   totalXp,
   onRestart,
+  rewardSeed,
 }: {
   attempted: number;
   correct: number;
   xpThisRun: number;
   totalXp: number;
   onRestart: () => void;
+  rewardSeed?: string;
 }) {
+  const [reward, setReward] = useState<{
+    reward: Reward;
+    isNew: boolean;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!rewardSeed) return;
+    // Roll once per run; seed includes attempt count so a re-drill can differ.
+    const r = rollReward(`${rewardSeed}:${attempted}:${correct}`);
+    setReward(collectReward(r));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const pct = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
   let verdict = "Continue with humility — keep drilling.";
   if (pct === 100) verdict = "Worthy! The Fathers themselves would smile.";
@@ -518,6 +542,40 @@ function SummaryScreen({
         <div className="text-xs text-parchment/60 mb-6">
           Total XP: <span className="text-gold">{totalXp.toLocaleString()}</span>
         </div>
+
+        {reward && (
+          <div
+            className={`max-w-md mx-auto mb-6 rounded-lg border-2 p-4 text-left ${
+              reward.reward.rarity === "rare"
+                ? "border-gold bg-gradient-to-br from-[#1a1408] to-[#0c0a08]"
+                : "border-byzantine/70 bg-gradient-to-br from-[#1a1024] to-[#0c0a08]"
+            }`}
+          >
+            <div className="text-[10px] uppercase tracking-[0.3em] text-gold/80 mb-1">
+              {reward.reward.rarity === "rare" ? "✦ A Relic!" : "A Saying"}
+              {reward.isNew ? " · new" : " · you have this"}
+            </div>
+            <div className="font-display text-lg text-parchment">
+              {reward.reward.title}
+            </div>
+            <p className="text-parchment/85 text-sm italic mt-1 leading-relaxed">
+              {reward.reward.kind === "saying" ? "“" : ""}
+              {reward.reward.text}
+              {reward.reward.kind === "saying" ? "”" : ""}
+            </p>
+            {reward.reward.source && (
+              <div className="text-xs text-gold/70 mt-1">
+                — {reward.reward.source}
+              </div>
+            )}
+            <Link
+              href="/reliquary"
+              className="inline-block mt-3 text-xs text-gold/80 hover:text-gold no-underline"
+            >
+              ✦ Open the Reliquary →
+            </Link>
+          </div>
+        )}
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button

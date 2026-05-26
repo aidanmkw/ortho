@@ -31,6 +31,7 @@ export default function DailyPage() {
         items={items}
         stageTitle="Daily Trial"
         topicTitle={day}
+        rewardSeed={`daily:${day}`}
       />
     </div>
   );
