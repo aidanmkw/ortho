@@ -56,6 +56,9 @@ export type BossAttack = {
   difficulty: 1 | 2 | 3 | 4 | 5;
   // Boss flavor when this attack is used.
   taunt?: string;
+  // When this attack was drawn from a live corpus item, its id — so answering
+  // it in battle records to the spaced-repetition scheduler (battling = study).
+  itemId?: string;
 };
 
 export type Boss = {

@@ -11,6 +11,9 @@ import { getPatron } from "@/lib/quest/patrons";
 import { getItem } from "@/lib/quest/items";
 import { sfx } from "@/lib/quest/sfx";
 import { PORTRAITS, playerPortraitConfig } from "@/lib/quest/portraits";
+import { withLiveAttacks } from "@/lib/quest/liveBattle";
+import { useProgress } from "../ProgressProvider";
+import type { Difficulty } from "@/lib/types";
 import Portrait from "./Portrait";
 import {
   PixelFrame,
@@ -71,6 +74,16 @@ export default function BattleScene({
   onAbort,
 }: Props) {
   const patron = getPatron(initialHero.patronId);
+  const { progress: studyProgress, record } = useProgress();
+
+  // Story battles draw live MCQ attacks from the study corpus, prioritized by
+  // the player's spaced-repetition state, so each fight is real practice.
+  // Sandbox/sparring bosses are already corpus-built, so leave them as-is.
+  const attacks = useMemo(
+    () => (sandbox ? boss.attacks : withLiveAttacks(boss, studyProgress).attacks),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [boss.id, sandbox]
+  );
 
   const [hero, setHero] = useState<HeroState>(initialHero);
   const [bossHp, setBossHp] = useState(boss.maxHp);
@@ -114,9 +127,9 @@ export default function BattleScene({
   }, [initialHero.items, patron]);
 
   const attack: BossAttack | null = useMemo(() => {
-    if (boss.attacks.length === 0) return null;
-    return boss.attacks[attackIdx % boss.attacks.length];
-  }, [boss.attacks, attackIdx]);
+    if (attacks.length === 0) return null;
+    return attacks[attackIdx % attacks.length];
+  }, [attacks, attackIdx]);
 
   // Shuffle options when entering an attack
   useEffect(() => {
@@ -276,8 +289,18 @@ export default function BattleScene({
     if (!attack) return;
     const opt = attack.options[originalIdx];
     const correctOpt = attack.options.find((o) => o.correct);
+
+    // Feed the spaced-repetition scheduler when this was a live corpus item.
+    if (attack.itemId && !sandbox) {
+      record(
+        attack.itemId,
+        attack.difficulty as Difficulty,
+        opt.correct ? "correct" : "wrong"
+      );
+    }
+
     resolvedRef.current.push({
-      attackIdx: attackIdx % boss.attacks.length,
+      attackIdx: attackIdx % attacks.length,
       bossId: boss.id,
       pickedOptionText: opt.text,
       pickedCorrect: opt.correct,
