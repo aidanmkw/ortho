@@ -391,6 +391,32 @@ export const PORTRAITS: Record<string, PortraitConfig> = {
     name: "The Doubt",
     nameSubscript: "Your Own Shadow",
   },
+
+  // --- Dedicated cast: resident saints (full-body sprites in /sprites) ---
+  // SVG fields are unused for these (image renders); kept valid for the type.
+  polycarp: { image: "polycarp.webp", skin: "light", hairStyle: "short", hairColor: "white", beard: "very-long", headwear: "halo", vestment: "bishop-white", name: "St. Polycarp", nameSubscript: "of Smyrna" },
+  "justin-martyr": { image: "justin-martyr.webp", skin: "light", hairStyle: "short", hairColor: "brown", beard: "short", headwear: "halo", vestment: "toga-white", name: "St. Justin", nameSubscript: "the Philosopher" },
+  "basil-great": { image: "basil-great.webp", skin: "light", hairStyle: "short", hairColor: "black", beard: "long", headwear: "halo", vestment: "bishop-white", name: "St. Basil the Great" },
+  chrysostom: { image: "chrysostom.webp", skin: "light", hairStyle: "short", hairColor: "brown", beard: "short", headwear: "halo", vestment: "bishop-white", name: "St. John Chrysostom" },
+  "maximus-confessor": { image: "maximus-confessor.webp", skin: "light", hairStyle: "short", hairColor: "gray", beard: "long", headwear: "halo", vestment: "monk-black", name: "St. Maximus", nameSubscript: "the Confessor" },
+  "cyril-methodius": { image: "cyril-methodius.webp", skin: "light", hairStyle: "short", hairColor: "brown", beard: "long", headwear: "halo", vestment: "monk-black", name: "Sts. Cyril & Methodius" },
+  photios: { image: "photios.webp", skin: "light", hairStyle: "short", hairColor: "black", beard: "long", headwear: "halo", vestment: "bishop-white", name: "St. Photios the Great" },
+  vladimir: { image: "vladimir.webp", skin: "light", hairStyle: "short", hairColor: "ginger", beard: "short", headwear: "halo", vestment: "imperial-purple", name: "St. Vladimir", nameSubscript: "of Kiev" },
+  "sava-serbia": { image: "sava-serbia.webp", skin: "light", hairStyle: "short", hairColor: "black", beard: "long", headwear: "halo", vestment: "bishop-white", name: "St. Sava", nameSubscript: "of Serbia" },
+  palamas: { image: "palamas.webp", skin: "light", hairStyle: "short", hairColor: "black", beard: "long", headwear: "halo", vestment: "bishop-white", name: "St. Gregory Palamas" },
+  "cosmas-aetolia": { image: "cosmas-aetolia.webp", skin: "light", hairStyle: "short", hairColor: "gray", beard: "long", headwear: "halo", vestment: "monk-black", name: "St. Cosmas", nameSubscript: "of Aetolia" },
+  "ambrose-optina": { image: "ambrose-optina.webp", skin: "light", hairStyle: "short", hairColor: "gray", beard: "long", headwear: "halo", vestment: "monk-black", name: "St. Ambrose of Optina" },
+  silouan: { image: "silouan.webp", skin: "light", hairStyle: "short", hairColor: "gray", beard: "long", headwear: "halo", vestment: "monk-black", name: "St. Silouan", nameSubscript: "the Athonite" },
+
+  // --- Dedicated cast: named antagonists (no halo) ---
+  nestorius: { image: "nestorius.webp", skin: "light", hairStyle: "short", hairColor: "black", beard: "short", headwear: "none", vestment: "bishop-crimson", name: "Nestorius" },
+  barlaam: { image: "barlaam.webp", skin: "light", hairStyle: "short", hairColor: "brown", beard: "short", headwear: "none", vestment: "modern-sweater", name: "Barlaam", nameSubscript: "the Calabrian" },
+  "crusader-knight": { image: "crusader-knight.webp", skin: "light", hairStyle: "short", hairColor: "brown", beard: "short", headwear: "none", vestment: "centurion", name: "Crusader Commander" },
+  "stephen-nicomedia": { image: "stephen-nicomedia.webp", skin: "light", hairStyle: "short", hairColor: "gray", beard: "short", headwear: "none", vestment: "modern-collared", name: "Stephen of Nicomedia" },
+  volkh: { image: "volkh.webp", skin: "tan", hairStyle: "long", hairColor: "gray", beard: "very-long", headwear: "none", vestment: "monk-brown", name: "Volkh", nameSubscript: "the Volkhv" },
+  "origenist-deacon": { image: "origenist-deacon.webp", skin: "light", hairStyle: "short", hairColor: "brown", beard: "short", headwear: "none", vestment: "deacon-purple", name: "The Origenist Deacon" },
+  "frankish-archpriest": { image: "frankish-archpriest.webp", skin: "light", hairStyle: "tonsure", hairColor: "brown", beard: "none", headwear: "none", vestment: "papal-white", name: "The Frankish Archpriest" },
+  "monothelite-examiner": { image: "monothelite-examiner.webp", skin: "tan", hairStyle: "short", hairColor: "black", beard: "short", headwear: "none", vestment: "imperial-purple", name: "The Imperial Examiner" },
 };
 
 // Player portrait config — hair color comes from save data.
