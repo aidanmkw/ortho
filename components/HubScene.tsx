@@ -150,6 +150,14 @@ export default function HubScene() {
               🔥 {progress.streakDays}-day streak
             </span>
           )}
+          {progress.freezesAvailable > 0 && (
+            <span
+              className="text-xs text-parchment/55"
+              title="Grace: a single missed day won't break your streak."
+            >
+              🕊 grace
+            </span>
+          )}
           {stats.mastered > 0 && (
             <span className="text-xs text-parchment/60 hidden sm:inline">
               · {stats.mastered} mastered

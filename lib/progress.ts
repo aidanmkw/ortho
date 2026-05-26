@@ -19,12 +19,18 @@ export type ItemRecord = {
 };
 
 export type ProgressState = {
-  version: 1;
+  version: 2;
   xp: number;
   rank: ApologistRank;
   streakDays: number;
   // ISO date of the last day on which the player did at least one item.
   lastActiveDay: string | null;
+  // Grace ("economia"): freezes that silently bridge a single missed day so a
+  // lapse doesn't shame the user into losing everything. One refills each
+  // calendar month, capped at 2.
+  freezesAvailable: number;
+  // "YYYY-MM" the freeze allotment was last refilled.
+  freezeMonth: string | null;
   items: Record<string, ItemRecord>;
 };
 
@@ -71,11 +77,13 @@ export function xpForCorrect(difficulty: Difficulty, isFirstTry: boolean) {
 
 export function emptyProgress(): ProgressState {
   return {
-    version: 1,
+    version: 2,
     xp: 0,
     rank: "Inquirer",
     streakDays: 0,
     lastActiveDay: null,
+    freezesAvailable: 1,
+    freezeMonth: null,
     items: {},
   };
 }
@@ -86,6 +94,10 @@ function todayKey(): string {
     2,
     "0"
   )}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function monthKey(dayKey: string): string {
+  return dayKey.slice(0, 7); // "YYYY-MM"
 }
 
 function daysBetween(a: string, b: string) {
@@ -153,10 +165,28 @@ export function recordResult(
   // Streak update — only when something was attempted today.
   let streakDays = state.streakDays;
   let lastActiveDay = state.lastActiveDay;
+  let freezesAvailable = state.freezesAvailable;
+  let freezeMonth = state.freezeMonth;
+
+  // Monthly economia: refill one grace freeze at the start of each new month.
+  const month = monthKey(today);
+  if (freezeMonth !== month) {
+    freezesAvailable = Math.min(2, freezesAvailable + 1);
+    freezeMonth = month;
+  }
+
   if (lastActiveDay !== today) {
     if (lastActiveDay) {
       const gap = daysBetween(lastActiveDay, today);
-      streakDays = gap === 1 ? streakDays + 1 : 1;
+      if (gap === 1) {
+        streakDays = streakDays + 1;
+      } else if (gap === 2 && freezesAvailable > 0) {
+        // Missed exactly one day — a grace freeze quietly bridges it.
+        freezesAvailable -= 1;
+        streakDays = streakDays + 1;
+      } else {
+        streakDays = 1;
+      }
     } else {
       streakDays = 1;
     }
@@ -169,6 +199,8 @@ export function recordResult(
     rank: rankForXp(xp),
     streakDays,
     lastActiveDay,
+    freezesAvailable,
+    freezeMonth,
     items: { ...state.items, [itemId]: updatedItem },
   };
 }
@@ -205,9 +237,19 @@ export function loadProgress(): ProgressState {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return emptyProgress();
-    const parsed = JSON.parse(raw) as ProgressState;
-    if (parsed.version !== 1) return emptyProgress();
-    return parsed;
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    const version = parsed.version;
+    // Migrate v1 → v2: add the grace-freeze fields, keep everything else.
+    if (version === 1) {
+      return {
+        ...(parsed as unknown as ProgressState),
+        version: 2,
+        freezesAvailable: 1,
+        freezeMonth: null,
+      };
+    }
+    if (version !== 2) return emptyProgress();
+    return parsed as unknown as ProgressState;
   } catch {
     return emptyProgress();
   }
