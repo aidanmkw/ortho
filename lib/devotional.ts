@@ -1,4 +1,5 @@
 import { saints, type SaintLife } from "./saints";
+import { FEAST_DEVOTIONALS } from "@/content/devotional/feasts";
 
 // A daily devotional assembled from content the app can stand behind:
 //   • the saint(s) the Church commemorates today (from the 254 lives)
@@ -24,6 +25,8 @@ export type DevotionalPrayer = {
 
 export type Devotional = {
   dateLabel: string;
+  feastTitle?: string;
+  reflection?: string;
   saints: SaintLife[];
   scripture: DevotionalScripture;
   fatherWord: { text: string; source: string };
@@ -227,7 +230,15 @@ export function getDevotional(d: Date = new Date()): Devotional {
 
   const todaysSaints = saintsForDate(d);
 
-  const scripture = SCRIPTURES[Math.floor(rng() * SCRIPTURES.length)];
+  // A Great Feast / major commemoration overrides the seeded reading.
+  const mmdd = `${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+    d.getDate()
+  ).padStart(2, "0")}`;
+  const feast = FEAST_DEVOTIONALS.find((f) => f.key === mmdd);
+
+  const scripture = feast
+    ? feast.scripture
+    : SCRIPTURES[Math.floor(rng() * SCRIPTURES.length)];
 
   // Prefer a quote from one of today's saints when available; else seeded pick.
   const saintWithQuote = todaysSaints.find((s) => s.quote && s.quote.text);
@@ -240,7 +251,9 @@ export function getDevotional(d: Date = new Date()): Devotional {
       }
     : FATHER_WORDS[Math.floor(rng() * FATHER_WORDS.length)];
 
-  const prayer = PRAYERS[Math.floor(rng() * PRAYERS.length)];
+  const prayer = feast
+    ? feast.troparion
+    : PRAYERS[Math.floor(rng() * PRAYERS.length)];
 
   const dateLabel = d.toLocaleDateString(undefined, {
     weekday: "long",
@@ -248,5 +261,13 @@ export function getDevotional(d: Date = new Date()): Devotional {
     day: "numeric",
   });
 
-  return { dateLabel, saints: todaysSaints, scripture, fatherWord, prayer };
+  return {
+    dateLabel,
+    feastTitle: feast?.title,
+    reflection: feast?.reflection,
+    saints: todaysSaints,
+    scripture,
+    fatherWord,
+    prayer,
+  };
 }

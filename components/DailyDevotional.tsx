@@ -47,17 +47,28 @@ export default function DailyDevotional() {
   const cards: { kicker: string; body: React.ReactNode }[] = [];
 
   cards.push({
-    kicker: "Daily Devotional",
+    kicker: devotional.feastTitle ? "Feast of the Church" : "Daily Devotional",
     body: (
       <div className="text-center">
         <div className="text-gold/90 font-display text-2xl sm:text-3xl mb-2">
           {devotional.dateLabel}
         </div>
-        <p className="text-parchment/70 text-sm">
-          {hasSaint
-            ? "Today the Church commemorates:"
-            : "A moment to read and pray before you begin."}
-        </p>
+        {devotional.feastTitle && (
+          <div className="font-display text-lg text-parchment mt-1 mb-2">
+            {devotional.feastTitle}
+          </div>
+        )}
+        {devotional.reflection ? (
+          <p className="text-parchment/85 text-sm leading-relaxed mt-2">
+            {devotional.reflection}
+          </p>
+        ) : (
+          <p className="text-parchment/70 text-sm">
+            {hasSaint
+              ? "Today the Church commemorates:"
+              : "A moment to read and pray before you begin."}
+          </p>
+        )}
         {hasSaint && (
           <div className="mt-3 space-y-1">
             {devotional.saints.map((s) => (
