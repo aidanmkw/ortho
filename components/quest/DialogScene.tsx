@@ -115,19 +115,21 @@ export default function DialogScene({
 
   return (
     <div
-      className="relative min-h-[100dvh] w-full flex flex-col"
+      className="relative h-[100dvh] w-full overflow-hidden"
       onClick={advance}
       role="button"
     >
       <PixelBackground id={background} />
 
-      {/* Speaker portrait area */}
-      <div className="relative z-10 flex-1 flex items-end justify-center pb-2 pt-12 px-4">
-        {!isNarrator && portraitConfig && (
+      {/* Speaker portrait — pinned to a fixed spot near the bottom so it never
+          moves as the dialog box grows with the typewriter text. */}
+      {!isNarrator && portraitConfig && (
+        <div
+          className="absolute left-0 right-0 z-10 flex justify-center pointer-events-none"
+          style={{ bottom: "27vh" }}
+        >
           <div
-            className={`flex flex-col items-center transition-transform ${
-              isPlayer ? "translate-x-[-15%]" : "translate-x-[15%]"
-            }`}
+            className={`${isPlayer ? "-translate-x-[12%]" : "translate-x-[12%]"}`}
           >
             <div className={`pixel-shadow-lg pixel-platform ${glowClass}`}>
               <Portrait
@@ -139,11 +141,12 @@ export default function DialogScene({
               />
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* Dialog box */}
-      <div className="relative z-20 p-3 sm:p-5">
+      {/* Dialog box — pinned to the bottom; grows upward over the sprite's
+          lower body without displacing it. */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 p-3 sm:p-5">
         <PixelFrame
           variant={
             isNarrator ? "void" : line.speaker.startsWith("st-") ? "good" : "default"
