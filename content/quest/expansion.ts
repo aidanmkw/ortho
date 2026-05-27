@@ -31,7 +31,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     location: "The Stadium of Smyrna",
     title: "Eighty-Six Years",
     background: "road-roman",
-    ally: "st-anthony",
+    ally: "polycarp",
     intro: [
       {
         speaker: "narrator",
@@ -71,15 +71,19 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "Polycarp lifts his head and looks slowly across the crowd. Then he raises his hand toward them — the howling, pagan mob — and says, 'Away with the atheists.' A ripple of confusion runs through the stands. He has turned their own word against them.",
+        text: "Polycarp lifts his head and looks slowly across the crowd. Then he raises his hand toward them — the howling, pagan mob.",
+      },
+      {
+        speaker: "polycarp",
+        text: "Away with the atheists.",
       },
       {
         speaker: "narrator",
-        text: "'Swear,' the proconsul presses, 'and I set you free. Reproach Christ.' The old man answers, and his voice is steady enough to carry to the highest tier.",
+        text: "A ripple of confusion runs through the stands. He has turned their own word against them. 'Swear,' the proconsul presses, 'and I set you free. Reproach Christ.' The old man answers, and his voice is steady enough to carry to the highest tier.",
       },
       {
-        speaker: "narrator",
-        text: "'Eighty and six years have I served Him, and He has done me no wrong. How then can I blaspheme my King who saved me?'",
+        speaker: "polycarp",
+        text: "Eighty and six years have I served Him, and He has done me no wrong. How then can I blaspheme my King who saved me?",
       },
       {
         speaker: "you",
@@ -182,7 +186,15 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "They bound the old man to the stake, but he asked not to be nailed: 'Leave me thus. He who gives me strength to endure the fire will grant me to remain in the flames unmoved.' He lifted his eyes and gave thanks, as over a chalice, that he was counted worthy to share the cup of the martyrs.",
+        text: "They bound the old man to the stake, but he asked not to be nailed. He spoke once more before the fire was lit.",
+      },
+      {
+        speaker: "polycarp",
+        text: "Leave me thus. He who gives me strength to endure the fire will grant me to remain in the flames unmoved.",
+      },
+      {
+        speaker: "narrator",
+        text: "He lifted his eyes and gave thanks, as over a chalice, that he was counted worthy to share the cup of the martyrs.",
       },
       {
         speaker: "narrator",
@@ -223,7 +235,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     location: "Rome, the school above the baths of Timiotinus",
     title: "The Reasonable Worship",
     background: "road-roman",
-    ally: "st-anthony",
+    ally: "justin-martyr",
     intro: [
       {
         speaker: "narrator",
@@ -243,15 +255,19 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "Justin turns from his lectern, his pupils watching. 'I did not abandon philosophy when I found Christ,' he tells you. 'I found philosophy itself — the only sure and profitable one. So I keep the cloak. Let them see that a man may love wisdom and worship the Crucified, and that these are not two things but one.'",
+        text: "Justin turns from his lectern, his pupils watching, and fixes his gaze upon you.",
+      },
+      {
+        speaker: "justin-martyr",
+        text: "I did not abandon philosophy when I found Christ, $you. I found philosophy itself — the only sure and profitable one. So I keep the cloak. Let them see that a man may love wisdom and worship the Crucified, and that these are not two things but one.",
       },
       {
         speaker: "you",
         text: "But Rome surely sees Christians as the enemies of reason — atheists, you said, ignorant folk who meet in the dark.",
       },
       {
-        speaker: "narrator",
-        text: "'Which is why I write,' Justin says. 'I have sent an Apology to the Emperor himself, and a second to the Senate — open letters, signed in my own name, that any man may read. We do not babble in secret. I show them that whatever was nobly said by anyone belongs to us Christians, for the Word who became flesh in Jesus is the same Logos who scattered seeds of truth among the wise of every nation.'",
+        speaker: "justin-martyr",
+        text: "Which is why I write. I have sent an Apology to the Emperor himself, and a second to the Senate — open letters, signed in my own name, that any man may read. We do not babble in secret. I show them that whatever was nobly said by anyone belongs to us Christians, for the Word who became flesh in Jesus is the same Logos who scattered seeds of truth among the wise of every nation.",
       },
       {
         speaker: "st-anthony",
@@ -263,7 +279,11 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "'I answer them one by one,' Justin says, drawing a scroll from the shelf. 'They say we devour infants and quench our lamps for shameless deeds. So I describe our worship plainly: how on the day called Sunday we gather, hear the memoirs of the Apostles read aloud, give thanks over bread and a cup, and send a portion to the absent and the poor. Let Caesar read it, and judge whether such men are monsters.'",
+        text: "Justin draws a scroll from the shelf and unrolls it before you.",
+      },
+      {
+        speaker: "justin-martyr",
+        text: "I answer them one by one. They say we devour infants and quench our lamps for shameless deeds. So I describe our worship plainly: how on the day called Sunday we gather, hear the memoirs of the Apostles read aloud, give thanks over bread and a cup, and send a portion to the absent and the poor. Let Caesar read it, and judge whether such men are monsters.",
       },
       {
         speaker: "st-anthony",
@@ -338,7 +358,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
             "You meet at dawn, eat 'flesh and blood,' and call it thanksgiving. Rumor says you devour infants. What is this rite, really?",
           options: [
             {
-              text: "On the day called Sunday we gather; the president gives thanks over bread and a cup of wine and water, and this — which we call Eucharist — is the flesh and blood of the incarnate Jesus.",
+              text: "On the day called Sunday we gather; the presider (the bishop) gives thanks over bread and a cup of wine and water, and this — which we call Eucharist — is the flesh and blood of the incarnate Jesus.",
               correct: true,
               rationale:
                 "Justin's eyewitness description of the liturgy (First Apology 65–67): the earliest detailed account of the Sunday Eucharist, and a flat denial of the cannibalism slander.",
@@ -368,11 +388,15 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "Within a few short years Justin and six companions would be denounced — by Crescens, it was whispered — and dragged before the prefect Rusticus. 'What doctrines do you practice?' the prefect demanded. Justin answered plainly, and refused to sacrifice.",
+        text: "Within a few short years Justin and six companions would be denounced — by Crescens, it was whispered — and dragged before the prefect Rusticus. 'What doctrines do you practice?' the prefect demanded. Justin answered plainly, and refused to sacrifice. 'If you are scourged and beheaded,' Rusticus pressed, 'do you suppose you will ascend into heaven?'",
+      },
+      {
+        speaker: "justin-martyr",
+        text: "I do not suppose it — I know it, and am fully persuaded of it.",
       },
       {
         speaker: "narrator",
-        text: "'If you are scourged and beheaded,' Rusticus pressed, 'do you suppose you will ascend into heaven?' Justin replied: 'I do not suppose it — I know it, and am fully persuaded of it.' They were scourged and beheaded together.",
+        text: "They were scourged and beheaded together.",
       },
       {
         speaker: "you",
@@ -405,7 +429,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     location: "Second Ecumenical Council, Constantinople",
     title: "The Lord, the Giver of Life",
     background: "council-hall",
-    ally: "st-anthony",
+    ally: "basil-great",
     intro: [
       {
         speaker: "narrator",
@@ -416,20 +440,24 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
         text: "But Nicaea settled it! The Son is one in essence with the Father. How did the heresy come back?",
       },
       {
-        speaker: "st-athanasius",
-        text: "A word on parchment does not still a storm in men's hearts, $you. I — Athanasius — was exiled five times for that one word, homoousios. When I lay dying they said the world had become Arian and groaned to find itself so. But God raised up new champions after me: three from the rough hill-country of Cappadocia.",
+        speaker: "st-anthony",
+        text: "A word on parchment does not still a storm in men's hearts, $you. Athanasius was exiled five times for that one word, homoousios, and when he lay dying they said the world had become Arian and groaned to find itself so. But God raised up new champions after him: three from the rough hill-country of Cappadocia. Look there — the bishop rising to speak. Basil of Caesarea, whom they already call the Great.",
       },
       {
-        speaker: "st-athanasius",
-        text: "Basil the Great, who built the language of the Trinity stone by stone: one essence — ousia — in three persons — hypostases. His brother Gregory of Nyssa, deepest of mystics. And Gregory the Theologian, who with a voice like fire won this very city back to the faith, preaching in a house-chapel he called Anastasia — Resurrection — while the heretics held every cathedral.",
+        speaker: "narrator",
+        text: "A spare, austere bishop with a long dark beard rises among the assembly. His health is broken by years of fasting and toil, yet his voice carries the iron of a man who has stared down emperors.",
+      },
+      {
+        speaker: "basil-great",
+        text: "I have built the language of the Trinity stone by stone, $you: one essence — ousia — in three persons — hypostases. My own brother Gregory of Nyssa, deepest of mystics, labors beside me; and Gregory the Theologian, who with a voice like fire won this very city back to the faith, preaching in a house-chapel he called Anastasia — Resurrection — while the heretics held every cathedral.",
       },
       {
         speaker: "you",
         text: "A house-chapel? An archbishop preaching in a borrowed room while the heretics keep the great churches?",
       },
       {
-        speaker: "st-athanasius",
-        text: "So it was, $you. They stoned him in that little room, and a mob broke in upon him at the Pascha vigil. Yet from that one lamp the whole city took fire again. Mark it well: the truth is not measured by the size of the building that houses it, nor the heresy by the gold of its cathedral.",
+        speaker: "basil-great",
+        text: "So it was. They stoned him in that little room, and a mob broke in upon him at the Pascha vigil. Yet from that one lamp the whole city took fire again. Mark it well: the truth is not measured by the size of the building that houses it, nor the heresy by the gold of its cathedral.",
       },
       {
         speaker: "you",
@@ -448,8 +476,8 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
         text: "But why fight over a word that Scripture seems not to use? If the Bible does not plainly say 'the Spirit is God,' is the Church not adding to the deposit?",
       },
       {
-        speaker: "st-athanasius",
-        text: "Basil answered that very charge, $you, and was attacked for praying both ways — 'Glory to the Father WITH the Son and WITH the Holy Spirit,' and not only 'THROUGH the Son IN the Spirit.' The Pneumatomachi called the little word 'with' an innovation. But Basil showed it was the Church's prayer from the beginning: the Spirit is glorified WITH the Father and the Son, never beneath them. The Church does not add to the faith; she defends in new words what she has always believed.",
+        speaker: "basil-great",
+        text: "I have answered that very charge, $you, and was attacked for praying both ways — 'Glory to the Father WITH the Son and WITH the Holy Spirit,' and not only 'THROUGH the Son IN the Spirit.' The Pneumatomachi call the little word 'with' an innovation. But it is the Church's prayer from the beginning: the Spirit is glorified WITH the Father and the Son, never beneath them. The Church does not add to the faith; she defends in new words what she has always believed.",
       },
       {
         speaker: "you",
@@ -461,15 +489,15 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "A frail, brilliant man rises to preside over the Council — Gregory the Theologian himself, worn thin by sickness and by the long war for the city. The Cappadocians' fingerprints are on every line of the Creed now taking shape.",
+        text: "A frail, brilliant man rises to preside over the Council — Gregory the Theologian himself, worn thin by sickness and by the long war for the city. The Cappadocians' fingerprints are on every line of the Creed now taking shape. Basil turns to you and answers the charge that he stays silent on the bare word.",
       },
       {
-        speaker: "narrator",
-        text: "'They ask why I do not shout the bare word \"God\" of the Spirit on every page,' Gregory says quietly. 'Scripture unveils the Father, then the Son, then the Spirit — light added to light, as our weak eyes can bear it. We worship the Spirit who makes me bold to speak. If He is not God, let Him first make me divine — and then I shall fear no man.'",
+        speaker: "basil-great",
+        text: "They ask why we do not shout the bare word 'God' of the Spirit on every page. Scripture unveils the Father, then the Son, then the Spirit — light added to light, as our weak eyes can bear it. We worship the Spirit who makes us bold to speak. If He is not God, let Him first make us divine — and then we shall fear no man.",
       },
       {
         speaker: "st-anthony",
-        text: "Their leader comes now, a disciple of the arch-logician Eunomius — cold, precise, armed with airtight syllogisms. Hold to what Basil taught: the Spirit is glorified together with the Father and the Son. Speak, $you — the very Creed your people will confess every Sunday until the end of the world is being forged in this room.",
+        text: "Their leader comes now, a disciple of the arch-logician Eunomius — cold, precise, armed with airtight syllogisms. Hold to what Basil has taught: the Spirit is glorified together with the Father and the Son. Speak, $you — the very Creed your people will confess every Sunday until the end of the world is being forged in this room.",
       },
       {
         speaker: "arius",
@@ -567,7 +595,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
         text: "Word for word? Even now, sixteen centuries later?",
       },
       {
-        speaker: "st-athanasius",
+        speaker: "basil-great",
         text: "Word for word. Guard it so. Men will be tempted in ages to come to 'improve' it, to add a phrase here, a clause there. Resist them. What three hundred Fathers and the Spirit composed, let no single hand amend.",
       },
       {
@@ -579,7 +607,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
         text: "He gave up the greatest see in the East rather than quarrel? After he had won the whole city back?",
       },
       {
-        speaker: "st-athanasius",
+        speaker: "basil-great",
         text: "He counted peace dearer than the throne. 'If I am the cause of the storm,' he said, 'cast me into the sea, and the waters will grow calm.' That, $you, is the temper of a true shepherd: jealous for the faith, indifferent to the chair.",
       },
       {
@@ -601,7 +629,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     location: "The Patriarchal palace, Constantinople",
     title: "Glory to God for All Things",
     background: "hagia-sophia",
-    ally: "st-anthony",
+    ally: "chrysostom",
     intro: [
       {
         speaker: "narrator",
@@ -637,11 +665,15 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "John descends from the ambo, the crowd still murmuring. He turns to you, and there is no fear in his face at all. 'I have only ever feared one thing,' he says, 'and it is not exile, nor the sword, nor poverty, nor death. It is sin. Everything else is a shadow that passes.'",
+        text: "John descends from the ambo, the crowd still murmuring. He turns to you, and there is no fear in his face at all.",
       },
       {
-        speaker: "narrator",
-        text: "'Let them banish me,' he goes on. 'The earth is the Lord's and the fullness thereof. Let them saw me in two — Isaiah was sawn. Let them drown me — that was Jonah's road. The Church is not Eudoxia's; she is the bride of Christ, and no power on earth can take her from Him.'",
+        speaker: "chrysostom",
+        text: "I have only ever feared one thing, $you, and it is not exile, nor the sword, nor poverty, nor death. It is sin. Everything else is a shadow that passes.",
+      },
+      {
+        speaker: "chrysostom",
+        text: "Let them banish me — the earth is the Lord's and the fullness thereof. Let them saw me in two; Isaiah was sawn. Let them drown me; that was Jonah's road. The Church is not Eudoxia's. She is the bride of Christ, and no power on earth can take her from Him.",
       },
       {
         speaker: "you",
@@ -649,7 +681,11 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "st-anthony",
-        text: "He could flatter, as a hundred court-bishops have done, and keep his palace. But then the Gospel would belong to the powerful, and the poor at the gate would have no voice. He will not buy his comfort with their silence. 'What I preach,' he says, 'is not mine to soften — it is the Lord's, and the Lord does not flatter.'",
+        text: "He could flatter, as a hundred court-bishops have done, and keep his palace. But then the Gospel would belong to the powerful, and the poor at the gate would have no voice. He will not buy his comfort with their silence.",
+      },
+      {
+        speaker: "chrysostom",
+        text: "What I preach is not mine to soften — it is the Lord's, and the Lord does not flatter.",
       },
       {
         speaker: "st-anthony",
@@ -750,7 +786,15 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "There, knowing the end had come, he asked for white baptismal robes, received the holy Mysteries, and spoke the doxology he had taught a whole city to say in every sorrow: 'Glory to God for all things.' And so he died.",
+        text: "There, knowing the end had come, he asked for white baptismal robes, received the holy Mysteries, and spoke the doxology he had taught a whole city to say in every sorrow.",
+      },
+      {
+        speaker: "chrysostom",
+        text: "Glory to God for all things.",
+      },
+      {
+        speaker: "narrator",
+        text: "And so he died.",
       },
       {
         speaker: "you",
@@ -969,7 +1013,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     location: "A prison cell, Constantinople",
     title: "The Tongue and the Hand",
     background: "interrogation",
-    ally: "st-anthony",
+    ally: "maximus-confessor",
     intro: [
       {
         speaker: "narrator",
@@ -1005,11 +1049,15 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "The old monk speaks, his voice quiet but utterly without fear. 'They tell me the Roman see has signed it, the patriarchs have signed it. They ask why I alone hold out. But truth is not counted by heads. If the whole world should commune with the patriarch in this, I would not — for the Apostle anathematizes even an angel that preaches another gospel.'",
+        text: "The old monk lifts his head and speaks, his voice quiet but utterly without fear.",
       },
       {
-        speaker: "narrator",
-        text: "'In Gethsemane,' Maximus goes on, 'the Lord prayed, \"Let this cup pass — yet not my will, but Thine.\" Whose was the will that shrank, and then submitted? It was His own human will, real and entire, freely bowing to the divine. There — in that prayer — our broken willing was made whole. Take that human will from Christ, and you take away my salvation.'",
+        speaker: "maximus-confessor",
+        text: "They tell me the Roman see has signed it, the patriarchs have signed it. They ask why I alone hold out. But truth is not counted by heads. If the whole world should commune with the patriarch in this, I would not — for the Apostle anathematizes even an angel that preaches another gospel.",
+      },
+      {
+        speaker: "maximus-confessor",
+        text: "In Gethsemane the Lord prayed, 'Let this cup pass — yet not my will, but Thine.' Whose was the will that shrank, and then submitted? It was His own human will, real and entire, freely bowing to the divine. There — in that prayer — our broken willing was made whole. Take that human will from Christ, and you take away my salvation.",
       },
       {
         speaker: "you",
@@ -1017,7 +1065,11 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "The old monk shakes his head slowly. 'When God commands all men to confess and believe,' he says, 'silence in the hour of trial is itself a denial. They do not ask me to be still in my cell — they ask me to commune with those who teach the lie, and so to seem to teach it myself. The emperor's decree they call the Typos forbids all speech of one will or two. But a truth forbidden is a truth betrayed.'",
+        text: "The old monk shakes his head slowly.",
+      },
+      {
+        speaker: "maximus-confessor",
+        text: "When God commands all men to confess and believe, silence in the hour of trial is itself a denial. They do not ask me to be still in my cell — they ask me to commune with those who teach the lie, and so to seem to teach it myself. The emperor's decree they call the Typos forbids all speech of one will or two. But a truth forbidden is a truth betrayed.",
       },
       {
         speaker: "st-anthony",

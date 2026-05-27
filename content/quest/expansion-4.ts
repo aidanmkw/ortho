@@ -32,7 +32,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     location: "A village square in Ottoman Epirus, beneath a great plane tree",
     title: "The Wooden Cross and the Lamp",
     background: "desert",
-    ally: "st-anthony",
+    ally: "cosmas-aetolia",
     intro: [
       {
         speaker: "narrator",
@@ -56,15 +56,19 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "Cosmas raises a thin brown hand, and the murmur dies away. 'My brethren and my children,' he calls, 'I have left Athos and every comfort for love of you. Listen: build a school in every parish. Without letters the children walk in darkness, and a soul that does not know God is poorer than the beggar who sleeps at your gate.'",
+        text: "Cosmas raises a thin brown hand, and the murmur dies away. The whole square leans toward the bent little monk beside the wooden cross.",
+      },
+      {
+        speaker: "cosmas-aetolia",
+        text: "My brethren and my children, I have left Athos and every comfort for love of you. Listen to me: build a school in every parish. Without letters the children walk in darkness, and a soul that does not know God is poorer than the beggar who sleeps at your gate.",
       },
       {
         speaker: "narrator",
-        text: "An old woman near you weeps openly. A shepherd lifts his son onto his shoulders so the boy can see. The monk speaks of baptizing the unbaptized, of keeping the fasts, of frequent communion — of holding fast to Christ though the Sultan's tax-collectors take everything else.",
+        text: "An old woman near you weeps openly. A shepherd lifts his son onto his shoulders so the boy can see. The barefoot monk speaks on — of baptizing the unbaptized, of keeping the fasts, of holding fast to Christ though the Sultan's tax-collectors take everything else.",
       },
       {
-        speaker: "narrator",
-        text: "'My child,' Cosmas says to a trembling girl, 'guard your faith and your freedom as you guard your eyes. The Faith of Christ, my brethren, is sweeter than honey, more precious than gold. Better to lose your fields and your flocks than to lose your soul.'",
+        speaker: "cosmas-aetolia",
+        text: "My child, guard your faith and your freedom as you guard your own eyes. The Faith of Christ, my brethren, is sweeter than honey and more precious than gold. Better to lose your fields and your flocks than to lose your soul. Keep Christ, and you keep everything; lose Him, and though you gain the whole world you have nothing.",
       },
       {
         speaker: "you",
@@ -194,7 +198,11 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "Cosmas of Aetolia comes down from his stool and lays a worn hand upon your shoulder. 'Well spoken, my child. The wisdom of this world is foolishness before God. Seek the wisdom of God, and you will fear nothing under heaven — not even the rope.'",
+        text: "Cosmas of Aetolia comes down from his stool and lays a worn brown hand upon your shoulder.",
+      },
+      {
+        speaker: "cosmas-aetolia",
+        text: "Well spoken, my child. The wisdom of this world is foolishness before God; do not labor only for the letters and learning of this age, but for the wisdom of God. Seek that wisdom, and you will fear nothing under heaven — not the Sultan, not the tax-collector, not even the rope.",
       },
       {
         speaker: "st-anthony",
@@ -414,7 +422,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     location: "The mill of St. Panteleimon Monastery, Mount Athos",
     title: "Keep Thy Mind in Hell",
     background: "void",
-    ally: "st-anthony",
+    ally: "silouan",
     intro: [
       {
         speaker: "narrator",
@@ -438,14 +446,18 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "The monk looks up from his ledger and regards you with eyes that seem to grieve and rejoice at once. 'I was near to despair,' he says quietly, 'for the demons would not leave me, and I could not tell where God was. And the Lord said to me: Keep thy mind in hell, and despair not.'",
+        text: "The monk looks up from his ledger and regards you with eyes that seem to grieve and rejoice at once.",
+      },
+      {
+        speaker: "silouan",
+        text: "I was near to despair, my child, for the demons would not leave me, and I could not tell where God was. The proud spirit dragged me down, and the light was hidden. Then the Lord Himself said to me: Keep thy mind in hell, and despair not.",
       },
       {
         speaker: "you",
         text: "Keep thy mind in hell? That sounds like cruelty, Father — like a counsel of darkness.",
       },
       {
-        speaker: "st-silouan",
+        speaker: "silouan",
         text: "No, my child. It is this: do not flee the knowledge of your own nothingness, nor the world's. Stand in that hell of self-knowledge — and yet hope wholly in God. There the proud demon cannot follow you, for he can drive a man to despair, but he cannot endure to despair-not. The hope undoes him.",
       },
       {
@@ -453,7 +465,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "His disciple, the monk Sophrony, will write these words down one day and carry them to Paris and to England, and they will save many. But Silouan has a second teaching, harder still. Tell him, Father.",
       },
       {
-        speaker: "st-silouan",
+        speaker: "silouan",
         text: "He who does not love his enemies does not yet know God. I wept for years, even for those who hate the Lord — even for the demons who once tormented me, that they too might know His mercy. This is the sure sign of the Spirit of God: love for enemies. Without it, all the rest is nothing.",
       },
       {
@@ -563,7 +575,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "The void does not so much retreat as dissolve. For the monk has answered it not with argument but with tears — weeping, openly, for the whole world: for the lost, for his enemies, even for the dark voice itself. Such grief is not weakness. It is a fire, and the void cannot put it out.",
       },
       {
-        speaker: "st-silouan",
+        speaker: "silouan",
         text: "Do you see, my child? The void is not the deepest thing. Love is. Pray for the whole world, and weep for all who do not yet know God — and you will find Him nearer than your own breath, even in the hell you keep in your mind.",
       },
       {
@@ -597,7 +609,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     location: "The skete of Optina Pustyn, near Kozelsk, Russia",
     title: "The Physicians of the Soul",
     background: "modern",
-    ally: "st-anthony",
+    ally: "ambrose-optina",
     intro: [
       {
         speaker: "narrator",
@@ -629,7 +641,11 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "Through the open door you glimpse Elder Ambrose, propped on his pillows, laughing softly with a worried peasant woman. 'Live simply,' he tells her, 'and do good, not seeking after great things. Where it is simple, there are angels by the hundred — but where it is clever, there are none at all.'",
+        text: "Through the open door you glimpse Elder Ambrose, propped on his pillows, laughing softly and beckoning the worried peasant woman nearer.",
+      },
+      {
+        speaker: "ambrose-optina",
+        text: "Live simply, my dear, and do good, not seeking after great things. Where it is simple, there are angels by the hundred — but where it is clever, there are none at all. We must live so as not to disturb anyone, and so that no one disturbs us. Why fret? God is everywhere, even here, even now.",
       },
       {
         speaker: "you",
@@ -744,7 +760,11 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     outro: [
       {
         speaker: "narrator",
-        text: "The young man's sneer falters, then breaks. The elder did not argue with him; the elder wept with him, and embraced him, and said the word 'love' until something long-frozen in the boy's chest cracked apart. He came to return God His ticket. He leaves unable to stop weeping.",
+        text: "The young man's sneer falters, then breaks. The elder did not argue with him; he wept with him, and embraced him, until something long-frozen in the boy's chest cracked apart. He came to return God His ticket. He leaves unable to stop weeping.",
+      },
+      {
+        speaker: "ambrose-optina",
+        text: "There now, my child — you see? I gave him no clever proof, for the heart is not healed by proofs. We must love all God's creation, the whole of it and every grain of sand; love every leaf, every ray of light, and you will perceive the divine mystery in things. Live without sorrow, without grumbling; pray simply, and love — and the wound that no argument can touch will close of itself.",
       },
       {
         speaker: "you",

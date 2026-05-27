@@ -222,7 +222,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     location: "The Holy Mountain of Athos and the Serbian court",
     title: "The Enlightener of the Serbs",
     background: "council-hall",
-    ally: "st-anthony",
+    ally: "sava-serbia",
     intro: [
       {
         speaker: "narrator",
@@ -250,39 +250,35 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
       },
       {
         speaker: "st-anthony",
-        text: "'Self-headed' — a Church that governs its own affairs, chooses its own bishops, yet holds the one identical Orthodox faith shared with the Greeks, the Bulgars, the Rus. Not a separate religion; a household ordering its own table within the one great house. Here is the archbishop himself.",
+        text: "'Self-headed' — a Church that governs its own affairs, chooses its own bishops, yet holds the one identical Orthodox faith shared with the Greeks, the Bulgars, the Rus. Not a separate religion; a household ordering its own table within the one great house. But here — let the archbishop himself tell you. A man in the plain black robe of an Athonite monk crosses the courtyard, though an omophorion now marks him archbishop. His face is gentle, yet there is iron beneath it.",
+      },
+      {
+        speaker: "sava-serbia",
+        text: "I am Sava, by God's mercy archbishop of the Serbs. A people without their own Church are sheep scattered on the hills. So I have given my people their shepherds and their books — the Scriptures, the services, the lives of the saints in the Slavonic words their grandmothers can pray. Yet a temptation follows close behind every such gift, smiling like a friend.",
       },
       {
         speaker: "you",
         text: "Why does it matter so greatly that the Serbs pray in their own tongue and have their own bishops? Could they not simply be Greeks in their faith?",
       },
       {
-        speaker: "st-anthony",
-        text: "Because the Gospel is for every nation in its own voice — recall the Apostles at Pentecost, when every man heard the mighty works of God in his own language. The faith does not erase a people; it baptizes them. Sava gives the Serbs the Scriptures, the services, the saints' lives in words their grandmothers can pray. A faith that must be borrowed in a foreign tongue stays a guest; a faith prayed in the mother tongue becomes home.",
+        speaker: "sava-serbia",
+        text: "Because the Gospel is for every nation in its own voice. Recall the Apostles at Pentecost, when every man heard the mighty works of God in his own language. The faith does not erase a people; it baptizes them. A faith that must be borrowed in a foreign tongue stays a guest; a faith prayed in the mother tongue becomes home. So I labored that the Serbs might pray, and weep, and rejoice before God in the speech of their own hearth.",
       },
       {
         speaker: "you",
-        text: "Yet you warned of a temptation hidden in this very gift.",
+        text: "Yet you spoke of a temptation hidden in this very gift.",
       },
       {
-        speaker: "st-anthony",
-        text: "The same gift can be twisted two ways, $you. A king may seize the people's Church and make it his servant — that is one snare. Or a people may make the Church a trophy of their blood, loving it because it is THEIRS and despising other Orthodox who are not — that is the other. Sava walks between both pits. Watch how he refuses the prince who would own what God has given.",
-      },
-      {
-        speaker: "narrator",
-        text: "A man in the plain black robe of an Athonite monk crosses the courtyard — though an omophorion now marks him archbishop. His face is gentle, but there is iron beneath it. He turns to you: 'A people without their own Church are sheep scattered on the hills. I have given the Serbs their shepherds and their books. But a temptation follows close behind every such gift, smiling like a friend.'",
-      },
-      {
-        speaker: "st-anthony",
-        text: "Mark that temptation well, $you. A prince hears 'a Church FOR the Serbian people' and twists it to 'a Church OF the Serbian crown' — a thing to be owned, bent to the throne, made to bless the king's wars and silence the king's rivals. It comes smooth as a courtier's bow. Do not let holiness be made the servant of power, nor the faith be made a banner of one blood above all others.",
+        speaker: "sava-serbia",
+        text: "The same gift can be twisted two ways, my friend. A king may seize the people's Church and make it his servant — that is one snare. Or a people may make the Church a trophy of their blood, loving it because it is THEIRS and despising other Orthodox who are not — that is the other. I must walk between both pits. A prince hears 'a Church FOR the Serbian people' and twists it to 'a Church OF the Serbian crown' — a thing to be owned, bent to the throne, made to bless his wars and silence his rivals. It comes smooth as a courtier's bow.",
       },
       {
         speaker: "you",
         text: "How does a man hold both at once — to love his people dearly, yet never let that love become an idol?",
       },
       {
-        speaker: "st-anthony",
-        text: "By loving them in God and not instead of Him, $you. Sava's love for the Serbs is fierce — he gives them their whole spiritual life — yet he never forgets that a Serb and a Greek and a Bulgar kneel at the one altar, confess the one faith, are saved by the one Christ. The nation is a field he plants; it is not the seed, and it is never the Lord of the harvest.",
+        speaker: "sava-serbia",
+        text: "By loving them in God and not instead of Him. My love for the Serbs is fierce — I have given them their whole spiritual life — yet I dare not forget that a Serb and a Greek and a Bulgar kneel at the one altar, confess the one faith, are saved by the one Christ. The nation is a field I plant; it is not the seed, and it is never the Lord of the harvest. I will not let holiness be made the servant of power, nor the faith be made a banner of one blood above all others.",
       },
       {
         speaker: "narrator",
@@ -388,11 +384,15 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
       },
       {
         speaker: "you",
-        text: "He gave them a Church of their own, yet kept it from becoming a weapon of the throne or a boast of the blood.",
+        text: "You gave them a Church of their own, yet kept it from becoming a weapon of the throne or a boast of the blood.",
+      },
+      {
+        speaker: "sava-serbia",
+        text: "I sought only to plant the faith deep in my people without making my people its idol. Holiness wedded to a nation, yet never enslaved to its princes — that is what I prayed to leave behind me. Love your own people, $you, but love them in God; the day a Church boasts of its blood above the Body of Christ, it has begun to lose the very Christ it boasts of. Go now in peace, and remember Pentecost: every tongue, the one Lord.",
       },
       {
         speaker: "st-anthony",
-        text: "That is his whole greatness, $you. The Church names him the Enlightener of the Serbs — holiness wedded to a people without being enslaved to its princes, a faith planted deep in a nation yet never made the nation's idol. The later ages will call that idol phyletism, and a council will condemn it; but Sava saw the danger first.",
+        text: "The Church names him the Enlightener of the Serbs, $you, and rightly. The later ages will call that idol of the blood phyletism, and a council will condemn it; but Sava saw the danger first and refused it.",
       },
       {
         speaker: "st-anthony",
@@ -415,7 +415,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     location: "The Councils of Constantinople and the cells of Mount Athos",
     title: "The Uncreated Light",
     background: "council-hall",
-    ally: "st-anthony",
+    ally: "palamas",
     intro: [
       {
         speaker: "narrator",
@@ -451,31 +451,31 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
       },
       {
         speaker: "narrator",
-        text: "Into this quarrel steps a monk of Athos, once a hesychast in these very cells, now drawn into the war of words: Gregory Palamas. He answers Barlaam with a distinction sharp as a sword — a distinction the Church has long known but never so fully spoken.",
+        text: "Into this quarrel steps a monk of Athos, once a hesychast in these very cells, now drawn into the war of words: Gregory Palamas. He turns first to you, his voice quiet but unbending.",
       },
       {
-        speaker: "st-anthony",
-        text: "Listen closely, for everything turns on it. Palamas grants Barlaam half his point: God in His ESSENCE — His innermost being — is indeed unknowable, imparticipable, forever beyond every creature. No man sees that and lives. But, says Palamas, God is not only His hidden essence.",
+        speaker: "palamas",
+        text: "I am Gregory, a monk of the Holy Mountain. I will grant Barlaam half his point, and gladly: God in His ESSENCE — His innermost being, what He IS in Himself — is indeed unknowable, imparticipable, forever beyond every creature. No man sees that and lives. So far we agree. But here he stumbles, for God is not only His hidden essence.",
       },
       {
-        speaker: "narrator",
-        text: "Palamas teaches it thus: 'God in His energies — His powers, His grace, His glory, His very life as it goes forth and acts — truly comes out to us and is partaken. The Light of Tabor was no creature, no symbol kindled for an hour. It was God Himself as He shines and acts: uncreated, divine, and yet not the unapproachable essence. God is partaken in His energies, and imparticipable in His essence.'",
+        speaker: "palamas",
+        text: "God in His ENERGIES — His powers, His grace, His glory, His very life as it goes forth and acts — truly comes out to us and is partaken. The Light that blazed from Christ on Tabor was no creature, no symbol kindled for an hour and then quenched. It was God Himself as He shines and acts: uncreated, divine, and yet not the unapproachable essence. I say it plainly: God is partaken in His energies, and imparticipable in His essence.",
       },
       {
         speaker: "you",
         text: "Essence and energies — is that not splitting God in two? Barlaam will surely cry that you preach two gods.",
       },
       {
-        speaker: "st-anthony",
-        text: "He will cry exactly that. But it is no division, $you — it is the one undivided God known in two ways: as He is in Himself, hidden; and as He freely gives Himself, shining. The sun is one, yet we cannot stare at its disk while we live wholly in its light and warmth. Hold to this, for upon it rests the promise that we are made 'partakers of the divine nature' (2 Peter 1:4) — not of the unknowable essence, but of the uncreated energies. That is deification. That is the whole hope.",
+        speaker: "palamas",
+        text: "He will cry exactly that — and he will be wrong. It is no division. It is the one undivided God known in two ways: as He is in Himself, hidden; and as He freely gives Himself, shining. The sun is one, yet you cannot stare at its disk and yet you live wholly in its light and its warmth. Hold to this, for upon it rests the promise that we are made 'partakers of the divine nature' — not of the unknowable essence, but of the uncreated energies. That is deification. That is the whole hope of every Christian.",
       },
       {
         speaker: "you",
         text: "And the breathing, the bowed heads, the endless repeating of the one prayer — Barlaam mocks that most of all. Is the body not a hindrance to so high a thing as seeing God?",
       },
       {
-        speaker: "st-anthony",
-        text: "Barlaam is a Platonist at heart; he would save only the mind and leave the body behind as a husk. But the Word became FLESH, $you. The body is a temple of the Holy Spirit, and it shall rise. So the hesychast prays with his whole self — drawing the scattered mind down into the heart, steadying it with the breath, anchoring it on the Holy Name. It is not magic and not mere repetition; it is the whole man, body and soul, turned toward God and waiting.",
+        speaker: "palamas",
+        text: "Barlaam is a Platonist at heart; he would save only the mind and cast the body aside as a husk. But the Word became FLESH. The body is a temple of the Holy Spirit, and it shall rise. So I and my brothers pray with the whole self — drawing the scattered mind down into the heart, steadying it with the breath, anchoring it upon the Holy Name. This stillness we call hesychia. It is not magic, and it is not mere chatter of the lips; it is the whole man, body and soul together, turned toward God and waiting in silence for His Light.",
       },
       {
         speaker: "you",
@@ -483,7 +483,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
       },
       {
         speaker: "st-anthony",
-        text: "Now you see why three councils will be summoned over what looks like a quarrel of monks. Strip away the uncreated energies and grace becomes a created trinket, the Light of Tabor a parlor trick, and 'have mercy on me' a cry into the dark. All of it stands or falls here. Steel yourself — the philosopher's logic is keen, and he means to cut.",
+        text: "Now you see why three councils will be summoned over what looks like a quarrel of monks, $you. Strip away the uncreated energies and grace becomes a created trinket, the Light of Tabor a parlor trick, and 'have mercy on me' a cry into the dark. All of it stands or falls here. Steel yourself — the philosopher's logic is keen, and he means to cut.",
       },
       {
         speaker: "narrator",
@@ -620,15 +620,15 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
       },
       {
         speaker: "st-anthony",
-        text: "Barlaam returned to the West and to Rome; Palamas was made archbishop of Thessalonica, and after his repose the Church numbered him among the saints. To this day, $you, the Second Sunday of Great Lent — the week after the Triumph of Orthodoxy — is kept as the Sunday of Saint Gregory Palamas: a second triumph of Orthodoxy.",
+        text: "Barlaam returned to the West and to Rome; Gregory was made archbishop of Thessalonica, and after his repose the Church numbered him among the saints. To this day, $you, the Second Sunday of Great Lent — the week after the Triumph of Orthodoxy — is kept as the Sunday of Saint Gregory Palamas: a second triumph of Orthodoxy.",
       },
       {
         speaker: "you",
         text: "I think I understand now why three whole councils were needed. It was never a dispute about words. It was about whether 'have mercy on me, a sinner' goes anywhere at all.",
       },
       {
-        speaker: "st-anthony",
-        text: "Just so. If God cannot be partaken, that prayer echoes into an empty heaven, and all our striving is loneliness dressed as piety. But because His energies are uncreated and freely given, the least monk in the poorest cell — and you, $you, wherever your own age sends you back — may be filled with the very Light of Tabor.",
+        speaker: "palamas",
+        text: "You have understood it rightly. If God cannot be partaken, that prayer echoes into an empty heaven, and all your striving is loneliness dressed as piety. But because His energies are uncreated and freely given, I tell you truly: the least monk in the poorest cell — and you also, wherever your own age sends you back — may be filled with the very Light of Tabor. Do not seek it with pride or with the eyes of the body's appetite; seek it in stillness, in humility, in the unceasing Name. God gives Himself to those who wait for Him.",
       },
       {
         speaker: "narrator",
