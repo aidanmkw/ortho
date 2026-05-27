@@ -19,7 +19,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 107",
     location: "The Road to Rome, near Smyrna",
     title: "The Letters in Chains",
-    background: "road-roman",
+    background: "ch1-antioch",
     ally: "st-ignatius",
     intro: [
       {
@@ -378,7 +378,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 250",
     location: "Catacomb of Priscilla, Rome",
     title: "Among the Bones of the Witnesses",
-    background: "catacombs",
+    background: "ch2-catacombs",
     ally: "st-anthony",
     intro: [
       {
@@ -741,7 +741,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 325",
     location: "First Ecumenical Council, Nicaea",
     title: "Begotten, Not Made",
-    background: "council-hall",
+    background: "ch3-nicaea",
     ally: "st-athanasius",
     intro: [
       {
@@ -1089,7 +1089,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 360",
     location: "The Wadi Natrun, Egypt",
     title: "Wrestling with the Tempter",
-    background: "desert",
+    background: "ch4-desert",
     ally: "st-macarius",
     intro: [
       {
@@ -1438,7 +1438,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 451",
     location: "Council of Chalcedon",
     title: "One Person, Two Natures",
-    background: "council-hall",
+    background: "ch5-chalcedon",
     ally: "st-cyril",
     intro: [
       {
@@ -1810,7 +1810,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 787",
     location: "Hagia Sophia, Constantinople",
     title: "The Triumph of Orthodoxy",
-    background: "hagia-sophia",
+    background: "ch6-icons",
     ally: "st-john-damascus",
     intro: [
       {
@@ -2160,7 +2160,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 1054",
     location: "Constantinople, Hagia Sophia",
     title: "The Filioque",
-    background: "hagia-sophia",
+    background: "ch7-schism",
     ally: "st-mark-ephesus",
     intro: [
       {
@@ -2503,7 +2503,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 1439",
     location: "Council of Florence",
     title: "Mark Will Not Sign",
-    background: "council-hall",
+    background: "ch8-florence",
     ally: "st-mark-ephesus",
     intro: [
       {
@@ -2858,7 +2858,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "AD 1937",
     location: "NKVD Interrogation Cell, Moscow",
     title: "The New Martyrs",
-    background: "interrogation",
+    background: "ch9-soviets",
     intro: [
       {
         speaker: "narrator",
@@ -3196,7 +3196,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "The Present Day",
     location: "Your apartment / a coffee shop / the internet",
     title: "Be Ready Always",
-    background: "modern",
+    background: "ch10-modern",
     intro: [
       {
         speaker: "narrator",
@@ -3547,7 +3547,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "The Present Day, an hour later",
     location: "Coffee shop",
     title: "The Reformer's Daughter",
-    background: "modern",
+    background: "ch10b-reformed",
     intro: [
       {
         speaker: "narrator",
@@ -3900,7 +3900,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "The Present Day, that evening",
     location: "Late night, voice chat",
     title: "The Long Argument",
-    background: "modern",
+    background: "ch10c-atheist",
     intro: [
       {
         speaker: "narrator",
@@ -4280,7 +4280,7 @@ const BASE_CHAPTERS: Chapter[] = [
     era: "Beyond Time",
     location: "Within yourself",
     title: "The Last Adversary",
-    background: "void",
+    background: "ch11-doubt",
     intro: [
       {
         speaker: "narrator",

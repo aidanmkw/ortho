@@ -30,7 +30,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 155",
     location: "The Stadium of Smyrna",
     title: "Eighty-Six Years",
-    background: "road-roman",
+    background: "ch101-polycarp",
     ally: "polycarp",
     intro: [
       {
@@ -234,7 +234,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 165",
     location: "Rome, the school above the baths of Timiotinus",
     title: "The Reasonable Worship",
-    background: "road-roman",
+    background: "ch102-justin",
     ally: "justin-martyr",
     intro: [
       {
@@ -428,7 +428,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 381",
     location: "Second Ecumenical Council, Constantinople",
     title: "The Lord, the Giver of Life",
-    background: "council-hall",
+    background: "ch103-cappadocians",
     ally: "basil-great",
     intro: [
       {
@@ -628,7 +628,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 404",
     location: "The Patriarchal palace, Constantinople",
     title: "Glory to God for All Things",
-    background: "hagia-sophia",
+    background: "ch104-chrysostom",
     ally: "chrysostom",
     intro: [
       {
@@ -826,7 +826,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 431",
     location: "Third Ecumenical Council, the Church of St. Mary, Ephesus",
     title: "The God-Bearer",
-    background: "council-hall",
+    background: "ch105-ephesus",
     ally: "st-cyril",
     intro: [
       {
@@ -1012,7 +1012,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 662",
     location: "A prison cell, Constantinople",
     title: "The Tongue and the Hand",
-    background: "interrogation",
+    background: "ch106-maximus",
     ally: "maximus-confessor",
     intro: [
       {
@@ -1203,7 +1203,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 867",
     location: "Rome, before the relics of St. Clement",
     title: "The Tongue of the Slavs",
-    background: "council-hall",
+    background: "ch107-cyril-methodius",
     ally: "st-anthony",
     intro: [
       {
@@ -1410,7 +1410,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 879",
     location: "Hagia Sophia, the Reunion Council, Constantinople",
     title: "From the Father",
-    background: "hagia-sophia",
+    background: "ch108-photios",
     ally: "photios",
     intro: [
       {
@@ -1609,7 +1609,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
     era: "AD 988",
     location: "Kiev, the banks of the Dnieper",
     title: "Heaven on Earth",
-    background: "hagia-sophia",
+    background: "ch109-rus",
     ally: "vladimir",
     intro: [
       {

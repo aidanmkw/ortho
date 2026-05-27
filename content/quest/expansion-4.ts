@@ -31,7 +31,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     era: "AD 1779",
     location: "A village square in Ottoman Epirus, beneath a great plane tree",
     title: "The Wooden Cross and the Lamp",
-    background: "desert",
+    background: "ch401-cosmas",
     ally: "cosmas-aetolia",
     intro: [
       {
@@ -234,7 +234,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     era: "AD 1831",
     location: "A snow-bound clearing near the Sarov hermitage, Russia",
     title: "Acquire the Spirit of Peace",
-    background: "void",
+    background: "ch402-seraphim",
     ally: "st-seraphim",
     intro: [
       {
@@ -421,7 +421,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     era: "AD 1938",
     location: "The mill of St. Panteleimon Monastery, Mount Athos",
     title: "Keep Thy Mind in Hell",
-    background: "void",
+    background: "ch403-silouan",
     ally: "silouan",
     intro: [
       {
@@ -608,7 +608,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     era: "AD 1878",
     location: "The skete of Optina Pustyn, near Kozelsk, Russia",
     title: "The Physicians of the Soul",
-    background: "modern",
+    background: "ch404-optina",
     ally: "ambrose-optina",
     intro: [
       {

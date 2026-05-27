@@ -30,7 +30,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
     era: "AD 553",
     location: "Fifth Ecumenical Council, Constantinople",
     title: "Solomon, I Have Outdone Thee",
-    background: "hagia-sophia",
+    background: "ch201-constantinople-ii",
     ally: "st-anthony",
     intro: [
       {
@@ -234,7 +234,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
     era: "c. AD 730",
     location: "The Great Lavra of Mar Saba, the Judean wilderness",
     title: "The God of Matter",
-    background: "desert",
+    background: "ch202-john-damascus",
     ally: "st-john-damascus",
     intro: [
       {
@@ -434,7 +434,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
     era: "c. AD 1000",
     location: "The Monastery of St. Mamas, Constantinople",
     title: "The Light That Is God",
-    background: "hagia-sophia",
+    background: "ch203-symeon",
     ally: "st-anthony",
     intro: [
       {

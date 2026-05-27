@@ -25,7 +25,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 330",
     location: "The Inner Mountain, the Egyptian desert",
     title: "The Watch of the Heart",
-    background: "desert",
+    background: "ch501-anthony-thoughts",
     kind: "lesson",
     ally: "st-anthony",
     intro: [
@@ -180,7 +180,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 380",
     location: "Scetis, the desert of the Cells",
     title: "Lord, As Thou Wilt",
-    background: "desert",
+    background: "ch502-macarius-prayer",
     kind: "lesson",
     ally: "st-macarius",
     intro: [
@@ -319,7 +319,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 360",
     location: "The Great Church, Alexandria",
     title: "That We Might Become God",
-    background: "hagia-sophia",
+    background: "ch503-athanasius-incarnation",
     kind: "lesson",
     ally: "st-athanasius",
     intro: [
@@ -458,7 +458,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 375",
     location: "The episcopal hall, Caesarea of Cappadocia",
     title: "The Giver of Life",
-    background: "council-hall",
+    background: "ch504-basil-spirit",
     kind: "lesson",
     ally: "basil-great",
     intro: [
@@ -597,7 +597,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 398",
     location: "The Great Church, Constantinople",
     title: "The Two Altars",
-    background: "hagia-sophia",
+    background: "ch505-chrysostom-poor",
     kind: "lesson",
     ally: "chrysostom",
     intro: [
@@ -736,7 +736,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 430",
     location: "The Church of St. Mary, Alexandria",
     title: "One and the Same",
-    background: "hagia-sophia",
+    background: "ch506-cyril-theotokos",
     kind: "lesson",
     ally: "st-cyril",
     intro: [
@@ -875,7 +875,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 640",
     location: "A monastery garden at the edge of the world",
     title: "The Healing of the Will",
-    background: "void",
+    background: "ch507-maximus-love",
     kind: "lesson",
     ally: "maximus-confessor",
     intro: [
@@ -1014,7 +1014,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 730",
     location: "The Lavra of St. Sabbas, the Judean desert",
     title: "The God Who Has a Face",
-    background: "hagia-sophia",
+    background: "ch508-damascene-icons",
     kind: "lesson",
     ally: "st-john-damascus",
     intro: [
@@ -1153,7 +1153,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 1340",
     location: "A hermitage on the Holy Mountain, Athos",
     title: "The Light of Tabor",
-    background: "hagia-sophia",
+    background: "ch509-palamas-light",
     kind: "lesson",
     ally: "palamas",
     intro: [
@@ -1292,7 +1292,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 1831",
     location: "The forest hermitage near Sarov, Russia",
     title: "The Aim of the Christian Life",
-    background: "desert",
+    background: "ch510-seraphim-joy",
     kind: "lesson",
     ally: "st-seraphim",
     intro: [
@@ -1439,7 +1439,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 1930",
     location: "The mill of the Monastery of St. Panteleimon, Mount Athos",
     title: "Keep Thy Mind in Hell",
-    background: "void",
+    background: "ch511-silouan-enemies",
     kind: "lesson",
     ally: "silouan",
     intro: [
@@ -1578,7 +1578,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 1775",
     location: "A village gathering under a tree, Ottoman Greece",
     title: "The Worth of the Soul",
-    background: "modern",
+    background: "ch512-cosmas-soul",
     kind: "lesson",
     ally: "cosmas-aetolia",
     intro: [
@@ -1717,7 +1717,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 1880",
     location: "The elder's hut, Optina Monastery, Russia",
     title: "Bear One Another's Burdens",
-    background: "modern",
+    background: "ch513-ambrose-burdens",
     kind: "lesson",
     ally: "ambrose-optina",
     intro: [
@@ -1864,7 +1864,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 420",
     location: "The wilderness beyond the Jordan",
     title: "The Long Road Back",
-    background: "desert",
+    background: "ch514-mary-egypt-repentance",
     kind: "lesson",
     ally: "st-mary-egypt",
     intro: [
@@ -2011,7 +2011,7 @@ export const EXPANSION_LESSONS: Chapter[] = [
     era: "c. AD 305",
     location: "A hall of the philosophers, Alexandria",
     title: "Faith and the Philosophers",
-    background: "council-hall",
+    background: "ch515-catherine-reason",
     kind: "lesson",
     ally: "st-catherine",
     intro: [

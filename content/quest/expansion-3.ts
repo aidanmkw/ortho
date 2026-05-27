@@ -30,7 +30,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     era: "AD 1204",
     location: "Hagia Sophia, the despoiled Great Church, Constantinople",
     title: "The Cross Turned Backward",
-    background: "hagia-sophia",
+    background: "ch301-fourth-crusade",
     ally: "st-anthony",
     intro: [
       {
@@ -221,7 +221,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     era: "c. AD 1219",
     location: "The Holy Mountain of Athos and the Serbian court",
     title: "The Enlightener of the Serbs",
-    background: "council-hall",
+    background: "ch302-sava-serbia",
     ally: "sava-serbia",
     intro: [
       {
@@ -414,7 +414,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     era: "AD 1341–1351",
     location: "The Councils of Constantinople and the cells of Mount Athos",
     title: "The Uncreated Light",
-    background: "council-hall",
+    background: "ch303-palamas",
     ally: "palamas",
     intro: [
       {
