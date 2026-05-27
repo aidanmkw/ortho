@@ -185,20 +185,11 @@ export function ScanlineOverlay() {
   );
 }
 
-const BG_SLUGS = new Set([
-  "road-roman",
-  "catacombs",
-  "council-hall",
-  "desert",
-  "hagia-sophia",
-  "interrogation",
-  "modern",
-  "void",
-]);
-
 export function PixelBackground({ id }: { id: string }) {
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  const slug = BG_SLUGS.has(id) ? id : "void";
+  // Each chapter may have its own backdrop image keyed by its background id;
+  // fall back to "void" only when no id is given.
+  const slug = id || "void";
   return (
     <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden>
       {/* eslint-disable-next-line @next/next/no-img-element */}
