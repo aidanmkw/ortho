@@ -32,7 +32,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     location: "A village square in Ottoman Epirus, beneath a great plane tree",
     title: "The Wooden Cross and the Lamp",
     background: "desert",
-    ally: "cosmas-aetolia",
+    ally: "st-anthony",
     intro: [
       {
         speaker: "narrator",
@@ -43,7 +43,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "It is the year of our Lord seventeen hundred and seventy-nine. For three centuries this land has lain under the Ottoman yoke. The churches stand half-ruined; the children grow up scarcely knowing the Creed; some cannot make the sign of the cross. And yet — the people have come. Thousands of them, silent, waiting.",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "Look there, $you — the barefoot monk planting a tall wooden cross in the dust, climbing onto a low stool beside it. Cosmas of Aetolia. Once a teacher on Mount Athos, now he walks from village to village with the Patriarch's blessing, opening schools and calling the people back from the edge of forgetting.",
       },
       {
@@ -51,7 +51,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "Why does he go barefoot? A teacher from the Holy Mountain — surely he could preach from a pulpit in a great city.",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "He left the Mountain and all its quiet for love of these forgotten ones. Hear him yourself; he is beginning.",
       },
       {
@@ -71,7 +71,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "The people are so poor, and he asks them to give what little they have to build schools. Will they not resent it?",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "On the contrary — they sell their last ornaments to raise the schoolhouses. He has founded more than two hundred. Where he passes, the children begin to read again, and the Liturgy is sung where it had fallen silent. He will be called Equal-to-the-Apostles for this.",
       },
       {
@@ -79,7 +79,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "He speaks much of prayer of the heart. What does he mean?",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "The unceasing prayer of the Name — 'Lord Jesus Christ, Son of God, have mercy on me.' And he is not alone in this labor. Far off on the Holy Mountain, two others work in the same Spirit: Nicodemus the Hagiorite and Macarius of Corinth. Even now they gather the writings of the Fathers on this prayer into one great book.",
       },
       {
@@ -87,7 +87,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "A book? What do they call it?",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "The Philokalia — 'the love of the beautiful.' In three years' time it will be printed in Venice, and it will set the whole Orthodox world aflame with prayer. But mark this, $you: the age now dawning in the West calls such prayer the muttering of peasants. It trusts only in reason, and it is coming even here.",
       },
       {
@@ -99,7 +99,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "Old man! You fill these wretches' heads with demons and endless whispered prayers while Europe wakes to reason and the rights of man. Why drag a conquered people backward into monkish dreams? Tell me — if your 'prayer of the heart' is anything more than the babble of slaves who have nothing better to do.",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "He will not be answered by Cosmas, $you — he has fixed his eyes on you, the stranger. Stand, and answer him. The whole square is listening.",
       },
     ],
@@ -197,7 +197,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "Cosmas of Aetolia comes down from his stool and lays a worn hand upon your shoulder. 'Well spoken, my child. The wisdom of this world is foolishness before God. Seek the wisdom of God, and you will fear nothing under heaven — not even the rope.'",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "He speaks of the rope, $you, because he knows. Later this very year the Ottomans will hang him, betrayed by men who feared his influence over the people. He dies a hieromartyr, blessing his executioners.",
       },
       {
@@ -205,11 +205,11 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "And the schools? The book? Does it all die with him?",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "No. In seventeen eighty-two the Philokalia is printed in Venice, and from these two springs — his preaching and that book — the prayer of the heart is rekindled across the whole Orthodox world. The book travels north, translated into Slavonic and into Russian.",
       },
       {
-        speaker: "cosmas-aetolia",
+        speaker: "st-anthony",
         text: "And in a frozen forest hermitage to the north, a man will pray it so deeply that his very body shines like the sun on snow. Come, $you. We go to Sarov.",
       },
     ],
@@ -414,7 +414,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     location: "The mill of St. Panteleimon Monastery, Mount Athos",
     title: "Keep Thy Mind in Hell",
     background: "void",
-    ally: "silouan",
+    ally: "st-anthony",
     intro: [
       {
         speaker: "narrator",
@@ -425,7 +425,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "A huge, broad-shouldered monk moves among the sacks, weighing the flour, settling the workers' wages with a patience that never breaks. His hands are a laborer's hands. Yet his face — scarred once by anger, you sense — has been worn soft and luminous, like a stone smoothed by long water.",
       },
       {
-        speaker: "silouan",
+        speaker: "st-anthony",
         text: "Silouan the Athonite, $you. He came to the Mountain a strong, hot-tempered young soldier, barely able to read. For years the demons and his own despair tormented him almost past bearing — until the living Christ appeared to him. In the depth of that fire he was given a word he could never have invented.",
       },
       {
@@ -433,7 +433,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "A storekeeper, weighing flour, who has seen Christ? And he stays here, among sacks and laborers?",
       },
       {
-        speaker: "silouan",
+        speaker: "st-anthony",
         text: "He hides his greatness under the simplest work, and prays for the whole world as he weighs the grain. Ask him of his word. He will not boast of it — but he will give it to you, for you will need it where you are going.",
       },
       {
@@ -449,7 +449,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "No, my child. It is this: do not flee the knowledge of your own nothingness, nor the world's. Stand in that hell of self-knowledge — and yet hope wholly in God. There the proud demon cannot follow you, for he can drive a man to despair, but he cannot endure to despair-not. The hope undoes him.",
       },
       {
-        speaker: "silouan",
+        speaker: "st-anthony",
         text: "His disciple, the monk Sophrony, will write these words down one day and carry them to Paris and to England, and they will save many. But Silouan has a second teaching, harder still. Tell him, Father.",
       },
       {
@@ -461,7 +461,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "Love even those who would destroy us? In the age I come from, that is called weakness — or madness.",
       },
       {
-        speaker: "silouan",
+        speaker: "st-anthony",
         text: "The age you now enter has made a god of the void itself, $you. It declares God dead and meaning a delusion, and it wears the calm face of reason. But it has never once met a love like this. Stand ready — it comes.",
       },
       {
@@ -571,15 +571,15 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "I think I understand now, Father. To despair not is not to pretend the darkness away. It is to stand in it and still love.",
       },
       {
-        speaker: "silouan",
+        speaker: "st-anthony",
         text: "Well said. St. Silouan reposes this very year, in nineteen thirty-eight, and his disciple Sophrony will gather his words and give them to the world. And he is not the last, $you. In this same dark century the fire is carried on.",
       },
       {
-        speaker: "silouan",
+        speaker: "st-anthony",
         text: "St. John of Shanghai bears Orthodoxy across China and on to San Francisco. St. Paisios and St. Porphyrios, on the Mountain and in Athens, comfort a doubting age with the same unhurried love you have just seen. The line is unbroken.",
       },
       {
-        speaker: "silouan",
+        speaker: "st-anthony",
         text: "You began as a soul pulled out of your own gray, godless century — and you have walked the whole road, from Ignatius and his lions to Silouan and his mill. The same Spirit, the same Cross, the same Risen Lord, across two thousand years. The line runs through you now. Keep thy mind in hell, and despair not. Go home, $you — and pray.",
       },
     ],
@@ -597,7 +597,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
     location: "The skete of Optina Pustyn, near Kozelsk, Russia",
     title: "The Physicians of the Soul",
     background: "modern",
-    ally: "ambrose-optina",
+    ally: "st-anthony",
     intro: [
       {
         speaker: "narrator",
@@ -608,7 +608,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "A long line of visitors waits at the door of a low wooden cell. Peasants in bast shoes stand beside princes in fine coats; scholars wracked with doubt wait behind mothers wild with grief. All have come to one bent, smiling old man who can scarcely rise from his bed, and who from dawn to dark receives them, one by one.",
       },
       {
-        speaker: "ambrose-optina",
+        speaker: "st-anthony",
         text: "Optina Pustyn, $you. Remember the Philokalia, carried north out of Venice? Here is its fruit. A line of elders — startsy — has risen in this place: first Leonid, then Macarius, and now the one you see, Ambrose. They are physicians of the soul. They read the heart, give a single word, and a man who came in despair walks out healed.",
       },
       {
@@ -616,7 +616,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "All these people, for one frail old monk? What can he give them that their own priests cannot?",
       },
       {
-        speaker: "ambrose-optina",
+        speaker: "st-anthony",
         text: "Discernment, and a love that has been purified by a lifetime of obedience and prayer. He sees the wound beneath the words. All Russia knows the road to his door — and not only the simple. The learned come too, though some come only to argue.",
       },
       {
@@ -624,7 +624,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "And the others before him — Leonid, Macarius. Did the people not fear such elders, who can read the secrets of a heart?",
       },
       {
-        speaker: "ambrose-optina",
+        speaker: "st-anthony",
         text: "At first some did, and the powerful in the Church distrusted them — eldership was suspected, even forbidden for a time. But the fruit silenced the fear. Souls came in chains of despair and walked out free. You cannot argue with a healed man, $you. You can only wonder what healed him.",
       },
       {
@@ -636,7 +636,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "He jokes, and yet she is weeping with relief. He has lifted something off her without my even hearing what it was.",
       },
       {
-        speaker: "ambrose-optina",
+        speaker: "st-anthony",
         text: "That is the gift of the elders. A famous man came here not long ago — Dostoevsky, the novelist, half-broken by the death of his little son. Ambrose spoke with him, and the writer is even now carrying that meeting into his last and greatest book, where a holy elder named Zosima will speak with the voice of Optina.",
       },
       {
@@ -652,7 +652,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "Peasants and weeping women, and a senile monk dispensing platitudes — this is the famous wisdom of Optina? Listen, pilgrim. If God were good, my little brother would not have died screaming in fever at six years old. I will not bow to a Creator who builds His world on the torture of one innocent child. Answer me that. Your gentle elders cannot.",
       },
       {
-        speaker: "ambrose-optina",
+        speaker: "st-anthony",
         text: "He flings the hardest question of all at you, $you — the suffering of the innocent. Do not answer it the way the world answers, with a clever argument. Answer it as Optina answers. Stand.",
       },
     ],
@@ -751,7 +751,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "I almost answered him with a syllogism. But the Cross is not a syllogism. God did not explain the child's suffering — He entered it, and bore it, and rose.",
       },
       {
-        speaker: "ambrose-optina",
+        speaker: "st-anthony",
         text: "You have learned the secret of Optina, $you. They healed an age of doubt not with arguments but with love — the same love that runs unbroken from the Upper Room to this skete in the pines. Hold fast to it.",
       },
       {
@@ -759,7 +759,7 @@ export const EXPANSION_CHAPTERS_4: Chapter[] = [
         text: "Dostoevsky will draw the saintly Elder Zosima of 'The Brothers Karamazov' from this place and from Ambrose himself. Sts. Leonid, Macarius, and Ambrose, and the elders after them, will be numbered among the saints. Optina will be crushed under the coming Soviet darkness — and will rise again.",
       },
       {
-        speaker: "ambrose-optina",
+        speaker: "st-anthony",
         text: "The fire of the Philokalia passed from cell to cell here, and from these cells into the wide doubting world. Now come — to the Holy Mountain, and to a soldier turned monk who was given a word from the very lips of Christ. The hardest age of all still waits for you.",
       },
     ],

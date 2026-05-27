@@ -222,14 +222,14 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     location: "The Holy Mountain of Athos and the Serbian court",
     title: "The Enlightener of the Serbs",
     background: "council-hall",
-    ally: "sava-serbia",
+    ally: "st-anthony",
     intro: [
       {
         speaker: "narrator",
         text: "Green mountains, cold and clean after the smoke of Constantinople. You stand on the Holy Mountain of Athos, where for centuries monks of many tongues have prayed beneath the peak that rises straight from the sea. Among the Greek monasteries stands a newer house, its frescoes fresh: Hilandar, the monastery of the Serbs.",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "A generation ago, $you, a young prince of Serbia named Rastko slipped from his father's palace by night and came to this Mountain, taking the monastic name Sava. In time his own father followed him — Stefan Nemanja, founder of the Serbian state, who laid down his crown to die a monk here under the name Symeon. Together, father and son, they raised up Hilandar.",
       },
       {
@@ -237,7 +237,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "A king who gave up his throne to become a monk? And his son a prince turned hermit?",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "So it was. But Sava could not stay hidden on the Mountain. His people needed him. A young nation, newly Christian, lacked what no gold can buy: not merely a church building, but their own Church — bishops of their own, books and services in their own Slavonic tongue, the faith woven into the very life and law of the Serbs.",
       },
       {
@@ -249,7 +249,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "Autocephaly — what does the word mean?",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "'Self-headed' — a Church that governs its own affairs, chooses its own bishops, yet holds the one identical Orthodox faith shared with the Greeks, the Bulgars, the Rus. Not a separate religion; a household ordering its own table within the one great house. Here is the archbishop himself.",
       },
       {
@@ -257,7 +257,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "Why does it matter so greatly that the Serbs pray in their own tongue and have their own bishops? Could they not simply be Greeks in their faith?",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "Because the Gospel is for every nation in its own voice — recall the Apostles at Pentecost, when every man heard the mighty works of God in his own language. The faith does not erase a people; it baptizes them. Sava gives the Serbs the Scriptures, the services, the saints' lives in words their grandmothers can pray. A faith that must be borrowed in a foreign tongue stays a guest; a faith prayed in the mother tongue becomes home.",
       },
       {
@@ -265,7 +265,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "Yet you warned of a temptation hidden in this very gift.",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "The same gift can be twisted two ways, $you. A king may seize the people's Church and make it his servant — that is one snare. Or a people may make the Church a trophy of their blood, loving it because it is THEIRS and despising other Orthodox who are not — that is the other. Sava walks between both pits. Watch how he refuses the prince who would own what God has given.",
       },
       {
@@ -273,7 +273,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "A man in the plain black robe of an Athonite monk crosses the courtyard — though an omophorion now marks him archbishop. His face is gentle, but there is iron beneath it. He turns to you: 'A people without their own Church are sheep scattered on the hills. I have given the Serbs their shepherds and their books. But a temptation follows close behind every such gift, smiling like a friend.'",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "Mark that temptation well, $you. A prince hears 'a Church FOR the Serbian people' and twists it to 'a Church OF the Serbian crown' — a thing to be owned, bent to the throne, made to bless the king's wars and silence the king's rivals. It comes smooth as a courtier's bow. Do not let holiness be made the servant of power, nor the faith be made a banner of one blood above all others.",
       },
       {
@@ -281,7 +281,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "How does a man hold both at once — to love his people dearly, yet never let that love become an idol?",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "By loving them in God and not instead of Him, $you. Sava's love for the Serbs is fierce — he gives them their whole spiritual life — yet he never forgets that a Serb and a Greek and a Bulgar kneel at the one altar, confess the one faith, are saved by the one Christ. The nation is a field he plants; it is not the seed, and it is never the Lord of the harvest.",
       },
       {
@@ -391,11 +391,11 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "He gave them a Church of their own, yet kept it from becoming a weapon of the throne or a boast of the blood.",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "That is his whole greatness, $you. The Church names him the Enlightener of the Serbs — holiness wedded to a people without being enslaved to its princes, a faith planted deep in a nation yet never made the nation's idol. The later ages will call that idol phyletism, and a council will condemn it; but Sava saw the danger first.",
       },
       {
-        speaker: "sava-serbia",
+        speaker: "st-anthony",
         text: "Now we go back, east and south, to Constantinople and to that Holy Mountain we glimpsed — for the deepest question of this whole journey awaits us there: whether a living man may truly behold God, and what, exactly, he beholds. Take my hand.",
       },
     ],
@@ -415,14 +415,14 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
     location: "The Councils of Constantinople and the cells of Mount Athos",
     title: "The Uncreated Light",
     background: "council-hall",
-    ally: "palamas",
+    ally: "st-anthony",
     intro: [
       {
         speaker: "narrator",
         text: "Mount Athos at the hour before dawn. In a stone cell lit by one small lamp, an old monk sits utterly still, head bowed to his breast, breathing slow and deep. With each breath his lips move soundlessly around the same words, over and over, without ceasing: 'Lord Jesus Christ, Son of God, have mercy on me, a sinner.'",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "They call this stillness hesychia, $you, and these monks the hesychasts. They seek to draw the wandering mind down into the heart and there to pray without ceasing, as the Apostle commands. And they say — softly, for it is a holy thing — that in this stillness, by grace, a man may behold the very Light of God: the same uncreated Light that blazed from Christ when He was transfigured upon Mount Tabor.",
       },
       {
@@ -430,7 +430,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "See the Light of God? With his own eyes? That sounds almost too bold to say aloud.",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "A learned man thinks so too, and has come east to say it loudly. Barlaam, a philosopher of Calabria in Italy — brilliant, sharp-tongued, schooled in the subtleties of the Greeks and the Latins both. He has visited these monks, watched them pray with bowed heads, and gone away to mock them. He calls them omphalopsychoi — 'men with their souls in their navels' — and declares that no living man can see God at all.",
       },
       {
@@ -438,7 +438,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "But why does it matter so much? Let the philosopher mock; let the monks pray. Where is the harm?",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "Because under the quarrel lies the whole of our salvation. Hear how Barlaam reasons: God's essence — what God IS in Himself — is utterly unknowable, beyond all mind and all sight. So far, true. But then he concludes: therefore whatever light the monks see can only be a created thing — a glow conjured in the imagination, or some trick of the fasting body. To claim a vision of God Himself, he says, is either delusion or pride.",
       },
       {
@@ -446,7 +446,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "And if no one can truly see or touch God, then... what becomes of being saved? Of being joined to Him?",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "You have found the very wound, $you. If God can in no way be partaken, then grace is merely a created gift He hands us from outside, like a coin; deification — our true sharing in the divine life — is a fable; and every saint who ever wept for joy in prayer saw nothing but his own fancy. The Gospel itself hangs on the answer.",
       },
       {
@@ -454,7 +454,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "Into this quarrel steps a monk of Athos, once a hesychast in these very cells, now drawn into the war of words: Gregory Palamas. He answers Barlaam with a distinction sharp as a sword — a distinction the Church has long known but never so fully spoken.",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "Listen closely, for everything turns on it. Palamas grants Barlaam half his point: God in His ESSENCE — His innermost being — is indeed unknowable, imparticipable, forever beyond every creature. No man sees that and lives. But, says Palamas, God is not only His hidden essence.",
       },
       {
@@ -466,7 +466,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "Essence and energies — is that not splitting God in two? Barlaam will surely cry that you preach two gods.",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "He will cry exactly that. But it is no division, $you — it is the one undivided God known in two ways: as He is in Himself, hidden; and as He freely gives Himself, shining. The sun is one, yet we cannot stare at its disk while we live wholly in its light and warmth. Hold to this, for upon it rests the promise that we are made 'partakers of the divine nature' (2 Peter 1:4) — not of the unknowable essence, but of the uncreated energies. That is deification. That is the whole hope.",
       },
       {
@@ -474,7 +474,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "And the breathing, the bowed heads, the endless repeating of the one prayer — Barlaam mocks that most of all. Is the body not a hindrance to so high a thing as seeing God?",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "Barlaam is a Platonist at heart; he would save only the mind and leave the body behind as a husk. But the Word became FLESH, $you. The body is a temple of the Holy Spirit, and it shall rise. So the hesychast prays with his whole self — drawing the scattered mind down into the heart, steadying it with the breath, anchoring it on the Holy Name. It is not magic and not mere repetition; it is the whole man, body and soul, turned toward God and waiting.",
       },
       {
@@ -482,7 +482,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "Then if Barlaam wins, it is not only the monks who lose, but every Christian's hope of ever truly reaching God.",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "Now you see why three councils will be summoned over what looks like a quarrel of monks. Strip away the uncreated energies and grace becomes a created trinket, the Light of Tabor a parlor trick, and 'have mercy on me' a cry into the dark. All of it stands or falls here. Steel yourself — the philosopher's logic is keen, and he means to cut.",
       },
       {
@@ -619,7 +619,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "The Councils of Constantinople vindicated Palamas: in 1341 against Barlaam, in 1347 and again in 1351 against Akindynos and Gregoras. The Tomos of 1351 set the seal upon the teaching — that the divine energies are uncreated, that God is truly partaken in His energies though imparticipable in His essence, and that the saints behold the uncreated Light.",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "Barlaam returned to the West and to Rome; Palamas was made archbishop of Thessalonica, and after his repose the Church numbered him among the saints. To this day, $you, the Second Sunday of Great Lent — the week after the Triumph of Orthodoxy — is kept as the Sunday of Saint Gregory Palamas: a second triumph of Orthodoxy.",
       },
       {
@@ -627,7 +627,7 @@ export const EXPANSION_CHAPTERS_3: Chapter[] = [
         text: "I think I understand now why three whole councils were needed. It was never a dispute about words. It was about whether 'have mercy on me, a sinner' goes anywhere at all.",
       },
       {
-        speaker: "palamas",
+        speaker: "st-anthony",
         text: "Just so. If God cannot be partaken, that prayer echoes into an empty heaven, and all our striving is loneliness dressed as piety. But because His energies are uncreated and freely given, the least monk in the poorest cell — and you, $you, wherever your own age sends you back — may be filled with the very Light of Tabor.",
       },
       {

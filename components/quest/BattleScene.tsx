@@ -94,6 +94,11 @@ export default function BattleScene({
   const [claimRevealed, setClaimRevealed] = useState(false);
   const [resultMsg, setResultMsg] = useState<string>("");
   const [resultRationale, setResultRationale] = useState<string>("");
+  // What the "Continue" button after a result should do (tap-to-advance so the
+  // player can actually read the result + rationale).
+  const [pendingOutcome, setPendingOutcome] = useState<
+    "victory" | "defeat" | "continue" | null
+  >(null);
   const [bossFlash, setBossFlash] = useState(false);
   const [heroFlash, setHeroFlash] = useState(false);
   const [bossLine, setBossLine] = useState(boss.intro);
@@ -336,14 +341,7 @@ export default function BattleScene({
       setResultRationale(opt.rationale ?? "");
       setPhase("resolving");
       setTimeout(() => setBossFlash(false), 400);
-      setTimeout(() => {
-        if (newBossHp === 0) {
-          sfx.victory();
-          setPhase("victory");
-        } else {
-          regenAndAdvance();
-        }
-      }, 2200);
+      setPendingOutcome(newBossHp === 0 ? "victory" : "continue");
     } else {
       let dmg = Math.round(wrongBase);
       if (defendActive) dmg = Math.round(dmg * 0.5);
@@ -357,14 +355,21 @@ export default function BattleScene({
       setResultRationale(opt.rationale ?? "");
       setPhase("resolving");
       setTimeout(() => setHeroFlash(false), 400);
-      setTimeout(() => {
-        if (newHp === 0) {
-          sfx.defeat();
-          setPhase("defeat");
-        } else {
-          regenAndAdvance();
-        }
-      }, 2200);
+      setPendingOutcome(newHp === 0 ? "defeat" : "continue");
+    }
+  }
+
+  function resolveContinue() {
+    const outcome = pendingOutcome;
+    setPendingOutcome(null);
+    if (outcome === "victory") {
+      sfx.victory();
+      setPhase("victory");
+    } else if (outcome === "defeat") {
+      sfx.defeat();
+      setPhase("defeat");
+    } else {
+      regenAndAdvance();
     }
   }
 
@@ -668,6 +673,15 @@ export default function BattleScene({
                   ★ {getPatron(hero.patronId)?.name} guides your hand! ★
                 </p>
               )}
+              <div className="mt-3 flex justify-end">
+                <PixelButton variant="primary" onClick={resolveContinue}>
+                  {pendingOutcome === "victory"
+                    ? "Finish ▶"
+                    : pendingOutcome === "defeat"
+                    ? "Continue ▶"
+                    : "Next Round ▶"}
+                </PixelButton>
+              </div>
             </PixelFrame>
           )}
 
