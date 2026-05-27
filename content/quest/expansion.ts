@@ -1076,7 +1076,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
         text: "They will tell you a mere monk, a layman in their eyes, has no right to overrule emperors and patriarchs. They will threaten the tongue that argues and the hand that writes. Stand with him, $you. The Sixth Ecumenical Council, two decades hence, will read his every word aloud and vindicate it — but he will not live to see it.",
       },
       {
-        speaker: "iconoclast",
+        speaker: "monothelite-examiner",
         text: "Monk's friend. Be reasonable. The Emperor himself and the Patriarch of this city have decreed one will in Christ, for the peace of a bleeding empire. Who are you — who is this broken old man — to set your private judgment against the throne and the altar together? Obedience is a Christian virtue, is it not? Recant — or the old man loses what speaks and what writes, and so, perhaps, do you.",
       },
     ],
@@ -1085,7 +1085,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       name: "The Imperial Examiner",
       title: "Agent of the Monothelite Court",
       tradition: "Monothelite Heresy",
-      sprite: "iconoclast",
+      sprite: "monothelite-examiner",
       maxHp: 245,
       intro:
         "One Christ, one will — so says the Emperor, so says the Patriarch. Two wills would tear the Saviour in two. Submit to the powers God has set over you.",
@@ -1279,7 +1279,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
         text: "Defend the brothers' work, $you. For on it hangs the faith of nations not yet born — the Bulgarians, the Serbs, and far to the north, the Rus. If the Word can be given to one people in their own tongue, it can be given to all; if it is chained to three, it is chained forever.",
       },
       {
-        speaker: "humbert",
+        speaker: "frankish-archpriest",
         text: "These Greeks corrupt the sacred mysteries by babbling them in the tongue of savages. God is praised in three holy languages — Hebrew, Greek, Latin — written by divine appointment above the Lord's own Cross. Who are these wandering Easterners to add a fourth, and a barbarous one at that? Speak, stranger, and defend this profanation — if a profanation can be defended at all.",
       },
     ],
@@ -1288,7 +1288,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       name: "The Frankish Archpriest",
       title: "Defender of the Three Tongues",
       tradition: "The Trilingual Error",
-      sprite: "humbert",
+      sprite: "frankish-archpriest",
       maxHp: 215,
       intro:
         "Pilate wrote the title in Hebrew, Greek, and Latin alone. These three God has hallowed; the rest are fit only for the marketplace. The Liturgy in Slavonic is a sacrilege.",
@@ -1685,7 +1685,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
         text: "But not all rejoice. A priest of the old gods — a volkhv, a sorcerer-priest of the deep woods — comes raging from the trees, certain I have betrayed the ancestors and doomed the land to famine and the wrath of Perun. Defend the choice, $you. For from this gray river will flow the whole baptism of the Russian land — a thousand years of saints, monks, and martyrs not yet born.",
       },
       {
-        speaker: "tempter",
+        speaker: "volkh",
         text: "Traitor to the blood! Perun the Thunderer fed your fathers and filled their granaries; the old gods gave Rus her swords and her strong sons. Now you drown them all in a foreign river for the sake of a crucified slave-god of the soft Greeks. Why forsake the gods of your own people, prince? Speak — if the cold water has not already washed the courage out of you.",
       },
     ],
@@ -1694,7 +1694,7 @@ export const EXPANSION_CHAPTERS: Chapter[] = [
       name: "Volkh the Volkhv",
       title: "Priest of the Old Gods",
       tradition: "Slavic Paganism",
-      sprite: "tempter",
+      sprite: "volkh",
       maxHp: 220,
       intro:
         "Perun the Thunderer, Veles of the herds — these gods made Rus mighty. You trade them for a dead Jew on a cross. Madness! Defend this betrayal of the blood.",

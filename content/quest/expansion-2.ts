@@ -110,7 +110,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
         text: "From a side aisle a deacon approaches, young and ardent, an admirer of Origen. His eyes are bright with grand and limitless hopes for the whole cosmos, and he thinks the assembled bishops small-minded men fencing in the boundless love of God.",
       },
       {
-        speaker: "tempter",
+        speaker: "origenist-deacon",
         text: "So the synod would chain the infinite God to its little rules! Tell me, stranger — Origen saw further than these timid bishops dare. Every soul was once a pure mind near to God; this world of flesh is our school and our exile. And in the end ALL shall return home — yes, the devil himself restored. Is the mercy of God not infinite? Refute me, if you would shrink heaven down to fit your fears.",
       },
     ],
@@ -119,7 +119,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
       name: "The Origenist Deacon",
       title: "Speculator of the Endless Restoration",
       tradition: "Origenism",
-      sprite: "tempter",
+      sprite: "origenist-deacon",
       maxHp: 230,
       intro:
         "Souls fell from a higher world into bodies; this life is their punishment and their school. And in the apokatastasis ALL shall return — every soul, every demon. Who are you to set a limit on the mercy of God?",
@@ -200,7 +200,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
     },
     outro: [
       {
-        speaker: "tempter",
+        speaker: "origenist-deacon",
         text: "Anathema, then, upon the pre-existence of souls... upon the restoration of the demons. I had loved my own speculations more than the faith once delivered. The narrow road — it is wider than I thought, and it goes somewhere my cleverness could not.",
       },
       {
@@ -510,7 +510,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
         text: "A figure in fine ecclesiastical robes detaches itself from a knot of clerics in the cloister. His bearing is cold, precise, certain. He has watched Symeon long enough; now he turns the full weight of his learning upon you.",
       },
       {
-        speaker: "humbert",
+        speaker: "stephen-nicomedia",
         text: "So! Another disciple of the abbot of Mamas. The whole city rings with his strange claims — that men SEE God, that they FEEL the Spirit burning in them like a flame. Tell me, novice: where did your master study? Under what teachers? Theology belongs to trained minds and to the settled forms of the Church, not to visions and weeping in the dark. Defend this enthusiasm — if indeed you can reason at all.",
       },
     ],
@@ -519,7 +519,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
       name: "Stephen of Nicomedia",
       title: "Theologian of the Court",
       tradition: "Formalist Rationalism",
-      sprite: "humbert",
+      sprite: "stephen-nicomedia",
       maxHp: 235,
       intro:
         "Grace works in the soul unseen and unfelt. To claim you SEE the light of God is pride and delusion. Keep the forms, say the prayers, trust the Church's order — and leave 'experience' to fanatics.",
@@ -600,7 +600,7 @@ export const EXPANSION_CHAPTERS_2: Chapter[] = [
     },
     outro: [
       {
-        speaker: "humbert",
+        speaker: "stephen-nicomedia",
         text: "The Fathers themselves saw the light... Moses' shining face, the glory upon Tabor, the heaven that opened to the martyr Stephen. I had reduced the living God to a doctrine on a page, and called my deafness wisdom.",
       },
       {
