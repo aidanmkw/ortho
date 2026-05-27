@@ -345,6 +345,24 @@ export default function QuestApp() {
         ☰ Menu
       </button>
 
+      {/* Era + location plate — top-left, during chapter scenes */}
+      {chapter &&
+        ["chapter-card", "intro", "battle", "review", "outro"].includes(
+          scene
+        ) && (
+          <div
+            className="fixed top-2 left-2 z-[60] max-w-[60vw] bg-black/85 border-2 border-gold/60 px-3 py-1.5"
+            style={{ boxShadow: "0 2px 0 0 rgba(0,0,0,0.6)" }}
+          >
+            <div className="font-pixel text-gold text-[11px] leading-tight">
+              {chapter.era}
+            </div>
+            <div className="font-pixel text-parchment/70 text-[8px] leading-tight truncate">
+              {chapter.location}
+            </div>
+          </div>
+        )}
+
       <QuestMenu
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
