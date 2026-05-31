@@ -51,10 +51,11 @@ JOBS = {
         "an over-polished smile. Plain hair, no halo, no glow behind the head."
     ),
     "iconoclast": (
-        "Constantine V, the iconoclast Byzantine emperor, a stern middle-aged "
-        "warrior-emperor in purple imperial robes with gold trim and a "
-        "Byzantine stemma crown, holding a hammer raised to smash an icon, "
-        "menacing. The crown sits on the head, no halo, no nimbus behind."
+        "Constantine V, an 8th-century Byzantine emperor, a stern middle-aged "
+        "ruler in purple imperial robes with gold trim and a tall jeweled "
+        "Byzantine stemma crown with pearl strings hanging at the sides, "
+        "holding a rolled imperial decree, an imperious commanding pose. "
+        "The crown sits on the head, no halo, no nimbus, no glow behind."
     ),
     "arius": (
         "Arius the heresiarch, a gaunt austere 4th-century Alexandrian "
