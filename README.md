@@ -48,6 +48,32 @@ If the workflow fails because Pages isn't enabled yet:
   toward un-mastered items.
 - **Review Queue.** All due-or-wrong items in one focused drill.
 
+## ΟΔΟΣ — The Pilgrim Road (3D)
+
+`/pilgrimage` is a browser 3D mode (Three.js) staged inside a Byzantine
+icon: gold-leaf sky, stepped faceted mountains, flat unlit color, and
+the quest's icon-style figures standing in the world as billboards.
+Third-person; WASD / drag on desktop, virtual joystick + drag on touch.
+
+One road runs through the 13 battle chapters of the 2D quest
+(`lib/quest/chapters.ts` is the single source of truth — same bosses,
+claims, rationales, epigraphs, XP). Mechanics are spatial:
+
+- **Trial of Witness.** The adversary hurls a claim; the answers
+  become Α/Β/Γ/Δ plates on the arena floor. Run to one and stand on
+  it (or tap it / press 1–4). Truth strikes the heretic; error
+  strikes you — and the correct plate glows with its rationale.
+- **Vigil lamps.** Walking through a lamp grants Light (+heal).
+  Spend 3 Light in battle ("Spirit of Truth") to dim two false answers.
+- **Saint blessings.** Greet the station's ally saint: heal, plus one
+  wrong answer absorbed in the next trial.
+- **Royal Doors.** Each station is sealed until its adversary falls;
+  victory opens the doors, lights a memorial, and advances the save
+  (`localStorage`, separate from the 2D quest save).
+
+Engine: `lib/quest3d/engine.ts` (world/camera/effects, no game rules);
+rules and UI live in `components/quest3d/PilgrimageApp.tsx`.
+
 ## Layout
 
 ```

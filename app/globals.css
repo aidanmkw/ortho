@@ -210,3 +210,15 @@ kbd {
   padding: 0 6px;
   font-size: 0.85em;
 }
+
+/* === ΟΔΟΣ — 3D Pilgrimage overlays === */
+@keyframes bannerfade {
+  0% { opacity: 0; transform: translateY(8px); }
+  8% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes hurtflash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}

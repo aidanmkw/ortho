@@ -209,6 +209,12 @@ export default function HubScene() {
           Tap an object in the room to begin.
         </p>
         <div className="mt-1 flex items-center justify-center gap-4">
+          <Link
+            href="/pilgrimage"
+            className="text-[11px] sm:text-xs text-gold/80 hover:text-gold no-underline underline-offset-2 hover:underline"
+          >
+            ☩ Pilgrim Road · 3D
+          </Link>
           <button
             type="button"
             onClick={() =>
