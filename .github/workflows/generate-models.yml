@@ -17,6 +17,15 @@ on:
         type: boolean
         required: false
         default: false
+  # Pushing .github/model-request also starts a run (its first
+  # non-comment line is passed to the script as arguments). This lets the
+  # run be triggered with an ordinary git push when workflow dispatch
+  # isn't available.
+  push:
+    branches:
+      - claude/orthodoxy-gamified-qa-Bd0hv
+    paths:
+      - ".github/model-request"
 
 permissions:
   contents: write
@@ -39,8 +48,13 @@ jobs:
           MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
         run: |
           ARGS=""
-          if [ -n "${{ inputs.only }}" ]; then ARGS="$ARGS --only=${{ inputs.only }}"; fi
-          if [ "${{ inputs.no_rig }}" = "true" ]; then ARGS="$ARGS --no-rig"; fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ -n "${{ inputs.only }}" ]; then ARGS="$ARGS --only=${{ inputs.only }}"; fi
+            if [ "${{ inputs.no_rig }}" = "true" ]; then ARGS="$ARGS --no-rig"; fi
+          elif [ -f .github/model-request ]; then
+            ARGS="$(grep -v '^#' .github/model-request | head -1)"
+          fi
+          echo "args: $ARGS"
           node scripts/generate-models.mjs $ARGS
       - name: Commit models
         run: |
