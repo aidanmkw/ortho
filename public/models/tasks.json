@@ -73,5 +73,11 @@
   "st-mark-ephesus": {
     "mesh": "019eb798-6329-72dc-af3d-f7a17ae37b10",
     "rig": "019eb79a-490c-71e0-beed-886a58c7fd8a"
+  },
+  "centurion": {
+    "mesh": "019eb730-0264-7ff1-83ea-5e4baeab473a"
+  },
+  "arius": {
+    "mesh": "019eb733-9bde-75b5-81a7-78333341078c"
   }
 }
