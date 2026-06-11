@@ -510,6 +510,12 @@ export class PilgrimEngine {
   private rail!: THREE.Mesh;
   private glowTex!: THREE.Texture;
   private texLoader!: THREE.TextureLoader;
+  private pmrem!: THREE.PMREMGenerator;
+  private envScene!: THREE.Scene;
+  private envSky!: Sky;
+  private envRT: THREE.WebGLRenderTarget | null = null;
+  private envTimer = 0;
+  private curMoveLen = 0;
 
   // state
   private mode: "explore" | "battle" = "explore";
@@ -559,6 +565,8 @@ export class PilgrimEngine {
     this.playerPos.set(0, 0, -spawn * ZONE_LEN - 3);
     this.applyZonePalette(spawn, true);
     this.curZone = spawn;
+    this.tickEnvironment(0.001);
+    this.refreshEnvironment();
 
     this.attachInput();
     this.resize();
@@ -587,6 +595,8 @@ export class PilgrimEngine {
       if (Array.isArray(mat)) mat.forEach((m) => m.dispose());
       else mat?.dispose();
     });
+    this.envRT?.dispose();
+    this.pmrem?.dispose();
     this.renderer?.dispose();
   }
 
@@ -634,6 +644,28 @@ export class PilgrimEngine {
     u.mieCoefficient.value = 0.004;
     u.mieDirectionalG.value = 0.85;
     this.scene.add(this.sky);
+    // a twin sky in a private scene feeds the PMREM environment map, so
+    // gold halos, trim and armor reflect the actual heavens of each era
+    this.pmrem = new THREE.PMREMGenerator(this.renderer);
+    this.envScene = new THREE.Scene();
+    this.envSky = new Sky();
+    this.envSky.scale.setScalar(1000);
+    this.envScene.add(this.envSky);
+  }
+
+  private refreshEnvironment() {
+    const src = this.sky.material.uniforms;
+    const dst = this.envSky.material.uniforms;
+    dst.turbidity.value = src.turbidity.value;
+    dst.rayleigh.value = src.rayleigh.value;
+    dst.mieCoefficient.value = src.mieCoefficient.value;
+    dst.mieDirectionalG.value = src.mieDirectionalG.value;
+    (dst.sunPosition.value as THREE.Vector3).copy(src.sunPosition.value as THREE.Vector3);
+    const rt = this.pmrem.fromScene(this.envScene, 0, 1, 1100);
+    this.envRT?.dispose();
+    this.envRT = rt;
+    this.scene.environment = rt.texture;
+    this.scene.environmentIntensity = 0.55;
   }
 
   private sunDir(elevation: number, azimuth: number): THREE.Vector3 {
@@ -1013,7 +1045,7 @@ export class PilgrimEngine {
 
       // -- ally saint on the road
       if (zone.allyId && PORTRAITS[zone.allyId]) {
-        const rig = buildRig(PORTRAITS[zone.allyId], { height: 1.78 });
+        const rig = buildRig(PORTRAITS[zone.allyId], { height: 1.98, seed: i * 7919 + 11 });
         rig.group.position.set(-3.9, 0, z0 - L * 0.42);
         rig.group.rotation.y = Math.PI * 0.35;
         this.scene.add(rig.group);
@@ -1031,8 +1063,8 @@ export class PilgrimEngine {
       const bp = arenaC.clone().add(new THREE.Vector3(0, 0, -3.2));
       this.bossPos.push(bp);
       if (!isBeaten) {
-        const tall = zone.chapter.boss!.sprite === "doubt" ? 2.2 : 1.95;
-        const rig = buildRig(PORTRAITS[zone.bossId], { height: tall });
+        const tall = zone.chapter.boss!.sprite === "doubt" ? 2.4 : 2.05;
+        const rig = buildRig(PORTRAITS[zone.bossId], { height: tall, seed: i * 104729 + 3 });
         rig.group.position.copy(bp);
         rig.group.rotation.y = 0; // faces +Z, toward the approaching pilgrim
         this.scene.add(rig.group);
@@ -1325,6 +1357,7 @@ export class PilgrimEngine {
   enterBattle(zoneIdx: number) {
     this.mode = "battle";
     this.battleZone = zoneIdx;
+    this.bossRigs[zoneIdx]?.gesture("menace");
     const c = this.arenaCenter[zoneIdx];
     this.playerPos.set(c.x, 0, c.z + 5.6);
     this.rail.position.set(c.x, -0.3, c.z);
@@ -1772,6 +1805,7 @@ export class PilgrimEngine {
     this.playerRig.group.rotation.y = this.playerYaw;
     this.playerRig.setSpeed(moveLen);
     this.playerRig.update(dt, this.time);
+    this.curMoveLen = THREE.MathUtils.lerp(this.curMoveLen, moveLen, Math.min(1, dt * 5));
 
     // --- NPC rigs
     for (let i = 0; i < this.zones.length; i++) {
@@ -1825,9 +1859,14 @@ export class PilgrimEngine {
     if (zi !== this.curZone) {
       this.curZone = zi;
       this.applyZonePalette(zi);
+      this.envTimer = 1.5; // re-bake reflections once the sky settles
       this.opts.hooks.onZoneChange?.(zi);
     }
     this.tickEnvironment(dt);
+    if (this.envTimer > 0) {
+      this.envTimer -= dt;
+      if (this.envTimer <= 0) this.refreshEnvironment();
+    }
 
     // --- lamps flicker
     for (const lamp of this.lamps) {
@@ -1947,6 +1986,12 @@ export class PilgrimEngine {
     desired.y = Math.max(groundY + 0.6, desired.y, 0.7);
     const lerpK = this.mode === "battle" ? Math.min(1, dt * 2.4) : Math.min(1, dt * 7);
     this.camera.position.lerp(desired, lerpK);
+    // gentle FOV widening at full stride
+    const fovT = this.mode === "battle" ? 55 : 55 + this.curMoveLen * 4;
+    if (Math.abs(this.camera.fov - fovT) > 0.05) {
+      this.camera.fov = THREE.MathUtils.lerp(this.camera.fov, fovT, Math.min(1, dt * 4));
+      this.camera.updateProjectionMatrix();
+    }
     if (this.shake > 0) {
       this.shake = Math.max(0, this.shake - dt * 0.8);
       this.camera.position.x += (Math.random() - 0.5) * this.shake * 0.5;
