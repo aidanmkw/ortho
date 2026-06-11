@@ -69,7 +69,7 @@ const args = process.argv.slice(2);
 const only = args.find((a) => a.startsWith("--only="))?.slice(7).split(",");
 const noRig = args.includes("--no-rig");
 const dryRun = args.includes("--dry-run");
-const KEY = process.env.MESHY_API_KEY;
+const KEY = process.env.MESHY_API_KEY?.trim();
 
 function headers() {
   return { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" };
@@ -163,6 +163,18 @@ async function main() {
     console.error("Set MESHY_API_KEY (https://www.meshy.ai → API keys). Nothing was generated.");
     process.exit(1);
   }
+  // preflight: fail fast and clearly on a bad key
+  const pre = await fetch(`${IMG_CREATE}?page_size=1`, { headers: headers() });
+  if (pre.status === 401) {
+    console.error(
+      "\nMeshy rejected this API key (401 Invalid API key).\n" +
+        "  • Copy it again from meshy.ai → Settings → API Keys (watch for trailing spaces/newlines)\n" +
+        "  • If you regenerated the key, the old value is dead — use the new one\n" +
+        `  • Key as received by this script: "${KEY.slice(0, 8)}…${KEY.slice(-4)}" (length ${KEY.length})\n`
+    );
+    process.exit(1);
+  }
+  console.log(`Meshy auth OK (HTTP ${pre.status}).`);
   await mkdir(OUT, { recursive: true });
   const done = [];
   for (const id of ids) {
