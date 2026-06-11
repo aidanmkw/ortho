@@ -93,6 +93,10 @@ export type EngineHooks = {
   onLamp?: (zoneIdx: number, lampIdx: number) => void;
   /** Player stood on an answer plate long enough to commit it. */
   onPlateCommit?: (plateIdx: number) => void;
+  /** A boss attack (bolt/scorch) connected with the player. */
+  onPlayerHit?: (damage: number, kind: "bolt" | "scorch") => void;
+  /** Player rushed the staggered boss — bonus damage window. */
+  onSmite?: () => void;
 };
 
 export type PlateState = "idle" | "dimmed" | "correct" | "wrong";

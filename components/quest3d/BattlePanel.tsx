@@ -163,7 +163,7 @@ export default function BattlePanel(p: Props) {
                 {p.stage === "question" ? (
                   <div className="mt-2.5 flex items-center justify-between gap-2 flex-wrap">
                     <div className="text-[10px] text-parchment/55">
-                      Run to a plate and stand on it — or tap an answer.
+                      Dodge his attacks — run to a plate and stand on it (or tap / 1–4).
                     </div>
                     <div className="flex gap-2">
                       <button

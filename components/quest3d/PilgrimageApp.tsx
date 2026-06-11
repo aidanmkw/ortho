@@ -143,6 +143,33 @@ export default function PilgrimageApp() {
     return boss.attacks[b.queue[b.qPos % b.queue.length]];
   };
 
+  const applyChipDamage = (dmg: number) => {
+    const b = battleRef.current;
+    if (!b) return;
+    sfx.hit();
+    setHurtKey((k) => k + 1);
+    const newHp = Math.max(0, hpRef.current - dmg);
+    setHpState(newHp);
+    if (newHp <= 0) {
+      b.defeated = true;
+      finishDefeat();
+    }
+  };
+
+  const applySmite = () => {
+    const b = battleRef.current;
+    if (!b) return;
+    const dmg = 14;
+    b.bossHp = Math.max(0, b.bossHp - dmg);
+    sfx.crit();
+    pushToast(`⚔ You press the witness — ${dmg} bonus damage!`);
+    if (b.bossHp <= 0) {
+      finishVictory();
+      return;
+    }
+    setBattleState(b);
+  };
+
   const openBattle = (zoneIdx: number) => {
     if (battleRef.current) return;
     const boss = zones[zoneIdx].chapter.boss!;
@@ -184,6 +211,7 @@ export default function PilgrimageApp() {
     b.resolvedNote = undefined;
     b.rationale = undefined;
     engineRef.current?.spawnPlates(b.order.length);
+    engineRef.current?.setBossAggro(true);
     setBattleState(b);
   };
 
@@ -193,6 +221,7 @@ export default function PilgrimageApp() {
     if (b.plateStates[plateIdx] === "dimmed") return;
     const engine = engineRef.current;
     engine?.lockPlates();
+    engine?.setBossAggro(false);
     const boss = zones[b.zoneIdx].chapter.boss!;
     const attack = currentAttack(b);
     const picked = attack.options[b.order[plateIdx]];
@@ -217,6 +246,10 @@ export default function PilgrimageApp() {
       if (crit) sfx.crit();
       else sfx.hit();
       engine?.strikeBoss();
+      if (b.bossHp > 0) {
+        engine?.staggerBoss();
+        if (b.bossHp <= b.bossMax / 2) engine?.setBossPhase2(true);
+      }
       if (b.bossHp <= 0) {
         b.resolvedNote = `✓ ${crit ? "CRITICAL — " : ""}Your witness strikes true for ${dmg}. ${boss.name} can answer nothing more.`;
       } else {
@@ -234,6 +267,7 @@ export default function PilgrimageApp() {
       const dmg = Math.round(attack.difficulty * 6 + 8);
       sfx.wrong();
       engine?.strikePlayer();
+      engine?.empowerNextVolley();
       setHurtKey((k) => k + 1);
       const newHp = Math.max(0, hpRef.current - dmg);
       setHpState(newHp);
@@ -410,6 +444,8 @@ export default function PilgrimageApp() {
           pushToast("🕯 +1 Light · the lamp's warmth restores you (+10)");
         },
         onPlateCommit: (idx) => resolveAnswer(idx),
+        onPlayerHit: (dmg) => applyChipDamage(dmg),
+        onSmite: () => applySmite(),
       },
     });
     engineRef.current = engine;
@@ -551,7 +587,8 @@ export default function PilgrimageApp() {
             <span className="text-parchment/70">Look</span> drag ·{" "}
             <span className="text-parchment/70">Act</span> E / tap ·{" "}
             <span className="text-parchment/70">Answer</span> run onto a plate,
-            tap it, or press 1–4
+            tap it, or press 1–4 · <span className="text-parchment/70">Dodge</span>{" "}
+            Space · <span className="text-parchment/70">Sprint</span> Shift
           </div>
           <Link
             href="/"
@@ -876,6 +913,14 @@ export default function PilgrimageApp() {
 
       {/* touch controls */}
       {coarse && <Joystick onMove={(x, y) => engineRef.current?.setJoystick(x, y)} />}
+      {coarse && b && (
+        <button
+          onClick={() => engineRef.current?.dash()}
+          className="fixed bottom-8 right-5 z-40 w-16 h-16 rounded-full border-2 border-gold/70 bg-black/50 text-gold text-[11px] font-display active:scale-95"
+        >
+          DASH
+        </button>
+      )}
 
       {/* loading / error */}
       {(loading || loadError) && (

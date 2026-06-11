@@ -528,6 +528,23 @@ export class PilgrimEngine {
   }[] = [];
   private modelTick = 0;
 
+  // live combat (battle mode)
+  private aggro = false;
+  private atkTimer = 2.2;
+  private atkInterval = 4.2;
+  private phase2 = false;
+  private stagger = 0;
+  private smiteDone = false;
+  private empowered = false;
+  private dashT = 0;
+  private dashCd = 0;
+  private iframes = 0;
+  private dashDir = new THREE.Vector3(0, 0, -1);
+  private lastMoveDir = new THREE.Vector3(0, 0, -1);
+  private bolts: { pos: THREE.Vector3; vel: THREE.Vector3; life: number; sprite: THREE.Sprite }[] = [];
+  private scorches: { pos: THREE.Vector3; t: number; ring: THREE.Mesh; disc: THREE.Mesh }[] = [];
+  private boltTex: THREE.Texture | null = null;
+
   // state
   private mode: "explore" | "battle" = "explore";
   private battleZone = -1;
@@ -1352,6 +1369,11 @@ export class PilgrimEngine {
   // ---- input -----------------------------------------------------------------
 
   private onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === " " && !e.repeat) {
+      this.dash();
+      e.preventDefault();
+      return;
+    }
     this.keys.add(e.key.toLowerCase());
   };
   private onKeyUp = (e: KeyboardEvent) => {
@@ -1450,6 +1472,8 @@ export class PilgrimEngine {
   enterBattle(zoneIdx: number) {
     this.mode = "battle";
     this.battleZone = zoneIdx;
+    this.clearCombat();
+    this.phase2 = false;
     this.bossRigs[zoneIdx]?.gesture("menace");
     const c = this.arenaCenter[zoneIdx];
     this.playerPos.set(c.x, 0, c.z + 5.6);
@@ -1464,6 +1488,7 @@ export class PilgrimEngine {
   }
 
   exitBattle() {
+    this.clearCombat();
     this.mode = "explore";
     this.battleZone = -1;
     this.clearPlates();
@@ -1477,6 +1502,250 @@ export class PilgrimEngine {
       }
       return true;
     });
+  }
+
+  // ---- live combat -------------------------------------------------------
+
+  /** Boss attacks only while a claim is open (React toggles per round). */
+  setBossAggro(on: boolean) {
+    this.aggro = on;
+    if (on) {
+      const maxHp = this.zones[this.battleZone]?.chapter.boss?.maxHp ?? 200;
+      this.atkInterval = THREE.MathUtils.clamp(5.4 - maxHp / 160, 2.4, 4.6);
+      this.atkTimer = 1.6; // a breath to read before the first volley
+    }
+  }
+
+  /** Wrong answer: the adversary's next volley is a three-bolt fan. */
+  empowerNextVolley() {
+    this.empowered = true;
+  }
+
+  /** Correct answer: the adversary reels; rushing him grants a smite. */
+  staggerBoss(sec = 2.6) {
+    this.stagger = sec;
+    this.smiteDone = false;
+    const rig = this.bossRigs[this.battleZone];
+    if (rig) {
+      let t = 0;
+      this.effects.push((dt) => {
+        t += dt;
+        const k =
+          t < 0.25 ? t / 0.25 : Math.max(0, 1 - Math.max(0, t - (sec - 0.4)) / 0.4);
+        rig.group.rotation.x = -0.3 * k;
+        if (t >= sec) {
+          rig.group.rotation.x = 0;
+          return false;
+        }
+        return true;
+      });
+    }
+  }
+
+  /** Dodge-dash with brief invincibility. Space / mobile button. */
+  dash() {
+    if (this.dashCd > 0 || this.mode !== "battle") return;
+    this.dashCd = 1.2;
+    this.dashT = 0.18;
+    this.iframes = 0.45;
+    this.dashDir.copy(this.lastMoveDir);
+    this.burst(this.playerPos.clone().add(new THREE.Vector3(0, 0.3, 0)), "#d8cfb4", 10);
+  }
+
+  private clearCombat() {
+    this.aggro = false;
+    this.stagger = 0;
+    this.empowered = false;
+    for (const b of this.bolts) {
+      this.scene.remove(b.sprite);
+      b.sprite.material.dispose();
+    }
+    this.bolts = [];
+    for (const s of this.scorches) {
+      this.scene.remove(s.ring, s.disc);
+      s.ring.geometry.dispose();
+      (s.ring.material as THREE.Material).dispose();
+      s.disc.geometry.dispose();
+      (s.disc.material as THREE.Material).dispose();
+    }
+    this.scorches = [];
+  }
+
+  private launchBolt(from: THREE.Vector3, dir: THREE.Vector3) {
+    if (!this.boltTex) this.boltTex = makeGlowTexture("rgba(255,70,40,0.95)", "rgba(120,10,10,0)");
+    const sprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: this.boltTex,
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      })
+    );
+    sprite.scale.setScalar(1.0);
+    sprite.position.copy(from);
+    this.scene.add(sprite);
+    this.bolts.push({ pos: from.clone(), vel: dir.clone().multiplyScalar(9.5), life: 3.2, sprite });
+  }
+
+  private bossVolley() {
+    const zi = this.battleZone;
+    const boss = this.bossRigs[zi];
+    const bp = this.bossPos[zi];
+    boss?.gesture("cast");
+    const target = this.playerPos.clone();
+    const fan = this.empowered ? [-0.32, 0, 0.32] : [0];
+    this.empowered = false;
+    // brief aim-line telegraph, then loose
+    const from = bp.clone().add(new THREE.Vector3(0, 1.6, 0));
+    const lineMat = new THREE.MeshBasicMaterial({
+      color: "#ff5040",
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const lines: THREE.Mesh[] = [];
+    for (const a of fan) {
+      const dir = target.clone().add(new THREE.Vector3(0, 1.0, 0)).sub(from).normalize();
+      dir.applyAxisAngle(new THREE.Vector3(0, 1, 0), a);
+      const len = 26;
+      const line = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, len, 4), lineMat);
+      line.position.copy(from).addScaledVector(dir, len / 2);
+      line.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+      this.scene.add(line);
+      lines.push(line);
+    }
+    let t = 0;
+    this.effects.push((dt) => {
+      t += dt;
+      lineMat.opacity = 0.35 * (1 - t / 0.45);
+      if (t >= 0.45) {
+        for (const l of lines) {
+          this.scene.remove(l);
+          l.geometry.dispose();
+        }
+        for (const a of fan) {
+          const dir = target.clone().add(new THREE.Vector3(0, 1.0, 0)).sub(from).normalize();
+          dir.applyAxisAngle(new THREE.Vector3(0, 1, 0), a);
+          this.launchBolt(from, dir);
+        }
+        return false;
+      }
+      return true;
+    });
+  }
+
+  private bossScorch() {
+    const at = this.playerPos.clone();
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(1.45, 1.7, 32),
+      new THREE.MeshBasicMaterial({
+        color: "#ff4030",
+        transparent: true,
+        opacity: 0.8,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      })
+    );
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.set(at.x, 0.06, at.z);
+    const disc = new THREE.Mesh(
+      new THREE.CircleGeometry(1.45, 32),
+      new THREE.MeshBasicMaterial({
+        color: "#a02020",
+        transparent: true,
+        opacity: 0.15,
+        depthWrite: false,
+      })
+    );
+    disc.rotation.x = -Math.PI / 2;
+    disc.position.set(at.x, 0.05, at.z);
+    this.scene.add(ring, disc);
+    this.scorches.push({ pos: at, t: 0, ring, disc });
+  }
+
+  /** Substepped combat integration: timers, bolts, scorches, smite. */
+  private combatStep(h: number) {
+    if (this.mode !== "battle") return;
+    this.dashCd = Math.max(0, this.dashCd - h);
+    this.iframes = Math.max(0, this.iframes - h);
+
+    // stagger window: rushing the boss = smite
+    if (this.stagger > 0) {
+      this.stagger -= h;
+      if (!this.smiteDone) {
+        const bp = this.bossPos[this.battleZone];
+        if (bp && bp.distanceTo(this.playerPos) < 1.9) {
+          this.smiteDone = true;
+          this.burst(bp.clone().add(new THREE.Vector3(0, 1.3, 0)), "#ffe28c", 30);
+          this.bossRigs[this.battleZone]?.flash();
+          this.shake = Math.max(this.shake, 0.25);
+          // shove the pilgrim back out of the boss
+          const back = this.playerPos.clone().sub(bp).setY(0).normalize();
+          this.playerPos.addScaledVector(back, 1.4);
+          this.opts.hooks.onSmite?.();
+        }
+      }
+    } else if (this.aggro) {
+      this.atkTimer -= h;
+      if (this.atkTimer <= 0) {
+        this.atkTimer = this.atkInterval * (this.phase2 ? 0.72 : 1) * (0.85 + Math.random() * 0.3);
+        if (Math.random() < 0.6) this.bossVolley();
+        else this.bossScorch();
+      }
+    }
+
+    // bolts
+    for (let i = this.bolts.length - 1; i >= 0; i--) {
+      const b = this.bolts[i];
+      b.pos.addScaledVector(b.vel, h);
+      b.life -= h;
+      b.sprite.position.copy(b.pos);
+      const dx = b.pos.x - this.playerPos.x;
+      const dy = b.pos.y - (this.playerPos.y + 1.0);
+      const dz = b.pos.z - this.playerPos.z;
+      const hit = dx * dx + dy * dy + dz * dz < 0.75 * 0.75;
+      if (hit && this.iframes <= 0) {
+        this.playerRig.flash();
+        this.shake = Math.max(this.shake, 0.22);
+        this.burst(this.playerPos.clone().add(new THREE.Vector3(0, 1.1, 0)), "#ff5040", 12);
+        this.opts.hooks.onPlayerHit?.(5 + (this.phase2 ? 3 : 0), "bolt");
+      }
+      if (hit || b.life <= 0 || b.pos.y < 0) {
+        this.scene.remove(b.sprite);
+        b.sprite.material.dispose();
+        this.bolts.splice(i, 1);
+      }
+    }
+
+    // scorches: warn 1.05s, then erupt
+    for (let i = this.scorches.length - 1; i >= 0; i--) {
+      const s = this.scorches[i];
+      s.t += h;
+      const mat = s.ring.material as THREE.MeshBasicMaterial;
+      mat.opacity = 0.5 + 0.4 * Math.sin(s.t * 18);
+      (s.disc.material as THREE.MeshBasicMaterial).opacity = 0.12 + (s.t / 1.05) * 0.3;
+      if (s.t >= 1.05) {
+        const d = Math.hypot(s.pos.x - this.playerPos.x, s.pos.z - this.playerPos.z);
+        this.burst(s.pos.clone().add(new THREE.Vector3(0, 0.4, 0)), "#ff6040", 22);
+        if (d < 1.55 && this.iframes <= 0) {
+          this.playerRig.flash();
+          this.shake = Math.max(this.shake, 0.3);
+          this.opts.hooks.onPlayerHit?.(8 + (this.phase2 ? 3 : 0), "scorch");
+        }
+        this.scene.remove(s.ring, s.disc);
+        s.ring.geometry.dispose();
+        mat.dispose();
+        s.disc.geometry.dispose();
+        (s.disc.material as THREE.Material).dispose();
+        this.scorches.splice(i, 1);
+      }
+    }
+  }
+
+  /** Below half health the adversary quickens. */
+  setBossPhase2(on: boolean) {
+    this.phase2 = on;
   }
 
   /** Lay out N answer plates in an arc facing the adversary. */
@@ -1711,6 +1980,7 @@ export class PilgrimEngine {
 
   /** The adversary is overcome: falls, fades, memorial lit, doors open. */
   bossDefeated(zoneIdx: number) {
+    this.clearCombat();
     this.bossAlive[zoneIdx] = false;
     const rig = this.bossRigs[zoneIdx];
     if (rig) {
@@ -1789,6 +2059,11 @@ export class PilgrimEngine {
   private simStep(h: number, velX: number, velZ: number) {
     this.playerPos.x += velX * h;
     this.playerPos.z += velZ * h;
+    if (this.dashT > 0) {
+      this.dashT -= h;
+      this.playerPos.addScaledVector(this.dashDir, 22 * h);
+    }
+    this.combatStep(h);
 
     // constraints
     if (this.mode === "battle") {
@@ -1861,8 +2136,9 @@ export class PilgrimEngine {
     // --- movement (substepped so low frame rates don't slow world-time
     //     or tunnel through lamp/plate triggers)
     const input = this.moveInput();
-    const speed = 5.4;
-    const moveLen = input.lengthSq() > 0.001 ? Math.min(1, input.length()) : 0;
+    const sprinting = this.keys.has("shift");
+    const speed = 5.4 * (sprinting ? 1.45 : 1);
+    const moveLen = input.lengthSq() > 0.001 ? Math.min(1, input.length()) * (sprinting ? 1.2 : 1) : 0;
     let dirX = 0;
     let dirZ = 0;
     if (moveLen > 0) {
@@ -1870,6 +2146,7 @@ export class PilgrimEngine {
       const cos = Math.cos(this.camYaw);
       dirX = input.x * cos - input.y * sin;
       dirZ = -input.x * sin - input.y * cos;
+      this.lastMoveDir.set(dirX, 0, dirZ).normalize();
       const targetYaw = Math.atan2(dirX, dirZ);
       let d = targetYaw - this.playerYaw;
       while (d > Math.PI) d -= Math.PI * 2;
