@@ -189,27 +189,7 @@ async function generateOne(id, spec) {
 
   let glbUrl = mesh.model_urls?.glb;
   if (!noRig) {
-    try {
-      console.log(`■ ${id}: rigging + animation`);
-      const rig = await post(RIG_CREATE, {
-        input_task_id: meshTask,
-        height_meters: 1.8,
-      });
-      const rigTask = rig.result ?? rig.id;
-      await rememberTasks(id, { rig: rigTask });
-      const rigged = await poll(RIG_GET(rigTask), `${id} rig`);
-      const found = collectGlbUrls(rigged);
-      console.log(
-        `\n■ ${id}: rig response glb fields: ${found.map((f) => f.path).join(", ") || "(none)"}`
-      );
-      if (!found.length) {
-        console.log(`■ ${id}: rig response sample: ${JSON.stringify(rigged).slice(0, 1200)}`);
-      }
-      glbUrl = pickRiggedUrl(rigged) ?? glbUrl;
-    } catch (e) {
-      console.warn(`\n■ ${id}: rigging unavailable (${e.message.slice(0, 120)}) — keeping static mesh.`);
-      console.warn("  If this is a 4xx, check https://docs.meshy.ai and adjust RIG_CREATE fields.");
-    }
+    glbUrl = (await rigMesh(id, meshTask)) ?? glbUrl;
   }
   if (!glbUrl) throw new Error(`${id}: no GLB url in response`);
   await download(glbUrl, out);
@@ -220,6 +200,57 @@ async function generateOne(id, spec) {
     console.warn(`■ ${id}: saved — ⚠ STATIC mesh (no skeleton/clips in the downloaded GLB)`);
   }
   return true;
+}
+
+/** Create a rigging+animation task for a mesh task; returns the best GLB url. */
+async function rigMesh(id, meshTaskId) {
+  try {
+    console.log(`■ ${id}: rigging + animation`);
+    const rig = await post(RIG_CREATE, {
+      input_task_id: meshTaskId,
+      height_meters: 1.8,
+    });
+    const rigTask = rig.result ?? rig.id;
+    await rememberTasks(id, { rig: rigTask });
+    const rigged = await poll(RIG_GET(rigTask), `${id} rig`);
+    const found = collectGlbUrls(rigged);
+    console.log(
+      `\n■ ${id}: rig response glb fields: ${found.map((f) => f.path).join(", ") || "(none)"}`
+    );
+    if (!found.length) {
+      console.log(`■ ${id}: rig response sample: ${JSON.stringify(rigged).slice(0, 1200)}`);
+    }
+    return pickRiggedUrl(rigged);
+  } catch (e) {
+    console.warn(`\n■ ${id}: rigging unavailable (${e.message.slice(0, 160)}) — keeping static mesh.`);
+    console.warn("  If this is a 4xx, check https://docs.meshy.ai and adjust RIG_CREATE fields.");
+    return undefined;
+  }
+}
+
+/**
+ * --rig-missing: for characters whose GLB is static but whose mesh task id
+ * is known (tasks.json), create a fresh rigging job and replace the file.
+ * Costs only the rigging fee — no regeneration.
+ */
+async function rigMissing() {
+  let all = {};
+  try {
+    all = JSON.parse(readFileSync(TASKS_FILE, "utf8"));
+  } catch {
+    console.error("No public/models/tasks.json — run --adopt-tasks first.");
+    return;
+  }
+  for (const [id, t] of Object.entries(all)) {
+    if (!t.mesh) continue;
+    const file = path.join(OUT, `${id}.glb`);
+    if (existsSync(file) && glbInfo(file).skins > 0) continue;
+    const url = await rigMesh(id, t.mesh);
+    if (!url) continue;
+    await download(url, file);
+    const info = glbInfo(file);
+    console.log(`■ ${id}: re-rigged — skins=${info.skins} clips=[${info.clips.join(", ")}]`);
+  }
 }
 
 /**
@@ -289,13 +320,18 @@ async function adoptTasks() {
 }
 
 async function main() {
-  if (args.includes("--adopt-tasks") || args.includes("--refresh-rigged")) {
+  if (
+    args.includes("--adopt-tasks") ||
+    args.includes("--refresh-rigged") ||
+    args.includes("--rig-missing")
+  ) {
     if (!KEY) {
       console.error("MESHY_API_KEY required.");
       process.exit(1);
     }
     if (args.includes("--adopt-tasks")) await adoptTasks();
     if (args.includes("--refresh-rigged")) await refreshRigged();
+    if (args.includes("--rig-missing")) await rigMissing();
     // keep the manifest in sync with whatever is rigged on disk now
     const manifest = { models: [] };
     for (const id of Object.keys(CHARACTERS)) {

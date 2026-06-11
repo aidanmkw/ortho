@@ -1,2 +1,2 @@
---adopt-tasks --refresh-rigged
-# repair pass: recover rigged GLBs for static models from task history
+--rig-missing
+# rig the three static meshes from their adopted mesh task ids
