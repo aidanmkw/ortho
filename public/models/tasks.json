@@ -1,0 +1,77 @@
+{
+  "player": {
+    "mesh": "019eb75d-53d7-7d03-8b28-f7dac7e5bd82",
+    "rig": "019eb75f-5c35-7414-b93a-2af8e0ea7b86"
+  },
+  "marcus": {
+    "mesh": "019eb75f-f2de-744b-a4d3-1c0936ebca8c",
+    "rig": "019eb763-105a-729e-9064-66c1e5c3c12f"
+  },
+  "tempter": {
+    "mesh": "019eb763-c776-7282-a3f4-86b1d7790487",
+    "rig": "019eb766-64bd-7644-8c07-848a7a49d425"
+  },
+  "eutyches": {
+    "mesh": "019eb767-1acb-7411-92e1-36de02dba994",
+    "rig": "019eb769-59d1-7497-b13a-cddbbd765786"
+  },
+  "iconoclast": {
+    "mesh": "019eb76a-11dd-7721-9671-00fd6891a56c",
+    "rig": "019eb76c-31bf-7190-be8c-976c08c13b31"
+  },
+  "humbert": {
+    "mesh": "019eb76c-cbbc-74b5-93ad-3ca843a687d5",
+    "rig": "019eb76e-ef83-7812-aa01-745efb39da93"
+  },
+  "pope-eugene": {
+    "mesh": "019eb76f-8649-7562-874c-f34f09dd7ada",
+    "rig": "019eb771-a647-788b-9243-d61ac9d19f8a"
+  },
+  "nkvd": {
+    "mesh": "019eb772-3e30-7639-bb4a-78e72f87ab05",
+    "rig": "019eb774-04cd-7907-bc1b-c6033c940ee0"
+  },
+  "lds": {
+    "mesh": "019eb774-9cb3-7931-b213-0f56ad04b13e",
+    "rig": "019eb777-fdea-7832-92d0-962cc38b8ef6"
+  },
+  "reformed": {
+    "mesh": "019eb778-952a-7874-8c0f-1658f9dad92c",
+    "rig": "019eb77b-21fc-762a-a685-2ef05652322f"
+  },
+  "atheist": {
+    "mesh": "019eb77b-b9eb-799e-a408-9ed7a3063975"
+  },
+  "doubt": {
+    "mesh": "019eb77e-9280-7bfd-a651-acbadaf1fa0a",
+    "rig": "019eb782-efcd-7b40-a71c-4f84dde11f2d"
+  },
+  "st-ignatius": {
+    "mesh": "019eb783-885c-7d3c-a8fc-3045d865ad09",
+    "rig": "019eb786-c87f-7e0e-a5e2-e46cd9b18dcf"
+  },
+  "st-anthony": {
+    "mesh": "019eb787-80eb-7cd3-a298-63d53618bcbc",
+    "rig": "019eb78a-a33a-7d85-be6b-f5b51c0070b9"
+  },
+  "st-athanasius": {
+    "mesh": "019eb78b-5a8a-7e1c-97ff-3d8ddb90e18e",
+    "rig": "019eb78e-7be4-7eed-80e4-e899f642377b"
+  },
+  "st-macarius": {
+    "mesh": "019eb78f-13b1-7bd6-ac21-1bb7b6040880",
+    "rig": "019eb791-77d0-7fb9-bfd0-a34b8ef2f2e5"
+  },
+  "st-cyril": {
+    "mesh": "019eb792-2ecc-7c87-acdf-21292011e4f9",
+    "rig": "019eb794-52b4-7047-9d0f-a3a7a64f9d51"
+  },
+  "st-john-damascus": {
+    "mesh": "019eb794-ea46-7082-afa7-4b7c8cf8000c",
+    "rig": "019eb797-cce5-717c-ab7b-369751ffa654"
+  },
+  "st-mark-ephesus": {
+    "mesh": "019eb798-6329-72dc-af3d-f7a17ae37b10",
+    "rig": "019eb79a-490c-71e0-beed-886a58c7fd8a"
+  }
+}

@@ -1,6 +1,25 @@
 {
   "models": [
+    "player",
     "centurion",
-    "arius"
+    "marcus",
+    "arius",
+    "tempter",
+    "eutyches",
+    "iconoclast",
+    "humbert",
+    "pope-eugene",
+    "nkvd",
+    "lds",
+    "reformed",
+    "atheist",
+    "doubt",
+    "st-ignatius",
+    "st-anthony",
+    "st-athanasius",
+    "st-macarius",
+    "st-cyril",
+    "st-john-damascus",
+    "st-mark-ephesus"
   ]
 }
