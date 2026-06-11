@@ -18,7 +18,7 @@
 // https://docs.meshy.ai rigging docs and adjust RIG_CREATE/RIG_GET only.
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 const API = "https://api.meshy.ai";
@@ -69,7 +69,20 @@ const args = process.argv.slice(2);
 const only = args.find((a) => a.startsWith("--only="))?.slice(7).split(",");
 const noRig = args.includes("--no-rig");
 const dryRun = args.includes("--dry-run");
-const KEY = process.env.MESHY_API_KEY?.trim();
+// Key resolution: env var, or a git-ignored local file so the key never
+// needs to be typed in a command (and can never be committed):
+//   echo "msy_yourkey" > scripts/.meshy-key
+function resolveKey() {
+  if (process.env.MESHY_API_KEY?.trim()) return process.env.MESHY_API_KEY.trim();
+  for (const f of [path.join(ROOT, "scripts", ".meshy-key"), path.join(ROOT, ".env.local")]) {
+    try {
+      const m = readFileSync(f, "utf8").match(/(msy_[A-Za-z0-9]+)/);
+      if (m) return m[1];
+    } catch {}
+  }
+  return undefined;
+}
+const KEY = resolveKey();
 
 function headers() {
   return { Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" };
@@ -160,7 +173,11 @@ async function main() {
   console.log(`Generating ${ids.length} character model(s): ${ids.join(", ")}`);
   if (dryRun) return;
   if (!KEY) {
-    console.error("Set MESHY_API_KEY (https://www.meshy.ai → API keys). Nothing was generated.");
+    console.error(
+      "No Meshy key found. Easiest fix:\n" +
+        '  echo "msy_yourkey" > scripts/.meshy-key\n' +
+        "(or set the MESHY_API_KEY env var). Nothing was generated."
+    );
     process.exit(1);
   }
   // preflight: fail fast and clearly on a bad key

@@ -8,3 +8,6 @@ next-env.d.ts
 .tsbuildinfo
 tsconfig.tsbuildinfo
 .gemini-key
+
+# local Meshy API key for scripts/generate-models.mjs (never commit)
+scripts/.meshy-key
