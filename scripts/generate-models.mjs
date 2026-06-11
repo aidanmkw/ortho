@@ -289,20 +289,19 @@ async function adoptTasks() {
 }
 
 async function main() {
-  if (args.includes("--adopt-tasks")) {
+  if (args.includes("--adopt-tasks") || args.includes("--refresh-rigged")) {
     if (!KEY) {
       console.error("MESHY_API_KEY required.");
       process.exit(1);
     }
-    await adoptTasks();
-    return;
-  }
-  if (args.includes("--refresh-rigged")) {
-    if (!KEY) {
-      console.error("MESHY_API_KEY required.");
-      process.exit(1);
+    if (args.includes("--adopt-tasks")) await adoptTasks();
+    if (args.includes("--refresh-rigged")) await refreshRigged();
+    // keep the manifest in sync with whatever is rigged on disk now
+    const manifest = { models: [] };
+    for (const id of Object.keys(CHARACTERS)) {
+      if (existsSync(path.join(OUT, `${id}.glb`))) manifest.models.push(id);
     }
-    await refreshRigged();
+    await writeFile(MANIFEST, JSON.stringify(manifest, null, 2) + "\n");
     return;
   }
   const ids = Object.keys(CHARACTERS).filter((id) => !only || only.includes(id));

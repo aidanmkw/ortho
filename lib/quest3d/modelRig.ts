@@ -72,11 +72,21 @@ class ModelRig implements Rig {
     if (clips.length) {
       this.hasClips = true;
       this.mixer = new THREE.AnimationMixer(root);
-      const idle = findClip(clips, "idle") ?? clips[0];
-      const walk = findClip(clips, "walk") ?? idle;
-      this.idleA = this.mixer.clipAction(idle);
+      const idle = findClip(clips, "idle");
+      const walk = findClip(clips, "walk") ?? idle ?? clips[0];
+      if (idle && idle !== walk) {
+        this.idleA = this.mixer.clipAction(idle);
+        this.idleA.play();
+      } else {
+        // no dedicated idle clip: hold a frozen pose of the walk clip so
+        // characters don't march in place while standing
+        const pose = walk.clone();
+        pose.name = "__pose";
+        this.idleA = this.mixer.clipAction(pose);
+        this.idleA.play();
+        this.idleA.paused = true;
+      }
       this.walkA = this.mixer.clipAction(walk);
-      this.idleA.play();
       this.walkA.play();
       this.walkA.weight = 0;
       for (const key of ["cast", "strike", "bless", "die"]) {
