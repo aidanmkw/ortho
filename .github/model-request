@@ -1,4 +1,2 @@
-# First non-comment line = arguments for scripts/generate-models.mjs.
-# Empty line = generate every character missing from public/models/.
-# run 2: patched url extraction + tasks.json
-
+--adopt-tasks --refresh-rigged
+# repair pass: recover rigged GLBs for static models from task history
