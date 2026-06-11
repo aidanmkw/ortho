@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "content:check": "tsx scripts/content-check.ts"
+    "content:check": "tsx scripts/content-check.ts",
+    "models:generate": "node scripts/generate-models.mjs"
   },
   "dependencies": {
     "@types/three": "^0.170.0",

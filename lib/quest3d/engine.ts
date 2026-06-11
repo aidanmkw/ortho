@@ -13,6 +13,7 @@ import * as THREE from "three";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { PORTRAITS } from "@/lib/quest/portraits";
 import { buildRig, playerConfig, type Rig } from "./characters";
+import { loadModelManifest, loadModelRig } from "./modelRig";
 import type {
   EngineHooks,
   NearTarget,
@@ -516,6 +517,7 @@ export class PilgrimEngine {
   private envRT: THREE.WebGLRenderTarget | null = null;
   private envTimer = 0;
   private curMoveLen = 0;
+  private modelIds = new Set<string>();
 
   // state
   private mode: "explore" | "battle" = "explore";
@@ -555,6 +557,7 @@ export class PilgrimEngine {
 
     this.buildLights();
     this.buildSkyDome();
+    this.modelIds = await loadModelManifest(this.opts.basePath);
     await this.buildWorld();
     if (this.disposed) return;
     this.buildPlayer();
@@ -1051,6 +1054,14 @@ export class PilgrimEngine {
         this.scene.add(rig.group);
         this.allyRigs.push(rig);
         this.allyPos.push(rig.group.position.clone());
+        this.maybeUpgradeRig(
+          zone.allyId,
+          1.98,
+          () => this.allyRigs[i],
+          (r) => {
+            this.allyRigs[i] = r;
+          }
+        );
       } else {
         this.allyRigs.push(null);
         this.allyPos.push(null);
@@ -1069,6 +1080,14 @@ export class PilgrimEngine {
         rig.group.rotation.y = 0; // faces +Z, toward the approaching pilgrim
         this.scene.add(rig.group);
         this.bossRigs.push(rig);
+        this.maybeUpgradeRig(
+          zone.bossId,
+          tall,
+          () => this.bossRigs[i],
+          (r) => {
+            this.bossRigs[i] = r;
+          }
+        );
       } else {
         this.bossRigs.push(null);
         this.addMemorial(arenaC);
@@ -1214,10 +1233,50 @@ export class PilgrimEngine {
     this.scene.add(cross, flame);
   }
 
+  /**
+   * If a generated GLB exists for this character (per the manifest), load
+   * it in the background and swap it in place of the procedural figure.
+   */
+  private maybeUpgradeRig(
+    id: string,
+    height: number,
+    get: () => Rig | null,
+    set: (r: Rig) => void
+  ) {
+    if (!this.modelIds.has(id)) return;
+    loadModelRig(this.opts.basePath, id, height).then((model) => {
+      if (!model) return;
+      if (this.disposed) {
+        model.dispose();
+        return;
+      }
+      const old = get();
+      if (!old) {
+        // character already removed (e.g. boss defeated) — discard
+        model.dispose();
+        return;
+      }
+      model.group.position.copy(old.group.position);
+      model.group.rotation.y = old.group.rotation.y;
+      this.scene.add(model.group);
+      this.scene.remove(old.group);
+      old.dispose();
+      set(model);
+    });
+  }
+
   private buildPlayer() {
     const cfg = playerConfig();
     this.playerRig = buildRig(cfg, { height: 1.72, hairHex: this.opts.hairHex });
     this.scene.add(this.playerRig.group);
+    this.maybeUpgradeRig(
+      "player",
+      1.72,
+      () => this.playerRig,
+      (r) => {
+        this.playerRig = r;
+      }
+    );
   }
 
   private buildWeather() {
