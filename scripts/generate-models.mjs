@@ -258,7 +258,45 @@ async function refreshRigged() {
   }
 }
 
+/**
+ * --adopt-tasks: rebuild tasks.json from the Meshy account history by
+ * matching past tasks to characters via their unique prompts. Lets
+ * --refresh-rigged recover rigged GLBs for models generated before task
+ * recording existed — at zero generation cost.
+ */
+async function adoptTasks() {
+  const list = async (kind) => {
+    const res = await fetch(`${API}/openapi/v1/${kind}?page_size=50`, { headers: headers() });
+    if (!res.ok) throw new Error(`${kind} list → ${res.status}`);
+    const data = await res.json();
+    return Array.isArray(data) ? data : data.result ?? data.data ?? [];
+  };
+  const meshes = await list("image-to-3d");
+  const rigs = await list("rigging");
+  console.log(`Found ${meshes.length} mesh task(s), ${rigs.length} rigging task(s) in account history.`);
+  let adopted = 0;
+  for (const [id, spec] of Object.entries(CHARACTERS)) {
+    const sig = spec.prompt.slice(0, 48);
+    const mesh = meshes.find((m) => JSON.stringify(m).includes(sig));
+    if (!mesh) continue;
+    const meshId = mesh.id ?? mesh.result;
+    const rig = rigs.find((r) => JSON.stringify(r).includes(meshId));
+    await rememberTasks(id, { mesh: meshId, ...(rig ? { rig: rig.id ?? rig.result } : {}) });
+    adopted++;
+    console.log(`■ ${id}: adopted mesh=${meshId}${rig ? ` rig=${rig.id ?? rig.result}` : " (no rig task found)"}`);
+  }
+  console.log(`Adopted ${adopted} character(s). Now run with --refresh-rigged.`);
+}
+
 async function main() {
+  if (args.includes("--adopt-tasks")) {
+    if (!KEY) {
+      console.error("MESHY_API_KEY required.");
+      process.exit(1);
+    }
+    await adoptTasks();
+    return;
+  }
   if (args.includes("--refresh-rigged")) {
     if (!KEY) {
       console.error("MESHY_API_KEY required.");
