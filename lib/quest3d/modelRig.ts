@@ -194,16 +194,62 @@ class ModelRig implements Rig {
   }
 }
 
-/** Fetch the model manifest; returns the set of character ids with GLBs. */
-export async function loadModelManifest(basePath: string): Promise<Set<string>> {
+/** Fetch the model manifest: character ids and environment prop ids. */
+export async function loadModelManifest(
+  basePath: string
+): Promise<{ models: Set<string>; props: Set<string> }> {
   try {
     const res = await fetch(`${basePath}/models/manifest.json`, { cache: "no-cache" });
-    if (!res.ok) return new Set();
-    const data = (await res.json()) as { models?: string[] };
-    return new Set(data.models ?? []);
+    if (!res.ok) return { models: new Set(), props: new Set() };
+    const data = (await res.json()) as { models?: string[]; props?: string[] };
+    return { models: new Set(data.models ?? []), props: new Set(data.props ?? []) };
   } catch {
-    return new Set();
+    return { models: new Set(), props: new Set() };
   }
+}
+
+/**
+ * Load a static scenery GLB, normalized so its base sits at y=0 and its
+ * height matches `height`. Returns null on any failure.
+ */
+export function loadPropScene(
+  basePath: string,
+  id: string,
+  height: number
+): Promise<THREE.Object3D | null> {
+  return new Promise((resolve) => {
+    new GLTFLoader().load(
+      `${basePath}/models/${id}.glb`,
+      (gltf) => {
+        try {
+          const root = gltf.scene;
+          const box = new THREE.Box3().setFromObject(root);
+          const size = box.getSize(new THREE.Vector3());
+          const scale = size.y > 1e-4 ? height / size.y : 1;
+          root.scale.setScalar(scale);
+          root.position.set(
+            -((box.min.x + box.max.x) / 2) * scale,
+            -box.min.y * scale,
+            -((box.min.z + box.max.z) / 2) * scale
+          );
+          root.traverse((o) => {
+            const m = o as THREE.Mesh;
+            if (m.isMesh) {
+              m.castShadow = true;
+              m.receiveShadow = true;
+            }
+          });
+          const wrap = new THREE.Group();
+          wrap.add(root);
+          resolve(wrap);
+        } catch {
+          resolve(null);
+        }
+      },
+      undefined,
+      () => resolve(null)
+    );
+  });
 }
 
 /** Load /models/<id>.glb as a Rig. Resolves null on any failure. */

@@ -13,7 +13,7 @@ import * as THREE from "three";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { PORTRAITS } from "@/lib/quest/portraits";
 import { buildRig, playerConfig, type Rig } from "./characters";
-import { loadModelManifest, loadModelRig } from "./modelRig";
+import { loadModelManifest, loadModelRig, loadPropScene } from "./modelRig";
 import type {
   EngineHooks,
   NearTarget,
@@ -249,6 +249,8 @@ type Gate = {
   doorL: THREE.Group;
   doorR: THREE.Group;
   barrier: THREE.Mesh;
+  frame: THREE.Group;
+  towers: THREE.Group[];
   open: boolean;
   z: number;
 };
@@ -259,19 +261,21 @@ function buildGate(rng: () => number): Gate {
   const span = 2.2;
   const ph = 5.2;
   const pw = 1.0;
+  const frame = new THREE.Group();
   for (const side of [-1, 1]) {
     const p = box(pw, ph, pw, stoneMat("#938e82"));
     p.position.set(side * (span + pw / 2), ph / 2, 0);
     const cap = box(pw * 1.5, 0.35, pw * 1.5, stoneMat("#7e786c"));
     cap.position.set(side * (span + pw / 2), ph + 0.18, 0);
-    group.add(p, cap);
+    frame.add(p, cap);
   }
   const lintel = box(span * 2 + pw * 2 + 0.7, 0.7, pw, stoneMat("#938e82"));
   lintel.position.y = ph + 0.55;
-  group.add(lintel);
+  frame.add(lintel);
   const cross = buildCross(1.0, goldMat(0.35));
   cross.position.y = ph + 0.95;
-  group.add(cross);
+  frame.add(cross);
+  group.add(frame);
 
   const doorGeo = new THREE.PlaneGeometry(span, 4.4);
   doorGeo.translate(span / 2, 0, 0);
@@ -317,11 +321,13 @@ function buildGate(rng: () => number): Gate {
   barrier.position.y = 2.2;
   group.add(barrier);
 
-  const tL = buildTower(rng);
-  tL.position.set(-(span + pw + 3.4), 0, -0.6);
-  const tR = buildTower(rng);
-  tR.position.set(span + pw + 3.4, 0, -0.6);
-  group.add(tL, tR);
+  const towerL = new THREE.Group();
+  towerL.add(buildTower(rng));
+  towerL.position.set(-(span + pw + 3.4), 0, -0.6);
+  const towerR = new THREE.Group();
+  towerR.add(buildTower(rng));
+  towerR.position.set(span + pw + 3.4, 0, -0.6);
+  group.add(towerL, towerR);
   // crimson velum slung tower-to-tower (the icon painter's join)
   const velum = new THREE.Mesh(
     new THREE.PlaneGeometry(span * 2 + pw * 2 + 5.6, 1.0, 8, 1),
@@ -340,7 +346,7 @@ function buildGate(rng: () => number): Gate {
   velum.position.y = ph + 2.2;
   group.add(velum);
 
-  return { group, doorL, doorR, barrier, open: false, z: 0 };
+  return { group, doorL, doorR, barrier, frame, towers: [towerL, towerR], open: false, z: 0 };
 }
 
 /** Roadside icon-shrine displaying the chapter's art. */
@@ -518,6 +524,8 @@ export class PilgrimEngine {
   private envTimer = 0;
   private curMoveLen = 0;
   private modelIds = new Set<string>();
+  private propIds = new Set<string>();
+  private propSlots = new Map<string, THREE.Group[]>();
   private pendingModels: {
     id: string;
     height: number;
@@ -583,8 +591,11 @@ export class PilgrimEngine {
 
     this.buildLights();
     this.buildSkyDome();
-    this.modelIds = await loadModelManifest(this.opts.basePath);
+    const manifest = await loadModelManifest(this.opts.basePath);
+    this.modelIds = manifest.models;
+    this.propIds = manifest.props;
     await this.buildWorld();
+    this.loadEnvironmentProps();
     if (this.disposed) return;
     this.buildPlayer();
     this.buildWeather();
@@ -827,6 +838,38 @@ export class PilgrimEngine {
     return { grass, dirt, rock, snowLine };
   }
 
+  private groundTex: THREE.Texture | null = null;
+  /** Subtle speckle detail map so the ground reads as earth, not vinyl. */
+  private groundDetailTex(): THREE.Texture {
+    if (this.groundTex) return this.groundTex;
+    const cv = document.createElement("canvas");
+    cv.width = cv.height = 256;
+    const ctx = cv.getContext("2d")!;
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 1400; i++) {
+      const g = 190 + Math.floor(Math.random() * 64);
+      ctx.fillStyle = `rgba(${g},${g},${g},${0.25 + Math.random() * 0.3})`;
+      const w = 1 + Math.random() * 2.5;
+      ctx.fillRect(Math.random() * 256, Math.random() * 256, w, w * (0.5 + Math.random()));
+    }
+    for (let i = 0; i < 90; i++) {
+      ctx.strokeStyle = `rgba(170,170,170,${0.12 + Math.random() * 0.12})`;
+      ctx.beginPath();
+      const x = Math.random() * 256;
+      const y = Math.random() * 256;
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + (Math.random() - 0.5) * 14, y + (Math.random() - 0.5) * 14);
+      ctx.stroke();
+    }
+    const tex = new THREE.CanvasTexture(cv);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(46, 9);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    this.groundTex = tex;
+    return tex;
+  }
+
   private buildTerrain() {
     const L = ZONE_LEN;
     const width = 240;
@@ -870,7 +913,12 @@ export class PilgrimEngine {
       geo.computeVertexNormals();
       const mesh = new THREE.Mesh(
         geo,
-        new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, metalness: 0 })
+        new THREE.MeshStandardMaterial({
+          vertexColors: true,
+          roughness: 1,
+          metalness: 0,
+          map: this.groundDetailTex(),
+        })
       );
       mesh.receiveShadow = true;
       this.scene.add(mesh);
@@ -1054,6 +1102,13 @@ export class PilgrimEngine {
       ring.rotation.x = -Math.PI / 2;
       ring.position.set(arenaC.x, 0.045, arenaC.z);
       this.scene.add(disc, ring);
+      for (const sx of [-6.1, 6.1]) {
+        const statue = this.propSlot("prop-statue", new THREE.Group());
+        const sz = arenaC.z - 2.4;
+        statue.position.set(sx, Math.max(0, terrainHeight(sx, sz)), sz);
+        statue.rotation.y = sx > 0 ? -Math.PI / 2.4 : Math.PI / 2.4;
+        this.scene.add(statue);
+      }
 
       // -- braziers along the road
       const lampN = pal.gloom && pal.gloom > 0.6 ? 5 : 4;
@@ -1126,11 +1181,13 @@ export class PilgrimEngine {
       gate.z = z0 - L + 2.0;
       gate.group.position.set(0, 0, gate.z);
       this.scene.add(gate.group);
+      this.propSlot("prop-gate-arch", gate.frame);
+      for (const t of gate.towers) this.propSlot("prop-tower", t);
       if (isBeaten) this.setGateOpen(gate, true);
       this.gates.push(gate);
 
       // -- waymarker obelisk at the boundary
-      const marker = new THREE.Group();
+      const marker = this.propSlot("prop-obelisk", new THREE.Group());
       const ob = box(0.5, 2.2, 0.5, stoneMat("#7e786c"));
       ob.position.y = 1.1;
       const obCap = new THREE.Mesh(new THREE.ConeGeometry(0.42, 0.5, 4), stoneMat("#6a645a"));
@@ -1201,17 +1258,21 @@ export class PilgrimEngine {
 
   private addLamp(zoneIdx: number, lampIdx: number, pos: THREE.Vector3, pal: ZonePalette) {
     const y0 = Math.max(0, terrainHeight(pos.x, pos.z));
+    const holder = this.propSlot("prop-brazier", new THREE.Group());
+    holder.position.set(pos.x, y0, pos.z);
+    this.scene.add(holder);
     const stand = new THREE.Mesh(
       new THREE.CylinderGeometry(0.06, 0.11, 1.1, 6),
       stoneMat("#4e4a42")
     );
     stand.castShadow = true;
-    stand.position.set(pos.x, y0 + 0.55, pos.z);
+    stand.position.set(0, 0.55, 0);
     const cup = new THREE.Mesh(
       new THREE.CylinderGeometry(0.2, 0.12, 0.18, 8),
       goldMat(0.25)
     );
-    cup.position.set(pos.x, y0 + 1.16, pos.z);
+    cup.position.set(0, 1.16, 0);
+    holder.add(stand, cup);
     const flame = new THREE.Sprite(
       new THREE.SpriteMaterial({
         map: this.glowTex,
@@ -1233,7 +1294,7 @@ export class PilgrimEngine {
     );
     glow.scale.setScalar(2.8);
     glow.position.copy(flame.position);
-    this.scene.add(stand, cup, flame, glow);
+    this.scene.add(flame, glow);
     this.lamps.push({
       zoneIdx,
       lampIdx,
@@ -1259,6 +1320,34 @@ export class PilgrimEngine {
     flame.scale.setScalar(0.9);
     flame.position.set(arenaC.x, 0.7, arenaC.z - 2.6);
     this.scene.add(cross, flame);
+  }
+
+  /** Register a placement that a generated scenery GLB may replace. */
+  private propSlot(kind: string, container: THREE.Group): THREE.Group {
+    if (!this.propSlots.has(kind)) this.propSlots.set(kind, []);
+    this.propSlots.get(kind)!.push(container);
+    return container;
+  }
+
+  /** Swap generated scenery into every registered placement. */
+  private loadEnvironmentProps() {
+    const HEIGHTS: Record<string, number> = {
+      "prop-gate-arch": 7.6,
+      "prop-tower": 8.6,
+      "prop-brazier": 1.45,
+      "prop-obelisk": 2.7,
+      "prop-statue": 3.4,
+    };
+    for (const [kind, slots] of this.propSlots) {
+      if (!this.propIds.has(kind)) continue;
+      loadPropScene(this.opts.basePath, kind, HEIGHTS[kind] ?? 3).then((scene) => {
+        if (!scene || this.disposed) return;
+        for (const slot of slots) {
+          slot.clear();
+          slot.add(scene.clone());
+        }
+      });
+    }
   }
 
   /**

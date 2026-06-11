@@ -24,6 +24,8 @@ import path from "node:path";
 const API = "https://api.meshy.ai";
 const IMG_CREATE = `${API}/openapi/v1/image-to-3d`;
 const IMG_GET = (id) => `${API}/openapi/v1/image-to-3d/${id}`;
+const TXT_CREATE = `${API}/openapi/v2/text-to-3d`;
+const TXT_GET = (id) => `${API}/openapi/v2/text-to-3d/${id}`;
 const RIG_CREATE = `${API}/openapi/v1/rigging`;
 const RIG_GET = (id) => `${API}/openapi/v1/rigging/${id}`;
 
@@ -63,6 +65,19 @@ const CHARACTERS = {
   "st-cyril": { sprite: "st-cyril.webp", prompt: `bishop saint of Alexandria, dark beard, white vestments, gold halo, ${STYLE}` },
   "st-john-damascus": { sprite: "st-john-damascus.webp", prompt: `monk saint with dark beard holding an icon, gold halo, ${STYLE}` },
   "st-mark-ephesus": { sprite: "st-mark-ephesus.webp", prompt: `bishop saint in purple vestments, dark beard, gold halo, ${STYLE}` },
+};
+
+// Environment scenery: text-to-3D, no rigging. The engine swaps these in
+// over the procedural stand-ins wherever the manifest lists them.
+const PROP_STYLE =
+  "weathered ancient Byzantine stone, ornate carved detail, moss and age, " +
+  "PBR textures, game-ready prop, single object, no base plate";
+const PROPS = {
+  "prop-gate-arch": { poly: 16000, prompt: `monumental ancient stone triumphal arch gateway, tall open archway with no doors, carved crosses, two engaged columns, ${PROP_STYLE}` },
+  "prop-tower": { poly: 12000, prompt: `round medieval stone watchtower with conical slate roof, arrow-slit windows, wooden door, ${PROP_STYLE}` },
+  "prop-brazier": { poly: 5000, prompt: `tall standing bronze brazier, wide fire bowl on an ornate pillar with three feet, ${PROP_STYLE}` },
+  "prop-obelisk": { poly: 4000, prompt: `ancient stone waymarker obelisk carved with a chi-rho symbol, ${PROP_STYLE}` },
+  "prop-statue": { poly: 12000, prompt: `weathered stone statue of an archangel with folded wings holding a downturned sword, standing on a square pedestal, ${PROP_STYLE}` },
 };
 
 const args = process.argv.slice(2);
@@ -160,7 +175,41 @@ async function rememberTasks(id, entry) {
   await writeFile(TASKS_FILE, JSON.stringify(all, null, 2) + "\n");
 }
 
+async function generateProp(id, spec) {
+  const out = path.join(OUT, `${id}.glb`);
+  if (existsSync(out)) {
+    console.log(`■ ${id}: already exists, skipping`);
+    return true;
+  }
+  console.log(`\n■ ${id}: text-to-3d preview`);
+  const prev = await post(TXT_CREATE, {
+    mode: "preview",
+    prompt: spec.prompt,
+    art_style: "realistic",
+    topology: "triangle",
+    target_polycount: spec.poly,
+    should_remesh: true,
+  });
+  const prevTask = prev.result ?? prev.id;
+  await poll(TXT_GET(prevTask), `${id} preview`);
+  console.log(`\n■ ${id}: refining + texturing`);
+  const ref = await post(TXT_CREATE, {
+    mode: "refine",
+    preview_task_id: prevTask,
+    enable_pbr: true,
+  });
+  const refTask = ref.result ?? ref.id;
+  const refined = await poll(TXT_GET(refTask), `${id} refine`);
+  await rememberTasks(id, { mesh: refTask });
+  const url = refined.model_urls?.glb ?? pickRiggedUrl(refined);
+  if (!url) throw new Error(`${id}: no GLB url`);
+  await download(url, out);
+  console.log(`■ ${id}: saved (${Math.round(require("node:fs").statSync(out).size / 1e5) / 10}MB)`);
+  return true;
+}
+
 async function generateOne(id, spec) {
+  if (PROPS[id]) return generateProp(id, PROPS[id]);
   const out = path.join(OUT, `${id}.glb`);
   if (existsSync(out)) {
     console.log(`■ ${id}: already exists, skipping (delete the .glb to regenerate)`);
@@ -332,15 +381,19 @@ async function main() {
     if (args.includes("--adopt-tasks")) await adoptTasks();
     if (args.includes("--refresh-rigged")) await refreshRigged();
     if (args.includes("--rig-missing")) await rigMissing();
-    // keep the manifest in sync with whatever is rigged on disk now
-    const manifest = { models: [] };
+    // keep the manifest in sync with whatever is on disk now
+    const manifest = { models: [], props: [] };
     for (const id of Object.keys(CHARACTERS)) {
       if (existsSync(path.join(OUT, `${id}.glb`))) manifest.models.push(id);
+    }
+    for (const id of Object.keys(PROPS)) {
+      if (existsSync(path.join(OUT, `${id}.glb`))) manifest.props.push(id);
     }
     await writeFile(MANIFEST, JSON.stringify(manifest, null, 2) + "\n");
     return;
   }
-  const ids = Object.keys(CHARACTERS).filter((id) => !only || only.includes(id));
+  const ALL = { ...CHARACTERS, ...PROPS };
+  const ids = Object.keys(ALL).filter((id) => !only || only.includes(id));
   console.log(`Generating ${ids.length} character model(s): ${ids.join(", ")}`);
   if (dryRun) return;
   if (!KEY) {
@@ -367,15 +420,18 @@ async function main() {
   const done = [];
   for (const id of ids) {
     try {
-      if (await generateOne(id, CHARACTERS[id])) done.push(id);
+      if (await generateOne(id, CHARACTERS[id] ?? PROPS[id])) done.push(id);
     } catch (e) {
       console.error(`✗ ${id}: ${e.message}`);
     }
   }
   // refresh the manifest from what actually exists on disk
-  const manifest = { models: [] };
+  const manifest = { models: [], props: [] };
   for (const id of Object.keys(CHARACTERS)) {
     if (existsSync(path.join(OUT, `${id}.glb`))) manifest.models.push(id);
+  }
+  for (const id of Object.keys(PROPS)) {
+    if (existsSync(path.join(OUT, `${id}.glb`))) manifest.props.push(id);
   }
   await writeFile(MANIFEST, JSON.stringify(manifest, null, 2) + "\n");
   console.log(`\nManifest updated: ${manifest.models.length} model(s) live.`);
