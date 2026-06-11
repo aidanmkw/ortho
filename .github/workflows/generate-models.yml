@@ -1,0 +1,56 @@
+name: Generate character models
+
+# Runs the Meshy generation pipeline on GitHub's runners (which have full
+# network access) and commits the resulting GLBs back to the branch.
+# Requires the MESHY_API_KEY repository secret (Settings → Secrets and
+# variables → Actions). Safe to re-run: existing models are skipped.
+
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "Comma-separated character ids (empty = all missing)"
+        required: false
+        default: ""
+      no_rig:
+        description: "Skip rigging (static meshes only)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-models
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate models via Meshy
+        env:
+          MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.only }}" ]; then ARGS="$ARGS --only=${{ inputs.only }}"; fi
+          if [ "${{ inputs.no_rig }}" = "true" ]; then ARGS="$ARGS --no-rig"; fi
+          node scripts/generate-models.mjs $ARGS
+      - name: Commit models
+        run: |
+          git config user.name "model-generator[bot]"
+          git config user.email "noreply@github.com"
+          git add public/models
+          if git diff --cached --quiet; then
+            echo "No new models to commit."
+          else
+            git commit -m "Generated character models (Meshy)"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
+          fi
