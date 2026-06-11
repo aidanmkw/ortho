@@ -380,6 +380,7 @@ export default function PilgrimageApp() {
     const engine = new PilgrimEngine(canvas, zones, {
       basePath: BASE,
       hair: saveRef.current.hair,
+      hairHex: HAIR_CHOICES.find((h) => h.id === saveRef.current.hair)?.hex,
       beaten: new Set(saveRef.current.beaten),
       checkpoint: saveRef.current.checkpoint,
       hooks: {
@@ -475,10 +476,11 @@ export default function PilgrimageApp() {
             The Pilgrim Road
           </div>
           <p className="max-w-md text-sm text-parchment/75 leading-relaxed mt-4">
-            Walk into the icon. One golden road runs through {zones.length}{" "}
-            stations of the Church&rsquo;s history — from a chained bishop on
-            the road to Rome, to the last adversary, who wears your own face.
-            At every station a claim is hurled against the faith;{" "}
+            One road runs through {zones.length} stations of the
+            Church&rsquo;s history — golden-hour olive hills, desert noon,
+            snowbound pine country, and a starlit waste where the last
+            adversary wears your own face. At every station a claim is
+            hurled against the faith;{" "}
             <span className="text-gold">
               run to the answer and stand upon it.
             </span>
@@ -891,7 +893,7 @@ export default function PilgrimageApp() {
           ) : (
             <>
               <div className="font-display text-gold text-xl animate-pulse">ΟΔΟΣ</div>
-              <div className="text-parchment/60 text-xs">Gilding the icon…</div>
+              <div className="text-parchment/60 text-xs">Raising the world…</div>
             </>
           )}
         </div>

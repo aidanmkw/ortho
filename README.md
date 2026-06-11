@@ -50,14 +50,21 @@ If the workflow fails because Pages isn't enabled yet:
 
 ## ΟΔΟΣ — The Pilgrim Road (3D)
 
-`/pilgrimage` is a browser 3D mode (Three.js) staged inside a Byzantine
-icon: gold-leaf sky, stepped faceted mountains, flat unlit color, and
-the quest's icon-style figures standing in the world as billboards.
-Third-person; WASD / drag on desktop, virtual joystick + drag on touch.
+`/pilgrimage` is a browser 3D mode (Three.js): an open-world road in a
+realistic low-poly style — noise-built terrain with snowy ridgelines, a
+real sun with shadows, atmospheric sky, instanced forests and grass,
+falling snow, night stars and aurora. Every figure is a fully 3D,
+code-animated character (walk cycles, casting and striking gestures,
+death falls) generated from the quest's portrait registry — vestments,
+mitres, halos, beards, and held crosses included. Third-person; WASD /
+drag on desktop, virtual joystick + drag on touch.
 
 One road runs through the 13 battle chapters of the 2D quest
 (`lib/quest/chapters.ts` is the single source of truth — same bosses,
-claims, rationales, epigraphs, XP). Mechanics are spatial:
+claims, rationales, epigraphs, XP). Each era keeps its own weather:
+golden-hour olive hills, desert noon, gray schism overcast, snowbound
+pine country for the Soviet years, and a starlit aurora night for the
+last adversary. Mechanics are spatial:
 
 - **Trial of Witness.** The adversary hurls a claim; the answers
   become Α/Β/Γ/Δ plates on the arena floor. Run to one and stand on
@@ -71,8 +78,9 @@ claims, rationales, epigraphs, XP). Mechanics are spatial:
   victory opens the doors, lights a memorial, and advances the save
   (`localStorage`, separate from the 2D quest save).
 
-Engine: `lib/quest3d/engine.ts` (world/camera/effects, no game rules);
-rules and UI live in `components/quest3d/PilgrimageApp.tsx`.
+Engine: `lib/quest3d/engine.ts` (terrain/sky/lighting/camera/effects, no
+game rules); characters: `lib/quest3d/characters.ts`; rules and UI live
+in `components/quest3d/PilgrimageApp.tsx`.
 
 ## Layout
 

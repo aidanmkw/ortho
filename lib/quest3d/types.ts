@@ -1,28 +1,49 @@
-// Types for the 3D icon-world pilgrimage ("ΟΔΟΣ — The Pilgrim Road").
+// Types for the 3D pilgrimage ("ΟΔΟΣ — The Pilgrim Road").
 // The 3D quest reuses the 2D quest's chapter/boss corpus (lib/quest/chapters)
 // for all battle content; these types cover only the world + save layer.
 
 import type { Chapter } from "@/lib/quest/types";
 
-/** What kind of stylized icon-trees a zone grows. */
-export type TreeKind = "olive" | "cypress" | "palm" | "bare" | "none";
+/** What grows in a zone. */
+export type TreeKind =
+  | "pine"
+  | "birch"
+  | "cypress"
+  | "olive"
+  | "palm"
+  | "dead"
+  | "none";
 
 /**
- * Per-zone palette — every zone is "written" like a register of one long
- * icon: gold sky throughout, but each era keeps its own earth and air.
+ * Per-zone biome: sun, air, and earth. The road runs through golden-hour
+ * Mediterranean hills, snowbound pine country, and finally a starlit
+ * waste — each chapter keeps its own weather.
  */
 export type ZonePalette = {
-  skyTop: string;
-  skyHorizon: string;
-  fog: string;
-  ground: string;
-  road: string;
-  /** [base, face, highlight] banding for the stepped icon-mountains. */
-  mountain: [string, string, string];
+  /** Sun position/energy. Negative elevation = night (sky hidden, moonlight). */
+  sun: { elevation: number; azimuth: number; intensity: number; color: string };
+  /** Atmosphere for the sky shader. */
+  turbidity: number;
+  rayleigh: number;
+  /** Hemisphere fill light. */
+  hemi: { sky: string; ground: string; intensity: number };
+  fog: { color: string; near: number; far: number };
+  exposure: number;
+  /** Ground colors. */
+  grass: string;
+  dirt: string; // road + bare patches
+  rock: string;
+  /** World height above which terrain reads as snow (999 = never). */
+  snowLine: number;
   trees: TreeKind;
-  /** Draw a starfield (used by the final "Beyond Time" zone). */
+  treeDensity: number; // 0..1
+  grassDensity: number; // 0..1
+  /** Night dressing. */
   stars?: boolean;
-  /** 0..1 how dark the zone reads — drives lamp glow strength. */
+  aurora?: boolean;
+  /** Falling snow instead of drifting motes. */
+  snowfall?: boolean;
+  /** 0..1: how dark the zone reads — drives lamp glow + player lantern. */
   gloom?: number;
 };
 
@@ -32,9 +53,9 @@ export type ZoneDef = {
   index: number;
   chapter: Chapter;
   palette: ZonePalette;
-  /** Sprite ids resolved to /public/sprites filenames. */
-  bossSprite: string;
-  allySprite?: string;
+  /** Portrait-registry ids (drive the 3D costume builder). */
+  bossId: string;
+  allyId?: string;
   allyName?: string;
   /** First intro line spoken by the ally (their greeting), if any. */
   allyLine?: string;
@@ -45,7 +66,7 @@ export type ZoneDef = {
 /** Save file for the 3D pilgrimage — independent of the 2D quest save. */
 export type PilgrimSave = {
   version: 1;
-  /** player sprite variant: black | brown | blond | auburn | dark | silver */
+  /** player hair variant id (see HAIR_CHOICES). */
   hair: string;
   xp: number;
   light: number;
