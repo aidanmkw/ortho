@@ -518,6 +518,15 @@ export class PilgrimEngine {
   private envTimer = 0;
   private curMoveLen = 0;
   private modelIds = new Set<string>();
+  private pendingModels: {
+    id: string;
+    height: number;
+    pos: THREE.Vector3 | null; // null = load immediately (the player)
+    started: boolean;
+    get: () => Rig | null;
+    set: (r: Rig) => void;
+  }[] = [];
+  private modelTick = 0;
 
   // state
   private mode: "explore" | "battle" = "explore";
@@ -1057,6 +1066,7 @@ export class PilgrimEngine {
         this.maybeUpgradeRig(
           zone.allyId,
           1.98,
+          rig.group.position.clone(),
           () => this.allyRigs[i],
           (r) => {
             this.allyRigs[i] = r;
@@ -1083,6 +1093,7 @@ export class PilgrimEngine {
         this.maybeUpgradeRig(
           zone.bossId,
           tall,
+          bp.clone(),
           () => this.bossRigs[i],
           (r) => {
             this.bossRigs[i] = r;
@@ -1234,23 +1245,31 @@ export class PilgrimEngine {
   }
 
   /**
-   * If a generated GLB exists for this character (per the manifest), load
-   * it in the background and swap it in place of the procedural figure.
+   * If a generated GLB exists for this character (per the manifest), queue
+   * it to replace the procedural figure. GLBs are several MB each, so NPC
+   * models only download once the pilgrim is near their stretch of road;
+   * `pos: null` (the player) loads immediately.
    */
   private maybeUpgradeRig(
     id: string,
     height: number,
+    pos: THREE.Vector3 | null,
     get: () => Rig | null,
     set: (r: Rig) => void
   ) {
     if (!this.modelIds.has(id)) return;
-    loadModelRig(this.opts.basePath, id, height).then((model) => {
+    this.pendingModels.push({ id, height, pos, started: false, get, set });
+  }
+
+  private startModelLoad(p: (typeof this.pendingModels)[number]) {
+    p.started = true;
+    loadModelRig(this.opts.basePath, p.id, p.height).then((model) => {
       if (!model) return;
       if (this.disposed) {
         model.dispose();
         return;
       }
-      const old = get();
+      const old = p.get();
       if (!old) {
         // character already removed (e.g. boss defeated) — discard
         model.dispose();
@@ -1261,8 +1280,22 @@ export class PilgrimEngine {
       this.scene.add(model.group);
       this.scene.remove(old.group);
       old.dispose();
-      set(model);
+      p.set(model);
     });
+  }
+
+  private tickModelLoads(dt: number) {
+    if (!this.pendingModels.length) return;
+    this.modelTick += dt;
+    if (this.modelTick < 0.5) return;
+    this.modelTick = 0;
+    for (const p of this.pendingModels) {
+      if (p.started) continue;
+      if (p.pos === null || p.pos.distanceTo(this.playerPos) < ZONE_LEN * 1.6) {
+        this.startModelLoad(p);
+      }
+    }
+    this.pendingModels = this.pendingModels.filter((p) => !p.started);
   }
 
   private buildPlayer() {
@@ -1272,6 +1305,7 @@ export class PilgrimEngine {
     this.maybeUpgradeRig(
       "player",
       1.72,
+      null,
       () => this.playerRig,
       (r) => {
         this.playerRig = r;
@@ -1926,6 +1960,7 @@ export class PilgrimEngine {
       this.envTimer -= dt;
       if (this.envTimer <= 0) this.refreshEnvironment();
     }
+    this.tickModelLoads(dt);
 
     // --- lamps flicker
     for (const lamp of this.lamps) {

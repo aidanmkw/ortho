@@ -1,3 +1,4 @@
 # First non-comment line = arguments for scripts/generate-models.mjs.
 # Empty line = generate every character missing from public/models/.
+# run 2: patched url extraction + tasks.json
 

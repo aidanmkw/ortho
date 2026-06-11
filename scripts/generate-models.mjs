@@ -116,6 +116,50 @@ async function download(url, file) {
   await writeFile(file, Buffer.from(await res.arrayBuffer()));
 }
 
+/** Walk a response object and collect every .glb URL with its JSON path. */
+function collectGlbUrls(obj, p = [], out = []) {
+  if (typeof obj === "string") {
+    if (/^https?:\/\/\S+\.glb([?#]|$)/i.test(obj)) out.push({ url: obj, path: p.join(".") });
+  } else if (obj && typeof obj === "object") {
+    for (const [k, v] of Object.entries(obj)) collectGlbUrls(v, [...p, k], out);
+  }
+  return out;
+}
+
+/** Prefer animated > rigged > anything when picking from a rig response. */
+function pickRiggedUrl(resp) {
+  const urls = collectGlbUrls(resp);
+  const score = (u) =>
+    /anim|walk|motion|action/i.test(u.path + u.url) ? 3 : /rig|skel/i.test(u.path + u.url) ? 2 : 1;
+  urls.sort((a, b) => score(b) - score(a));
+  return urls[0]?.url;
+}
+
+/** Parse a GLB's JSON chunk: how many skins/clips did we actually get? */
+function glbInfo(file) {
+  try {
+    const b = readFileSync(file);
+    const len = b.readUInt32LE(12);
+    const json = JSON.parse(b.slice(20, 20 + len).toString());
+    return {
+      skins: (json.skins ?? []).length,
+      clips: (json.animations ?? []).map((a) => a.name ?? "?"),
+    };
+  } catch {
+    return { skins: 0, clips: [] };
+  }
+}
+
+const TASKS_FILE = path.join(OUT, "tasks.json");
+async function rememberTasks(id, entry) {
+  let all = {};
+  try {
+    all = JSON.parse(readFileSync(TASKS_FILE, "utf8"));
+  } catch {}
+  all[id] = { ...(all[id] ?? {}), ...entry };
+  await writeFile(TASKS_FILE, JSON.stringify(all, null, 2) + "\n");
+}
+
 async function generateOne(id, spec) {
   const out = path.join(OUT, `${id}.glb`);
   if (existsSync(out)) {
@@ -141,6 +185,8 @@ async function generateOne(id, spec) {
   const mesh = await poll(IMG_GET(meshTask), `${id} mesh`);
   console.log(`\n■ ${id}: mesh done`);
 
+  await rememberTasks(id, { mesh: meshTask });
+
   let glbUrl = mesh.model_urls?.glb;
   if (!noRig) {
     try {
@@ -150,13 +196,16 @@ async function generateOne(id, spec) {
         height_meters: 1.8,
       });
       const rigTask = rig.result ?? rig.id;
+      await rememberTasks(id, { rig: rigTask });
       const rigged = await poll(RIG_GET(rigTask), `${id} rig`);
-      glbUrl =
-        rigged.result?.basic_animations?.glb ??
-        rigged.model_urls?.glb ??
-        rigged.result?.rigged_model_url ??
-        glbUrl;
-      console.log(`\n■ ${id}: rigged`);
+      const found = collectGlbUrls(rigged);
+      console.log(
+        `\n■ ${id}: rig response glb fields: ${found.map((f) => f.path).join(", ") || "(none)"}`
+      );
+      if (!found.length) {
+        console.log(`■ ${id}: rig response sample: ${JSON.stringify(rigged).slice(0, 1200)}`);
+      }
+      glbUrl = pickRiggedUrl(rigged) ?? glbUrl;
     } catch (e) {
       console.warn(`\n■ ${id}: rigging unavailable (${e.message.slice(0, 120)}) — keeping static mesh.`);
       console.warn("  If this is a 4xx, check https://docs.meshy.ai and adjust RIG_CREATE fields.");
@@ -164,11 +213,60 @@ async function generateOne(id, spec) {
   }
   if (!glbUrl) throw new Error(`${id}: no GLB url in response`);
   await download(glbUrl, out);
-  console.log(`■ ${id}: saved public/models/${id}.glb`);
+  const info = glbInfo(out);
+  if (info.skins > 0 || info.clips.length > 0) {
+    console.log(`■ ${id}: saved — rigged ✓ skins=${info.skins} clips=[${info.clips.join(", ")}]`);
+  } else {
+    console.warn(`■ ${id}: saved — ⚠ STATIC mesh (no skeleton/clips in the downloaded GLB)`);
+  }
   return true;
 }
 
+/**
+ * --refresh-rigged: re-poll recorded rigging tasks and re-download their
+ * animated GLBs over any static files. Costs no generation credits.
+ */
+async function refreshRigged() {
+  let all = {};
+  try {
+    all = JSON.parse(readFileSync(TASKS_FILE, "utf8"));
+  } catch {
+    console.error("No public/models/tasks.json — nothing to refresh.");
+    return;
+  }
+  for (const [id, t] of Object.entries(all)) {
+    if (!t.rig) continue;
+    const file = path.join(OUT, `${id}.glb`);
+    const before = existsSync(file) ? glbInfo(file) : { skins: 0, clips: [] };
+    if (before.skins > 0) {
+      console.log(`■ ${id}: already rigged, skipping`);
+      continue;
+    }
+    try {
+      const rigged = await poll(RIG_GET(t.rig), `${id} rig`, 2);
+      const url = pickRiggedUrl(rigged);
+      if (!url) {
+        console.warn(`■ ${id}: no glb in rig response`);
+        continue;
+      }
+      await download(url, file);
+      const info = glbInfo(file);
+      console.log(`\n■ ${id}: refreshed — skins=${info.skins} clips=[${info.clips.join(", ")}]`);
+    } catch (e) {
+      console.warn(`■ ${id}: refresh failed: ${e.message.slice(0, 120)}`);
+    }
+  }
+}
+
 async function main() {
+  if (args.includes("--refresh-rigged")) {
+    if (!KEY) {
+      console.error("MESHY_API_KEY required.");
+      process.exit(1);
+    }
+    await refreshRigged();
+    return;
+  }
   const ids = Object.keys(CHARACTERS).filter((id) => !only || only.includes(id));
   console.log(`Generating ${ids.length} character model(s): ${ids.join(", ")}`);
   if (dryRun) return;
