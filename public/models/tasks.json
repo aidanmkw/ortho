@@ -75,9 +75,11 @@
     "rig": "019eb79a-490c-71e0-beed-886a58c7fd8a"
   },
   "centurion": {
-    "mesh": "019eb730-0264-7ff1-83ea-5e4baeab473a"
+    "mesh": "019eb730-0264-7ff1-83ea-5e4baeab473a",
+    "rig": "019eb7ae-5a7c-787d-961b-aed64daaa550"
   },
   "arius": {
-    "mesh": "019eb733-9bde-75b5-81a7-78333341078c"
+    "mesh": "019eb733-9bde-75b5-81a7-78333341078c",
+    "rig": "019eb7af-172a-74eb-b6eb-e6f35d78ad2b"
   }
 }
