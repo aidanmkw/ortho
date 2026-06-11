@@ -81,5 +81,20 @@
   "arius": {
     "mesh": "019eb733-9bde-75b5-81a7-78333341078c",
     "rig": "019eb7af-172a-74eb-b6eb-e6f35d78ad2b"
+  },
+  "prop-gate-arch": {
+    "mesh": "019eb8dc-61d4-7ac1-b2a7-26c098265c59"
+  },
+  "prop-tower": {
+    "mesh": "019eb8df-29be-73ad-9525-a877f60e4f9a"
+  },
+  "prop-brazier": {
+    "mesh": "019eb8e1-925c-7ca4-a1a7-ff243c12f21f"
+  },
+  "prop-obelisk": {
+    "mesh": "019eb8e3-ea90-785d-b091-6fcac8f9f20c"
+  },
+  "prop-statue": {
+    "mesh": "019eb8e6-31e9-7930-becd-19d49bab1f8c"
   }
 }

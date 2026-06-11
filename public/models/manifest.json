@@ -21,5 +21,12 @@
     "st-cyril",
     "st-john-damascus",
     "st-mark-ephesus"
+  ],
+  "props": [
+    "prop-gate-arch",
+    "prop-tower",
+    "prop-brazier",
+    "prop-obelisk",
+    "prop-statue"
   ]
 }
