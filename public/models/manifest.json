@@ -27,6 +27,9 @@
     "prop-tower",
     "prop-brazier",
     "prop-obelisk",
-    "prop-statue"
+    "prop-statue",
+    "prop-column",
+    "prop-searchlight",
+    "prop-void-shard"
   ]
 }

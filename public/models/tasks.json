@@ -96,5 +96,14 @@
   },
   "prop-statue": {
     "mesh": "019eb8e6-31e9-7930-becd-19d49bab1f8c"
+  },
+  "prop-column": {
+    "mesh": "019f23d2-95f6-798d-95bd-861173135d08"
+  },
+  "prop-searchlight": {
+    "mesh": "019f23d6-3b84-7a58-86bb-fbcd2d754d0b"
+  },
+  "prop-void-shard": {
+    "mesh": "019f23da-8098-7012-ba73-286c5163869a"
   }
 }
