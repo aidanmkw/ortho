@@ -104,11 +104,12 @@ export function terrainHeight(x: number, z: number): number {
   const dChapel = Math.hypot(x - 16, local - 27);
   k *= 0.1 + 0.9 * THREE.MathUtils.smoothstep(dCave, 5, 16);
   k *= 0.1 + 0.9 * THREE.MathUtils.smoothstep(dChapel, 5, 16);
-  // legendary waystone clearings (the Second Road)
+  // legendary waystone clearings (the Second Road) — fully flat like the
+  // arenas: the disc, banner, duelist and battle rail all sit at y=0
   const dWest = Math.hypot(x + 27, local - 13);
   const dEast = Math.hypot(x - 27, local - 36);
-  k *= 0.08 + 0.92 * THREE.MathUtils.smoothstep(dWest, 5, 17);
-  k *= 0.08 + 0.92 * THREE.MathUtils.smoothstep(dEast, 5, 17);
+  k *= THREE.MathUtils.smoothstep(dWest, 5.2, 17);
+  k *= THREE.MathUtils.smoothstep(dEast, 5.2, 17);
   const roll = fbm(x * 0.022 + 13.7, z * 0.022) * 1.6;
   const hills =
     THREE.MathUtils.smoothstep(ax, 10, 30) *
