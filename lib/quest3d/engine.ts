@@ -1897,13 +1897,14 @@ export class PilgrimEngine {
       "prop-brazier": 1.45,
       "prop-obelisk": 2.7,
       "prop-statue": 3.4,
-      "prop-column": 2.0,
+      "prop-column": 2.6,
       "prop-searchlight": 7.5,
       "prop-void-shard": 2.6,
     };
     for (const [kind, slots] of this.propSlots) {
       if (!this.propIds.has(kind)) continue;
-      loadPropScene(this.opts.basePath, kind, HEIGHTS[kind] ?? 3).then((scene) => {
+      const byMax = kind === "prop-column"; // the drum lies on its side
+      loadPropScene(this.opts.basePath, kind, HEIGHTS[kind] ?? 3, byMax).then((scene) => {
         if (!scene || this.disposed) return;
         for (const slot of slots) {
           const clone = scene.clone();

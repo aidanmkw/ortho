@@ -231,7 +231,8 @@ export async function loadModelManifest(
 export function loadPropScene(
   basePath: string,
   id: string,
-  height: number
+  height: number,
+  byLargestAxis = false
 ): Promise<THREE.Object3D | null> {
   return new Promise((resolve) => {
     new GLTFLoader().load(
@@ -241,7 +242,8 @@ export function loadPropScene(
           const root = gltf.scene;
           const box = new THREE.Box3().setFromObject(root);
           const size = box.getSize(new THREE.Vector3());
-          const scale = size.y > 1e-4 ? height / size.y : 1;
+          const basis = byLargestAxis ? Math.max(size.x, size.y, size.z) : size.y;
+          const scale = basis > 1e-4 ? height / basis : 1;
           root.scale.setScalar(scale);
           root.position.set(
             -((box.min.x + box.max.x) / 2) * scale,
