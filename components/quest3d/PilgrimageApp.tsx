@@ -16,6 +16,16 @@ import { sfx, getMuted, setMuted } from "@/lib/quest/sfx";
 import BattlePanel, { PLATE_LETTERS, type PanelOption } from "./BattlePanel";
 import Joystick from "./Joystick";
 import { RELICS, CAVE_RELIC } from "@/lib/quest3d/relics";
+import { startAmbience, stopAmbience, resumeAmbience, setMood } from "@/lib/quest3d/ambience";
+import { buildSideDuels } from "@/lib/quest3d/sideQuests";
+import { startChant, stopChant } from "@/lib/chant";
+import { withLiveAttacks } from "@/lib/quest/liveBattle";
+import {
+  loadProgress as loadMainProgress,
+  saveProgress as saveMainProgress,
+  recordResult,
+} from "@/lib/progress";
+import type { ProgressState } from "@/lib/progress";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII"];
@@ -39,6 +49,9 @@ function rankFor(beaten: number): string {
 
 type Battle = {
   zoneIdx: number;
+  duelIdx: number | null;
+  attacks: BossAttack[];
+  authoredCount: number;
   stage: "intro" | "question" | "resolved";
   queue: number[];
   qPos: number;
@@ -67,7 +80,7 @@ type Card =
   | { kind: "shrine"; zoneIdx: number; healed: boolean }
   | { kind: "caveq"; zoneIdx: number; attack: BossAttack; picked: number | null; won: boolean; relicId: string | null }
   | { kind: "chapel"; zoneIdx: number }
-  | { kind: "victory"; zoneIdx: number; xp: number; rankedUp: string | null }
+  | { kind: "victory"; xp: number; rankedUp: string | null; outro: string; epigraph?: { text: string; source: string }; laurel?: boolean }
   | { kind: "defeat"; zoneIdx: number }
   | { kind: "finished" };
 
@@ -108,6 +121,12 @@ export default function PilgrimageApp() {
   const [plateFocus, setPlateFocus] = React.useState<number | null>(null);
   const [timerLeft, setTimerLeft] = React.useState<number | null>(null);
 
+  const sideDuels = React.useMemo(() => buildSideDuels(), []);
+  const [companionSay, setCompanionSay] = React.useState<string | null>(null);
+  const companionTimer = React.useRef<number | null>(null);
+  const visitedZones = React.useRef<Set<number>>(new Set());
+  const lowHpSaid = React.useRef(false);
+  const mainProgress = React.useRef<ProgressState | null>(null);
   const maxHp = () => (saveRef.current.relics.includes("psalter") ? 115 : 100);
   const hasRelic = (id: string) => saveRef.current.relics.includes(id);
 
@@ -135,6 +154,12 @@ export default function PilgrimageApp() {
     syncHud();
   };
 
+  const companion = (text: string, seconds = 6.5) => {
+    setCompanionSay(text);
+    if (companionTimer.current) window.clearTimeout(companionTimer.current);
+    companionTimer.current = window.setTimeout(() => setCompanionSay(null), seconds * 1000);
+  };
+
   const pushToast = (text: string) => {
     const id = toastId.current++;
     setToasts((t) => [...t.slice(-2), { id, text }]);
@@ -159,8 +184,7 @@ export default function PilgrimageApp() {
 
   const currentAttack = (b: Battle): BossAttack => {
     if (b.ghostAttack) return b.ghostAttack;
-    const boss = zones[b.zoneIdx].chapter.boss!;
-    return boss.attacks[b.queue[b.qPos % b.queue.length]];
+    return b.attacks[b.queue[b.qPos % b.queue.length]];
   };
 
   const SIGNATURE: Record<string, string> = {
@@ -177,6 +201,10 @@ export default function PilgrimageApp() {
     setHurtKey((k) => k + 1);
     const newHp = Math.max(0, hpRef.current - dmg);
     setHpState(newHp);
+    if (newHp <= 35 && !lowHpSaid.current) {
+      lowHpSaid.current = true;
+      companion("Courage, pilgrim — the martyrs stood where you stand.");
+    }
     if (newHp <= 0) {
       b.defeated = true;
       finishDefeat();
@@ -207,6 +235,11 @@ export default function PilgrimageApp() {
       : null;
     setNear(null);
     nearRef.current = null;
+    // augment the authored pool with live corpus questions chosen by the
+    // player's spaced-repetition state — battling IS studying
+    mainProgress.current = loadMainProgress();
+    const liveBoss = withLiveAttacks(boss, mainProgress.current, 5);
+    setMood({ battle: 1 });
     const engine = engineRef.current;
     engine?.enterBattle(zoneIdx);
     const chId = zones[zoneIdx].chapter.id;
@@ -236,8 +269,11 @@ export default function PilgrimageApp() {
     }
     setBattleState({
       zoneIdx,
+      duelIdx: null,
+      attacks: liveBoss.attacks,
+      authoredCount: boss.attacks.length,
       stage: "intro",
-      queue: shuffle(boss.attacks.map((_, i) => i)),
+      queue: shuffle(liveBoss.attacks.map((_, i) => i)),
       qPos: 0,
       order: [],
       bossHp: max,
@@ -252,6 +288,48 @@ export default function PilgrimageApp() {
       corrects: 0,
       activeSide: 0,
       ghosts,
+      ghostAttack: null,
+    });
+    lowHpSaid.current = false;
+  };
+
+  const openDuel = (duelIdx: number) => {
+    if (battleRef.current) return;
+    const duel = sideDuels[duelIdx];
+    if (!duel?.chapter.boss) return;
+    const boss = duel.chapter.boss;
+    sfx.bossEnter();
+    mainProgress.current = loadMainProgress();
+    const liveBoss = withLiveAttacks(boss, mainProgress.current, 5);
+    const max = Math.max(60, Math.round((boss.maxHp * BOSS_HP_SCALE) / 10) * 10);
+    const blessing = blessedZones.current.has(duel.zone) ? zones[duel.zone].allyName ?? null : null;
+    setNear(null);
+    nearRef.current = null;
+    setMood({ battle: 1 });
+    const engine = engineRef.current;
+    engine?.enterDuel(duelIdx);
+    window.setTimeout(() => engine?.bossSay(boss.intro.slice(0, 130), 4.2), 800);
+    setBattleState({
+      zoneIdx: duel.zone,
+      duelIdx,
+      attacks: liveBoss.attacks,
+      authoredCount: boss.attacks.length,
+      stage: "intro",
+      queue: shuffle(liveBoss.attacks.map((_, i) => i)),
+      qPos: 0,
+      order: [],
+      bossHp: max,
+      bossMax: max,
+      midlineShown: false,
+      showMidline: false,
+      plateStates: [],
+      lightUsed: false,
+      defeated: false,
+      blessing,
+      blessingCharges: blessing ? (hasRelic("rope") ? 2 : 1) : 0,
+      corrects: 0,
+      activeSide: 0,
+      ghosts: [],
       ghostAttack: null,
     });
   };
@@ -324,6 +402,17 @@ export default function PilgrimageApp() {
     b.stage = "resolved";
     b.pickedCorrect = picked.correct;
 
+    // record to the main app's spaced-repetition scheduler
+    if (attack.itemId && mainProgress.current) {
+      mainProgress.current = recordResult(
+        mainProgress.current,
+        attack.itemId,
+        attack.difficulty,
+        picked.correct ? "correct" : "wrong"
+      );
+      saveMainProgress(mainProgress.current);
+    }
+
     if (picked.correct) {
       const crit = Math.random() < 0.12;
       let mult = crit ? 2 : 1;
@@ -367,7 +456,7 @@ export default function PilgrimageApp() {
       engine?.spawnWisp();
       if (attack.taunt) engine?.bossSay(attack.taunt, 3);
       // The Doubt will remember this
-      if (!b.ghostAttack) {
+      if (!b.ghostAttack && b.queue[b.qPos % b.queue.length] < b.authoredCount) {
         const aIdx = b.queue[b.qPos % b.queue.length];
         const log = saveRef.current.wrongLog;
         if (!log.some((w) => w.b === boss.id && w.a === aIdx)) {
@@ -450,13 +539,39 @@ export default function PilgrimageApp() {
   const finishVictory = () => {
     const b = battleRef.current;
     if (!b) return;
-    const zone = zones[b.zoneIdx];
     const engine = engineRef.current;
     engine?.clearPlates();
+    setMood({ battle: 0 });
+    const s = saveRef.current;
+    if (b.duelIdx !== null) {
+      // legendary duel of the Second Road
+      const duel = sideDuels[b.duelIdx];
+      const boss = duel.chapter.boss!;
+      engine?.duelDefeated(b.duelIdx);
+      engine?.exitBattle();
+      sfx.victory();
+      if (!s.laurels.includes(duel.chapter.id)) s.laurels.push(duel.chapter.id);
+      s.wins += 1;
+      s.xp += duel.chapter.reward.xp;
+      s.light += 5;
+      setHpState(Math.min(maxHp(), hpRef.current + 25));
+      persist();
+      companion("A legend of the Church, honored. The Second Road remembers you.");
+      setBattleState(null);
+      setCardState({
+        kind: "victory",
+        xp: duel.chapter.reward.xp,
+        rankedUp: null,
+        outro: boss.outro,
+        epigraph: boss.victoryEpigraph,
+        laurel: true,
+      });
+      return;
+    }
+    const zone = zones[b.zoneIdx];
     engine?.bossDefeated(b.zoneIdx);
     engine?.exitBattle();
     sfx.victory();
-    const s = saveRef.current;
     const prevRank = rankFor(s.beaten.length);
     if (!s.beaten.includes(zone.chapter.id)) s.beaten.push(zone.chapter.id);
     s.wins += 1;
@@ -467,12 +582,14 @@ export default function PilgrimageApp() {
     setHpState(Math.min(maxHp(), hpRef.current + 25));
     persist();
     lastDefeatZone.current = -1;
+    companion(["Δόξα τῷ Θεῷ — another shadow falls.", "Well witnessed, pilgrim.", "So the Fathers answered, and so do you."][s.beaten.length % 3]);
     setBattleState(null);
     setCardState({
       kind: "victory",
-      zoneIdx: b.zoneIdx,
       xp: zone.chapter.reward.xp,
       rankedUp: newRank !== prevRank ? newRank : null,
+      outro: zone.chapter.boss!.outro,
+      epigraph: zone.chapter.boss!.victoryEpigraph,
     });
   };
 
@@ -486,6 +603,7 @@ export default function PilgrimageApp() {
     veneratedZones.current.delete(b.zoneIdx); // the shrine will receive you again
     engineRef.current?.exitBattle();
     engineRef.current?.respawn(b.zoneIdx);
+    setMood({ battle: 0 });
     setHpState(Math.round(maxHp() * 0.6));
     persist();
     setCardState({ kind: "defeat", zoneIdx: b.zoneIdx });
@@ -494,6 +612,7 @@ export default function PilgrimageApp() {
 
   const withdraw = () => {
     if (!battleRef.current) return;
+    setMood({ battle: 0 });
     engineRef.current?.exitBattle();
     setBattleState(null);
     pushToast("You step back from the trial. The adversary waits.");
@@ -573,6 +692,8 @@ export default function PilgrimageApp() {
       setHpState(Math.min(maxHp(), hpRef.current + 15));
       persist();
       setCardState({ kind: "chapel", zoneIdx: t.zoneIdx });
+    } else if (t.kind === "duel") {
+      openDuel(t.duelIdx);
     } else if (t.kind === "gate") {
       sfx.wrong();
       pushToast(
@@ -632,6 +753,7 @@ export default function PilgrimageApp() {
       hair: saveRef.current.hair,
       hairHex: HAIR_CHOICES.find((h) => h.id === saveRef.current.hair)?.hex,
       beaten: new Set(saveRef.current.beaten),
+      laurels: new Set(saveRef.current.laurels),
       checkpoint: saveRef.current.checkpoint,
       hooks: {
         onReady: () => {
@@ -639,6 +761,17 @@ export default function PilgrimageApp() {
           setBannerZone(Math.min(saveRef.current.checkpoint, zones.length - 1));
         },
         onZoneChange: (zi) => {
+          if (!visitedZones.current.has(zi)) {
+            visitedZones.current.add(zi);
+            const line = zones[zi].narratorLine;
+            if (line) window.setTimeout(() => companion(line, 8), 2500);
+          }
+          const pal = zones[zi].palette;
+          setMood({
+            wind: 0.4 + (pal.treeDensity ?? 0.5) * 0.4,
+            snow: pal.snowfall ? 1 : 0,
+            gloom: pal.gloom ?? 0,
+          });
           setBannerZone(zi);
           const s = saveRef.current;
           if (zi > s.checkpoint) {
@@ -784,6 +917,10 @@ export default function PilgrimageApp() {
                 writeSave(saveRef.current);
                 syncHud();
                 setHpState(Math.min(saveRef.current.hp ?? 100, maxHp()));
+                startAmbience();
+                try {
+                  if (window.localStorage.getItem("chant:enabled") !== "0") startChant();
+                } catch {}
                 setPhase("play");
               }}
               className="font-display text-lg bg-gold text-[#14100a] px-10 py-3 rounded border-2 border-[#f0d358] hover:brightness-110 active:translate-y-px shadow-[0_0_30px_rgba(201,162,39,0.35)]"
@@ -898,6 +1035,11 @@ export default function PilgrimageApp() {
         <div className="hidden sm:block bg-black/70 border border-gold/40 rounded px-2.5 py-1.5 text-[11px] text-parchment/85">
           {hud.rank} · {hud.xp} XP
         </div>
+        {saveRef.current.laurels.length > 0 && (
+          <div className="bg-black/70 border border-gold/40 rounded px-2 py-1.5 text-[11px] text-gold" title="Legendary duels won on the Second Road">
+            🏆 {saveRef.current.laurels.length}
+          </div>
+        )}
         {saveRef.current.relics.length > 0 && (
           <div className="bg-black/70 border border-gold/40 rounded px-2 py-1.5 text-[13px]">
             {saveRef.current.relics.map((r) =>
@@ -914,6 +1056,15 @@ export default function PilgrimageApp() {
             const m = !muted;
             setMuted(m);
             setMutedState(m);
+            if (m) {
+              stopAmbience();
+              stopChant();
+            } else {
+              resumeAmbience();
+              try {
+                if (window.localStorage.getItem("chant:enabled") !== "0") startChant();
+              } catch {}
+            }
           }}
           className="bg-black/70 border border-gold/40 rounded px-2.5 py-1.5 text-[11px] text-gold"
           aria-label="Toggle sound"
@@ -963,6 +1114,15 @@ export default function PilgrimageApp() {
             {near.kind === "shrine" && (
               <>
                 <span className="text-gold">✦</span> Venerate the station icon
+                {!coarse && <span className="text-parchment/50 text-xs"> — E</span>}
+              </>
+            )}
+            {near.kind === "duel" && (
+              <>
+                <span className="text-[#c084ff]">⚔</span> LEGENDARY — Face{" "}
+                <span className="text-gold">
+                  {sideDuels[near.duelIdx]?.chapter.boss?.name}
+                </span>
                 {!coarse && <span className="text-parchment/50 text-xs"> — E</span>}
               </>
             )}
@@ -1146,23 +1306,19 @@ export default function PilgrimageApp() {
             {card.kind === "victory" && (
               <>
                 <div className="text-[10px] uppercase tracking-[0.35em] text-gold mb-2">
-                  ✓ The witness stands
+                  {card.laurel ? "🏆 A legend honored" : "✓ The witness stands"}
                 </div>
                 <p className="text-parchment/85 text-sm leading-relaxed italic">
-                  “{zones[card.zoneIdx].chapter.boss!.outro}”
+                  “{card.outro}”
                 </p>
-                {zones[card.zoneIdx].chapter.boss!.victoryEpigraph && (
+                {card.epigraph && (
                   <div className="mt-3 border-l-2 border-gold/60 pl-3">
-                    <p className="text-[#ffe98c] text-sm leading-relaxed">
-                      {zones[card.zoneIdx].chapter.boss!.victoryEpigraph!.text}
-                    </p>
-                    <p className="text-gold/70 text-[11px] mt-1">
-                      — {zones[card.zoneIdx].chapter.boss!.victoryEpigraph!.source}
-                    </p>
+                    <p className="text-[#ffe98c] text-sm leading-relaxed">{card.epigraph.text}</p>
+                    <p className="text-gold/70 text-[11px] mt-1">— {card.epigraph.source}</p>
                   </div>
                 )}
                 <p className="text-gold text-sm mt-3">
-                  +{card.xp} XP
+                  +{card.xp} XP{card.laurel && " · +5 Light · 🏆 Laurel"}
                   {card.rankedUp && (
                     <span className="text-parchment">
                       {" "}
@@ -1171,8 +1327,9 @@ export default function PilgrimageApp() {
                   )}
                 </p>
                 <p className="text-parchment/60 text-xs mt-1.5">
-                  The Royal Doors stand open (+25 healed). The road continues — the shrine ahead can
-                  restore you fully, once.
+                  {card.laurel
+                    ? "The waystone is at peace (+25 healed)."
+                    : "The Royal Doors stand open (+25 healed). The road continues — the shrine ahead can restore you fully, once."}
                 </p>
               </>
             )}
@@ -1224,6 +1381,18 @@ export default function PilgrimageApp() {
                 {card.kind === "finished" ? "Walk on ⏎" : "Continue ⏎"}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* companion */}
+      {companionSay && (
+        <div className="absolute left-3 bottom-40 z-30 max-w-[280px] pointer-events-none">
+          <div className="bg-[#100c07]/90 border border-gold/50 rounded-lg px-3 py-2">
+            <div className="text-[9px] uppercase tracking-[0.3em] text-gold/90 mb-0.5">
+              ☦ St. Anthony
+            </div>
+            <p className="text-parchment/90 text-[11px] leading-snug italic">{companionSay}</p>
           </div>
         </div>
       )}

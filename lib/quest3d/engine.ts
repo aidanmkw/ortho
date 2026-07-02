@@ -15,6 +15,7 @@ import { PORTRAITS } from "@/lib/quest/portraits";
 import { buildRig, playerConfig, type Rig } from "./characters";
 import { loadModelManifest, loadModelRig, loadPropScene } from "./modelRig";
 import { CAVE_ZONES, CHAPEL_ZONES } from "./relics";
+import { buildSideDuels, DUEL_SLOTS, type SideDuel } from "./sideQuests";
 import type {
   EngineHooks,
   NearTarget,
@@ -99,6 +100,11 @@ export function terrainHeight(x: number, z: number): number {
   const dChapel = Math.hypot(x - 16, local - 27);
   k *= 0.1 + 0.9 * THREE.MathUtils.smoothstep(dCave, 5, 16);
   k *= 0.1 + 0.9 * THREE.MathUtils.smoothstep(dChapel, 5, 16);
+  // legendary waystone clearings (the Second Road)
+  const dWest = Math.hypot(x + 27, local - 13);
+  const dEast = Math.hypot(x - 27, local - 36);
+  k *= 0.08 + 0.92 * THREE.MathUtils.smoothstep(dWest, 5, 17);
+  k *= 0.08 + 0.92 * THREE.MathUtils.smoothstep(dEast, 5, 17);
   const roll = fbm(x * 0.022 + 13.7, z * 0.022) * 1.6;
   const hills =
     THREE.MathUtils.smoothstep(ax, 10, 30) *
@@ -445,6 +451,7 @@ export type EngineOptions = {
   hair: string;
   hairHex?: string;
   beaten: Set<string>;
+  laurels: Set<string>;
   checkpoint: number;
   hooks: EngineHooks;
 };
@@ -571,11 +578,21 @@ export class PilgrimEngine {
   private spotlight: THREE.Sprite | null = null;
   private schism: { a: THREE.Mesh; b: THREE.Mesh } | null = null;
   private crowd: Rig[] = [];
+  private companion: Rig | null = null;
+  private companionSpeed = 0;
   private bossHome: THREE.Vector3 | null = null;
   private beatenIds: Set<string>;
   private cavePos: (THREE.Vector3 | null)[] = [];
   private chapelPos: (THREE.Vector3 | null)[] = [];
   private plateReadFocus = -1;
+
+  // battle target (works for both station bosses and side duels)
+  private bCenter = new THREE.Vector3();
+  private bBossPos = new THREE.Vector3();
+  private bBossRig: Rig | null = null;
+  private bMaxHp = 200;
+  private battleDuel = -1;
+  private duels: { def: SideDuel; rig: Rig | null; pos: THREE.Vector3; center: THREE.Vector3; alive: boolean }[] = [];
 
   // state
   private mode: "explore" | "battle" = "explore";
@@ -623,6 +640,7 @@ export class PilgrimEngine {
     this.loadEnvironmentProps();
     if (this.disposed) return;
     this.buildPlayer();
+    this.buildCompanion();
     this.buildWeather();
     this.buildClouds();
     this.buildRail();
@@ -1047,6 +1065,7 @@ export class PilgrimEngine {
           const z = z0 - 2 - rng() * (L - 4);
           const local = ((-z % L) + L) % L;
           if (Math.hypot(x + 17, local - 20) < 8 || Math.hypot(x - 16, local - 27) < 8) continue;
+          if (Math.hypot(x + 27, local - 13) < 8 || Math.hypot(x - 27, local - 36) < 8) continue;
           spots.push({ x, z, s: 0.7 + rng() * 0.9, r: rng() * Math.PI * 2 });
         }
         for (const part of parts) {
@@ -1431,6 +1450,50 @@ export class PilgrimEngine {
       }
     });
 
+    // -- the Second Road: legendary duels at off-road waystones
+    for (const def of buildSideDuels()) {
+      const slot = DUEL_SLOTS[def.slot];
+      const z0d = -def.zone * L;
+      const cx = slot.x;
+      const cz = z0d - slot.local;
+      const center = new THREE.Vector3(cx, 0, cz);
+      const alive = !this.opts.laurels.has(def.chapter.id);
+      // waystone ring
+      const disc = new THREE.Mesh(
+        new THREE.CircleGeometry(4.6, 28),
+        new THREE.MeshStandardMaterial({ color: "#7e7668", roughness: 1 })
+      );
+      disc.rotation.x = -Math.PI / 2;
+      disc.position.set(cx, 0.03, cz);
+      disc.receiveShadow = true;
+      const ring = new THREE.Mesh(new THREE.RingGeometry(4.2, 4.6, 36), goldMat(0.2));
+      ring.rotation.x = -Math.PI / 2;
+      ring.position.set(cx, 0.045, cz);
+      const bannerPole = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.06, 0.08, 4.2, 6),
+        stoneMat("#4a3a28")
+      );
+      bannerPole.position.set(cx + 3.6, 2.1, cz + 3.4);
+      const bannerCloth = box(1.05, 1.9, 0.04, new THREE.MeshStandardMaterial({ color: alive ? "#3a1f4d" : "#c9a227", roughness: 0.9 }));
+      bannerCloth.position.set(cx + 3.6, 2.95, cz + 3.5);
+      this.scene.add(disc, ring, bannerPole, bannerCloth);
+      let rig: Rig | null = null;
+      const pos = center.clone().add(new THREE.Vector3(0, 0, -2.4));
+      if (alive) {
+        rig = buildRig(PORTRAITS[def.chapter.boss!.sprite], {
+          height: 2.0,
+          seed: 0x51de + def.idx * 131,
+        });
+        rig.group.position.copy(pos);
+        this.scene.add(rig.group);
+      } else {
+        const wreath = buildCross(1.2, goldMat(0.4));
+        wreath.position.copy(pos);
+        this.scene.add(wreath);
+      }
+      this.duels.push({ def, rig, pos, center, alive });
+    }
+
     // a low plinth at the very start of the road
     const plinth = new THREE.Mesh(
       new THREE.CylinderGeometry(2.6, 3, 0.35, 24),
@@ -1659,6 +1722,50 @@ export class PilgrimEngine {
     }
   }
 
+  private buildCompanion() {
+    // St. Anthony — the corpus' own guide — walks the road with the pilgrim
+    const rig = buildRig(PORTRAITS["st-anthony"], { height: 1.86, seed: 0xa17 });
+    rig.group.position.set(-1.8, 0, this.playerPos.z + 2.2);
+    this.scene.add(rig.group);
+    this.companion = rig;
+  }
+
+  private tickCompanion(dt: number) {
+    const c = this.companion;
+    if (!c) return;
+    let target: THREE.Vector3;
+    if (this.mode === "battle") {
+      target = this.bCenter.clone().add(new THREE.Vector3(3.4, 0, 7.6));
+    } else {
+      const yaw = this.playerYaw;
+      const behind = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
+      const right = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
+      target = this.playerPos.clone().addScaledVector(behind, 2.0).addScaledVector(right, -1.7);
+    }
+    target.y = this.mode === "battle" ? 0 : terrainHeight(target.x, target.z);
+    const pos = c.group.position;
+    const d = pos.distanceTo(target);
+    if (d > 0.35) {
+      const step = Math.min(d, Math.min(6.6, d * 2.4) * dt);
+      const dir = target.clone().sub(pos).normalize();
+      pos.addScaledVector(dir, step);
+      c.group.rotation.y = Math.atan2(dir.x, dir.z);
+      this.companionSpeed = THREE.MathUtils.lerp(this.companionSpeed, Math.min(1, d / 3), dt * 6);
+    } else {
+      this.companionSpeed = THREE.MathUtils.lerp(this.companionSpeed, 0, dt * 6);
+      // idle: face what the pilgrim faces
+      const want = this.mode === "battle"
+        ? Math.atan2(this.bBossPos.x - pos.x, this.bBossPos.z - pos.z)
+        : this.playerYaw;
+      let dy = want - c.group.rotation.y;
+      while (dy > Math.PI) dy -= Math.PI * 2;
+      while (dy < -Math.PI) dy += Math.PI * 2;
+      c.group.rotation.y += dy * Math.min(1, dt * 3);
+    }
+    c.setSpeed(this.companionSpeed);
+    c.update(dt, this.time);
+  }
+
   private buildWeather() {
     // drifting motes by day, falling snow in the white zones
     const N = 300;
@@ -1798,22 +1905,94 @@ export class PilgrimEngine {
 
   // ---- battle staging (called from React) --------------------------------------
 
+  private nearDuel(zi: number, p: THREE.Vector3): number {
+    for (const d of this.duels) {
+      if (d.def.zone === zi && d.alive && d.pos.distanceTo(p) < 5.2) return d.def.idx;
+    }
+    return -1;
+  }
+
+  /** Name for prompts. */
+  getDuel(idx: number): SideDuel | undefined {
+    return this.duels[idx]?.def;
+  }
+
+  /** Begin a legendary duel at its waystone. */
+  enterDuel(idx: number) {
+    const d = this.duels[idx];
+    if (!d || !d.alive) return;
+    this.mode = "battle";
+    this.battleZone = d.def.zone;
+    this.battleDuel = idx;
+    this.clearCombat();
+    this.phase2 = false;
+    this.bCenter.copy(d.center);
+    this.bBossPos = d.pos;
+    this.bBossRig = d.rig;
+    this.bMaxHp = d.def.chapter.boss?.maxHp ?? 260;
+    this.bossHome = null;
+    this.playerPos.set(d.center.x, 0, d.center.z + 4.6);
+    d.rig?.gesture("menace");
+    this.rail.position.set(d.center.x, -0.3, d.center.z);
+    this.rail.visible = true;
+    const mat = this.rail.material as THREE.MeshStandardMaterial;
+    this.effects.push((dt) => {
+      this.rail.position.y = Math.min(0.42, this.rail.position.y + dt * 1.4);
+      mat.opacity = Math.min(0.9, mat.opacity + dt * 2);
+      return this.rail.position.y < 0.42;
+    });
+  }
+
+  /** A legendary adversary is overcome. */
+  duelDefeated(idx: number) {
+    const d = this.duels[idx];
+    if (!d) return;
+    this.clearCombat();
+    this.crowdBless();
+    d.alive = false;
+    const rig = d.rig;
+    if (rig) {
+      rig.gesture("die");
+      rig.fadeOut(2.2);
+      this.burst(d.pos.clone().add(new THREE.Vector3(0, 1.4, 0)), "#ffe28c", 36);
+      let t = 0;
+      this.effects.push((dt) => {
+        t += dt;
+        if (t > 2.4) {
+          this.scene.remove(rig.group);
+          rig.dispose();
+          d.rig = null;
+          return false;
+        }
+        return true;
+      });
+    }
+    const wreath = buildCross(1.2, goldMat(0.4));
+    wreath.position.copy(d.pos);
+    this.scene.add(wreath);
+  }
+
   enterBattle(zoneIdx: number) {
     this.mode = "battle";
     this.battleZone = zoneIdx;
+    this.battleDuel = -1;
     this.clearCombat();
     this.phase2 = false;
     const c = this.arenaCenter[zoneIdx];
+    this.bCenter.copy(c);
+    this.bBossPos = this.bossPos[zoneIdx];
+    this.bBossRig = this.bossRigs[zoneIdx];
+    this.bMaxHp = this.zones[zoneIdx].chapter.boss?.maxHp ?? 200;
     this.playerPos.set(c.x, 0, c.z + 5.6);
     // the adversary strides forward to meet the pilgrim
-    const rig = this.bossRigs[zoneIdx];
+    const rig = this.bBossRig;
     if (rig) {
-      this.bossHome = this.bossPos[zoneIdx].clone();
+      this.bossHome = this.bBossPos.clone();
       const targetZ = c.z - 1.7;
       rig.setSpeed(0.45);
       this.effects.push((dt) => {
-        if (this.battleZone !== zoneIdx || !this.bossRigs[zoneIdx]) return false;
-        const bp = this.bossPos[zoneIdx];
+        if (this.battleZone !== zoneIdx || this.bBossRig !== rig) return false;
+        const bp = this.bBossPos;
         bp.z = Math.min(bp.z + dt * 1.5, targetZ);
         rig.group.position.copy(bp);
         if (bp.z >= targetZ) {
@@ -1835,14 +2014,14 @@ export class PilgrimEngine {
   }
 
   exitBattle() {
-    const zi = this.battleZone;
     // an undefeated adversary returns to his post
-    if (zi >= 0 && this.bossRigs[zi] && this.bossHome) {
-      this.bossPos[zi].copy(this.bossHome);
-      this.bossRigs[zi]!.group.position.copy(this.bossHome);
-      this.bossRigs[zi]!.setSpeed(0);
+    if (this.bBossRig && this.bossHome) {
+      this.bBossPos.copy(this.bossHome);
+      this.bBossRig.group.position.copy(this.bossHome);
+      this.bBossRig.setSpeed(0);
     }
     this.bossHome = null;
+    this.battleDuel = -1;
     this.clearCrowd();
     this.clearCombat();
     this.mode = "explore";
@@ -1931,7 +2110,7 @@ export class PilgrimEngine {
       maxLines: 4,
       accent: "#a02020",
     });
-    this.claimSprite.position.copy(this.bossPos[zi]).add(new THREE.Vector3(0, 3.7, 0));
+    this.claimSprite.position.copy(this.bBossPos).add(new THREE.Vector3(0, 3.7, 0));
     this.scene.add(this.claimSprite);
   }
 
@@ -1946,7 +2125,7 @@ export class PilgrimEngine {
     const zi = this.battleZone;
     if (zi < 0) return;
     const s = this.makeTextSprite(text, { w: 900, h: 190, font: 44, maxLines: 2, accent: "#c9a227" });
-    s.position.copy(this.bossPos[zi]).add(new THREE.Vector3(0, this.claimSprite ? 5.6 : 3.2, 0));
+    s.position.copy(this.bBossPos).add(new THREE.Vector3(0, this.claimSprite ? 5.6 : 3.2, 0));
     this.scene.add(s);
     this.barkSprite = s;
     let t = 0;
@@ -2005,7 +2184,7 @@ export class PilgrimEngine {
           })
         );
         m.rotation.x = -Math.PI / 2;
-        m.position.set(this.arenaCenter[zi].x + x, 0.05, this.arenaCenter[zi].z);
+        m.position.set(this.bCenter.x + x, 0.05, this.bCenter.z);
         this.scene.add(m);
         return m;
       };
@@ -2028,10 +2207,9 @@ export class PilgrimEngine {
 
   /** Which bank a plate stands on (-1 west / +1 east). */
   getPlateSide(i: number): -1 | 1 {
-    const zi = this.battleZone;
     const p = this.plates[i];
-    if (!p || zi < 0) return 1;
-    return p.pos.x - this.arenaCenter[zi].x < 0 ? -1 : 1;
+    if (!p) return 1;
+    return p.pos.x - this.bCenter.x < 0 ? -1 : 1;
   }
 
   /** False claims take shape and hunt the pilgrim until popped. */
@@ -2046,7 +2224,7 @@ export class PilgrimEngine {
       })
     );
     sprite.scale.setScalar(1.15);
-    const c = this.arenaCenter[this.battleZone];
+    const c = this.bCenter;
     const a = Math.random() * Math.PI * 2;
     const pos = new THREE.Vector3(c.x + Math.cos(a) * 6, 1.1, c.z + Math.sin(a) * 6);
     sprite.position.copy(pos);
@@ -2056,9 +2234,8 @@ export class PilgrimEngine {
 
   /** Pilgrims gather to watch the witness. */
   setCrowdCount(n: number) {
-    const zi = this.battleZone;
-    if (zi < 0) return;
-    const c = this.arenaCenter[zi];
+    if (this.battleZone < 0) return;
+    const c = this.bCenter;
     while (this.crowd.length < Math.min(n, 6)) {
       const i = this.crowd.length;
       const rig = buildRig(undefined, {
@@ -2094,8 +2271,7 @@ export class PilgrimEngine {
   setBossAggro(on: boolean) {
     this.aggro = on;
     if (on) {
-      const maxHp = this.zones[this.battleZone]?.chapter.boss?.maxHp ?? 200;
-      this.atkInterval = THREE.MathUtils.clamp(5.4 - maxHp / 160, 2.4, 4.6);
+      this.atkInterval = THREE.MathUtils.clamp(5.4 - this.bMaxHp / 160, 2.4, 4.6);
       this.atkTimer = 1.6; // a breath to read before the first volley
     }
   }
@@ -2109,7 +2285,7 @@ export class PilgrimEngine {
   staggerBoss(sec = 2.6) {
     this.stagger = sec;
     this.smiteDone = false;
-    const rig = this.bossRigs[this.battleZone];
+    const rig = this.bBossRig;
     if (rig) {
       let t = 0;
       this.effects.push((dt) => {
@@ -2188,9 +2364,8 @@ export class PilgrimEngine {
   }
 
   private bossVolley() {
-    const zi = this.battleZone;
-    const boss = this.bossRigs[zi];
-    const bp = this.bossPos[zi];
+    const boss = this.bBossRig;
+    const bp = this.bBossPos;
     boss?.gesture("cast");
     const target = this.playerPos.clone();
     const fan = this.empowered ? [-0.32, 0, 0.32] : [0];
@@ -2274,11 +2449,11 @@ export class PilgrimEngine {
     if (this.stagger > 0) {
       this.stagger -= h;
       if (!this.smiteDone) {
-        const bp = this.bossPos[this.battleZone];
-        if (bp && bp.distanceTo(this.playerPos) < 1.9) {
+        const bp = this.bBossPos;
+        if (bp.distanceTo(this.playerPos) < 1.9) {
           this.smiteDone = true;
           this.burst(bp.clone().add(new THREE.Vector3(0, 1.3, 0)), "#ffe28c", 30);
-          this.bossRigs[this.battleZone]?.flash();
+          this.bBossRig?.flash();
           this.shake = Math.max(this.shake, 0.25);
           // shove the pilgrim back out of the boss
           const back = this.playerPos.clone().sub(bp).setY(0).normalize();
@@ -2379,7 +2554,7 @@ export class PilgrimEngine {
   spawnPlates(count: number, shorts?: string[]) {
     this.clearPlates();
     this.platesLocked = false;
-    const c = this.arenaCenter[this.battleZone];
+    const c = this.bCenter;
     const arc = Math.PI * 0.62;
     for (let i = 0; i < count; i++) {
       const ang =
@@ -2484,11 +2659,10 @@ export class PilgrimEngine {
 
   /** Gold beam from the pilgrim to the adversary (correct answer). */
   strikeBoss() {
-    const zi = this.battleZone;
-    if (zi < 0) return;
+    if (this.battleZone < 0) return;
     this.playerRig.gesture("strike");
     const from = this.playerPos.clone().add(new THREE.Vector3(0, 1.3, 0));
-    const to = this.bossPos[zi].clone().add(new THREE.Vector3(0, 1.4, 0));
+    const to = this.bBossPos.clone().add(new THREE.Vector3(0, 1.4, 0));
     const dir = to.clone().sub(from);
     const len = dir.length();
     const beamMat = new THREE.MeshBasicMaterial({
@@ -2503,7 +2677,7 @@ export class PilgrimEngine {
     beam.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
     this.scene.add(beam);
     this.burst(to, "#ffe28c", 26);
-    this.bossRigs[zi]?.flash();
+    this.bBossRig?.flash();
     this.shake = Math.max(this.shake, 0.18);
     let t = 0;
     this.effects.push((dt) => {
@@ -2522,10 +2696,9 @@ export class PilgrimEngine {
 
   /** The adversary winds up and hurls his claim (wrong answer). */
   strikePlayer() {
-    const zi = this.battleZone;
-    if (zi < 0) return;
-    this.bossRigs[zi]?.gesture("cast");
-    const from = this.bossPos[zi].clone().add(new THREE.Vector3(0, 1.7, 0));
+    if (this.battleZone < 0) return;
+    this.bBossRig?.gesture("cast");
+    const from = this.bBossPos.clone().add(new THREE.Vector3(0, 1.7, 0));
     const bolt = new THREE.Sprite(
       new THREE.SpriteMaterial({
         map: makeGlowTexture("rgba(70,10,10,0.95)", "rgba(30,4,4,0)"),
@@ -2709,7 +2882,7 @@ export class PilgrimEngine {
 
     // constraints
     if (this.mode === "battle") {
-      const c = this.arenaCenter[this.battleZone];
+      const c = this.bCenter;
       const off = this.playerPos.clone().sub(c);
       off.y = 0;
       const r = off.length();
@@ -2817,7 +2990,7 @@ export class PilgrimEngine {
     if (this.mode === "battle") {
       // face the adversary while on trial (unless running between plates)
       if (moveLen < 0.1) {
-        const b = this.bossPos[this.battleZone];
+        const b = this.bBossPos;
         const want = Math.atan2(b.x - this.playerPos.x, b.z - this.playerPos.z);
         let d = want - this.playerYaw;
         while (d > Math.PI) d -= Math.PI * 2;
@@ -2847,6 +3020,22 @@ export class PilgrimEngine {
             boss.group.rotation.y += d * Math.min(1, dt * 3);
           }
           boss.update(dt, this.time);
+        }
+      }
+      if (i === 0) {
+        for (const d of this.duels) {
+          if (!d.rig) continue;
+          const dist = d.pos.distanceTo(this.playerPos);
+          if (dist < 55) {
+            if (dist < 22) {
+              const want = Math.atan2(this.playerPos.x - d.pos.x, this.playerPos.z - d.pos.z);
+              let dd = want - d.rig.group.rotation.y;
+              while (dd > Math.PI) dd -= Math.PI * 2;
+              while (dd < -Math.PI) dd += Math.PI * 2;
+              d.rig.group.rotation.y += dd * Math.min(1, dt * 3);
+            }
+            d.rig.update(dt, this.time);
+          }
         }
       }
       const ally = this.allyRigs[i];
@@ -2949,6 +3138,8 @@ export class PilgrimEngine {
     }
     mp.needsUpdate = true;
 
+    this.tickCompanion(dt);
+
     // --- clouds drift and fade with the dark
     const cloudOp = 0.4 * (1 - this.env.gloom) * (1 - this.darkCur);
     for (const cl of this.clouds) {
@@ -2977,6 +3168,8 @@ export class PilgrimEngine {
         next = { kind: "cave", zoneIdx: zi };
       } else if (this.chapelPos[zi] && this.chapelPos[zi]!.distanceTo(p) < 4.4) {
         next = { kind: "chapel", zoneIdx: zi };
+      } else if (this.nearDuel(zi, p) >= 0) {
+        next = { kind: "duel", zoneIdx: zi, duelIdx: this.nearDuel(zi, p) };
       } else if (
         this.bossAlive[zi] &&
         Math.abs(this.gates[zi].z - p.z) < 3 &&
@@ -3000,8 +3193,8 @@ export class PilgrimEngine {
     let pitch = this.camPitch;
     let dist = this.camDist;
     if (this.mode === "battle") {
-      const c = this.arenaCenter[this.battleZone];
-      const b = this.bossPos[this.battleZone];
+      const c = this.bCenter;
+      const b = this.bBossPos;
       target = new THREE.Vector3(
         (this.playerPos.x + b.x) / 2,
         1.5,

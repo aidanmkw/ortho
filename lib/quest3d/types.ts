@@ -82,6 +82,8 @@ export type PilgrimSave = {
   relics: string[];
   /** wrong answers logged for The Doubt to replay: boss id + attack idx. */
   wrongLog: { b: string; a: number }[];
+  /** legendary side duels won (chapter ids). */
+  laurels: string[];
 };
 
 /** What the player is standing near (drives the interact button / prompts). */
@@ -91,7 +93,8 @@ export type NearTarget =
   | { kind: "shrine"; zoneIdx: number }
   | { kind: "gate"; zoneIdx: number }
   | { kind: "cave"; zoneIdx: number }
-  | { kind: "chapel"; zoneIdx: number };
+  | { kind: "chapel"; zoneIdx: number }
+  | { kind: "duel"; zoneIdx: number; duelIdx: number };
 
 /** Callbacks from the engine up into React. */
 export type EngineHooks = {

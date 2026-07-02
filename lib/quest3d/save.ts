@@ -29,6 +29,7 @@ export function emptySave(): PilgrimSave {
     hp: 100,
     relics: [],
     wrongLog: [],
+    laurels: [],
   };
 }
 
