@@ -14,6 +14,7 @@ import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { PORTRAITS } from "@/lib/quest/portraits";
 import { buildRig, playerConfig, type Rig } from "./characters";
 import { loadModelManifest, loadModelRig, loadPropScene } from "./modelRig";
+import { CAVE_ZONES, CHAPEL_ZONES } from "./relics";
 import type {
   EngineHooks,
   NearTarget,
@@ -24,7 +25,7 @@ import type {
 } from "./types";
 
 export const ZONE_LEN = 46;
-const ROAD_HALF = 8.5; // walkable corridor half-width
+const ROAD_HALF = 21; // walkable corridor half-width (POIs live off-road)
 const PLATE_RADIUS = 4.9;
 const PLATE_COMMIT_S = 0.7;
 const GREEK_LETTERS = ["Α", "Β", "Γ", "Δ", "Ε"];
@@ -93,6 +94,11 @@ export function terrainHeight(x: number, z: number): number {
   let k = THREE.MathUtils.smoothstep(ax, 4.5, 11);
   k *= THREE.MathUtils.smoothstep(dArena, 9, 15);
   k *= THREE.MathUtils.smoothstep(dGate, 5, 11);
+  // off-road clearings for the hermit cave and ruined chapel
+  const dCave = Math.hypot(x + 17, local - 20);
+  const dChapel = Math.hypot(x - 16, local - 27);
+  k *= 0.1 + 0.9 * THREE.MathUtils.smoothstep(dCave, 5, 16);
+  k *= 0.1 + 0.9 * THREE.MathUtils.smoothstep(dChapel, 5, 16);
   const roll = fbm(x * 0.022 + 13.7, z * 0.022) * 1.6;
   const hills =
     THREE.MathUtils.smoothstep(ax, 10, 30) *
@@ -525,7 +531,11 @@ export class PilgrimEngine {
   private curMoveLen = 0;
   private modelIds = new Set<string>();
   private propIds = new Set<string>();
-  private propSlots = new Map<string, THREE.Group[]>();
+  private propSlots = new Map<
+    string,
+    { holder: THREE.Group; proc: THREE.Group; glb: THREE.Object3D | null }[]
+  >();
+  private propLodTick = 0;
   private pendingModels: {
     id: string;
     height: number;
@@ -552,6 +562,20 @@ export class PilgrimEngine {
   private bolts: { pos: THREE.Vector3; vel: THREE.Vector3; life: number; sprite: THREE.Sprite }[] = [];
   private scorches: { pos: THREE.Vector3; t: number; ring: THREE.Mesh; disc: THREE.Mesh }[] = [];
   private boltTex: THREE.Texture | null = null;
+  private wisps: { pos: THREE.Vector3; sprite: THREE.Sprite; phase: number }[] = [];
+  private claimSprite: THREE.Sprite | null = null;
+  private barkSprite: THREE.Sprite | null = null;
+  private darkTarget = 0;
+  private darkCur = 0;
+  private spotlightOn = false;
+  private spotlight: THREE.Sprite | null = null;
+  private schism: { a: THREE.Mesh; b: THREE.Mesh } | null = null;
+  private crowd: Rig[] = [];
+  private bossHome: THREE.Vector3 | null = null;
+  private beatenIds: Set<string>;
+  private cavePos: (THREE.Vector3 | null)[] = [];
+  private chapelPos: (THREE.Vector3 | null)[] = [];
+  private plateReadFocus = -1;
 
   // state
   private mode: "explore" | "battle" = "explore";
@@ -569,6 +593,7 @@ export class PilgrimEngine {
     this.canvas = canvas;
     this.zones = zones;
     this.opts = opts;
+    this.beatenIds = new Set(opts.beaten);
   }
 
   // ---- lifecycle ----------------------------------------------------------
@@ -599,6 +624,7 @@ export class PilgrimEngine {
     if (this.disposed) return;
     this.buildPlayer();
     this.buildWeather();
+    this.buildClouds();
     this.buildRail();
 
     const spawn = Math.min(this.opts.checkpoint, this.zones.length - 1);
@@ -609,6 +635,25 @@ export class PilgrimEngine {
     this.refreshEnvironment();
 
     this.attachInput();
+    // test/debug handle (only when explicitly enabled)
+    try {
+      if (window.localStorage.getItem("pilgrimage:debug") === "1") {
+        (window as unknown as { __pilgrim: object }).__pilgrim = {
+          tp: (x: number, z: number) => {
+            this.playerPos.set(x, terrainHeight(x, z), z);
+          },
+          pos: () => ({ x: this.playerPos.x, y: this.playerPos.y, z: this.playerPos.z }),
+          state: () => ({
+            zone: this.curZone,
+            mode: this.mode,
+            near: this.near,
+            cave: this.cavePos[this.curZone]?.toArray() ?? null,
+            chapel: this.chapelPos[this.curZone]?.toArray() ?? null,
+            caveLen: this.cavePos.length,
+          }),
+        };
+      }
+    } catch {}
     this.resize();
     window.addEventListener("resize", this.resize);
     this.clock.start();
@@ -732,6 +777,14 @@ export class PilgrimEngine {
     t.rayleigh = pal.rayleigh;
     t.gloom = pal.gloom ?? 0;
     t.snow = pal.snowfall ? 1 : 0;
+    // a station already won is visibly at peace: warmer, clearer air
+    if (this.beatenIds.has(this.zones[Math.max(0, Math.min(idx, this.zones.length - 1))].chapter.id)) {
+      t.sunIntensity *= 1.14;
+      t.hemiIntensity *= 1.1;
+      t.fogFar *= 1.3;
+      t.exposure += 0.05;
+      t.gloom *= 0.55;
+    }
     if (immediate) {
       const e = this.env;
       e.elevation = t.elevation;
@@ -772,6 +825,9 @@ export class PilgrimEngine {
     e.gloom = THREE.MathUtils.lerp(e.gloom, t.gloom, k);
     e.snow = THREE.MathUtils.lerp(e.snow, t.snow, k);
 
+    // battle darkness (Tempter) / interrogation dimming (NKVD)
+    this.darkCur = THREE.MathUtils.lerp(this.darkCur, this.darkTarget, Math.min(1, dt * 2.2));
+    const dk = this.darkCur;
     // apply
     const dir = this.sunDir(e.elevation, e.azimuth);
     const su = this.sky.material.uniforms;
@@ -782,16 +838,22 @@ export class PilgrimEngine {
     const lightDir = this.sunDir(Math.max(e.elevation, 9), e.azimuth);
     this.sun.position.copy(this.playerPos).addScaledVector(lightDir, 80);
     this.sunTarget.position.copy(this.playerPos);
-    this.sun.intensity = Math.max(0.18, e.sunIntensity);
+    this.sun.intensity = Math.max(0.14, e.sunIntensity * (1 - 0.93 * dk));
     this.sun.color.copy(e.sunColor);
     this.hemi.color.copy(e.hemiSky);
     this.hemi.groundColor.copy(e.hemiGround);
-    this.hemi.intensity = e.hemiIntensity;
+    this.hemi.intensity = e.hemiIntensity * (1 - 0.82 * dk);
     this.fog.color.copy(e.fogColor);
-    this.fog.near = e.fogNear;
-    this.fog.far = e.fogFar;
-    this.renderer.toneMappingExposure = e.exposure;
-    this.lantern.intensity = e.gloom * 9;
+    this.fog.near = THREE.MathUtils.lerp(e.fogNear, 11, dk);
+    this.fog.far = THREE.MathUtils.lerp(e.fogFar, 36, dk);
+    this.renderer.toneMappingExposure = e.exposure * (1 - 0.3 * dk);
+    this.lantern.intensity = Math.max(e.gloom, dk) * 9;
+    if (this.spotlight) {
+      this.spotlight.visible = this.spotlightOn;
+      if (this.spotlightOn) {
+        this.spotlight.position.set(this.playerPos.x, 0.14, this.playerPos.z);
+      }
+    }
     this.lantern.position.set(
       this.playerPos.x,
       this.playerPos.y + 2.1,
@@ -983,6 +1045,8 @@ export class PilgrimEngine {
           const side = i % 2 === 0 ? -1 : 1;
           const x = side * (10 + rng() * 38);
           const z = z0 - 2 - rng() * (L - 4);
+          const local = ((-z % L) + L) % L;
+          if (Math.hypot(x + 17, local - 20) < 8 || Math.hypot(x - 16, local - 27) < 8) continue;
           spots.push({ x, z, s: 0.7 + rng() * 0.9, r: rng() * Math.PI * 2 });
         }
         for (const part of parts) {
@@ -1187,7 +1251,7 @@ export class PilgrimEngine {
       this.gates.push(gate);
 
       // -- waymarker obelisk at the boundary
-      const marker = this.propSlot("prop-obelisk", new THREE.Group());
+      const marker = new THREE.Group();
       const ob = box(0.5, 2.2, 0.5, stoneMat("#7e786c"));
       ob.position.y = 1.1;
       const obCap = new THREE.Mesh(new THREE.ConeGeometry(0.42, 0.5, 4), stoneMat("#6a645a"));
@@ -1196,9 +1260,132 @@ export class PilgrimEngine {
       const bandM = box(0.54, 0.18, 0.54, goldMat(0.2), false);
       bandM.position.y = 1.7;
       marker.add(ob, obCap, bandM);
+      this.propSlot("prop-obelisk", marker);
       const mx = -5.6;
       marker.position.set(mx, Math.max(0, terrainHeight(mx, z0 - L + 0.5)), z0 - L + 0.5);
       this.scene.add(marker);
+
+      // -- hermit cave / ruined chapel (off-road discoveries)
+      if (CAVE_ZONES.includes(i)) {
+        const cx = -17;
+        const cz = z0 - 20;
+        const cy = Math.max(0, terrainHeight(cx, cz));
+        const cave = new THREE.Group();
+        for (let r = 0; r < 5; r++) {
+          const rock = new THREE.Mesh(
+            new THREE.IcosahedronGeometry(1.6 + rng() * 1.4, 0),
+            new THREE.MeshStandardMaterial({ color: "#6e685c", roughness: 1, flatShading: true })
+          );
+          rock.castShadow = true;
+          rock.receiveShadow = true;
+          const a = (r / 5) * Math.PI - Math.PI / 2;
+          rock.position.set(Math.cos(a) * 2.2, 0.8 + rng() * 1.2, Math.sin(a) * 1.6 - 0.6);
+          rock.rotation.set(rng() * 3, rng() * 3, rng() * 3);
+          cave.add(rock);
+        }
+        const mouth = new THREE.Mesh(
+          new THREE.CircleGeometry(1.05, 20),
+          new THREE.MeshBasicMaterial({ color: "#050403" })
+        );
+        mouth.position.set(0, 1.0, 0.9);
+        cave.add(mouth);
+        const candle = new THREE.Sprite(
+          new THREE.SpriteMaterial({ map: this.glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })
+        );
+        candle.scale.setScalar(0.9);
+        candle.position.set(0.8, 0.5, 1.3);
+        cave.add(candle);
+        cave.position.set(cx, cy, cz);
+        this.scene.add(cave);
+        this.cavePos.push(new THREE.Vector3(cx, 0, cz));
+      } else this.cavePos.push(null);
+
+      if (CHAPEL_ZONES.includes(i)) {
+        const px = 16;
+        const pz = z0 - 27;
+        const py = Math.max(0, terrainHeight(px, pz));
+        const ch = new THREE.Group();
+        const wallM = stoneMat("#8d887c");
+        const back = box(4.6, 2.6, 0.35, wallM);
+        back.position.set(0, 1.3, -2.1);
+        const sideL = box(0.35, 2.2, 3.6, wallM);
+        sideL.position.set(-2.2, 1.1, -0.4);
+        const sideR = box(0.35, 1.4, 2.6, wallM);
+        sideR.position.set(2.2, 0.7, -0.8);
+        const fallen = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 3.2, 10), wallM);
+        fallen.castShadow = true;
+        fallen.rotation.z = Math.PI / 2;
+        fallen.rotation.y = 0.4;
+        fallen.position.set(0.8, 0.42, 1.6);
+        const altar = box(1.2, 0.8, 0.7, stoneMat("#a09a8c"));
+        altar.position.set(0, 0.4, -1.4);
+        const cross = buildCross(0.7, goldMat(0.35));
+        cross.position.set(0, 0.8, -1.4);
+        ch.add(back, sideL, sideR, fallen, altar, cross);
+        for (const [gx, gz] of [[-0.7, -1.1], [0.7, -1.1]]) {
+          const g = new THREE.Sprite(
+            new THREE.SpriteMaterial({ map: this.glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })
+          );
+          g.scale.setScalar(0.7);
+          g.position.set(gx, 1.0, gz);
+          ch.add(g);
+        }
+        ch.position.set(px, py, pz);
+        ch.rotation.y = -0.4;
+        this.scene.add(ch);
+        this.chapelPos.push(new THREE.Vector3(px, 0, pz));
+      } else this.chapelPos.push(null);
+
+      // -- crimson banners announcing the arena
+      for (const side of [-1, 1]) {
+        const b = new THREE.Group();
+        const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.08, 4.4, 6), stoneMat("#4a3a28"));
+        pole.castShadow = true;
+        pole.position.y = 2.2;
+        const cloth = box(1.12, 2.1, 0.04, new THREE.MeshStandardMaterial({ color: "#7c1414", roughness: 0.9 }));
+        cloth.position.set(0, 3.1, 0.1);
+        const emblem = buildCross(0.5, goldMat(0.3));
+        emblem.position.set(0, 2.7, 0.16);
+        b.add(pole, cloth, emblem);
+        const bx = side * 5.4;
+        const bz = z0 - L + 19;
+        b.position.set(bx, Math.max(0, terrainHeight(bx, bz)), bz);
+        this.scene.add(b);
+      }
+
+      // -- flagstones worn into the road
+      for (let f = 0; f < 8; f++) {
+        const fs = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.55 + rng() * 0.45, 0.55 + rng() * 0.45, 0.05, 7),
+          stoneMat(rng() > 0.5 ? "#9a9284" : "#8a8274")
+        );
+        fs.receiveShadow = true;
+        fs.position.set((f % 2 === 0 ? -1 : 1) * (0.8 + rng() * 1.2), 0.025, z0 - 3 - f * ((L - 12) / 8));
+        fs.rotation.y = rng() * Math.PI;
+        this.scene.add(fs);
+      }
+
+      // -- ruined columns off the road
+      for (let rcol = 0; rcol < 2; rcol++) {
+        const side = rcol === 0 ? -1 : 1;
+        const rx = side * (11 + rng() * 4);
+        const rz = z0 - 6 - rng() * (L - 16);
+        const ry = Math.max(0, terrainHeight(rx, rz));
+        const stump = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.5, 0.55, 1 + rng() * 1.6, 10),
+          stoneMat("#98917f")
+        );
+        stump.castShadow = true;
+        stump.receiveShadow = true;
+        const sh = (stump.geometry as THREE.CylinderGeometry).parameters.height;
+        stump.position.set(rx, ry + sh / 2, rz);
+        const seg = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 2.2, 10), stoneMat("#8f887a"));
+        seg.castShadow = true;
+        seg.rotation.z = Math.PI / 2;
+        seg.rotation.y = rng() * Math.PI;
+        seg.position.set(rx + 1.3, ry + 0.45, rz + 0.8);
+        this.scene.add(stump, seg);
+      }
 
       // -- stars over the dark zones
       if (pal.stars) {
@@ -1258,7 +1445,7 @@ export class PilgrimEngine {
 
   private addLamp(zoneIdx: number, lampIdx: number, pos: THREE.Vector3, pal: ZonePalette) {
     const y0 = Math.max(0, terrainHeight(pos.x, pos.z));
-    const holder = this.propSlot("prop-brazier", new THREE.Group());
+    const holder = new THREE.Group();
     holder.position.set(pos.x, y0, pos.z);
     this.scene.add(holder);
     const stand = new THREE.Mesh(
@@ -1273,6 +1460,7 @@ export class PilgrimEngine {
     );
     cup.position.set(0, 1.16, 0);
     holder.add(stand, cup);
+    this.propSlot("prop-brazier", holder);
     const flame = new THREE.Sprite(
       new THREE.SpriteMaterial({
         map: this.glowTex,
@@ -1322,15 +1510,29 @@ export class PilgrimEngine {
     this.scene.add(cross, flame);
   }
 
-  /** Register a placement that a generated scenery GLB may replace. */
+  /**
+   * Register a fully-assembled placement that a generated scenery GLB may
+   * replace. Existing children are swept into a toggleable "procedural"
+   * group so the LOD tick can swap between them and the detailed mesh.
+   */
   private propSlot(kind: string, container: THREE.Group): THREE.Group {
     if (!this.propSlots.has(kind)) this.propSlots.set(kind, []);
-    this.propSlots.get(kind)!.push(container);
+    const proc = new THREE.Group();
+    while (container.children.length) proc.add(container.children[0]);
+    container.add(proc);
+    this.propSlots.get(kind)!.push({ holder: container, proc, glb: null });
     return container;
   }
 
-  /** Swap generated scenery into every registered placement. */
+  /**
+   * Load generated scenery and attach a hidden clone per placement; the
+   * per-frame LOD tick shows the detailed mesh only near the player
+   * (dozens of 10k-poly clones resident at once would sink weak GPUs).
+   */
   private loadEnvironmentProps() {
+    try {
+      if (window.localStorage.getItem("pilgrimage:noprops") === "1") return;
+    } catch {}
     const HEIGHTS: Record<string, number> = {
       "prop-gate-arch": 7.6,
       "prop-tower": 8.6,
@@ -1343,10 +1545,29 @@ export class PilgrimEngine {
       loadPropScene(this.opts.basePath, kind, HEIGHTS[kind] ?? 3).then((scene) => {
         if (!scene || this.disposed) return;
         for (const slot of slots) {
-          slot.clear();
-          slot.add(scene.clone());
+          const clone = scene.clone();
+          clone.visible = false;
+          slot.holder.add(clone);
+          slot.glb = clone;
         }
       });
+    }
+  }
+
+  private tickPropLod(dt: number) {
+    this.propLodTick += dt;
+    if (this.propLodTick < 0.5) return;
+    this.propLodTick = 0;
+    const range = ZONE_LEN * 1.35;
+    const wp = new THREE.Vector3();
+    for (const slots of this.propSlots.values()) {
+      for (const s of slots) {
+        if (!s.glb) continue;
+        s.holder.getWorldPosition(wp);
+        const near = Math.abs(wp.z - this.playerPos.z) < range;
+        s.glb.visible = near;
+        s.proc.visible = !near;
+      }
     }
   }
 
@@ -1417,6 +1638,25 @@ export class PilgrimEngine {
         this.playerRig = r;
       }
     );
+  }
+
+  private clouds: THREE.Sprite[] = [];
+  private buildClouds() {
+    const tex = makeGlowTexture("rgba(255,252,244,0.85)", "rgba(255,252,244,0)");
+    const n = 10;
+    for (let i = 0; i < n; i++) {
+      const s = new THREE.Sprite(
+        new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.4, depthWrite: false, fog: false })
+      );
+      s.scale.set(34 + Math.random() * 26, 10 + Math.random() * 6, 1);
+      s.position.set(
+        (Math.random() - 0.5) * 160,
+        52 + Math.random() * 26,
+        -Math.random() * this.zones.length * ZONE_LEN
+      );
+      this.scene.add(s);
+      this.clouds.push(s);
+    }
   }
 
   private buildWeather() {
@@ -1563,9 +1803,27 @@ export class PilgrimEngine {
     this.battleZone = zoneIdx;
     this.clearCombat();
     this.phase2 = false;
-    this.bossRigs[zoneIdx]?.gesture("menace");
     const c = this.arenaCenter[zoneIdx];
     this.playerPos.set(c.x, 0, c.z + 5.6);
+    // the adversary strides forward to meet the pilgrim
+    const rig = this.bossRigs[zoneIdx];
+    if (rig) {
+      this.bossHome = this.bossPos[zoneIdx].clone();
+      const targetZ = c.z - 1.7;
+      rig.setSpeed(0.45);
+      this.effects.push((dt) => {
+        if (this.battleZone !== zoneIdx || !this.bossRigs[zoneIdx]) return false;
+        const bp = this.bossPos[zoneIdx];
+        bp.z = Math.min(bp.z + dt * 1.5, targetZ);
+        rig.group.position.copy(bp);
+        if (bp.z >= targetZ) {
+          rig.setSpeed(0);
+          rig.gesture("menace");
+          return false;
+        }
+        return true;
+      });
+    }
     this.rail.position.set(c.x, -0.3, c.z);
     this.rail.visible = true;
     const mat = this.rail.material as THREE.MeshStandardMaterial;
@@ -1577,6 +1835,15 @@ export class PilgrimEngine {
   }
 
   exitBattle() {
+    const zi = this.battleZone;
+    // an undefeated adversary returns to his post
+    if (zi >= 0 && this.bossRigs[zi] && this.bossHome) {
+      this.bossPos[zi].copy(this.bossHome);
+      this.bossRigs[zi]!.group.position.copy(this.bossHome);
+      this.bossRigs[zi]!.setSpeed(0);
+    }
+    this.bossHome = null;
+    this.clearCrowd();
     this.clearCombat();
     this.mode = "explore";
     this.battleZone = -1;
@@ -1591,6 +1858,234 @@ export class PilgrimEngine {
       }
       return true;
     });
+  }
+
+  // ---- world text ----------------------------------------------------------
+
+  private makeTextSprite(
+    text: string,
+    o: { w: number; h: number; font: number; maxLines: number; accent: string }
+  ): THREE.Sprite {
+    const cv = document.createElement("canvas");
+    cv.width = o.w;
+    cv.height = o.h;
+    const ctx = cv.getContext("2d")!;
+    ctx.fillStyle = "rgba(14,10,6,0.82)";
+    ctx.fillRect(0, 0, o.w, o.h);
+    ctx.strokeStyle = o.accent;
+    ctx.lineWidth = 6;
+    ctx.strokeRect(6, 6, o.w - 12, o.h - 12);
+    // wrap
+    let font = o.font;
+    let lines: string[] = [];
+    for (; font >= o.font * 0.7; font -= 6) {
+      ctx.font = `${font}px Georgia, serif`;
+      lines = [];
+      let line = "";
+      for (const word of text.split(/\s+/)) {
+        const probe = line ? line + " " + word : word;
+        if (ctx.measureText(probe).width > o.w - 60 && line) {
+          lines.push(line);
+          line = word;
+        } else line = probe;
+      }
+      if (line) lines.push(line);
+      if (lines.length <= o.maxLines) break;
+    }
+    if (lines.length > o.maxLines) {
+      lines = lines.slice(0, o.maxLines);
+      lines[o.maxLines - 1] += " …";
+    }
+    ctx.font = `${font}px Georgia, serif`;
+    ctx.fillStyle = "#f4ecd8";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    const lh = font * 1.22;
+    const y0 = o.h / 2 - ((lines.length - 1) * lh) / 2;
+    lines.forEach((l, i) => ctx.fillText(l, o.w / 2, y0 + i * lh));
+    const tex = new THREE.CanvasTexture(cv);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    const sprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, fog: false })
+    );
+    sprite.scale.set(o.w / 140, o.h / 140, 1);
+    return sprite;
+  }
+
+  private killSprite(s: THREE.Sprite | null) {
+    if (!s) return;
+    this.scene.remove(s);
+    s.material.map?.dispose();
+    s.material.dispose();
+  }
+
+  /** The adversary's claim floats over him as world-text. */
+  showClaim(text: string) {
+    this.killSprite(this.claimSprite);
+    const zi = this.battleZone;
+    if (zi < 0) return;
+    this.claimSprite = this.makeTextSprite(text, {
+      w: 1100,
+      h: 300,
+      font: 46,
+      maxLines: 4,
+      accent: "#a02020",
+    });
+    this.claimSprite.position.copy(this.bossPos[zi]).add(new THREE.Vector3(0, 3.7, 0));
+    this.scene.add(this.claimSprite);
+  }
+
+  hideClaim() {
+    this.killSprite(this.claimSprite);
+    this.claimSprite = null;
+  }
+
+  /** Short bark above the adversary (taunts, midlines, outros). */
+  bossSay(text: string, seconds = 3.4) {
+    this.killSprite(this.barkSprite);
+    const zi = this.battleZone;
+    if (zi < 0) return;
+    const s = this.makeTextSprite(text, { w: 900, h: 190, font: 44, maxLines: 2, accent: "#c9a227" });
+    s.position.copy(this.bossPos[zi]).add(new THREE.Vector3(0, this.claimSprite ? 5.6 : 3.2, 0));
+    this.scene.add(s);
+    this.barkSprite = s;
+    let t = 0;
+    this.effects.push((dt) => {
+      t += dt;
+      if (t >= seconds) {
+        if (this.barkSprite === s) {
+          this.killSprite(s);
+          this.barkSprite = null;
+        }
+        return false;
+      }
+      return true;
+    });
+  }
+
+  // ---- signature fight staging ----------------------------------------------
+
+  /** Tempter: the arena goes dark; your lantern is the world. 0..1. */
+  setBattleDarkness(k: number) {
+    this.darkTarget = THREE.MathUtils.clamp(k, 0, 1);
+  }
+
+  /** NKVD: a cold spotlight tracks the prisoner. */
+  setSpotlight(on: boolean) {
+    this.spotlightOn = on;
+    if (on && !this.spotlight) {
+      this.spotlight = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+          map: makeGlowTexture("rgba(220,230,255,0.55)", "rgba(180,200,255,0)"),
+          transparent: true,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+          fog: false,
+        })
+      );
+      this.spotlight.scale.setScalar(6.5);
+      this.scene.add(this.spotlight);
+    }
+    if (this.spotlight) this.spotlight.visible = on;
+  }
+
+  /** Schism: the arena splits; the Spirit rests on one bank per round. */
+  setSchismSide(side: -1 | 0 | 1) {
+    const zi = this.battleZone;
+    if (zi < 0) return;
+    if (!this.schism) {
+      const mk = (x: number) => {
+        const m = new THREE.Mesh(
+          new THREE.PlaneGeometry(6.8, 14.6),
+          new THREE.MeshBasicMaterial({
+            color: "#f0d358",
+            transparent: true,
+            opacity: 0,
+            depthWrite: false,
+          })
+        );
+        m.rotation.x = -Math.PI / 2;
+        m.position.set(this.arenaCenter[zi].x + x, 0.05, this.arenaCenter[zi].z);
+        this.scene.add(m);
+        return m;
+      };
+      this.schism = { a: mk(-3.6), b: mk(3.6) };
+    }
+    const ma = this.schism.a.material as THREE.MeshBasicMaterial;
+    const mb = this.schism.b.material as THREE.MeshBasicMaterial;
+    if (side === 0) {
+      ma.opacity = 0;
+      mb.opacity = 0;
+    } else {
+      const act = side < 0 ? ma : mb;
+      const off = side < 0 ? mb : ma;
+      act.color.set("#f0d358");
+      act.opacity = 0.16;
+      off.color.set("#7c1414");
+      off.opacity = 0.1;
+    }
+  }
+
+  /** Which bank a plate stands on (-1 west / +1 east). */
+  getPlateSide(i: number): -1 | 1 {
+    const zi = this.battleZone;
+    const p = this.plates[i];
+    if (!p || zi < 0) return 1;
+    return p.pos.x - this.arenaCenter[zi].x < 0 ? -1 : 1;
+  }
+
+  /** False claims take shape and hunt the pilgrim until popped. */
+  spawnWisp() {
+    if (this.wisps.length >= 2 || this.battleZone < 0) return;
+    const sprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: makeGlowTexture("rgba(150,80,220,0.95)", "rgba(60,20,110,0)"),
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      })
+    );
+    sprite.scale.setScalar(1.15);
+    const c = this.arenaCenter[this.battleZone];
+    const a = Math.random() * Math.PI * 2;
+    const pos = new THREE.Vector3(c.x + Math.cos(a) * 6, 1.1, c.z + Math.sin(a) * 6);
+    sprite.position.copy(pos);
+    this.scene.add(sprite);
+    this.wisps.push({ pos, sprite, phase: Math.random() * 7 });
+  }
+
+  /** Pilgrims gather to watch the witness. */
+  setCrowdCount(n: number) {
+    const zi = this.battleZone;
+    if (zi < 0) return;
+    const c = this.arenaCenter[zi];
+    while (this.crowd.length < Math.min(n, 6)) {
+      const i = this.crowd.length;
+      const rig = buildRig(undefined, {
+        height: 1.66 + (i % 3) * 0.05,
+        seed: 0xbeef + i * 977,
+        hairHex: ["#3a2a1a", "#141414", "#7a5a30", "#9a9a9a", "#5a3a20", "#c8c8c8"][i],
+      });
+      const a = Math.PI / 2 + (i - 2.5) * 0.28;
+      rig.group.position.set(c.x + Math.cos(a) * 9.2, 0, c.z + Math.sin(a) * 9.0);
+      rig.group.rotation.y = Math.atan2(c.x - rig.group.position.x, c.z - rig.group.position.z);
+      this.scene.add(rig.group);
+      this.burst(rig.group.position.clone().add(new THREE.Vector3(0, 1, 0)), "#ffe28c", 8);
+      this.crowd.push(rig);
+    }
+  }
+
+  /** The crowd rejoices. */
+  crowdBless() {
+    for (const r of this.crowd) r.gesture("bless");
+  }
+
+  private clearCrowd() {
+    for (const r of this.crowd) {
+      this.scene.remove(r.group);
+      r.dispose();
+    }
+    this.crowd = [];
   }
 
   // ---- live combat -------------------------------------------------------
@@ -1645,6 +2140,22 @@ export class PilgrimEngine {
     this.aggro = false;
     this.stagger = 0;
     this.empowered = false;
+    this.hideClaim();
+    this.killSprite(this.barkSprite);
+    this.barkSprite = null;
+    this.setBattleDarkness(0);
+    this.setSpotlight(false);
+    if (this.schism) {
+      this.scene.remove(this.schism.a, this.schism.b);
+      (this.schism.a.material as THREE.Material).dispose();
+      (this.schism.b.material as THREE.Material).dispose();
+      this.schism = null;
+    }
+    for (const w of this.wisps) {
+      this.scene.remove(w.sprite);
+      w.sprite.material.dispose();
+    }
+    this.wisps = [];
     for (const b of this.bolts) {
       this.scene.remove(b.sprite);
       b.sprite.material.dispose();
@@ -1794,7 +2305,10 @@ export class PilgrimEngine {
       const dy = b.pos.y - (this.playerPos.y + 1.0);
       const dz = b.pos.z - this.playerPos.z;
       const hit = dx * dx + dy * dy + dz * dz < 0.75 * 0.75;
-      if (hit && this.iframes <= 0) {
+      if (hit && this.iframes > 0) {
+        this.burst(this.playerPos.clone().add(new THREE.Vector3(0, 1.2, 0)), "#ffe28c", 8);
+        this.opts.hooks.onBoltDodged?.();
+      } else if (hit) {
         this.playerRig.flash();
         this.shake = Math.max(this.shake, 0.22);
         this.burst(this.playerPos.clone().add(new THREE.Vector3(0, 1.1, 0)), "#ff5040", 12);
@@ -1804,6 +2318,30 @@ export class PilgrimEngine {
         this.scene.remove(b.sprite);
         b.sprite.material.dispose();
         this.bolts.splice(i, 1);
+      }
+    }
+
+    // wisps: false claims hunting the pilgrim
+    for (let i = this.wisps.length - 1; i >= 0; i--) {
+      const w = this.wisps[i];
+      const dir = this.playerPos.clone().add(new THREE.Vector3(0, 1.05, 0)).sub(w.pos);
+      const d = dir.length();
+      dir.normalize();
+      w.pos.addScaledVector(dir, 2.1 * h);
+      w.pos.y = 1.05 + Math.sin(this.time * 3 + w.phase) * 0.15;
+      w.sprite.position.copy(w.pos);
+      if (d < 0.6) {
+        if (this.iframes > 0) {
+          this.burst(w.pos.clone(), "#c084ff", 16);
+          this.opts.hooks.onWispPopped?.();
+        } else {
+          this.playerRig.flash();
+          this.burst(w.pos.clone(), "#7c3aed", 12);
+          this.opts.hooks.onPlayerHit?.(4, "wisp");
+        }
+        this.scene.remove(w.sprite);
+        w.sprite.material.dispose();
+        this.wisps.splice(i, 1);
       }
     }
 
@@ -1838,7 +2376,7 @@ export class PilgrimEngine {
   }
 
   /** Lay out N answer plates in an arc facing the adversary. */
-  spawnPlates(count: number) {
+  spawnPlates(count: number, shorts?: string[]) {
     this.clearPlates();
     this.platesLocked = false;
     const c = this.arenaCenter[this.battleZone];
@@ -1872,6 +2410,18 @@ export class PilgrimEngine {
       face.position.y = 1.0;
       face.lookAt(new THREE.Vector3(c.x, 1.0, c.z - 3));
       group.add(pedestal, face);
+      if (shorts?.[i]) {
+        const snip = this.makeTextSprite(shorts[i], {
+          w: 560,
+          h: 170,
+          font: 36,
+          maxLines: 3,
+          accent: "#5a4810",
+        });
+        snip.scale.multiplyScalar(0.52);
+        snip.position.set(0, 1.95, 0);
+        group.add(snip);
+      }
       group.position.set(px, 0, pz);
       this.scene.add(group);
       this.plates.push({
@@ -2070,6 +2620,9 @@ export class PilgrimEngine {
   /** The adversary is overcome: falls, fades, memorial lit, doors open. */
   bossDefeated(zoneIdx: number) {
     this.clearCombat();
+    this.crowdBless();
+    this.beatenIds.add(this.zones[zoneIdx].chapter.id);
+    if (this.curZone === zoneIdx) this.applyZonePalette(zoneIdx);
     this.bossAlive[zoneIdx] = false;
     const rig = this.bossRigs[zoneIdx];
     if (rig) {
@@ -2197,13 +2750,22 @@ export class PilgrimEngine {
     // plate standing detection
     if (this.mode === "battle" && this.plates.length && !this.platesLocked) {
       let focus = -1;
+      let read = -1;
+      let readDist = 2.6;
       for (let i = 0; i < this.plates.length; i++) {
         if (this.plates[i].state === "dimmed") continue;
         const d = this.plates[i].pos.distanceTo(this.playerPos);
-        if (d < 1.05) {
-          focus = i;
-          break;
+        if (d < readDist) {
+          read = i;
+          readDist = d;
         }
+        if (d < 1.05 && focus < 0) {
+          focus = i;
+        }
+      }
+      if (read !== this.plateReadFocus) {
+        this.plateReadFocus = read;
+        this.opts.hooks.onPlateFocus?.(read >= 0 ? read : null);
       }
       if (focus !== this.plateFocus) {
         this.plateFocus = focus;
@@ -2248,7 +2810,9 @@ export class PilgrimEngine {
       this.simStep(h, dirX * speed, dirZ * speed);
     }
 
-    // --- player rig
+    // --- player rig (follows the rolling ground off-road)
+    const groundY = this.mode === "battle" ? 0 : terrainHeight(this.playerPos.x, this.playerPos.z);
+    this.playerPos.y = THREE.MathUtils.lerp(this.playerPos.y, groundY, Math.min(1, dt * 10));
     this.playerRig.group.position.copy(this.playerPos);
     if (this.mode === "battle") {
       // face the adversary while on trial (unless running between plates)
@@ -2327,6 +2891,7 @@ export class PilgrimEngine {
       if (this.envTimer <= 0) this.refreshEnvironment();
     }
     this.tickModelLoads(dt);
+    this.tickPropLod(dt);
 
     // --- lamps flicker
     for (const lamp of this.lamps) {
@@ -2384,6 +2949,14 @@ export class PilgrimEngine {
     }
     mp.needsUpdate = true;
 
+    // --- clouds drift and fade with the dark
+    const cloudOp = 0.4 * (1 - this.env.gloom) * (1 - this.darkCur);
+    for (const cl of this.clouds) {
+      cl.position.x += dt * 0.7;
+      if (cl.position.x > 110) cl.position.x = -110;
+      cl.material.opacity = cloudOp;
+    }
+
     // --- camera
     this.updateCamera(dt);
     this.renderer.render(this.scene, this.camera);
@@ -2400,6 +2973,10 @@ export class PilgrimEngine {
         next = { kind: "ally", zoneIdx: zi };
       } else if (this.shrinePos[zi].distanceTo(p) < 3.8) {
         next = { kind: "shrine", zoneIdx: zi };
+      } else if (this.cavePos[zi] && this.cavePos[zi]!.distanceTo(p) < 4.2) {
+        next = { kind: "cave", zoneIdx: zi };
+      } else if (this.chapelPos[zi] && this.chapelPos[zi]!.distanceTo(p) < 4.4) {
+        next = { kind: "chapel", zoneIdx: zi };
       } else if (
         this.bossAlive[zi] &&
         Math.abs(this.gates[zi].z - p.z) < 3 &&

@@ -15,6 +15,7 @@ import type { BossAttack } from "@/lib/quest/types";
 import { sfx, getMuted, setMuted } from "@/lib/quest/sfx";
 import BattlePanel, { PLATE_LETTERS, type PanelOption } from "./BattlePanel";
 import Joystick from "./Joystick";
+import { RELICS, CAVE_RELIC } from "@/lib/quest3d/relics";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII"];
@@ -54,11 +55,18 @@ type Battle = {
   lightUsed: boolean;
   defeated: boolean;
   blessing: string | null;
+  blessingCharges: number;
+  corrects: number;
+  activeSide: -1 | 0 | 1;
+  ghosts: BossAttack[];
+  ghostAttack: BossAttack | null;
 };
 
 type Card =
   | { kind: "ally"; name: string; line: string; healed: boolean }
-  | { kind: "shrine"; zoneIdx: number }
+  | { kind: "shrine"; zoneIdx: number; healed: boolean }
+  | { kind: "caveq"; zoneIdx: number; attack: BossAttack; picked: number | null; won: boolean; relicId: string | null }
+  | { kind: "chapel"; zoneIdx: number }
   | { kind: "victory"; zoneIdx: number; xp: number; rankedUp: string | null }
   | { kind: "defeat"; zoneIdx: number }
   | { kind: "finished" };
@@ -91,7 +99,17 @@ export default function PilgrimageApp() {
   const hpRef = React.useRef(PLAYER_MAX_HP);
   const cardRef = React.useRef<Card | null>(null);
   const blessedZones = React.useRef<Set<number>>(new Set());
+  const veneratedZones = React.useRef<Set<number>>(new Set());
+  const caveUsed = React.useRef<Set<number>>(new Set());
+  const chapelUsed = React.useRef<Set<number>>(new Set());
+  const lastDefeatZone = React.useRef<number>(-1);
+  const timerDeadline = React.useRef<number | null>(null);
   const toastId = React.useRef(1);
+  const [plateFocus, setPlateFocus] = React.useState<number | null>(null);
+  const [timerLeft, setTimerLeft] = React.useState<number | null>(null);
+
+  const maxHp = () => (saveRef.current.relics.includes("psalter") ? 115 : 100);
+  const hasRelic = (id: string) => saveRef.current.relics.includes(id);
 
   React.useEffect(() => {
     saveRef.current = loadSave();
@@ -133,14 +151,23 @@ export default function PilgrimageApp() {
   };
   const setHpState = (v: number) => {
     hpRef.current = v;
+    saveRef.current.hp = v;
     setHp(v);
   };
 
   // ---- battle flow ---------------------------------------------------------
 
   const currentAttack = (b: Battle): BossAttack => {
+    if (b.ghostAttack) return b.ghostAttack;
     const boss = zones[b.zoneIdx].chapter.boss!;
     return boss.attacks[b.queue[b.qPos % b.queue.length]];
+  };
+
+  const SIGNATURE: Record<string, string> = {
+    "ch4-desert": "The Tempter snuffs the sun — only your lantern holds the dark at bay.",
+    "ch7-schism": "The arena splits East and West. Answer from the bank where the Spirit rests.",
+    "ch9-soviets": "The interrogation clock is running. Eighteen seconds to answer, prisoner.",
+    "ch11-doubt": "The Doubt remembers every time you faltered. Your old wrong answers return.",
   };
 
   const applyChipDamage = (dmg: number) => {
@@ -159,7 +186,7 @@ export default function PilgrimageApp() {
   const applySmite = () => {
     const b = battleRef.current;
     if (!b) return;
-    const dmg = 14;
+    const dmg = hasRelic("wheel") ? 28 : 14;
     b.bossHp = Math.max(0, b.bossHp - dmg);
     sfx.crit();
     pushToast(`⚔ You press the witness — ${dmg} bonus damage!`);
@@ -180,7 +207,33 @@ export default function PilgrimageApp() {
       : null;
     setNear(null);
     nearRef.current = null;
-    engineRef.current?.enterBattle(zoneIdx);
+    const engine = engineRef.current;
+    engine?.enterBattle(zoneIdx);
+    const chId = zones[zoneIdx].chapter.id;
+    // signature staging
+    if (chId === "ch4-desert") engine?.setBattleDarkness(1);
+    if (chId === "ch9-soviets") {
+      engine?.setBattleDarkness(0.55);
+      engine?.setSpotlight(true);
+    }
+    if (SIGNATURE[chId]) pushToast(SIGNATURE[chId]);
+    // The Doubt replays your own recorded failures
+    let ghosts: BossAttack[] = [];
+    if (chId === "ch11-doubt") {
+      ghosts = shuffle(
+        saveRef.current.wrongLog
+          .map((w) => {
+            const z = zones.find((zz) => zz.chapter.boss?.id === w.b);
+            return z?.chapter.boss?.attacks[w.a];
+          })
+          .filter((a): a is BossAttack => !!a)
+      ).slice(0, 4);
+    }
+    if (lastDefeatZone.current === zoneIdx) {
+      window.setTimeout(() => engine?.bossSay("Back again? The truth has not changed, pilgrim.", 3.6), 900);
+    } else {
+      window.setTimeout(() => engine?.bossSay(boss.intro.slice(0, 130), 4.2), 900);
+    }
     setBattleState({
       zoneIdx,
       stage: "intro",
@@ -195,12 +248,24 @@ export default function PilgrimageApp() {
       lightUsed: false,
       defeated: false,
       blessing,
+      blessingCharges: blessing ? (hasRelic("rope") ? 2 : 1) : 0,
+      corrects: 0,
+      activeSide: 0,
+      ghosts,
+      ghostAttack: null,
     });
   };
 
   const beginRound = () => {
     const b = battleRef.current;
     if (!b) return;
+    const engine = engineRef.current;
+    const chId = zones[b.zoneIdx].chapter.id;
+    // The Doubt: every other round is one of YOUR old wrong answers
+    b.ghostAttack =
+      chId === "ch11-doubt" && b.ghosts.length && b.qPos % 2 === 1
+        ? b.ghosts.shift()!
+        : null;
     const attack = currentAttack(b);
     b.stage = "question";
     b.order = shuffle(attack.options.map((_, i) => i));
@@ -210,9 +275,26 @@ export default function PilgrimageApp() {
     b.pickedCorrect = undefined;
     b.resolvedNote = undefined;
     b.rationale = undefined;
-    engineRef.current?.spawnPlates(b.order.length);
-    engineRef.current?.setBossAggro(true);
+    const shorts = b.order.map((optIdx) => attack.options[optIdx].text);
+    engine?.spawnPlates(b.order.length, shorts);
+    engine?.showClaim((b.ghostAttack ? "YOUR OLD DOUBT: " : "") + attack.claim);
+    if (b.ghostAttack) engine?.bossSay("You faltered on this once. Will you again?");
+    else if (attack.taunt) engine?.bossSay(attack.taunt);
+    if (chId === "ch7-schism") {
+      b.activeSide = b.qPos % 2 === 0 ? 1 : -1;
+      engine?.setSchismSide(b.activeSide);
+      pushToast(`The Spirit rests on the ${b.activeSide > 0 ? "EAST" : "WEST"} bank — answer from there.`);
+    }
+    if (chId === "ch9-soviets") {
+      timerDeadline.current = Date.now() + 18000;
+      setTimerLeft(18);
+    } else {
+      timerDeadline.current = null;
+      setTimerLeft(null);
+    }
+    engine?.setBossAggro(true);
     setBattleState(b);
+    setPlateFocus(null);
   };
 
   const resolveAnswer = (plateIdx: number) => {
@@ -222,6 +304,9 @@ export default function PilgrimageApp() {
     const engine = engineRef.current;
     engine?.lockPlates();
     engine?.setBossAggro(false);
+    engine?.hideClaim();
+    timerDeadline.current = null;
+    setTimerLeft(null);
     const boss = zones[b.zoneIdx].chapter.boss!;
     const attack = currentAttack(b);
     const picked = attack.options[b.order[plateIdx]];
@@ -241,8 +326,17 @@ export default function PilgrimageApp() {
 
     if (picked.correct) {
       const crit = Math.random() < 0.12;
-      const dmg = Math.round((attack.difficulty * 8 + 10) * (crit ? 2 : 1));
+      let mult = crit ? 2 : 1;
+      let sideNote = "";
+      if (b.activeSide !== 0 && engine && engine.getPlateSide(plateIdx) !== b.activeSide) {
+        mult *= 0.6;
+        sideNote = " (spoken from the far bank, it lands softly)";
+      }
+      const dmg = Math.round((attack.difficulty * 8 + 10) * mult);
+      b.corrects += 1;
+      engine?.setCrowdCount(b.corrects * 2);
       b.bossHp = Math.max(0, b.bossHp - dmg);
+      void sideNote;
       if (crit) sfx.crit();
       else sfx.hit();
       engine?.strikeBoss();
@@ -253,21 +347,34 @@ export default function PilgrimageApp() {
       if (b.bossHp <= 0) {
         b.resolvedNote = `✓ ${crit ? "CRITICAL — " : ""}Your witness strikes true for ${dmg}. ${boss.name} can answer nothing more.`;
       } else {
-        b.resolvedNote = `✓ ${crit ? "CRITICAL — " : ""}Your witness strikes true: ${dmg} to ${boss.name}.`;
+        b.resolvedNote = `✓ ${crit ? "CRITICAL — " : ""}Your witness strikes true: ${dmg} to ${boss.name}.${sideNote}`;
         if (!b.midlineShown && b.bossHp <= b.bossMax / 2 && boss.midline) {
           b.midlineShown = true;
           b.showMidline = true;
+          engine?.bossSay(boss.midline, 4);
         }
       }
-    } else if (b.blessing) {
+    } else if (b.blessingCharges > 0) {
       sfx.ding();
-      b.resolvedNote = `☦ ${b.blessing} intercedes — the blow is turned aside. (You chose ${PLATE_LETTERS[plateIdx]}.)`;
-      b.blessing = null;
+      b.blessingCharges -= 1;
+      b.resolvedNote = `☦ ${b.blessing} intercedes — the blow is turned aside. (You chose ${PLATE_LETTERS[plateIdx]}.)${b.blessingCharges > 0 ? " One grace remains." : ""}`;
+      if (b.blessingCharges <= 0) b.blessing = null;
     } else {
       const dmg = Math.round(attack.difficulty * 6 + 8);
       sfx.wrong();
       engine?.strikePlayer();
       engine?.empowerNextVolley();
+      engine?.spawnWisp();
+      if (attack.taunt) engine?.bossSay(attack.taunt, 3);
+      // The Doubt will remember this
+      if (!b.ghostAttack) {
+        const aIdx = b.queue[b.qPos % b.queue.length];
+        const log = saveRef.current.wrongLog;
+        if (!log.some((w) => w.b === boss.id && w.a === aIdx)) {
+          log.push({ b: boss.id, a: aIdx });
+          if (log.length > 24) log.shift();
+        }
+      }
       setHurtKey((k) => k + 1);
       const newHp = Math.max(0, hpRef.current - dmg);
       setHpState(newHp);
@@ -279,6 +386,57 @@ export default function PilgrimageApp() {
     }
     setBattleState(b);
   };
+
+  const resolveTimeout = () => {
+    const b = battleRef.current;
+    if (!b || b.stage !== "question") return;
+    const engine = engineRef.current;
+    engine?.lockPlates();
+    engine?.setBossAggro(false);
+    engine?.hideClaim();
+    timerDeadline.current = null;
+    setTimerLeft(null);
+    const attack = currentAttack(b);
+    const correctOptIdx = attack.options.findIndex((o) => o.correct);
+    const correctPlate = b.order.indexOf(correctOptIdx);
+    const states: PlateState[] = b.order.map((_, i) => (i === correctPlate ? "correct" : "dimmed"));
+    engine?.setPlateStates(states);
+    b.plateStates = states;
+    b.correctLetter = PLATE_LETTERS[correctPlate];
+    b.rationale = attack.options[correctOptIdx]?.rationale;
+    b.stage = "resolved";
+    b.pickedCorrect = false;
+    const dmg = Math.round(attack.difficulty * 6 + 10);
+    sfx.wrong();
+    engine?.strikePlayer();
+    engine?.spawnWisp();
+    engine?.bossSay("The clock has run out. Silence is agreement, prisoner.", 3.6);
+    setHurtKey((k) => k + 1);
+    const newHp = Math.max(0, hpRef.current - dmg);
+    setHpState(newHp);
+    b.resolvedNote = `✗ Time expires — the interrogator strikes for ${dmg}.`;
+    if (newHp <= 0) {
+      b.defeated = true;
+      b.resolvedNote += " The world goes white as bare gesso.";
+    }
+    setBattleState(b);
+  };
+
+  // NKVD interrogation clock
+  React.useEffect(() => {
+    if (timerLeft === null) return;
+    const iv = window.setInterval(() => {
+      if (!timerDeadline.current) return;
+      const left = Math.max(0, (timerDeadline.current - Date.now()) / 1000);
+      setTimerLeft(left);
+      if (left <= 0) {
+        window.clearInterval(iv);
+        resolveTimeout();
+      }
+    }, 250);
+    return () => window.clearInterval(iv);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timerLeft !== null]);
 
   const continueRound = () => {
     const b = battleRef.current;
@@ -305,9 +463,10 @@ export default function PilgrimageApp() {
     s.xp += zone.chapter.reward.xp;
     s.checkpoint = Math.min(b.zoneIdx + 1, zones.length - 1);
     if (!s.startedAt) s.startedAt = Date.now();
-    persist();
     const newRank = rankFor(s.beaten.length);
-    setHpState(PLAYER_MAX_HP);
+    setHpState(Math.min(maxHp(), hpRef.current + 25));
+    persist();
+    lastDefeatZone.current = -1;
     setBattleState(null);
     setCardState({
       kind: "victory",
@@ -323,10 +482,12 @@ export default function PilgrimageApp() {
     sfx.defeat();
     const s = saveRef.current;
     s.losses += 1;
-    persist();
+    lastDefeatZone.current = b.zoneIdx;
+    veneratedZones.current.delete(b.zoneIdx); // the shrine will receive you again
     engineRef.current?.exitBattle();
     engineRef.current?.respawn(b.zoneIdx);
-    setHpState(PLAYER_MAX_HP);
+    setHpState(Math.round(maxHp() * 0.6));
+    persist();
     setCardState({ kind: "defeat", zoneIdx: b.zoneIdx });
     setBattleState(null);
   };
@@ -341,7 +502,8 @@ export default function PilgrimageApp() {
   const spendLight = () => {
     const b = battleRef.current;
     const s = saveRef.current;
-    if (!b || b.stage !== "question" || b.lightUsed || s.light < 3) return;
+    const cost = hasRelic("pen") ? 2 : 3;
+    if (!b || b.stage !== "question" || b.lightUsed || s.light < cost) return;
     const attack = currentAttack(b);
     const wrongPlates = b.order
       .map((optIdx, plate) => ({ optIdx, plate }))
@@ -351,7 +513,7 @@ export default function PilgrimageApp() {
     for (const d of toDim) b.plateStates[d.plate] = "dimmed";
     engineRef.current?.setPlateStates(b.plateStates);
     b.lightUsed = true;
-    s.light -= 3;
+    s.light -= hasRelic("pen") ? 2 : 3;
     persist();
     sfx.heal();
     setBattleState(b);
@@ -383,8 +545,34 @@ export default function PilgrimageApp() {
         healed: first,
       });
     } else if (t.kind === "shrine") {
+      const fresh = !veneratedZones.current.has(t.zoneIdx);
+      if (fresh) {
+        veneratedZones.current.add(t.zoneIdx);
+        setHpState(maxHp());
+        sfx.heal();
+      } else sfx.click();
+      setCardState({ kind: "shrine", zoneIdx: t.zoneIdx, healed: fresh });
+    } else if (t.kind === "cave") {
+      if (caveUsed.current.has(t.zoneIdx)) {
+        pushToast("The hermit has withdrawn to prayer.");
+        return;
+      }
       sfx.click();
-      setCardState({ kind: "shrine", zoneIdx: t.zoneIdx });
+      const pool = zone.chapter.boss!.attacks.filter((a) => a.difficulty >= 3);
+      const attack = shuffle(pool.length ? pool : zone.chapter.boss!.attacks)[0];
+      setCardState({ kind: "caveq", zoneIdx: t.zoneIdx, attack, picked: null, won: false, relicId: null });
+    } else if (t.kind === "chapel") {
+      if (chapelUsed.current.has(t.zoneIdx)) {
+        pushToast("The candles here have already given their light.");
+        return;
+      }
+      chapelUsed.current.add(t.zoneIdx);
+      sfx.heal();
+      const s = saveRef.current;
+      s.light += 3;
+      setHpState(Math.min(maxHp(), hpRef.current + 15));
+      persist();
+      setCardState({ kind: "chapel", zoneIdx: t.zoneIdx });
     } else if (t.kind === "gate") {
       sfx.wrong();
       pushToast(
@@ -393,9 +581,37 @@ export default function PilgrimageApp() {
     }
   };
 
+  const answerCave = (idx: number) => {
+    const c = cardRef.current;
+    if (!c || c.kind !== "caveq" || c.picked !== null) return;
+    const correct = !!c.attack.options[idx]?.correct;
+    caveUsed.current.add(c.zoneIdx);
+    let relicId: string | null = null;
+    if (correct) {
+      sfx.levelUp();
+      const rid = CAVE_RELIC[c.zoneIdx];
+      const s = saveRef.current;
+      if (rid && !s.relics.includes(rid)) {
+        s.relics.push(rid);
+        relicId = rid;
+      } else {
+        s.light += 3;
+      }
+      setHpState(Math.min(maxHp(), hpRef.current + 10));
+      persist();
+    } else {
+      sfx.wrong();
+      setHurtKey((k) => k + 1);
+      setHpState(Math.max(1, hpRef.current - 12));
+      persist();
+    }
+    setCardState({ ...c, picked: idx, won: correct, relicId });
+  };
+
   const dismissCard = () => {
     const c = cardRef.current;
     if (!c) return;
+    if (c.kind === "caveq" && c.picked === null) return; // answer first
     if (c.kind === "victory" && saveRef.current.beaten.length >= zones.length) {
       setCardState({ kind: "finished" });
       return;
@@ -446,6 +662,20 @@ export default function PilgrimageApp() {
         onPlateCommit: (idx) => resolveAnswer(idx),
         onPlayerHit: (dmg) => applyChipDamage(dmg),
         onSmite: () => applySmite(),
+        onPlateFocus: (idx) => setPlateFocus(idx),
+        onBoltDodged: () => {
+          if (hasRelic("censer")) {
+            saveRef.current.light += 1;
+            persist();
+            pushToast("⚱ The censer catches the bolt — +1 Light");
+          } else sfx.ding();
+        },
+        onWispPopped: () => {
+          saveRef.current.light += 1;
+          persist();
+          sfx.ding();
+          pushToast("The false claim scatters — +1 Light");
+        },
       },
     });
     engineRef.current = engine;
@@ -553,6 +783,7 @@ export default function PilgrimageApp() {
                 if (!saveRef.current.startedAt) saveRef.current.startedAt = Date.now();
                 writeSave(saveRef.current);
                 syncHud();
+                setHpState(Math.min(saveRef.current.hp ?? 100, maxHp()));
                 setPhase("play");
               }}
               className="font-display text-lg bg-gold text-[#14100a] px-10 py-3 rounded border-2 border-[#f0d358] hover:brightness-110 active:translate-y-px shadow-[0_0_30px_rgba(201,162,39,0.35)]"
@@ -656,7 +887,7 @@ export default function PilgrimageApp() {
           <div className="w-20 sm:w-28 h-2 bg-[#14100a] rounded-sm overflow-hidden border border-gold/40">
             <div
               className="h-full bg-gradient-to-r from-[#f0d358] to-gold transition-all duration-500"
-              style={{ width: `${(hp / PLAYER_MAX_HP) * 100}%` }}
+              style={{ width: `${(hp / maxHp()) * 100}%` }}
             />
           </div>
           <span className="text-[10px] text-parchment/80 font-mono">{hp}</span>
@@ -667,6 +898,17 @@ export default function PilgrimageApp() {
         <div className="hidden sm:block bg-black/70 border border-gold/40 rounded px-2.5 py-1.5 text-[11px] text-parchment/85">
           {hud.rank} · {hud.xp} XP
         </div>
+        {saveRef.current.relics.length > 0 && (
+          <div className="bg-black/70 border border-gold/40 rounded px-2 py-1.5 text-[13px]">
+            {saveRef.current.relics.map((r) =>
+              RELICS[r] ? (
+                <span key={r} title={`${RELICS[r].name} — ${RELICS[r].desc}`} className="mx-0.5">
+                  {RELICS[r].icon}
+                </span>
+              ) : null
+            )}
+          </div>
+        )}
         <button
           onClick={() => {
             const m = !muted;
@@ -724,6 +966,18 @@ export default function PilgrimageApp() {
                 {!coarse && <span className="text-parchment/50 text-xs"> — E</span>}
               </>
             )}
+            {near.kind === "cave" && (
+              <>
+                <span className="text-gold">🕳</span> A hermit&rsquo;s cave — a voice within
+                {!coarse && <span className="text-parchment/50 text-xs"> — E</span>}
+              </>
+            )}
+            {near.kind === "chapel" && (
+              <>
+                <span className="text-gold">🕯</span> Pray at the ruined chapel
+                {!coarse && <span className="text-parchment/50 text-xs"> — E</span>}
+              </>
+            )}
             {near.kind === "gate" && (
               <>
                 <span className="text-gold">🚪</span> The Royal Doors
@@ -743,7 +997,7 @@ export default function PilgrimageApp() {
           bossHp={b.bossHp}
           bossMax={b.bossMax}
           playerHp={hp}
-          playerMax={PLAYER_MAX_HP}
+          playerMax={maxHp()}
           stage={b.stage}
           introText={battleBoss.intro}
           midline={b.showMidline ? battleBoss.midline : null}
@@ -756,7 +1010,15 @@ export default function PilgrimageApp() {
           correctLetter={b.correctLetter}
           light={hud.light}
           lightUsed={b.lightUsed}
+          lightCost={hasRelic("pen") ? 2 : 3}
           blessing={b.blessing}
+          timer={timerLeft}
+          focusText={
+            plateFocus !== null && battleAttack
+              ? battleAttack.options[b.order[plateFocus]]?.text ?? null
+              : null
+          }
+          focusLetter={plateFocus !== null ? PLATE_LETTERS[plateFocus] : null}
           onBegin={beginRound}
           onPick={resolveAnswer}
           onContinue={continueRound}
@@ -813,6 +1075,72 @@ export default function PilgrimageApp() {
                     {zones[card.zoneIdx].narratorLine}
                   </p>
                 )}
+                <p className="text-gold/90 text-xs mt-3">
+                  {card.healed
+                    ? "You venerate the icon, and your wounds close — restored to full."
+                    : "You have already been restored at this station."}
+                </p>
+              </>
+            )}
+            {card.kind === "caveq" && (
+              <>
+                <div className="text-[10px] uppercase tracking-[0.35em] text-gold/90 mb-2">
+                  🕳 The Hermit&rsquo;s Trial
+                </div>
+                {card.picked === null ? (
+                  <>
+                    <p className="text-parchment/85 text-sm leading-relaxed italic mb-2">
+                      A voice from the dark: &ldquo;Answer rightly, and take what I have kept. Answer
+                      wrongly, and the mountain will remember it.&rdquo;
+                    </p>
+                    <p className="text-parchment text-[13px] leading-snug mb-2">
+                      <span className="text-crimson font-bold">✠ </span>
+                      {card.attack.claim}
+                    </p>
+                    <div className="grid grid-cols-1 gap-1.5">
+                      {card.attack.options.map((o, i) => (
+                        <button
+                          key={i}
+                          onClick={() => answerCave(i)}
+                          className="text-left rounded border-2 border-gold/40 bg-[#171208] text-parchment hover:border-gold px-2.5 py-2 text-[12px] leading-snug"
+                        >
+                          <span className="font-display text-gold mr-2">{PLATE_LETTERS[i]}</span>
+                          {o.text}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : card.won ? (
+                  <>
+                    <p className="text-[#ffe98c] text-sm leading-relaxed">
+                      &ldquo;Well answered.&rdquo; The hermit presses something into your hands.
+                    </p>
+                    {card.relicId && RELICS[card.relicId] && (
+                      <p className="text-gold text-sm mt-2">
+                        {RELICS[card.relicId].icon} <strong>{RELICS[card.relicId].name}</strong> —{" "}
+                        {RELICS[card.relicId].desc}
+                      </p>
+                    )}
+                    {!card.relicId && <p className="text-gold text-sm mt-2">+3 Light · +10 healed</p>}
+                  </>
+                ) : (
+                  <p className="text-[#e8a0a0] text-sm leading-relaxed">
+                    &ldquo;Not yet, pilgrim.&rdquo; The cave breathes cold — you stumble out poorer
+                    (−12). The hermit will not ask twice.
+                  </p>
+                )}
+              </>
+            )}
+            {card.kind === "chapel" && (
+              <>
+                <div className="text-[10px] uppercase tracking-[0.35em] text-gold/90 mb-2">
+                  ⛪ A Ruined Chapel
+                </div>
+                <p className="text-parchment/85 text-sm leading-relaxed">
+                  Roofless walls, and yet the candles burn. Someone still prays here. You kneel a
+                  while among the fallen stones.
+                </p>
+                <p className="text-gold text-sm mt-3">+3 Light · +15 healed</p>
               </>
             )}
             {card.kind === "victory" && (
@@ -843,7 +1171,8 @@ export default function PilgrimageApp() {
                   )}
                 </p>
                 <p className="text-parchment/60 text-xs mt-1.5">
-                  The Royal Doors stand open. The road continues.
+                  The Royal Doors stand open (+25 healed). The road continues — the shrine ahead can
+                  restore you fully, once.
                 </p>
               </>
             )}
@@ -859,9 +1188,9 @@ export default function PilgrimageApp() {
                   again.
                 </p>
                 <p className="text-parchment/55 text-xs mt-2">
-                  Tip: greet the station&rsquo;s saint for a blessing, gather
-                  lamps for Light, and spend 🕯 3 in battle to dim two false
-                  answers.
+                  You rise at three-fifths strength. Venerate the station icon to be fully
+                  restored, greet the saint for a blessing, and look off the road — hermits and
+                  ruined chapels keep gifts for the searching.
                 </p>
               </>
             )}

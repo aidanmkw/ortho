@@ -26,6 +26,9 @@ export function emptySave(): PilgrimSave {
     losses: 0,
     startedAt: 0,
     lastSavedAt: 0,
+    hp: 100,
+    relics: [],
+    wrongLog: [],
   };
 }
 

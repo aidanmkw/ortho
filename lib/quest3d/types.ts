@@ -76,6 +76,12 @@ export type PilgrimSave = {
   losses: number;
   startedAt: number;
   lastSavedAt: number;
+  /** persistent pilgrim health (healing is scarce). */
+  hp: number;
+  /** relic ids found in hermit caves. */
+  relics: string[];
+  /** wrong answers logged for The Doubt to replay: boss id + attack idx. */
+  wrongLog: { b: string; a: number }[];
 };
 
 /** What the player is standing near (drives the interact button / prompts). */
@@ -83,7 +89,9 @@ export type NearTarget =
   | { kind: "boss"; zoneIdx: number }
   | { kind: "ally"; zoneIdx: number }
   | { kind: "shrine"; zoneIdx: number }
-  | { kind: "gate"; zoneIdx: number };
+  | { kind: "gate"; zoneIdx: number }
+  | { kind: "cave"; zoneIdx: number }
+  | { kind: "chapel"; zoneIdx: number };
 
 /** Callbacks from the engine up into React. */
 export type EngineHooks = {
@@ -93,10 +101,16 @@ export type EngineHooks = {
   onLamp?: (zoneIdx: number, lampIdx: number) => void;
   /** Player stood on an answer plate long enough to commit it. */
   onPlateCommit?: (plateIdx: number) => void;
-  /** A boss attack (bolt/scorch) connected with the player. */
-  onPlayerHit?: (damage: number, kind: "bolt" | "scorch") => void;
+  /** A boss attack (bolt/scorch/wisp) connected with the player. */
+  onPlayerHit?: (damage: number, kind: "bolt" | "scorch" | "wisp") => void;
   /** Player rushed the staggered boss — bonus damage window. */
   onSmite?: () => void;
+  /** Player is close enough to a plate to read it (null = none). */
+  onPlateFocus?: (plateIdx: number | null) => void;
+  /** A bolt passed harmlessly through the player mid-dash. */
+  onBoltDodged?: () => void;
+  /** A false-claim wisp was popped by dashing through it. */
+  onWispPopped?: () => void;
 };
 
 export type PlateState = "idle" | "dimmed" | "correct" | "wrong";

@@ -29,7 +29,13 @@ type Props = {
   correctLetter?: string;
   light: number;
   lightUsed: boolean;
+  lightCost: number;
   blessing?: string | null;
+  /** NKVD interrogation clock (seconds remaining), if this fight is timed. */
+  timer?: number | null;
+  /** Full text of the plate the pilgrim is standing near. */
+  focusText?: string | null;
+  focusLetter?: string | null;
   onBegin: () => void;
   onPick: (idx: number) => void;
   onContinue: () => void;
@@ -56,8 +62,21 @@ export default function BattlePanel(p: Props) {
               {p.bossName}
               <span className="text-parchment/60 text-xs"> · {p.bossTitle}</span>
             </div>
-            <div className="text-[10px] uppercase tracking-widest text-crimson shrink-0">
-              {p.tradition}
+            <div className="flex items-center gap-2 shrink-0">
+              {typeof p.timer === "number" && (
+                <span
+                  className={`font-mono text-sm px-1.5 rounded border ${
+                    p.timer <= 5
+                      ? "text-[#ff6050] border-crimson animate-pulse"
+                      : "text-parchment/90 border-parchment/30"
+                  }`}
+                >
+                  {Math.ceil(p.timer)}s
+                </span>
+              )}
+              <div className="text-[10px] uppercase tracking-widest text-crimson">
+                {p.tradition}
+              </div>
             </div>
           </div>
           <div className="mt-1 h-2.5 bg-[#1a0808] rounded-sm overflow-hidden border border-crimson/40">
@@ -124,15 +143,14 @@ export default function BattlePanel(p: Props) {
                     {p.midline}
                   </p>
                 )}
-                <p className="text-parchment text-[13px] sm:text-[15px] leading-snug">
-                  <span className="text-crimson font-bold">✠ The claim: </span>
-                  {p.claim}
-                </p>
-                {p.taunt && p.stage === "question" && (
-                  <p className="text-parchment/55 text-[11px] italic mt-1">{p.taunt}</p>
+                {p.stage === "resolved" && (
+                  <p className="text-parchment text-[13px] sm:text-[15px] leading-snug">
+                    <span className="text-crimson font-bold">✠ The claim: </span>
+                    {p.claim}
+                  </p>
                 )}
 
-                <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                <div className={p.stage === "question" ? "hidden" : "mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-1.5"}>
                   {p.options.map((o, i) => {
                     const base =
                       "text-left rounded border-2 px-2.5 py-2 text-[12px] sm:text-[13px] leading-snug transition flex gap-2 items-start";
@@ -161,22 +179,54 @@ export default function BattlePanel(p: Props) {
                 </div>
 
                 {p.stage === "question" ? (
-                  <div className="mt-2.5 flex items-center justify-between gap-2 flex-wrap">
-                    <div className="text-[10px] text-parchment/55">
-                      Dodge his attacks — run to a plate and stand on it (or tap / 1–4).
+                  <div className="mt-1 flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-1.5 min-w-0 flex-1">
+                      {p.options.map((o, i) => {
+                        const chip: Record<PanelOption["state"], string> = {
+                          idle:
+                            p.focusLetter === PLATE_LETTERS[i]
+                              ? "border-gold bg-gold/20 text-gold"
+                              : "border-gold/40 text-parchment/85",
+                          dimmed: "border-parchment/10 text-parchment/25",
+                          correct: "border-[#f0d358] text-[#ffe98c]",
+                          wrong: "border-crimson text-[#e8a0a0]",
+                        };
+                        return (
+                          <button
+                            key={i}
+                            disabled={o.state === "dimmed"}
+                            onClick={() => p.onPick(i)}
+                            className={`font-display text-base w-9 h-9 shrink-0 rounded border-2 bg-black/40 ${chip[o.state]}`}
+                          >
+                            {PLATE_LETTERS[i]}
+                          </button>
+                        );
+                      })}
+                      <div className="min-w-0 flex-1 text-[11px] sm:text-xs text-parchment/90 leading-snug border-l-2 border-gold/30 pl-2 max-h-12 overflow-hidden">
+                        {p.focusText ? (
+                          <>
+                            <span className="text-gold font-display mr-1">{p.focusLetter}</span>
+                            {p.focusText}
+                          </>
+                        ) : (
+                          <span className="text-parchment/45">
+                            The claim hangs over him — walk among the plates to read the answers.
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <button
                         onClick={p.onSpendLight}
-                        disabled={p.light < 3 || p.lightUsed}
-                        className={`text-[11px] px-2.5 py-1.5 rounded border ${
-                          p.light >= 3 && !p.lightUsed
+                        disabled={p.light < p.lightCost || p.lightUsed}
+                        className={`text-[11px] px-2.5 py-1.5 rounded border shrink-0 ${
+                          p.light >= p.lightCost && !p.lightUsed
                             ? "border-gold/70 text-gold hover:bg-gold/10"
                             : "border-parchment/15 text-parchment/30"
                         }`}
-                        title="Spend 3 Light: the Spirit of Truth dims two false answers."
+                        title={`Spend ${p.lightCost} Light: the Spirit of Truth dims two false answers.`}
                       >
-                        🕯 Spirit of Truth (3)
+                        🕯 ({p.lightCost})
                       </button>
                       <button
                         onClick={p.onWithdraw}
