@@ -305,6 +305,35 @@ async function rigMissing() {
   }
 }
 
+/** --refresh-props: re-download prop GLBs from recorded text-to-3d tasks. */
+async function refreshProps() {
+  let all = {};
+  try {
+    all = JSON.parse(readFileSync(TASKS_FILE, "utf8"));
+  } catch {
+    console.error("No tasks.json — run --adopt-tasks first.");
+    return;
+  }
+  for (const id of Object.keys(PROPS)) {
+    const t = all[id];
+    const file = path.join(OUT, `${id}.glb`);
+    if (!t?.mesh || existsSync(file)) continue;
+    try {
+      const res = await fetch(TXT_GET(t.mesh), { headers: headers() });
+      const data = await res.json();
+      const url = data.model_urls?.glb ?? pickRiggedUrl(data);
+      if (!url) {
+        console.warn(`■ ${id}: no glb on task`);
+        continue;
+      }
+      await download(url, file);
+      console.log(`■ ${id}: recovered (${Math.round(readFileSync(file).length / 1e5) / 10}MB)`);
+    } catch (e) {
+      console.warn(`■ ${id}: recover failed: ${e.message.slice(0, 120)}`);
+    }
+  }
+}
+
 /**
  * --refresh-rigged: re-poll recorded rigging tasks and re-download their
  * animated GLBs over any static files. Costs no generation credits.
@@ -356,7 +385,8 @@ async function adoptTasks() {
   };
   const meshes = await list("image-to-3d");
   const rigs = await list("rigging");
-  console.log(`Found ${meshes.length} mesh task(s), ${rigs.length} rigging task(s) in account history.`);
+  const texts = await list("text-to-3d");
+  console.log(`History: ${meshes.length} mesh, ${rigs.length} rigging, ${texts.length} text task(s).`);
   let adopted = 0;
   for (const [id, spec] of Object.entries(CHARACTERS)) {
     const sig = spec.prompt.slice(0, 48);
@@ -366,15 +396,25 @@ async function adoptTasks() {
     const rig = rigs.find((r) => JSON.stringify(r).includes(meshId));
     await rememberTasks(id, { mesh: meshId, ...(rig ? { rig: rig.id ?? rig.result } : {}) });
     adopted++;
-    console.log(`■ ${id}: adopted mesh=${meshId}${rig ? ` rig=${rig.id ?? rig.result}` : " (no rig task found)"}`);
+    console.log(`■ ${id}: adopted mesh=${meshId}${rig ? ` rig=${rig.id ?? rig.result}` : ""}`);
   }
-  console.log(`Adopted ${adopted} character(s). Now run with --refresh-rigged.`);
+  for (const [id, spec] of Object.entries(PROPS)) {
+    const sig = spec.prompt.slice(0, 48);
+    // refine tasks echo the prompt; prefer the newest match with a glb url
+    const hit = texts.find((t) => JSON.stringify(t).includes(sig) && JSON.stringify(t).includes(".glb"));
+    if (!hit) continue;
+    await rememberTasks(id, { mesh: hit.id ?? hit.result });
+    adopted++;
+    console.log(`■ ${id}: adopted text task=${hit.id ?? hit.result}`);
+  }
+  console.log(`Adopted ${adopted} item(s). Run with --refresh-rigged and/or --refresh-props.`);
 }
 
 async function main() {
   if (
     args.includes("--adopt-tasks") ||
     args.includes("--refresh-rigged") ||
+    args.includes("--refresh-props") ||
     args.includes("--rig-missing")
   ) {
     if (!KEY) {
@@ -383,6 +423,7 @@ async function main() {
     }
     if (args.includes("--adopt-tasks")) await adoptTasks();
     if (args.includes("--refresh-rigged")) await refreshRigged();
+    if (args.includes("--refresh-props")) await refreshProps();
     if (args.includes("--rig-missing")) await rigMissing();
     // keep the manifest in sync with whatever is on disk now
     const manifest = { models: [], props: [] };

@@ -1,2 +1,2 @@
---only=prop-column,prop-searchlight,prop-void-shard
-# era set dressing + voices (voices skip until ELEVENLABS_API_KEY secret exists)
+--adopt-tasks --refresh-props
+# recover era props lost to the commit-step failure
