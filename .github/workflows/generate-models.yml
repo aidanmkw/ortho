@@ -46,6 +46,7 @@ jobs:
       - name: Generate models via Meshy
         env:
           MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: |
           ARGS=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -56,11 +57,15 @@ jobs:
           fi
           echo "args: $ARGS"
           node scripts/generate-models.mjs $ARGS
+      - name: Generate voices via ElevenLabs
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: node scripts/generate-voices.mjs
       - name: Commit models
         run: |
           git config user.name "model-generator[bot]"
           git config user.email "noreply@github.com"
-          git add public/models
+          git add public/models public/voice
           if git diff --cached --quiet; then
             echo "No new models to commit."
           else

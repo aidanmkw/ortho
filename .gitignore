@@ -11,3 +11,5 @@ tsconfig.tsbuildinfo
 
 # local Meshy API key for scripts/generate-models.mjs (never commit)
 scripts/.meshy-key
+
+scripts/.elevenlabs-key

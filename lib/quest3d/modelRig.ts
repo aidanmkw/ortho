@@ -80,11 +80,12 @@ class ModelRig implements Rig {
       } else {
         // no dedicated idle clip: hold a frozen pose of the walk clip so
         // characters don't march in place while standing
+        // barely-moving walk = a living sway instead of a frozen pose
         const pose = walk.clone();
         pose.name = "__pose";
         this.idleA = this.mixer.clipAction(pose);
         this.idleA.play();
-        this.idleA.paused = true;
+        this.idleA.timeScale = 0.055;
       }
       this.walkA = this.mixer.clipAction(walk);
       this.walkA.play();
@@ -197,14 +198,18 @@ class ModelRig implements Rig {
 /** Fetch the model manifest: character ids and environment prop ids. */
 export async function loadModelManifest(
   basePath: string
-): Promise<{ models: Set<string>; props: Set<string> }> {
+): Promise<{ models: Set<string>; props: Set<string>; voices: Set<string> }> {
   try {
     const res = await fetch(`${basePath}/models/manifest.json`, { cache: "no-cache" });
-    if (!res.ok) return { models: new Set(), props: new Set() };
-    const data = (await res.json()) as { models?: string[]; props?: string[] };
-    return { models: new Set(data.models ?? []), props: new Set(data.props ?? []) };
+    if (!res.ok) return { models: new Set(), props: new Set(), voices: new Set() };
+    const data = (await res.json()) as { models?: string[]; props?: string[]; voices?: string[] };
+    return {
+      models: new Set(data.models ?? []),
+      props: new Set(data.props ?? []),
+      voices: new Set(data.voices ?? []),
+    };
   } catch {
-    return { models: new Set(), props: new Set() };
+    return { models: new Set(), props: new Set(), voices: new Set() };
   }
 }
 

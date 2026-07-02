@@ -1,0 +1,226 @@
+[
+  {
+    "id": "ch1-antioch",
+    "sprite": "centurion",
+    "intro": "You Christians refuse the gods. Atheists! Tell me — what is this 'Christ' worth dying for?",
+    "midline": "Hah! A clever tongue. But the gods of Rome have not yet had their say.",
+    "outro": "Curse you... my men whisper that several of them feel... drawn... by what you have said."
+  },
+  {
+    "id": "ch101-polycarp",
+    "sprite": "centurion",
+    "intro": "The old man chose the fire. Foolishness! Reverence Caesar, curse the dead Galilean, and live. What is one word against the gods?",
+    "midline": "You speak as he spoke. Do all you Christians share one stubborn tongue?",
+    "outro": "Then burn with him! ...Yet the crowd has gone quiet. They watched the old man die, and not one of them rejoiced."
+  },
+  {
+    "id": "ch102-justin",
+    "sprite": "marcus",
+    "intro": "You Christians borrow scraps from Plato and call it revelation. Show me one thing in your 'gospel' that the philosophers did not say better and first.",
+    "midline": "Hm. Justin has trained you well. But a clever pupil is not yet a true one.",
+    "outro": "Enough! I will report you to the prefect Rusticus. Reasons did not silence you — perhaps the executioner will."
+  },
+  {
+    "id": "ch2-catacombs",
+    "sprite": "marcus",
+    "intro": "Your tomb is full of painted gods. Your religion is no different from ours.",
+    "midline": "Hmph. You speak well — but no Christian I knew has answered me this far.",
+    "outro": "I... must think on what you have said. I will not arrest you. But this conversation is not over."
+  },
+  {
+    "id": "ch3-nicaea",
+    "sprite": "arius",
+    "intro": "Surely there was a time when the Son was not. He is the firstborn of all creation — the first and highest creature.",
+    "midline": "You speak with confidence, young one, but you have not the wisdom of years.",
+    "outro": "Anathema... I am undone... my doctrine is the wolf the Shepherd warned of..."
+  },
+  {
+    "id": "ch4-desert",
+    "sprite": "tempter",
+    "intro": "Why fast and pray? Why deny yourself? Surely God wants you to be HAPPY.",
+    "midline": "You resist well. But ALL the saints failed at least once. You will be no different.",
+    "outro": "I will return. I always return. You have only seen one of my masks."
+  },
+  {
+    "id": "ch103-cappadocians",
+    "sprite": "arius",
+    "intro": "The Spirit is not begotten, so He is not the Son; and not unbegotten, so He is not the Father. Therefore He is made — a creature. Where is your third God?",
+    "midline": "You answer like a Cappadocian. But Scripture nowhere calls the Spirit 'God' in so many letters!",
+    "outro": "Anathema... 'who together with the Father and the Son is worshipped and glorified'... I had made the Sanctifier a slave."
+  },
+  {
+    "id": "ch104-chrysostom",
+    "sprite": "marcus",
+    "intro": "A bishop should bless the throne, not scold it. Gold belongs in the sanctuary, not the gutter. Why does your John forget who feeds him?",
+    "midline": "You are as stubborn as he is. Do you not fear the Empress at all?",
+    "outro": "So be it — exile, then. ...Strange. The man boards the cart for the frontier still giving thanks. What has he that we have not?"
+  },
+  {
+    "id": "ch105-ephesus",
+    "sprite": "nestorius",
+    "intro": "Two natures, two persons: the man Jesus, and the Word who dwelt in him. Mary bore the man. Call her Christotokos and have done with this 'God-bearer.'",
+    "midline": "You speak like Cyril. But how can the impassible Word be 'born' or 'die'? You attribute to God what belongs to the man!",
+    "outro": "Anathema upon Nestorius... 'one and the same Son'... I had torn the seamless robe of Christ in two."
+  },
+  {
+    "id": "ch5-chalcedon",
+    "sprite": "eutyches",
+    "intro": "Surely Christ's humanity, like a drop of vinegar in the ocean of His divinity, is absorbed!",
+    "midline": "You have read more than I supposed. But the union must collapse the two.",
+    "outro": "Anathema upon me... 'one, and the same Christ, in two natures'... I see."
+  },
+  {
+    "id": "ch201-constantinople-ii",
+    "sprite": "origenist-deacon",
+    "intro": "Souls fell from a higher world into bodies; this life is their punishment and their school. And in the apokatastasis ALL shall return — every soul, every demon. Who are you to set a limit on the mercy of God?",
+    "midline": "You quote the bishops at me. But is it not a meaner God who lets even one soul be lost forever?",
+    "outro": "Anathema, then, upon the pre-existence of souls... upon the restoration of the demons... I had loved my own speculations more than the faith once delivered."
+  },
+  {
+    "id": "ch106-maximus",
+    "sprite": "monothelite-examiner",
+    "intro": "One Christ, one will — so says the Emperor, so says the Patriarch. Two wills would tear the Saviour in two. Submit to the powers God has set over you.",
+    "midline": "You will not bend? Then the old man's tongue and right hand are forfeit. Still you speak!",
+    "outro": "Cut out his tongue, then; sever his hand. ...Yet they say he wrote on, by another's pen, and the Sixth Council will read every line aloud."
+  },
+  {
+    "id": "ch202-john-damascus",
+    "sprite": "iconoclast",
+    "intro": "'Thou shalt make no graven image.' The Law is plain. Your icons are idols, your veneration is worship stolen from God. The Emperor commands them burned. Submit.",
+    "midline": "You distinguish 'worship' from 'honor'? A monk's hair-splitting. Yet... the argument from the Incarnation troubles me.",
+    "outro": "The Incarnation changes all... God has been seen, and what is seen may be drawn. I had made the invisible God an excuse to deny that He became visible."
+  },
+  {
+    "id": "ch6-icons",
+    "sprite": "iconoclast",
+    "intro": "You worship paint and wood. I will destroy every panel until the people are pure.",
+    "midline": "My armies smashed a thousand icons; my heirs will smash a thousand more!",
+    "outro": "I am undone... they will paint me out of the mosaics... and write 'Triumph of Orthodoxy' over my reign."
+  },
+  {
+    "id": "ch107-cyril-methodius",
+    "sprite": "frankish-archpriest",
+    "intro": "Pilate wrote the title in Hebrew, Greek, and Latin alone. These three God has hallowed; the rest are fit only for the marketplace. The Liturgy in Slavonic is a sacrilege.",
+    "midline": "You quote the Apostle against me? Hm. Perhaps the Pope will not so easily forbid these brothers after all.",
+    "outro": "Then let the Slavs have their letters... The Bishop of Rome himself has blessed their books. I am overruled by Peter's chair."
+  },
+  {
+    "id": "ch108-photios",
+    "sprite": "humbert",
+    "intro": "And from the Son! It honors Christ to say the Spirit proceeds from Him too. Why does the East cling to half the truth?",
+    "midline": "You distinguish 'procession' from 'sending'? A subtle Greek trick. Yet... the Council has not received our word.",
+    "outro": "The council stands by the Creed unaltered... 'who proceeds from the Father.' Rome's own legates have signed it. We have added what no council gave us."
+  },
+  {
+    "id": "ch109-rus",
+    "sprite": "volkh",
+    "intro": "Perun the Thunderer, Veles of the herds — these gods made Rus mighty. You trade them for a dead Jew on a cross. Madness! Defend this betrayal of the blood.",
+    "midline": "The prince's heart hardens against me... and the people follow him into the water, unafraid.",
+    "outro": "The idols float downriver, broken... and the people are not struck dead. Their faces shine. Perhaps the old gods were never gods at all."
+  },
+  {
+    "id": "ch203-symeon",
+    "sprite": "stephen-nicomedia",
+    "intro": "Grace works in the soul unseen and unfelt. To claim you SEE the light of God is pride and delusion. Keep the forms, say the prayers, trust the Church's order — and leave 'experience' to fanatics.",
+    "midline": "You answer me from the Scriptures and the Fathers, not from raw feeling? Hm. Perhaps this monk is no mere enthusiast.",
+    "outro": "The Fathers themselves saw the light... Moses' shining face, Tabor's glory, Stephen's vision of heaven. I had reduced the living God to a doctrine on a page."
+  },
+  {
+    "id": "ch7-schism",
+    "sprite": "humbert",
+    "intro": "Stubborn Greek! Sign the addition or be cast out of the universal Church!",
+    "midline": "You quote your Photios as if he were a Father. He was a SCHISMATIC.",
+    "outro": "Curse you — but I... I cannot answer the canon of Ephesus. I have laid the bull. I must withdraw."
+  },
+  {
+    "id": "ch301-fourth-crusade",
+    "sprite": "crusader-knight",
+    "intro": "We sailed to free Jerusalem and God set this richer prize before us. The Greeks are schismatics; their gold is now the Church's, their city Rome's. This is no crime — it is holy war.",
+    "midline": "You name us robbers? We bear the Cross of Christ on our very breast!",
+    "outro": "Enough... The horses in the sanctuary, the throne defiled, the relics carted off like loot. We came to save Jerusalem and we have crucified the East instead."
+  },
+  {
+    "id": "ch302-sava-serbia",
+    "sprite": "tempter",
+    "intro": "The king built the kingdom; the king's gold built the Church. Therefore the Church is the king's — to command, to wield, to silence when it scolds. What is a bishop but the throne's chaplain?",
+    "midline": "You will not bow the mitre to the crown? Every wise nation yokes its priests to its prince!",
+    "outro": "So the Church belongs to no king... It serves the King of kings, and serves the people by serving Him. The monk has bested the courtier."
+  },
+  {
+    "id": "ch303-palamas",
+    "sprite": "barlaam",
+    "intro": "God's essence alone is God, and it is utterly beyond sight. Whatever your monks see on their mountain is therefore a creature — a phantom of the mind. No man sees God and lives. Your 'uncreated light' is a fairy tale dressed in theology.",
+    "midline": "Essence and energies — you split God in two to save your monks! Where in philosophy is such a distinction?",
+    "outro": "The Tomos condemns me... 'God is partaken, yet imparticipable'... I demanded that God be either wholly seen or wholly hidden, and forgot that He is the living God, who gives Himself and yet remains beyond."
+  },
+  {
+    "id": "ch8-florence",
+    "sprite": "pope-eugene",
+    "intro": "$you. You also? Sign with the others. Your Emperor commands it. Your conscience must yield to the Empire.",
+    "midline": "I have brought down kings. I will bring down one stubborn Ephesian and a foreign youth.",
+    "outro": "He has not signed. ...Then we have done nothing."
+  },
+  {
+    "id": "ch401-cosmas",
+    "sprite": "atheist",
+    "intro": "Your people are crushed, ignorant, hopeless. Teach them mathematics and the rights of man, not the Jesus Prayer. What use is 'unceasing prayer' to a slave of the Sultan?",
+    "midline": "You answer like the monks of the Mountain. But reason marches on, old man, and your candle gutters in its wind.",
+    "outro": "Strange — the people leave fed, not flattered. They had nothing, and he has given them everything. Perhaps a lamp lit within outlasts my brighter, colder torch."
+  },
+  {
+    "id": "ch402-seraphim",
+    "sprite": "tempter",
+    "intro": "Prayer is wasted breath. Joy is a story you tell yourself against the dark. Set down the rope, close your eyes, and let the gray heaviness take you. There is nothing else.",
+    "midline": "You still pray? Still the old man smiles 'Christ is risen' into the snow? ...Why does the weight not crush him?",
+    "outro": "Light — actual light, brighter than noon on the snow, pouring from the old man's face, and warmth where there was no fire. I cannot abide it. The heaviness lifts. He has 'acquired the Spirit' indeed."
+  },
+  {
+    "id": "ch404-optina",
+    "sprite": "doubt",
+    "intro": "I do not deny God — I return Him the ticket. A world built on the tears of one tortured child is not worth the entrance fee. Your kindly elders have no answer to a single child's suffering. Defend your God, if you can bear to.",
+    "midline": "You do not explain the suffering away? You weep with me instead, and point me to the Cross? ...That is not the answer I came to defeat.",
+    "outro": "The elder did not argue. He embraced me, and wept, and said 'love' until the word cracked something in me. I came to return my ticket. I leave unable to stop weeping. Perhaps the answer was never an argument."
+  },
+  {
+    "id": "ch9-soviets",
+    "sprite": "nkvd",
+    "intro": "Sign here. Renounce religion. You may go home tonight. Your mother is waiting.",
+    "midline": "You are not the first to be stubborn. But you may yet be the first wise enough to live.",
+    "outro": "You... you will be taken away. ...And yet I find I cannot make you afraid. Take him."
+  },
+  {
+    "id": "ch403-silouan",
+    "sprite": "atheist",
+    "intro": "God is dead. Meaning is a story the weak tell themselves. There is no hell to fear and no heaven to hope, only the void — so eat, sleep, and despair like an honest man. Your prayers fall into nothing.",
+    "midline": "You still pray for your enemies? For me? ...I offer you the clean truth of nothing, and you answer with tears of love. It unsettles the dark.",
+    "outro": "He weeps — not for himself, but for the whole world, even for the lost, even for the demons. Such grief is not weakness; it is a fire I cannot put out. The void is not the deepest thing. Love is."
+  },
+  {
+    "id": "ch10-modern",
+    "sprite": "lds",
+    "intro": "Joseph Smith restored the true Church of Jesus Christ in 1830. May I share his story?",
+    "midline": "You know quite a bit about our faith. May I ask: have you prayed about the Book of Mormon?",
+    "outro": "Thank you for the conversation. I... I will check the essays on the Church website tonight."
+  },
+  {
+    "id": "ch10b-reformed",
+    "sprite": "reformed",
+    "intro": "Where in Scripture do you find prayers to Mary? Where do you find seven sacraments? You add to the Bible.",
+    "midline": "OK — I admit, you know my tradition's documents better than most of my classmates.",
+    "outro": "I... I want to talk again. May I read 1 Clement this week and come back?"
+  },
+  {
+    "id": "ch10c-atheist",
+    "sprite": "atheist",
+    "intro": "Make a case. I'll listen. But don't give me Sunday school answers.",
+    "midline": "...you know, I haven't actually heard most of this. I thought all Christians were the same.",
+    "outro": "Look, I'm not converting tonight. But this is the longest conversation I've had about God where I didn't get angry. Maybe coffee next week?"
+  },
+  {
+    "id": "ch11-doubt",
+    "sprite": "doubt",
+    "intro": "What if all of this is wishful thinking? What if you converted out of loneliness?",
+    "midline": "You answer well. But the questions return when you are tired. I am patient.",
+    "outro": "I am not destroyed. I never am. But you have learned my name, and I cannot live unnamed in the same heart as Christ."
+  }
+]

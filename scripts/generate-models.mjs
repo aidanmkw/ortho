@@ -78,6 +78,9 @@ const PROPS = {
   "prop-brazier": { poly: 5000, prompt: `tall standing bronze brazier, wide fire bowl on an ornate pillar with three feet, ${PROP_STYLE}` },
   "prop-obelisk": { poly: 4000, prompt: `ancient stone waymarker obelisk carved with a chi-rho symbol, ${PROP_STYLE}` },
   "prop-statue": { poly: 12000, prompt: `weathered stone statue of an archangel with folded wings holding a downturned sword, standing on a square pedestal, ${PROP_STYLE}` },
+  "prop-column": { poly: 4000, prompt: `broken ancient marble column drum section, fluted, toppled and cracked, ${PROP_STYLE}` },
+  "prop-searchlight": { poly: 10000, prompt: `1930s soviet gulag wooden guard tower with mounted searchlight, weathered timber, barbed wire details, PBR textures, game-ready` },
+  "prop-void-shard": { poly: 3000, prompt: `floating jagged obsidian crystal shard with faint violet inner glow, dark fantasy, PBR textures, game-ready` },
 };
 
 const args = process.argv.slice(2);

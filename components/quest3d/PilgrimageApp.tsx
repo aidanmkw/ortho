@@ -17,6 +17,7 @@ import BattlePanel, { PLATE_LETTERS, type PanelOption } from "./BattlePanel";
 import Joystick from "./Joystick";
 import Vespers from "./Vespers";
 import { RELICS, CAVE_RELIC } from "@/lib/quest3d/relics";
+import { loadModelManifest } from "@/lib/quest3d/modelRig";
 import { startAmbience, stopAmbience, resumeAmbience, setMood } from "@/lib/quest3d/ambience";
 import { buildSideDuels } from "@/lib/quest3d/sideQuests";
 import { startChant, stopChant } from "@/lib/chant";
@@ -134,10 +135,25 @@ export default function PilgrimageApp() {
   const visitedZones = React.useRef<Set<number>>(new Set());
   const lowHpSaid = React.useRef(false);
   const mainProgress = React.useRef<ProgressState | null>(null);
+  const voicesRef = React.useRef<Set<string>>(new Set());
+  const voiceEl = React.useRef<HTMLAudioElement | null>(null);
+  const playVoice = (chapterId: string, kind: "intro" | "midline" | "outro") => {
+    if (!voicesRef.current.has(chapterId) || getMuted()) return;
+    try {
+      voiceEl.current?.pause();
+      const a = new Audio(`${BASE}/voice/${chapterId}-${kind}.mp3`);
+      a.volume = 0.9;
+      voiceEl.current = a;
+      void a.play().catch(() => {});
+    } catch {}
+  };
   const maxHp = () => (saveRef.current.relics.includes("psalter") ? 115 : 100);
   const hasRelic = (id: string) => saveRef.current.relics.includes(id);
 
   React.useEffect(() => {
+    loadModelManifest(BASE).then((m) => {
+      voicesRef.current = m.voices;
+    });
     saveRef.current = loadSave();
     setHair(saveRef.current.hair);
     setMutedState(getMuted());
@@ -272,7 +288,10 @@ export default function PilgrimageApp() {
     if (lastDefeatZone.current === zoneIdx) {
       window.setTimeout(() => engine?.bossSay("Back again? The truth has not changed, pilgrim.", 3.6), 900);
     } else {
-      window.setTimeout(() => engine?.bossSay(boss.intro.slice(0, 130), 4.2), 900);
+      window.setTimeout(() => {
+        engine?.bossSay(boss.intro.slice(0, 130), 4.2);
+        playVoice(chId, "intro");
+      }, 900);
     }
     setBattleState({
       zoneIdx,
@@ -315,7 +334,10 @@ export default function PilgrimageApp() {
     setMood({ battle: 1 });
     const engine = engineRef.current;
     engine?.enterDuel(duelIdx);
-    window.setTimeout(() => engine?.bossSay(boss.intro.slice(0, 130), 4.2), 800);
+    window.setTimeout(() => {
+      engine?.bossSay(boss.intro.slice(0, 130), 4.2);
+      playVoice(duel.chapter.id, "intro");
+    }, 800);
     setBattleState({
       zoneIdx: duel.zone,
       duelIdx,
@@ -448,6 +470,7 @@ export default function PilgrimageApp() {
           b.midlineShown = true;
           b.showMidline = true;
           engine?.bossSay(boss.midline, 4);
+          playVoice(b.duelIdx !== null ? sideDuels[b.duelIdx].chapter.id : zones[b.zoneIdx].chapter.id, "midline");
         }
       }
     } else if (b.blessingCharges > 0) {
@@ -557,6 +580,7 @@ export default function PilgrimageApp() {
       engine?.duelDefeated(b.duelIdx);
       engine?.exitBattle();
       sfx.victory();
+      playVoice(duel.chapter.id, "outro");
       if (!s.laurels.includes(duel.chapter.id)) s.laurels.push(duel.chapter.id);
       s.wins += 1;
       s.xp += duel.chapter.reward.xp;
@@ -579,6 +603,7 @@ export default function PilgrimageApp() {
     engine?.bossDefeated(b.zoneIdx);
     engine?.exitBattle();
     sfx.victory();
+    playVoice(zone.chapter.id, "outro");
     const prevRank = rankFor(s.beaten.length);
     if (!s.beaten.includes(zone.chapter.id)) s.beaten.push(zone.chapter.id);
     s.wins += 1;
@@ -998,7 +1023,10 @@ export default function PilgrimageApp() {
   const nearZone = near ? zones[near.zoneIdx] : null;
   const b = battle;
   const battleBoss = b ? zones[b.zoneIdx].chapter.boss! : null;
-  const battleAttack = b && b.stage !== "intro" ? zones[b.zoneIdx].chapter.boss!.attacks[b.queue[b.qPos % b.queue.length]] : null;
+  const battleAttack =
+    b && b.stage !== "intro"
+      ? b.ghostAttack ?? b.attacks[b.queue[b.qPos % b.queue.length]]
+      : null;
   const panelOptions: PanelOption[] =
     b && battleAttack
       ? b.order.map((optIdx, plate) => ({
@@ -1152,7 +1180,8 @@ export default function PilgrimageApp() {
         <div className="pointer-events-none absolute top-[18%] inset-x-0 z-30 flex justify-center px-4">
           <div className="text-center bg-black/65 border-2 border-gold/60 rounded-lg px-6 py-4 max-w-lg animate-[bannerfade_4.2s_ease-in-out_1]">
             <div className="text-[10px] uppercase tracking-[0.4em] text-gold/90">
-              Station {ROMAN[zone.index]} · {zone.chapter.era}
+              <span className="text-gold/60">❦ </span>Station {ROMAN[zone.index]} · {zone.chapter.era}
+              <span className="text-gold/60"> ❦</span>
             </div>
             <div className="font-display text-xl sm:text-2xl text-parchment mt-1">
               {zone.chapter.title}
@@ -1268,7 +1297,7 @@ export default function PilgrimageApp() {
           onClick={dismissCard}
         >
           <div
-            className="bg-[#100c07] border-2 border-gold/70 rounded-lg max-w-lg w-full p-5 text-left"
+            className="manuscript-card border-2 border-gold/70 rounded-lg max-w-lg w-full p-5 text-left"
             onClick={(e) => e.stopPropagation()}
           >
             {card.kind === "ally" && (
@@ -1382,7 +1411,7 @@ export default function PilgrimageApp() {
                 <div className="text-[10px] uppercase tracking-[0.35em] text-gold mb-2">
                   {card.laurel ? "🏆 A legend honored" : "✓ The witness stands"}
                 </div>
-                <p className="text-parchment/85 text-sm leading-relaxed italic">
+                <p className="drop-cap text-parchment/85 text-sm leading-relaxed italic">
                   “{card.outro}”
                 </p>
                 {card.epigraph && (
@@ -1466,7 +1495,7 @@ export default function PilgrimageApp() {
           onClick={() => setShowMap(false)}
         >
           <div
-            className="bg-[#100c07] border-2 border-gold/70 rounded-lg max-w-md w-full p-4 max-h-[80vh] overflow-y-auto"
+            className="manuscript-card border-2 border-gold/70 rounded-lg max-w-md w-full p-4 max-h-[80vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="text-[10px] uppercase tracking-[0.35em] text-gold/90 mb-3">

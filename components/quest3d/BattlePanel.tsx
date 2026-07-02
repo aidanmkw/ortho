@@ -115,7 +115,7 @@ export default function BattlePanel(p: Props) {
             )}
           </div>
 
-          <div className="bg-[#0e0a06]/92 border-2 border-gold/60 rounded-lg p-3 sm:p-4 backdrop-blur-sm">
+          <div className="iconostasis bg-[#0e0a06]/92 border-2 border-gold/60 rounded-lg p-3 sm:p-4 backdrop-blur-sm">
             {p.stage === "intro" ? (
               <>
                 <p className="text-parchment text-sm sm:text-base leading-relaxed italic">

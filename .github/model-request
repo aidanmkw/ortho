@@ -1,2 +1,2 @@
---only=prop-gate-arch,prop-tower,prop-brazier,prop-obelisk,prop-statue
-# environment scenery: text-to-3d props
+--only=prop-column,prop-searchlight,prop-void-shard
+# era set dressing + voices (voices skip until ELEVENLABS_API_KEY secret exists)

@@ -11,6 +11,10 @@
 
 import * as THREE from "three";
 import { Sky } from "three/examples/jsm/objects/Sky.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { PORTRAITS } from "@/lib/quest/portraits";
 import { buildRig, playerConfig, type Rig } from "./characters";
 import { loadModelManifest, loadModelRig, loadPropScene } from "./modelRig";
@@ -113,7 +117,11 @@ export function terrainHeight(x: number, z: number): number {
     THREE.MathUtils.smoothstep(ax, 34, 95) *
     ridge(x * 0.009 + 3.3, z * 0.009) *
     58;
-  return (roll + hills + mountains) * k;
+  let h = (roll + hills + mountains) * k;
+  // a still lake west of Nicaea (station III)
+  const dLake = Math.hypot(x + 42, z + 122);
+  h -= 2.6 * (1 - THREE.MathUtils.smoothstep(dLake, 5, 11));
+  return h;
 }
 
 // ---------------------------------------------------------------------------
@@ -176,6 +184,109 @@ function makeBladeTexture(): THREE.Texture {
     ctx.fill();
   }
   const tex = new THREE.CanvasTexture(cv);
+  return tex;
+}
+
+/** Painted foliage cluster with alpha — the soul of the new trees. */
+function makeFoliageTexture(base: string, hi: string, tall = false): THREE.Texture {
+  const cv = document.createElement("canvas");
+  cv.width = 128;
+  cv.height = tall ? 192 : 128;
+  const ctx = cv.getContext("2d")!;
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  const cx = cv.width / 2;
+  const cy = cv.height / 2;
+  const R = Math.min(cx, cy) - 6;
+  for (let i = 0; i < 34; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const r = Math.pow(Math.random(), 0.6) * R;
+    const x = cx + Math.cos(a) * r * (tall ? 0.55 : 1);
+    const y = cy + Math.sin(a) * r;
+    const s = 8 + Math.random() * 14;
+    const edge = r / R;
+    ctx.fillStyle = Math.random() > 0.62 - edge * 0.25 ? hi : base;
+    ctx.globalAlpha = 0.85 - edge * 0.3;
+    ctx.beginPath();
+    ctx.ellipse(x, y, s, s * (0.6 + Math.random() * 0.5), a, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+/** Puffy painted cloud with a flat base. */
+function makeCloudTexture(): THREE.Texture {
+  const cv = document.createElement("canvas");
+  cv.width = 256;
+  cv.height = 128;
+  const ctx = cv.getContext("2d")!;
+  ctx.clearRect(0, 0, 256, 128);
+  for (let i = 0; i < 22; i++) {
+    const x = 40 + Math.random() * 176;
+    const y = 74 - Math.pow(Math.random(), 1.6) * 46;
+    const r = 14 + Math.random() * 26;
+    const g = ctx.createRadialGradient(x, y - r * 0.2, 2, x, y, r);
+    g.addColorStop(0, "rgba(255,253,247,0.85)");
+    g.addColorStop(0.7, "rgba(244,240,232,0.45)");
+    g.addColorStop(1, "rgba(240,236,228,0)");
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x, Math.min(y, 86), r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+/** Noise-derived normal map that gives the ground real tooth. */
+function makeGroundNormalTexture(): THREE.Texture {
+  const N = 256;
+  const cv = document.createElement("canvas");
+  cv.width = cv.height = N;
+  const ctx = cv.getContext("2d")!;
+  const h = new Float32Array(N * N);
+  for (let oct = 0; oct < 4; oct++) {
+    const step = 4 << oct;
+    for (let i = 0; i < 700 >> oct; i++) {
+      const x = Math.random() * N;
+      const y = Math.random() * N;
+      const r = step * (0.5 + Math.random());
+      const amp = (Math.random() - 0.35) / (oct + 1);
+      for (let dy = -r; dy < r; dy++) {
+        for (let dx = -r; dx < r; dx++) {
+          const d = Math.hypot(dx, dy) / r;
+          if (d > 1) continue;
+          const px = (((x + dx) % N) + N) % N | 0;
+          const py = (((y + dy) % N) + N) % N | 0;
+          h[py * N + px] += amp * (1 - d) * 0.5;
+        }
+      }
+    }
+  }
+  const img = ctx.createImageData(N, N);
+  for (let y = 0; y < N; y++) {
+    for (let x = 0; x < N; x++) {
+      const l = h[y * N + ((x - 1 + N) % N)];
+      const r = h[y * N + ((x + 1) % N)];
+      const u = h[((y - 1 + N) % N) * N + x];
+      const d = h[((y + 1) % N) * N + x];
+      const nx = (l - r) * 2.2;
+      const ny = (u - d) * 2.2;
+      const inv = 1 / Math.hypot(nx, ny, 1);
+      const idx = (y * N + x) * 4;
+      img.data[idx] = (nx * inv * 0.5 + 0.5) * 255;
+      img.data[idx + 1] = (ny * inv * 0.5 + 0.5) * 255;
+      img.data[idx + 2] = (1 * inv * 0.5 + 0.5) * 255;
+      img.data[idx + 3] = 255;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(46, 9);
   return tex;
 }
 
@@ -490,6 +601,9 @@ export class PilgrimEngine {
   private hemi!: THREE.HemisphereLight;
   private fog!: THREE.Fog;
   private lantern!: THREE.PointLight;
+  private rim!: THREE.DirectionalLight;
+  private composer: EffectComposer | null = null;
+  private bloom: UnrealBloomPass | null = null;
   private auroraMat: THREE.ShaderMaterial | null = null;
   private env = {
     elevation: 14,
@@ -566,7 +680,7 @@ export class PilgrimEngine {
   private iframes = 0;
   private dashDir = new THREE.Vector3(0, 0, -1);
   private lastMoveDir = new THREE.Vector3(0, 0, -1);
-  private bolts: { pos: THREE.Vector3; vel: THREE.Vector3; life: number; sprite: THREE.Sprite }[] = [];
+  private bolts: { pos: THREE.Vector3; vel: THREE.Vector3; life: number; sprite: THREE.Sprite; ghostT: number }[] = [];
   private scorches: { pos: THREE.Vector3; t: number; ring: THREE.Mesh; disc: THREE.Mesh }[] = [];
   private boltTex: THREE.Texture | null = null;
   private wisps: { pos: THREE.Vector3; sprite: THREE.Sprite; phase: number }[] = [];
@@ -628,6 +742,18 @@ export class PilgrimEngine {
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(55, 1, 0.1, 460);
+    // post stack: bloom makes the emissive gold read as LIGHT
+    let post = true;
+    try {
+      if (window.localStorage.getItem("pilgrimage:nopost") === "1") post = false;
+    } catch {}
+    if (post) {
+      this.composer = new EffectComposer(this.renderer);
+      this.composer.addPass(new RenderPass(this.scene, this.camera));
+      this.bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.38, 0.45, 0.9);
+      this.composer.addPass(this.bloom);
+      this.composer.addPass(new OutputPass());
+    }
     this.fog = new THREE.Fog("#e8c9a0", 55, 175);
     this.scene.fog = this.fog;
     this.texLoader = new THREE.TextureLoader();
@@ -645,6 +771,7 @@ export class PilgrimEngine {
     this.buildCompanion();
     this.buildWeather();
     this.buildClouds();
+    this.buildAtmosphere();
     this.buildRail();
 
     const spawn = Math.min(this.opts.checkpoint, this.zones.length - 1);
@@ -700,6 +827,7 @@ export class PilgrimEngine {
       if (Array.isArray(mat)) mat.forEach((m) => m.dispose());
       else mat?.dispose();
     });
+    this.composer?.dispose();
     this.envRT?.dispose();
     this.pmrem?.dispose();
     this.renderer?.dispose();
@@ -709,6 +837,7 @@ export class PilgrimEngine {
     const w = this.canvas.clientWidth || window.innerWidth;
     const h = this.canvas.clientHeight || window.innerHeight;
     this.renderer.setSize(w, h, false);
+    this.composer?.setSize(w, h);
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
   };
@@ -738,6 +867,11 @@ export class PilgrimEngine {
     // the pilgrim's lantern — only burns in gloomy zones
     this.lantern = new THREE.PointLight("#ffc878", 0, 14, 1.8);
     this.scene.add(this.lantern);
+
+    // cool rim/back light lifts figures off the background
+    this.rim = new THREE.DirectionalLight("#bcd2ff", 0.55);
+    this.scene.add(this.rim);
+    this.scene.add(this.rim.target);
   }
 
   private buildSkyDome() {
@@ -868,6 +1002,10 @@ export class PilgrimEngine {
     this.fog.far = THREE.MathUtils.lerp(e.fogFar, 36, dk);
     this.renderer.toneMappingExposure = e.exposure * (1 - 0.3 * dk);
     this.lantern.intensity = Math.max(e.gloom, dk) * 9;
+    const rimDir = this.sunDir(24, e.azimuth + 180);
+    this.rim.position.copy(this.playerPos).addScaledVector(rimDir, 40);
+    this.rim.target.position.copy(this.playerPos);
+    this.rim.intensity = 0.55 * (1 - 0.6 * dk);
     if (this.spotlight) {
       this.spotlight.visible = this.spotlightOn;
       if (this.spotlightOn) {
@@ -952,6 +1090,12 @@ export class PilgrimEngine {
     return tex;
   }
 
+  private groundNrm: THREE.Texture | null = null;
+  private groundNormal(): THREE.Texture {
+    if (!this.groundNrm) this.groundNrm = makeGroundNormalTexture();
+    return this.groundNrm;
+  }
+
   private buildTerrain() {
     const L = ZONE_LEN;
     const width = 240;
@@ -1000,6 +1144,8 @@ export class PilgrimEngine {
           roughness: 1,
           metalness: 0,
           map: this.groundDetailTex(),
+          normalMap: this.groundNormal(),
+          normalScale: new THREE.Vector2(0.55, 0.55),
         })
       );
       mesh.receiveShadow = true;
@@ -1056,9 +1202,8 @@ export class PilgrimEngine {
       const pal = zone.palette;
       const z0 = -zi * L;
 
-      // trees
-      const parts = this.treeParts(pal.trees);
-      if (parts.length) {
+      // trees — trunk instances + painted leaf-card canopies
+      if (pal.trees !== "none") {
         const count = Math.round(34 * pal.treeDensity);
         const spots: { x: number; z: number; s: number; r: number }[] = [];
         for (let i = 0; i < count; i++) {
@@ -1070,21 +1215,7 @@ export class PilgrimEngine {
           if (Math.hypot(x + 27, local - 13) < 8 || Math.hypot(x - 27, local - 36) < 8) continue;
           spots.push({ x, z, s: 0.7 + rng() * 0.9, r: rng() * Math.PI * 2 });
         }
-        for (const part of parts) {
-          const inst = new THREE.InstancedMesh(part.geo, part.mat, spots.length);
-          inst.castShadow = true;
-          inst.receiveShadow = true;
-          spots.forEach((sp, i) => {
-            const y = terrainHeight(sp.x, sp.z);
-            dummy.position.set(sp.x, y + part.offY * sp.s, sp.z);
-            dummy.rotation.set(0, sp.r, 0);
-            dummy.scale.set(sp.s, sp.s * (part.scaleY ?? 1), sp.s);
-            dummy.updateMatrix();
-            inst.setMatrixAt(i, dummy.matrix);
-          });
-          inst.instanceMatrix.needsUpdate = true;
-          this.scene.add(inst);
-        }
+        this.buildTreesV2(pal.trees, spots, rng);
       }
 
       // rocks
@@ -1151,6 +1282,129 @@ export class PilgrimEngine {
   }
 
   private bladeTex!: THREE.Texture;
+  private foliage: Record<string, THREE.Texture> = {};
+  private foliageTex(kind: string): THREE.Texture {
+    if (!this.foliage[kind]) {
+      const palette: Record<string, [string, string, boolean]> = {
+        pine: ["#24402a", "#3a5c3c", false],
+        cypress: ["#243c22", "#39562f", true],
+        olive: ["#57683e", "#8a9a6a", false],
+        birch: ["#5b7c3c", "#8fae5c", false],
+        palm: ["#3c5c26", "#5f8438", true],
+      };
+      const [a, b, tall] = palette[kind] ?? palette.pine;
+      this.foliage[kind] = makeFoliageTexture(a, b, tall);
+    }
+    return this.foliage[kind];
+  }
+
+  /** Trunks as one instanced mesh; canopies as instanced leaf-cards. */
+  private buildTreesV2(
+    kind: TreeKind,
+    spots: { x: number; z: number; s: number; r: number }[],
+    rng: () => number
+  ) {
+    if (!spots.length) return;
+    const dummy = new THREE.Object3D();
+    const trunkColor = kind === "birch" ? "#d8d4c8" : kind === "dead" ? "#2c2622" : "#4a3424";
+    const trunkH = kind === "palm" ? 3.4 : kind === "cypress" ? 1.0 : 2.4;
+    const trunkInst = new THREE.InstancedMesh(
+      new THREE.CylinderGeometry(0.09, 0.17, trunkH, 6),
+      stoneMat(trunkColor),
+      spots.length
+    );
+    trunkInst.castShadow = true;
+    spots.forEach((sp, i) => {
+      const y = terrainHeight(sp.x, sp.z);
+      dummy.position.set(sp.x, y + (trunkH / 2) * sp.s, sp.z);
+      dummy.rotation.set(0, sp.r, (rng() - 0.5) * 0.12);
+      dummy.scale.setScalar(sp.s);
+      dummy.updateMatrix();
+      trunkInst.setMatrixAt(i, dummy.matrix);
+    });
+    trunkInst.instanceMatrix.needsUpdate = true;
+    this.scene.add(trunkInst);
+    if (kind === "dead") {
+      // bare branches only
+      const br = new THREE.InstancedMesh(
+        new THREE.CylinderGeometry(0.03, 0.06, 1.2, 4),
+        stoneMat("#26211e"),
+        spots.length * 3
+      );
+      br.castShadow = true;
+      let k = 0;
+      for (const sp of spots) {
+        const y = terrainHeight(sp.x, sp.z);
+        for (let b = 0; b < 3; b++) {
+          dummy.position.set(sp.x + (rng() - 0.5) * 0.5, y + (1.5 + rng() * 0.8) * sp.s, sp.z + (rng() - 0.5) * 0.5);
+          dummy.rotation.set((rng() - 0.5) * 1.4, rng() * Math.PI, 0.7 + rng() * 0.7);
+          dummy.scale.setScalar(sp.s);
+          dummy.updateMatrix();
+          br.setMatrixAt(k++, dummy.matrix);
+        }
+      }
+      br.instanceMatrix.needsUpdate = true;
+      this.scene.add(br);
+      return;
+    }
+    // canopy cards
+    const perTree = kind === "pine" ? 5 : kind === "cypress" ? 4 : kind === "palm" ? 6 : 6;
+    const cardGeo = new THREE.PlaneGeometry(1, 1);
+    const cardMat = new THREE.MeshStandardMaterial({
+      map: this.foliageTex(kind),
+      alphaTest: 0.42,
+      side: THREE.DoubleSide,
+      roughness: 1,
+    });
+    const cards = new THREE.InstancedMesh(cardGeo, cardMat, spots.length * perTree);
+    cards.castShadow = true;
+    const col = new THREE.Color();
+    let ci = 0;
+    for (const sp of spots) {
+      const y = terrainHeight(sp.x, sp.z);
+      for (let c = 0; c < perTree; c++) {
+        let px = 0, py = 0, pz = 0, sx = 1, sy = 1, rx = 0, rz = 0;
+        const ry = rng() * Math.PI * 2;
+        if (kind === "pine") {
+          const t = c / (perTree - 1);
+          py = (1.5 + t * 2.4) * sp.s;
+          sx = (2.6 - t * 1.7) * sp.s;
+          sy = 1.1 * sp.s;
+          rx = -Math.PI / 2 + (rng() - 0.5) * 0.35;
+        } else if (kind === "cypress") {
+          py = (1.6 + rng() * 0.6) * sp.s;
+          sx = 1.15 * sp.s;
+          sy = (3.2 + rng() * 0.8) * sp.s;
+        } else if (kind === "palm") {
+          py = trunkH * sp.s;
+          px = Math.cos(ry) * 0.9 * sp.s;
+          pz = Math.sin(ry) * 0.9 * sp.s;
+          sx = 2.4 * sp.s;
+          sy = 0.9 * sp.s;
+          rz = -0.5;
+        } else {
+          const a = rng() * Math.PI * 2;
+          const rr = rng() * 0.7 * sp.s;
+          px = Math.cos(a) * rr;
+          pz = Math.sin(a) * rr;
+          py = (2.3 + (rng() - 0.5) * 0.9) * sp.s;
+          sx = (1.8 + rng() * 0.8) * sp.s;
+          sy = (1.5 + rng() * 0.6) * sp.s;
+        }
+        dummy.position.set(sp.x + px, y + py, sp.z + pz);
+        dummy.rotation.set(rx, ry, rz);
+        dummy.scale.set(sx, sy, 1);
+        dummy.updateMatrix();
+        cards.setMatrixAt(ci, dummy.matrix);
+        col.setHSL(0, 0, 1).offsetHSL(0, 0, (rng() - 0.5) * 0.16);
+        cards.setColorAt(ci, col);
+        ci++;
+      }
+    }
+    cards.instanceMatrix.needsUpdate = true;
+    if (cards.instanceColor) cards.instanceColor.needsUpdate = true;
+    this.scene.add(cards);
+  }
 
   private async buildWorld() {
     const L = ZONE_LEN;
@@ -1399,13 +1653,42 @@ export class PilgrimEngine {
         stump.castShadow = true;
         stump.receiveShadow = true;
         const sh = (stump.geometry as THREE.CylinderGeometry).parameters.height;
-        stump.position.set(rx, ry + sh / 2, rz);
         const seg = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 2.2, 10), stoneMat("#8f887a"));
         seg.castShadow = true;
         seg.rotation.z = Math.PI / 2;
         seg.rotation.y = rng() * Math.PI;
-        seg.position.set(rx + 1.3, ry + 0.45, rz + 0.8);
-        this.scene.add(stump, seg);
+        seg.position.set(1.3, 0.45, 0.8);
+        stump.position.set(0, sh / 2, 0);
+        const ruinG = new THREE.Group();
+        ruinG.add(stump, seg);
+        ruinG.position.set(rx, ry, rz);
+        this.scene.add(ruinG);
+        this.propSlot("prop-column", ruinG);
+      }
+
+      // -- era set dressing slots (filled by generated props when present)
+      if (i === 8) {
+        for (const sx of [-9.5, 9.5]) {
+          const slot = new THREE.Group();
+          slot.position.set(sx, Math.max(0, terrainHeight(sx, arenaC.z + 7)), arenaC.z + 7);
+          slot.rotation.y = sx > 0 ? -Math.PI / 3 : Math.PI / 3;
+          this.scene.add(slot);
+          this.propSlot("prop-searchlight", slot);
+        }
+      }
+      if (i === 12) {
+        for (let sh2 = 0; sh2 < 6; sh2++) {
+          const a = (sh2 / 6) * Math.PI * 2;
+          const slot = new THREE.Group();
+          slot.position.set(
+            arenaC.x + Math.cos(a) * 11,
+            1.6 + (sh2 % 3) * 1.4,
+            arenaC.z + Math.sin(a) * 11
+          );
+          slot.rotation.set(rng() * 0.6 - 0.3, rng() * Math.PI * 2, rng() * 0.6 - 0.3);
+          this.scene.add(slot);
+          this.propSlot("prop-void-shard", slot);
+        }
       }
 
       // -- stars over the dark zones
@@ -1604,6 +1887,9 @@ export class PilgrimEngine {
       "prop-brazier": 1.45,
       "prop-obelisk": 2.7,
       "prop-statue": 3.4,
+      "prop-column": 2.0,
+      "prop-searchlight": 7.5,
+      "prop-void-shard": 2.6,
     };
     for (const [kind, slots] of this.propSlots) {
       if (!this.propIds.has(kind)) continue;
@@ -1706,8 +1992,14 @@ export class PilgrimEngine {
   }
 
   private clouds: THREE.Sprite[] = [];
+  private sunSprite: THREE.Sprite | null = null;
+  private sunGlare: THREE.Sprite | null = null;
+  private moonSprite: THREE.Sprite | null = null;
+  private fogPatches: THREE.Mesh[] = [];
+  private rays: THREE.Mesh[] = [];
+  private waterMat: THREE.ShaderMaterial | null = null;
   private buildClouds() {
-    const tex = makeGlowTexture("rgba(255,252,244,0.85)", "rgba(255,252,244,0)");
+    const tex = makeCloudTexture();
     const n = 10;
     for (let i = 0; i < n; i++) {
       const s = new THREE.Sprite(
@@ -1766,6 +2058,107 @@ export class PilgrimEngine {
     }
     c.setSpeed(this.companionSpeed);
     c.update(dt, this.time);
+  }
+
+  private buildAtmosphere() {
+    // sun disc + glare, tracked along the sky each frame
+    this.sunSprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: makeGlowTexture("rgba(255,244,214,1)", "rgba(255,214,140,0)"),
+        transparent: true,
+        depthWrite: false,
+        depthTest: false,
+        blending: THREE.AdditiveBlending,
+        fog: false,
+      })
+    );
+    this.sunSprite.scale.setScalar(15);
+    this.sunSprite.renderOrder = -10;
+    this.scene.add(this.sunSprite);
+    this.sunGlare = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: makeGlowTexture("rgba(255,236,190,0.5)", "rgba(255,214,140,0)"),
+        transparent: true,
+        depthWrite: false,
+        depthTest: false,
+        blending: THREE.AdditiveBlending,
+        fog: false,
+        opacity: 0.3,
+      })
+    );
+    this.sunGlare.scale.setScalar(38);
+    this.sunGlare.renderOrder = -10;
+    this.scene.add(this.sunGlare);
+    this.moonSprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: makeGlowTexture("rgba(226,234,252,0.95)", "rgba(180,200,240,0)"),
+        transparent: true,
+        depthWrite: false,
+        depthTest: false,
+        fog: false,
+      })
+    );
+    this.moonSprite.scale.setScalar(14);
+    this.moonSprite.renderOrder = -10;
+    this.scene.add(this.moonSprite);
+
+    // drifting ground-fog sheets for the gloomy stretches
+    const fogTex = makeGlowTexture("rgba(200,196,204,0.32)", "rgba(200,196,204,0)");
+    for (let i = 0; i < 8; i++) {
+      const m = new THREE.Mesh(
+        new THREE.PlaneGeometry(26, 12),
+        new THREE.MeshBasicMaterial({
+          map: fogTex,
+          transparent: true,
+          opacity: 0,
+          depthWrite: false,
+        })
+      );
+      m.rotation.x = -Math.PI / 2;
+      m.position.y = 0.7 + (i % 3) * 0.5;
+      this.scene.add(m);
+      this.fogPatches.push(m);
+    }
+
+    // god-ray shafts near the gates of the golden stations
+    const rayMat = new THREE.MeshBasicMaterial({
+      color: "#ffe2a0",
+      transparent: true,
+      opacity: 0.06,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    });
+    this.zones.forEach((zone, i) => {
+      if ((zone.palette.gloom ?? 0) > 0.3 || zone.palette.snowfall || zone.palette.stars) return;
+      const z0 = -i * ZONE_LEN;
+      for (let r = 0; r < 3; r++) {
+        const shaft = new THREE.Mesh(new THREE.PlaneGeometry(2.2 + r, 26), rayMat);
+        shaft.position.set(-6 + r * 6, 12, z0 - 22 - r * 6);
+        shaft.rotation.z = 0.5;
+        shaft.rotation.y = 0.4;
+        this.scene.add(shaft);
+        this.rays.push(shaft);
+      }
+    });
+
+    // the lake west of Nicaea
+    this.waterMat = new THREE.ShaderMaterial({
+      transparent: true,
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);} `,
+      fragmentShader: `varying vec2 vUv; uniform float uTime;
+        void main(){
+          float w = sin(vUv.x*40.0+uTime*0.8)*sin(vUv.y*34.0-uTime*0.6)*0.5+0.5;
+          vec3 col = mix(vec3(0.10,0.17,0.20), vec3(0.32,0.44,0.46), w*0.35 + 0.25);
+          float edge = smoothstep(0.5, 0.28, distance(vUv, vec2(0.5)));
+          gl_FragColor = vec4(col, 0.85*edge);
+        }`,
+    });
+    const water = new THREE.Mesh(new THREE.CircleGeometry(9.5, 40), this.waterMat);
+    water.rotation.x = -Math.PI / 2;
+    water.position.set(-42, -0.55, -122);
+    this.scene.add(water);
   }
 
   private buildWeather() {
@@ -1896,7 +2289,8 @@ export class PilgrimEngine {
 
   /** One-frame capture for photo mode (renders then reads the canvas). */
   snapshot(): string {
-    this.renderer.render(this.scene, this.camera);
+    if (this.composer) this.composer.render();
+    else this.renderer.render(this.scene, this.camera);
     return this.renderer.domElement.toDataURL("image/png");
   }
 
@@ -1972,6 +2366,8 @@ export class PilgrimEngine {
     if (!d) return;
     this.clearCombat();
     this.crowdBless();
+    this.victoryOrbitT = 2.4;
+    this.victoryCenter.copy(d.pos);
     d.alive = false;
     const rig = d.rig;
     if (rig) {
@@ -2383,7 +2779,7 @@ export class PilgrimEngine {
     sprite.scale.setScalar(1.0);
     sprite.position.copy(from);
     this.scene.add(sprite);
-    this.bolts.push({ pos: from.clone(), vel: dir.clone().multiplyScalar(9.5), life: 3.2, sprite });
+    this.bolts.push({ pos: from.clone(), vel: dir.clone().multiplyScalar(9.5), life: 3.2, sprite, ghostT: 0 });
   }
 
   private bossVolley() {
@@ -2499,6 +2895,27 @@ export class PilgrimEngine {
       b.pos.addScaledVector(b.vel, h);
       b.life -= h;
       b.sprite.position.copy(b.pos);
+      // fading trail ghosts
+      b.ghostT += h;
+      if (b.ghostT > 0.05) {
+        b.ghostT = 0;
+        const g = new THREE.Sprite(b.sprite.material.clone());
+        g.scale.setScalar(0.7);
+        g.position.copy(b.pos);
+        this.scene.add(g);
+        let gt = 0;
+        this.effects.push((d2) => {
+          gt += d2;
+          g.material.opacity = Math.max(0, 0.6 - gt * 2.6);
+          g.scale.setScalar(0.7 - gt * 1.4);
+          if (gt > 0.24) {
+            this.scene.remove(g);
+            g.material.dispose();
+            return false;
+          }
+          return true;
+        });
+      }
       const dx = b.pos.x - this.playerPos.x;
       const dy = b.pos.y - (this.playerPos.y + 1.0);
       const dz = b.pos.z - this.playerPos.z;
@@ -2553,6 +2970,34 @@ export class PilgrimEngine {
       if (s.t >= 1.05) {
         const d = Math.hypot(s.pos.x - this.playerPos.x, s.pos.z - this.playerPos.z);
         this.burst(s.pos.clone().add(new THREE.Vector3(0, 0.4, 0)), "#ff6040", 22);
+        // expanding shockwave ring
+        const wave = new THREE.Mesh(
+          new THREE.RingGeometry(0.4, 0.72, 32),
+          new THREE.MeshBasicMaterial({
+            color: "#ff8050",
+            transparent: true,
+            opacity: 0.85,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            side: THREE.DoubleSide,
+          })
+        );
+        wave.rotation.x = -Math.PI / 2;
+        wave.position.set(s.pos.x, 0.1, s.pos.z);
+        this.scene.add(wave);
+        let wt = 0;
+        this.effects.push((d2) => {
+          wt += d2;
+          wave.scale.setScalar(1 + wt * 7);
+          (wave.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 0.85 - wt * 2.2);
+          if (wt > 0.45) {
+            this.scene.remove(wave);
+            wave.geometry.dispose();
+            (wave.material as THREE.Material).dispose();
+            return false;
+          }
+          return true;
+        });
         if (d < 1.55 && this.iframes <= 0) {
           this.playerRig.flash();
           this.shake = Math.max(this.shake, 0.3);
@@ -2814,9 +3259,16 @@ export class PilgrimEngine {
   }
 
   /** The adversary is overcome: falls, fades, memorial lit, doors open. */
+  private victoryOrbitT = 0;
+  private victoryCenter = new THREE.Vector3();
+
   bossDefeated(zoneIdx: number) {
     this.clearCombat();
     this.crowdBless();
+    // gold fountain + a slow ceremonial camera orbit
+    this.victoryOrbitT = 2.4;
+    this.victoryCenter.copy(this.bossPos[zoneIdx]);
+    this.burst(this.bossPos[zoneIdx].clone().add(new THREE.Vector3(0, 0.5, 0)), "#ffe28c", 60);
     this.beatenIds.add(this.zones[zoneIdx].chapter.id);
     if (this.curZone === zoneIdx) this.applyZonePalette(zoneIdx);
     this.bossAlive[zoneIdx] = false;
@@ -3164,16 +3616,50 @@ export class PilgrimEngine {
     this.tickCompanion(dt);
 
     // --- clouds drift and fade with the dark
-    const cloudOp = 0.4 * (1 - this.env.gloom) * (1 - this.darkCur);
+    const cloudOp = 0.55 * (1 - this.env.gloom) * (1 - this.darkCur);
     for (const cl of this.clouds) {
       cl.position.x += dt * 0.7;
       if (cl.position.x > 110) cl.position.x = -110;
       cl.material.opacity = cloudOp;
     }
 
+    // --- sun / moon discs ride the real sky
+    const sunD = this.sunDir(this.env.elevation, this.env.azimuth);
+    if (this.sunSprite && this.sunGlare) {
+      const p = this.camera.position.clone().addScaledVector(sunD, 300);
+      this.sunSprite.position.copy(p);
+      this.sunGlare.position.copy(p);
+      const vis = THREE.MathUtils.clamp(this.env.elevation / 8, 0, 1) * (1 - this.darkCur);
+      this.sunSprite.material.opacity = 0.85 * vis;
+      this.sunGlare.material.opacity = 0.22 * vis;
+    }
+    if (this.moonSprite) {
+      const md = this.sunDir(28, this.env.azimuth + 160);
+      this.moonSprite.position.copy(this.camera.position).addScaledVector(md, 300);
+      this.moonSprite.material.opacity = THREE.MathUtils.clamp(-this.env.elevation / 6, 0, 0.95);
+    }
+
+    // --- ground fog hugs the gloomy stretches
+    const fogK = Math.max(this.env.gloom, this.env.snow * 0.5, this.darkCur * 0.8);
+    this.fogPatches.forEach((m, i) => {
+      const mat = m.material as THREE.MeshBasicMaterial;
+      mat.opacity = 0.16 * fogK;
+      m.position.x = Math.sin(this.time * 0.05 + i * 2.2) * 12;
+      m.position.z = this.playerPos.z + ((i * 13) % 40) - 20;
+    });
+
+    // --- god rays only burn in low golden sun
+    const rayVis = THREE.MathUtils.clamp((22 - this.env.elevation) / 14, 0, 1) *
+      THREE.MathUtils.clamp(this.env.elevation / 8, 0, 1) * (1 - this.env.gloom) * (1 - this.darkCur);
+    if (this.rays.length) {
+      (this.rays[0].material as THREE.MeshBasicMaterial).opacity = 0.06 * rayVis;
+    }
+    if (this.waterMat) this.waterMat.uniforms.uTime.value = this.time;
+
     // --- camera
     this.updateCamera(dt);
-    this.renderer.render(this.scene, this.camera);
+    if (this.composer) this.composer.render();
+    else this.renderer.render(this.scene, this.camera);
   }
 
   private updateNear() {
@@ -3211,6 +3697,18 @@ export class PilgrimEngine {
   }
 
   private updateCamera(dt: number) {
+    if (this.victoryOrbitT > 0) {
+      this.victoryOrbitT -= dt;
+      const yaw = this.time * 0.7;
+      const pos = new THREE.Vector3(
+        this.victoryCenter.x + Math.sin(yaw) * 7.5,
+        this.victoryCenter.y + 3.4,
+        this.victoryCenter.z + Math.cos(yaw) * 7.5
+      );
+      this.camera.position.lerp(pos, Math.min(1, dt * 3));
+      this.camera.lookAt(this.victoryCenter.clone().add(new THREE.Vector3(0, 1.1, 0)));
+      return;
+    }
     if (this.attract) {
       // slow ceremonial drift over the first stations
       this.attractT += dt;
