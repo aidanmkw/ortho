@@ -20,7 +20,15 @@
     "st-macarius",
     "st-cyril",
     "st-john-damascus",
-    "st-mark-ephesus"
+    "st-mark-ephesus",
+    "nestorius",
+    "origenist-deacon",
+    "monothelite-examiner",
+    "frankish-archpriest",
+    "volkh",
+    "stephen-nicomedia",
+    "crusader-knight",
+    "barlaam"
   ],
   "props": [
     "prop-gate-arch",

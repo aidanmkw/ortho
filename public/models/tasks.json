@@ -105,5 +105,37 @@
   },
   "prop-void-shard": {
     "mesh": "019f23da-8098-7012-ba73-286c5163869a"
+  },
+  "nestorius": {
+    "mesh": "019f24af-e883-778a-b93c-1152ff00f65a",
+    "rig": "019f24b2-dbe5-7ce6-8c06-30a8804c863f"
+  },
+  "origenist-deacon": {
+    "mesh": "019f24b3-9755-71ff-a265-49a12c94e172",
+    "rig": "019f24b6-4980-792e-8cad-39811dda0f86"
+  },
+  "monothelite-examiner": {
+    "mesh": "019f24b7-03fc-7941-93ae-213fda357907",
+    "rig": "019f24ba-58b0-7338-af32-ad4f897d756a"
+  },
+  "frankish-archpriest": {
+    "mesh": "019f24ba-f2ca-7e4f-a573-6e22b2d84495",
+    "rig": "019f24bd-aab9-7afe-a59f-97daceeb00e7"
+  },
+  "volkh": {
+    "mesh": "019f24be-6736-7b17-b9b0-4ecddb237484",
+    "rig": "019f24c2-6264-7fa0-a4d4-3998f5142898"
+  },
+  "stephen-nicomedia": {
+    "mesh": "019f24c3-3da3-7fd4-8d91-5a1c6c7e25b8",
+    "rig": "019f24c6-1128-7cf4-a8a1-825797e078ca"
+  },
+  "crusader-knight": {
+    "mesh": "019f24c6-ab81-7d1c-839e-5b197529e971",
+    "rig": "019f24c9-7f8e-784e-8d25-396454819c5f"
+  },
+  "barlaam": {
+    "mesh": "019f24ca-346f-7889-aa63-b3e8a15745e7",
+    "rig": "019f24cd-067d-7937-b38b-079e70b76268"
   }
 }
