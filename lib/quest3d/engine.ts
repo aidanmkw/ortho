@@ -2022,6 +2022,21 @@ export class PilgrimEngine {
     rig.group.position.set(-1.8, 0, this.playerPos.z + 2.2);
     this.scene.add(rig.group);
     this.companion = rig;
+    // he deserves the real model as much as anyone on the road
+    if (this.modelIds.has("st-anthony")) {
+      loadModelRig(this.opts.basePath, "st-anthony", 1.86).then((model) => {
+        if (!model || this.disposed || !this.companion) {
+          model?.dispose();
+          return;
+        }
+        model.group.position.copy(this.companion.group.position);
+        model.group.rotation.y = this.companion.group.rotation.y;
+        this.scene.add(model.group);
+        this.scene.remove(this.companion.group);
+        this.companion.dispose();
+        this.companion = model;
+      });
+    }
   }
 
   private tickCompanion(dt: number) {

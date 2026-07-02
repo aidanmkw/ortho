@@ -42,6 +42,7 @@ class ModelRig implements Rig {
   private fade = -1;
   private fadeDur = 1;
   private hasClips = false;
+  private needsSway = false;
   private bobSeed = Math.random() * 7;
   private dead = false;
 
@@ -78,14 +79,15 @@ class ModelRig implements Rig {
         this.idleA = this.mixer.clipAction(idle);
         this.idleA.play();
       } else {
-        // no dedicated idle clip: hold a frozen pose of the walk clip so
-        // characters don't march in place while standing
-        // barely-moving walk = a living sway instead of a frozen pose
+        // no dedicated idle clip: hold the cycle's contact pose (t=0) and
+        // let update() breathe the root — scrubbing the walk slowly parks
+        // characters on ugly mid-stride frames
         const pose = walk.clone();
         pose.name = "__pose";
         this.idleA = this.mixer.clipAction(pose);
         this.idleA.play();
-        this.idleA.timeScale = 0.055;
+        this.idleA.paused = true;
+        this.needsSway = true;
       }
       this.walkA = this.mixer.clipAction(walk);
       this.walkA.play();
@@ -148,6 +150,15 @@ class ModelRig implements Rig {
         this.walkA.timeScale = 0.7 + this.cur * 0.8;
       }
       this.mixer.update(dt);
+      // breathe while standing (amplitude fades out as walking blends in)
+      if (this.needsSway && !this.dead) {
+        const k = 1 - Math.min(1, this.cur * 2);
+        const root = this.group.children[0];
+        if (root) {
+          root.rotation.x = 0.015 * Math.sin(time * 1.5 + this.bobSeed) * k;
+          root.rotation.z = 0.01 * Math.sin(time * 1.1 + this.bobSeed * 2) * k;
+        }
+      }
     } else if (!this.dead) {
       // rig-less mesh: breathe + lean so it never looks frozen
       this.group.children[0].rotation.x = 0.02 * Math.sin(time * 1.6 + this.bobSeed) + this.cur * 0.08;
