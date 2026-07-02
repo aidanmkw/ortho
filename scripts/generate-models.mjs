@@ -83,6 +83,14 @@ const PROPS = {
   "prop-void-shard": { poly: 3000, prompt: `floating jagged obsidian crystal shard with faint violet inner glow, dark fantasy, PBR textures, game-ready` },
 };
 
+// Second Road duelists (auto-derived; see scripts/extract-side-characters.ts)
+try {
+  const side = JSON.parse(readFileSync(path.join(ROOT, "scripts", "side-characters.json"), "utf8"));
+  for (const [id, spec] of Object.entries(side)) {
+    if (!CHARACTERS[id]) CHARACTERS[id] = spec;
+  }
+} catch {}
+
 const args = process.argv.slice(2);
 const only = args.find((a) => a.startsWith("--only="))?.slice(7).split(",");
 const noRig = args.includes("--no-rig");

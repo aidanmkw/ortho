@@ -1771,6 +1771,16 @@ export class PilgrimEngine {
         });
         rig.group.position.copy(pos);
         this.scene.add(rig.group);
+        const di = this.duels.length; // index this duel will occupy
+        this.maybeUpgradeRig(
+          def.chapter.boss!.sprite,
+          2.0,
+          pos.clone(),
+          () => this.duels[di]?.rig ?? null,
+          (r) => {
+            if (this.duels[di]) this.duels[di].rig = r;
+          }
+        );
       } else {
         const wreath = buildCross(1.2, goldMat(0.4));
         wreath.position.copy(pos);

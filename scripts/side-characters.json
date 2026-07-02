@@ -1,0 +1,34 @@
+{
+  "nestorius": {
+    "sprite": "nestorius.webp",
+    "prompt": "The Nestorian Advocate, Partisan of Constantinople, crimson episcopal vestments, black short beard, Byzantine icon style full-body character, dignified elongated proportions, muted earth and gold palette, game-ready, standing A-pose"
+  },
+  "origenist-deacon": {
+    "sprite": "origenist-deacon.webp",
+    "prompt": "The Origenist Deacon, Speculator of the Endless Restoration, purple deacon vestments with orarion, brown short beard, Byzantine icon style full-body character, dignified elongated proportions, muted earth and gold palette, game-ready, standing A-pose"
+  },
+  "monothelite-examiner": {
+    "sprite": "monothelite-examiner.webp",
+    "prompt": "The Imperial Examiner, Agent of the Monothelite Court, Byzantine imperial purple with gold loros, black short beard, Byzantine icon style full-body character, dignified elongated proportions, muted earth and gold palette, game-ready, standing A-pose"
+  },
+  "frankish-archpriest": {
+    "sprite": "frankish-archpriest.webp",
+    "prompt": "The Frankish Archpriest, Defender of the Three Tongues, white papal robes, Byzantine icon style full-body character, dignified elongated proportions, muted earth and gold palette, game-ready, standing A-pose"
+  },
+  "volkh": {
+    "sprite": "volkh.webp",
+    "prompt": "Volkh the Volkhv, Priest of the Old Gods, brown monastic habit, gray very long beard, Byzantine icon style full-body character, dignified elongated proportions, muted earth and gold palette, game-ready, standing A-pose"
+  },
+  "stephen-nicomedia": {
+    "sprite": "stephen-nicomedia.webp",
+    "prompt": "Stephen of Nicomedia, Theologian of the Court, casual collared shirt, gray short beard, Byzantine icon style full-body character, dignified elongated proportions, muted earth and gold palette, game-ready, standing A-pose"
+  },
+  "crusader-knight": {
+    "sprite": "crusader-knight.webp",
+    "prompt": "The Crusader Commander, Spirit of Conquest in Pious Dress, Roman officer armor with red cloak, brown short beard, Byzantine icon style full-body character, dignified elongated proportions, muted earth and gold palette, game-ready, standing A-pose"
+  },
+  "barlaam": {
+    "sprite": "barlaam.webp",
+    "prompt": "Barlaam the Calabrian, The Philosopher Who Denied the Vision of God, dark modern sweater, brown short beard, Byzantine icon style full-body character, dignified elongated proportions, muted earth and gold palette, game-ready, standing A-pose"
+  }
+}
