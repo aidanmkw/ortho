@@ -377,15 +377,18 @@ async function refreshRigged() {
  * recording existed — at zero generation cost.
  */
 async function adoptTasks() {
-  const list = async (kind) => {
-    const res = await fetch(`${API}/openapi/v1/${kind}?page_size=50`, { headers: headers() });
-    if (!res.ok) throw new Error(`${kind} list → ${res.status}`);
+  const list = async (kind, version = "v1") => {
+    const res = await fetch(`${API}/openapi/${version}/${kind}?page_size=50`, { headers: headers() });
+    if (!res.ok) {
+      console.warn(`(${kind} list → ${res.status}; skipping)`);
+      return [];
+    }
     const data = await res.json();
     return Array.isArray(data) ? data : data.result ?? data.data ?? [];
   };
   const meshes = await list("image-to-3d");
   const rigs = await list("rigging");
-  const texts = await list("text-to-3d");
+  const texts = await list("text-to-3d", "v2");
   console.log(`History: ${meshes.length} mesh, ${rigs.length} rigging, ${texts.length} text task(s).`);
   let adopted = 0;
   for (const [id, spec] of Object.entries(CHARACTERS)) {

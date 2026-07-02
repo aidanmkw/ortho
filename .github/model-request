@@ -1,2 +1,2 @@
 --adopt-tasks --refresh-props
-# recover era props lost to the commit-step failure
+# retry: v2 list path for text-to-3d history
