@@ -15,6 +15,7 @@ import type { BossAttack } from "@/lib/quest/types";
 import { sfx, getMuted, setMuted } from "@/lib/quest/sfx";
 import BattlePanel, { PLATE_LETTERS, type PanelOption } from "./BattlePanel";
 import Joystick from "./Joystick";
+import Vespers from "./Vespers";
 import { RELICS, CAVE_RELIC } from "@/lib/quest3d/relics";
 import { startAmbience, stopAmbience, resumeAmbience, setMood } from "@/lib/quest3d/ambience";
 import { buildSideDuels } from "@/lib/quest3d/sideQuests";
@@ -89,7 +90,9 @@ type Toast = { id: number; text: string };
 export default function PilgrimageApp() {
   const zones = React.useMemo<ZoneDef[]>(() => buildZones(), []);
 
-  const [phase, setPhase] = React.useState<"title" | "play">("title");
+  const [phase, setPhase] = React.useState<"title" | "play" | "vespers">("title");
+  const [showMap, setShowMap] = React.useState(false);
+  const [curZone, setCurZone] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
   const [loadError, setLoadError] = React.useState<string | null>(null);
   const [hud, setHud] = React.useState({ light: 0, xp: 0, rank: "Inquirer", beaten: 0 });
@@ -122,6 +125,10 @@ export default function PilgrimageApp() {
   const [timerLeft, setTimerLeft] = React.useState<number | null>(null);
 
   const sideDuels = React.useMemo(() => buildSideDuels(), []);
+  const vespersChapters = React.useMemo(
+    () => [...zones.map((z) => z.chapter), ...sideDuels.map((d) => d.chapter)],
+    [zones, sideDuels]
+  );
   const [companionSay, setCompanionSay] = React.useState<string | null>(null);
   const companionTimer = React.useRef<number | null>(null);
   const visitedZones = React.useRef<Set<number>>(new Set());
@@ -743,7 +750,6 @@ export default function PilgrimageApp() {
   // ---- engine lifecycle ------------------------------------------------------
 
   React.useEffect(() => {
-    if (phase !== "play") return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     setLoading(true);
@@ -761,6 +767,7 @@ export default function PilgrimageApp() {
           setBannerZone(Math.min(saveRef.current.checkpoint, zones.length - 1));
         },
         onZoneChange: (zi) => {
+          setCurZone(zi);
           if (!visitedZones.current.has(zi)) {
             visitedZones.current.add(zi);
             const line = zones[zi].narratorLine;
@@ -812,6 +819,7 @@ export default function PilgrimageApp() {
       },
     });
     engineRef.current = engine;
+    engine.setAttract(true);
     engine.start().catch((e) => {
       console.error(e);
       setLoadError("The icon could not be gilded — assets failed to load.");
@@ -821,7 +829,7 @@ export default function PilgrimageApp() {
       engineRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, zones]);
+  }, [zones]);
 
   // banner auto-hide
   React.useEffect(() => {
@@ -853,16 +861,16 @@ export default function PilgrimageApp() {
 
   // ---- title screen -----------------------------------------------------------
 
-  if (phase === "title") {
+  const renderTitle = () => {
     const s = saveRef.current;
     const hasSave = s.lastSavedAt > 0 || s.beaten.length > 0;
     return (
-      <div className="fixed inset-0 z-[100] overflow-y-auto bg-[#0e0a06] text-parchment">
+      <div className="fixed inset-0 z-[100] overflow-y-auto text-parchment">
         <div
           className="min-h-full flex flex-col items-center justify-center px-5 py-10 text-center"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 30%, #5a431a 0%, #2e2210 45%, #0e0a06 100%)",
+              "radial-gradient(ellipse at 50% 30%, rgba(60,45,18,0.72) 0%, rgba(28,21,10,0.78) 45%, rgba(10,8,4,0.88) 100%)",
           }}
         >
           <div className="text-gold/80 text-[11px] uppercase tracking-[0.5em] mb-3">
@@ -921,6 +929,9 @@ export default function PilgrimageApp() {
                 try {
                   if (window.localStorage.getItem("chant:enabled") !== "0") startChant();
                 } catch {}
+                const eng = engineRef.current;
+                eng?.setAttract(false);
+                eng?.respawn(Math.min(saveRef.current.checkpoint, zones.length - 1));
                 setPhase("play");
               }}
               className="font-display text-lg bg-gold text-[#14100a] px-10 py-3 rounded border-2 border-[#f0d358] hover:brightness-110 active:translate-y-px shadow-[0_0_30px_rgba(201,162,39,0.35)]"
@@ -932,9 +943,7 @@ export default function PilgrimageApp() {
                 onClick={() => {
                   if (window.confirm("Begin anew? Your road so far will be wiped clean.")) {
                     clearSave();
-                    saveRef.current = { ...emptySave(), hair };
-                    syncHud();
-                    setPhase("play");
+                    window.location.reload();
                   }
                 }}
                 className="text-xs text-parchment/55 hover:text-parchment underline-offset-2 hover:underline"
@@ -946,6 +955,20 @@ export default function PilgrimageApp() {
               <div className="text-[11px] text-parchment/60">
                 {s.beaten.length}/{zones.length} stations · {s.xp} XP ·{" "}
                 {rankFor(s.beaten.length)}
+              </div>
+            )}
+            <button
+              onClick={() => {
+                sfx.click();
+                setPhase("vespers");
+              }}
+              className="mt-1 font-display text-sm bg-[#2a1c40] text-[#d6c2f0] px-6 py-2 rounded border-2 border-[#5c3470] hover:border-[#8a5cb0]"
+            >
+              🌙 Vespers — the Daily Gauntlet
+            </button>
+            {loading && (
+              <div className="text-[10px] text-gold/70 animate-pulse mt-1">
+                the world is rising behind you…
               </div>
             )}
           </div>
@@ -967,7 +990,7 @@ export default function PilgrimageApp() {
         </div>
       </div>
     );
-  }
+  };
 
   // ---- play -------------------------------------------------------------------
 
@@ -992,6 +1015,13 @@ export default function PilgrimageApp() {
       <div className="pointer-events-none absolute inset-0 z-20 border-[3px] border-[#c9a227]/70" />
       <div className="pointer-events-none absolute inset-[7px] z-20 border border-[#7a5e10]/60" />
 
+      {phase === "title" && renderTitle()}
+      {phase === "vespers" && (
+        <Vespers chapters={vespersChapters} onExit={() => setPhase("title")} />
+      )}
+
+      {phase === "play" && (
+      <>
       {/* damage vignette */}
       {hurtKey > 0 && (
         <div
@@ -1051,6 +1081,50 @@ export default function PilgrimageApp() {
             )}
           </div>
         )}
+        <button
+          onClick={() => setShowMap((v) => !v)}
+          className="bg-black/70 border border-gold/40 rounded px-2.5 py-1.5 text-[11px] text-gold"
+          aria-label="Pilgrim's map"
+        >
+          🗺
+        </button>
+        <button
+          onClick={() => {
+            const url = engineRef.current?.snapshot();
+            if (!url) return;
+            const img = new Image();
+            img.onload = () => {
+              const cv = document.createElement("canvas");
+              cv.width = img.width + 48;
+              cv.height = img.height + 110;
+              const ctx = cv.getContext("2d")!;
+              ctx.fillStyle = "#100c07";
+              ctx.fillRect(0, 0, cv.width, cv.height);
+              ctx.strokeStyle = "#c9a227";
+              ctx.lineWidth = 6;
+              ctx.strokeRect(12, 12, cv.width - 24, cv.height - 24);
+              ctx.drawImage(img, 24, 24);
+              ctx.fillStyle = "#f0d358";
+              ctx.font = "24px Georgia, serif";
+              ctx.textAlign = "center";
+              ctx.fillText(
+                `${zones[curZone]?.chapter.title ?? ""} · ΟΔΟΣ — The Pilgrim Road`,
+                cv.width / 2,
+                cv.height - 42
+              );
+              const a = document.createElement("a");
+              a.download = `pilgrim-road-${Date.now()}.png`;
+              a.href = cv.toDataURL("image/png");
+              a.click();
+            };
+            img.src = url;
+            sfx.ding();
+          }}
+          className="bg-black/70 border border-gold/40 rounded px-2.5 py-1.5 text-[11px] text-gold"
+          aria-label="Photo mode"
+        >
+          📷
+        </button>
         <button
           onClick={() => {
             const m = !muted;
@@ -1385,8 +1459,57 @@ export default function PilgrimageApp() {
         </div>
       )}
 
+      {/* pilgrim's map */}
+      {showMap && (
+        <div
+          className="absolute inset-0 z-40 bg-black/75 backdrop-blur-[2px] flex items-center justify-center p-4"
+          onClick={() => setShowMap(false)}
+        >
+          <div
+            className="bg-[#100c07] border-2 border-gold/70 rounded-lg max-w-md w-full p-4 max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-[10px] uppercase tracking-[0.35em] text-gold/90 mb-3">
+              🗺 The Pilgrim&rsquo;s Map
+            </div>
+            {zones.map((z, i) => {
+              const beaten = saveRef.current.beaten.includes(z.chapter.id);
+              const zoneDuels = sideDuels.filter((d) => d.zone === i);
+              return (
+                <div
+                  key={z.chapter.id}
+                  className={`flex items-center gap-2 py-1 border-b border-gold/10 text-[11px] ${
+                    i === curZone ? "text-gold" : beaten ? "text-parchment/85" : "text-parchment/45"
+                  }`}
+                >
+                  <span className="w-7 font-display">{ROMAN[i]}</span>
+                  <span className={`w-2 h-2 rounded-full shrink-0 ${beaten ? "bg-gold" : "bg-crimson/70"}`} />
+                  <span className="flex-1 truncate">{z.chapter.title}</span>
+                  {CAVE_RELIC[i] !== undefined && <span title="A hermit keeps something here">🕳</span>}
+                  {zoneDuels.map((d) => (
+                    <span
+                      key={d.chapter.id}
+                      title={d.chapter.boss?.name}
+                      className={saveRef.current.laurels.includes(d.chapter.id) ? "" : "opacity-40 grayscale"}
+                    >
+                      🏆
+                    </span>
+                  ))}
+                  {i === curZone && <span className="text-gold">◄ you</span>}
+                </div>
+              );
+            })}
+            <p className="text-parchment/45 text-[10px] mt-3">
+              🕳 hermits keep relics off-road · 🏆 legendary duels of the Second Road
+            </p>
+          </div>
+        </div>
+      )}
+      </>
+      )}
+
       {/* companion */}
-      {companionSay && (
+      {phase === "play" && companionSay && (
         <div className="absolute left-3 bottom-40 z-30 max-w-[280px] pointer-events-none">
           <div className="bg-[#100c07]/90 border border-gold/50 rounded-lg px-3 py-2">
             <div className="text-[9px] uppercase tracking-[0.3em] text-gold/90 mb-0.5">
@@ -1410,8 +1533,8 @@ export default function PilgrimageApp() {
       </div>
 
       {/* touch controls */}
-      {coarse && <Joystick onMove={(x, y) => engineRef.current?.setJoystick(x, y)} />}
-      {coarse && b && (
+      {phase === "play" && coarse && <Joystick onMove={(x, y) => engineRef.current?.setJoystick(x, y)} />}
+      {phase === "play" && coarse && b && (
         <button
           onClick={() => engineRef.current?.dash()}
           className="fixed bottom-8 right-5 z-40 w-16 h-16 rounded-full border-2 border-gold/70 bg-black/50 text-gold text-[11px] font-display active:scale-95"
@@ -1421,7 +1544,7 @@ export default function PilgrimageApp() {
       )}
 
       {/* loading / error */}
-      {(loading || loadError) && (
+      {phase !== "title" && (loading || loadError) && (
         <div className="absolute inset-0 z-50 bg-[#0e0a06] flex flex-col items-center justify-center gap-3">
           {loadError ? (
             <>

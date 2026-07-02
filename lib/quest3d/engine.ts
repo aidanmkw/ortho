@@ -602,6 +602,8 @@ export class PilgrimEngine {
   private plateTimer = 0;
   private platesLocked = false;
   private curZone = -1;
+  private attract = false;
+  private attractT = 0;
   private near: NearTarget | null = null;
   private nearTick = 0;
   private time = 0;
@@ -1882,6 +1884,27 @@ export class PilgrimEngine {
     this.canvas.removeEventListener("wheel", this.onWheel);
   }
 
+  /** Cinematic title mode: camera drifts over the road, input ignored. */
+  setAttract(on: boolean) {
+    this.attract = on;
+    if (!on) {
+      this.camYaw = 0;
+      this.camPitch = 0.24;
+      this.camDist = 7.2;
+    }
+  }
+
+  /** One-frame capture for photo mode (renders then reads the canvas). */
+  snapshot(): string {
+    this.renderer.render(this.scene, this.camera);
+    return this.renderer.domElement.toDataURL("image/png");
+  }
+
+  /** Current road position (for the pilgrim's map). */
+  getPlayerZ(): number {
+    return this.playerPos.z;
+  }
+
   /** Virtual joystick input from the DOM layer, each axis in [-1, 1]. */
   setJoystick(x: number, y: number) {
     this.joy.set(x, y);
@@ -2959,7 +2982,7 @@ export class PilgrimEngine {
 
     // --- movement (substepped so low frame rates don't slow world-time
     //     or tunnel through lamp/plate triggers)
-    const input = this.moveInput();
+    const input = this.attract ? new THREE.Vector2(0, 0) : this.moveInput();
     const sprinting = this.keys.has("shift");
     const speed = 5.4 * (sprinting ? 1.45 : 1);
     const moveLen = input.lengthSq() > 0.001 ? Math.min(1, input.length()) * (sprinting ? 1.2 : 1) : 0;
@@ -3188,6 +3211,22 @@ export class PilgrimEngine {
   }
 
   private updateCamera(dt: number) {
+    if (this.attract) {
+      // slow ceremonial drift over the first stations
+      this.attractT += dt;
+      const t = this.attractT;
+      const target = new THREE.Vector3(0, 2.4, -26 - Math.sin(t * 0.05) * 14);
+      const yaw = t * 0.05;
+      const pos = new THREE.Vector3(
+        target.x + Math.sin(yaw) * 17,
+        8.5 + Math.sin(t * 0.11) * 1.5,
+        target.z + Math.cos(yaw) * 17
+      );
+      pos.y = Math.max(pos.y, terrainHeight(pos.x, pos.z) + 2);
+      this.camera.position.lerp(pos, Math.min(1, dt * 1.5));
+      this.camera.lookAt(target);
+      return;
+    }
     let target: THREE.Vector3;
     let yaw = this.camYaw;
     let pitch = this.camPitch;
