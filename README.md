@@ -82,6 +82,37 @@ Engine: `lib/quest3d/engine.ts` (terrain/sky/lighting/camera/effects, no
 game rules); characters: `lib/quest3d/characters.ts`; rules and UI live
 in `components/quest3d/PilgrimageApp.tsx`.
 
+## ✦ Creator Outreach Studio (`/outreach`)
+
+A second, self-contained app in this repo — the "be your own Forbes, for
+free" toolkit. Forbes charges creators ~$5k/yr to say "as seen on Forbes";
+this does the opposite. It runs **entirely in your browser** — no servers,
+no API keys, no fees. State lives in `localStorage` only.
+
+The full outreach loop from the idea, built as four tools:
+
+- **Pipeline** (`/outreach`) — a CRM board tracking each creator through
+  Prospect → DM sent → Replied → Said yes → Featured → Posted (and Passed).
+- **Prospects** (`/outreach/prospects`) — manage your creator list, set your
+  brand, and browse the creator-discovery directory (Modash, Phyllo,
+  HypeAuditor, Upfluence, GRIN, Aspire, Klear/Meltwater, Heepsy, Favikon,
+  CreatorIQ).
+- **DM Studio** (`/outreach/dm`) — generate an honest, personalized outreach
+  DM from five angles (Casual, Short & Sweet, Fan, Value-First, Collab) with
+  `{{name}}`/`{{topic}}` filled from the selected creator + your brand.
+- **Humanizer** (`/outreach/humanizer`) — turn a creator's top post into a
+  structured, human-sounding article via a deterministic in-browser text
+  transform (strips AI tells, adds contractions, sections, takeaways). Also
+  emits the ready-to-paste **agent prompt** if you'd rather use your own AI.
+- **Carousel Studio** (`/outreach/carousel`) — slice the article into
+  Instagram 1080×1080 slides rendered on `<canvas>`, themed, and exported as
+  PNGs.
+
+Code lives under `lib/outreach/` (types, discovery data, templates, the
+`humanize()` and carousel logic) and `components/outreach/` (provider + UI).
+The Orthodox app's chrome is hidden on these routes via
+`components/AppFrame.tsx`; the Studio ships its own layout.
+
 ## Layout
 
 ```
